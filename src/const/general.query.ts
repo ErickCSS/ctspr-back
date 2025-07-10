@@ -11,6 +11,16 @@ mediaItems(where:{title: "${title}"}){
 }`;
 };
 
+export const queryAbout = `query About {
+  posts(where: {categoryName:"Nosotros"}){
+    nodes{
+      id
+      title
+      content
+    }
+  }
+}`;
+
 export const querySucursales = `query sucursales {
   posts(where: {categoryName:"sucursales"}){
     nodes{

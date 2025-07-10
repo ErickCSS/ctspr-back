@@ -3,6 +3,7 @@ import { Lato } from "next/font/google";
 import "./globals.css";
 import { Footer } from "@components/general/Footer";
 import { Header } from "@components/general/header";
+import { ViewTransitions } from "next-view-transitions";
 
 const lato = Lato({
   variable: "--font-lato",
@@ -25,10 +26,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
-      <body className={` ${lato.variable} antialiased`}>
-        <Header /> {children} <Footer />
-      </body>
-    </html>
+    <ViewTransitions>
+      <html lang="es">
+        <body className={` ${lato.variable} antialiased`}>
+          <Header /> {children} <Footer />
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

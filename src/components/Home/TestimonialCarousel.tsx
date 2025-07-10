@@ -9,12 +9,15 @@ import { TestimoniosProps } from "@/types/generalQuery.types";
 import { Navigation } from "swiper/modules";
 import { parseContent } from "@/utils/parseContent.utils";
 import Image from "next/image";
+import { toReversed } from "@/utils/toReversed";
 
 export const TestimonialCarousel = ({
   testimonios,
 }: {
   testimonios: TestimoniosProps;
 }) => {
+  const testimoniosReversed = toReversed(testimonios.posts.nodes);
+
   return (
     <Swiper
       spaceBetween={0}
@@ -23,7 +26,7 @@ export const TestimonialCarousel = ({
       modules={[Navigation]}
       className="TestimonialCarousel w-[1100px] rounded-xl bg-zinc-100"
     >
-      {testimonios.posts.nodes?.reverse().map((testimonio, index) => (
+      {testimoniosReversed?.map((testimonio, index) => (
         <SwiperSlide key={index} className="px-10 pt-22 pb-10">
           <div className="grid grid-cols-[200px_1fr] items-center gap-10">
             <Image
@@ -31,6 +34,9 @@ export const TestimonialCarousel = ({
               alt={testimonio.title}
               width={200}
               height={200}
+              loading="lazy"
+              decoding="async"
+              quality={60}
               className="h-auto w-full"
             />
 

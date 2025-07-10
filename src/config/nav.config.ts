@@ -15,7 +15,7 @@ export const NAV_CONFIG = [
   },
   {
     name: "Ofertas de Empleo",
-    href: "/ofertas-de-empleo",
+    href: "/ofertas-empleo",
   },
   {
     name: "Blog",

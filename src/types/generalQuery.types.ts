@@ -25,6 +25,16 @@ export interface SucursalesProps {
   };
 }
 
+export interface AboutProps {
+  posts: {
+    nodes: {
+      id: string;
+      title: string;
+      content: string;
+    }[];
+  };
+}
+
 export interface TestimoniosProps {
   posts: {
     nodes: {

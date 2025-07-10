@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { Social } from "@components/shared/Social";
 import { IconMailFilled } from "@tabler/icons-react";
 import Image from "next/image";

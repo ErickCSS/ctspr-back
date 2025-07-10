@@ -38,6 +38,9 @@ export const WhyChooseUsCarousel = ({
               width={100}
               height={100}
               className="h-auto w-32"
+              loading="lazy"
+              decoding="async"
+              quality={50}
             />
 
             <div className="mt-3 flex flex-col space-y-2">
