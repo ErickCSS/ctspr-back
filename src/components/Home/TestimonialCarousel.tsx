@@ -1,14 +1,13 @@
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import parse from "html-react-parser";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import { TestimoniosProps } from "@/types/generalQuery.types";
 import { Navigation } from "swiper/modules";
-import { parseContent, parsePhoneNumbers } from "@/utils/parseContent.utils";
+import { parseContent } from "@/utils/parseContent.utils";
 import Image from "next/image";
 
 export const TestimonialCarousel = ({
