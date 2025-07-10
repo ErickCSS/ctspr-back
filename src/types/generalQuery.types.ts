@@ -66,3 +66,17 @@ export interface WhyChooseUsProps {
     }[];
   };
 }
+
+export interface HeroProps {
+  posts: {
+    nodes: {
+      id: string;
+      title: string;
+      featuredImage: {
+        node: {
+          sourceUrl: string;
+        };
+      };
+    }[];
+  };
+}

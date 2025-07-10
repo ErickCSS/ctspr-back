@@ -1,3 +1,5 @@
+import { WrapperEmpleo } from "@components/Wrappers/WrapperEmpleo";
+
 export default function OfertasEmpleos() {
-  return <div>Ofertas Empleos</div>;
+  return <WrapperEmpleo />;
 }

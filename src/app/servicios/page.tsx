@@ -1,3 +1,5 @@
+import { WrapperServicios } from "@components/Wrappers/WrapperServicios";
+
 export default function Servicios() {
-  return <div>Servicios</div>;
+  return <WrapperServicios />;
 }

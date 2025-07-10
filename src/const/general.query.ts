@@ -67,3 +67,19 @@ export const queryWhyChooseUs = `query WhyChooseUs {
     }
   }
 }`;
+
+export const queryHero = (title: string) => {
+  return `query Hero {
+  posts(where: {categoryName:"hero", title:"${title}"}) {
+    nodes {
+      id
+      title
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+    }
+  }
+}`;
+};
