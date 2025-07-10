@@ -1,4 +1,7 @@
 {
   "cSpell.words": ["embla"],
-  "css.customData": [".vscode/tailwindcss.json"]
+  "css.customData": [
+    ".vscode/tailwindcss.json"
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

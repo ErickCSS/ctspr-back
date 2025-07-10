@@ -47,6 +47,7 @@
 @theme {
   --color-primaryColor: oklch(0.3559 0.1068 272.29);
   --color-secondaryColor: oklch(0.6166 0.2506 355.59);
+  --color-accentColor: oklch(0.465 0.2004 269.18);
   --font-lato: "Lato", "Lato Fallback", sans-serif;
 }
 
@@ -136,6 +137,34 @@
 }
 
 .SucursalCarousel {
+  .swiper-button-prev,
+  .swiper-button-next {
+    @apply size-20 rounded-full bg-white text-black shadow-xl;
+    &::after {
+      @apply text-3xl;
+    }
+  }
+}
+
+.TestimonialCarousel {
+  .swiper-button-prev,
+  .swiper-button-next {
+    @apply top-10 text-lg font-black text-zinc-500;
+    &::after {
+      @apply text-3xl;
+    }
+  }
+
+  .swiper-button-prev {
+    @apply left-1/2 -translate-x-28;
+  }
+
+  .swiper-button-next {
+    @apply right-1/2 translate-x-28;
+  }
+}
+
+.whyChooseUsCarousel {
   .swiper-button-prev,
   .swiper-button-next {
     @apply size-20 rounded-full bg-white text-black shadow-xl;

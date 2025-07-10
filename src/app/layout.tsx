@@ -11,6 +11,9 @@ const lato = Lato({
 });
 
 export const metadata: Metadata = {
+  icons: {
+    icon: "/images/cts-favicon.png",
+  },
   title: "Caribbean Temporary Services LLC",
   description:
     "Caribbean Temporary Services, LLC. (CTS), es una empresa local establecida en 1983 con la misión de proveer amplias oportunidades de empleo, mientras proporciona un servicio que maneja las necesidades y contribuye al crecimiento de sus clientes en Puerto Rico.",

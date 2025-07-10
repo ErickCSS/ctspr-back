@@ -42,3 +42,18 @@ export const queryTestimonios = `query testimonios {
     }
   }
 }`;
+
+export const queryWhyChooseUs = `query WhyChooseUs {
+  posts(where: {categoryName:"Porque Elegirnos"}){
+    nodes{
+      id
+      title
+      content
+      featuredImage{
+        node{
+          sourceUrl
+        }
+      }
+    }
+  }
+}`;

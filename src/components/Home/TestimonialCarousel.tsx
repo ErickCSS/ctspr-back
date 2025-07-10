@@ -21,11 +21,10 @@ export const TestimonialCarousel = ({
       slidesPerView={1}
       navigation={true}
       modules={[Navigation]}
-      loop={true}
-      className="w-[1200px] rounded-xl bg-zinc-100"
+      className="TestimonialCarousel w-[1100px] rounded-xl bg-zinc-100"
     >
-      {testimonios.posts.nodes.reverse().map((testimonio, index) => (
-        <SwiperSlide key={index} className="px-10 pt-15 pb-10">
+      {testimonios.posts.nodes?.reverse().map((testimonio, index) => (
+        <SwiperSlide key={index} className="px-10 pt-22 pb-10">
           <div className="grid grid-cols-[200px_1fr] items-center gap-10">
             <Image
               src={testimonio.featuredImage.node.sourceUrl}
@@ -36,8 +35,23 @@ export const TestimonialCarousel = ({
             />
 
             <div className="flex flex-col space-y-2">
-              <h4 className="text-3xl font-black">{testimonio.title}</h4>
-              <p className="text-lg">{parseContent(testimonio.content)}</p>
+              <h4 className="mb-2 flex items-end gap-x-3 text-3xl font-bold">
+                {testimonio.title}{" "}
+                <span className="text-lg">
+                  {testimonio.excerpt.includes("Casa Bacardí")
+                    ? parseContent(testimonio.excerpt)
+                    : ""}
+                </span>
+              </h4>
+              <div className="text-lg">
+                {parseContent(testimonio.content, {
+                  configs: {
+                    p: {
+                      className: "font-balance",
+                    },
+                  },
+                })}
+              </div>
             </div>
           </div>
         </SwiperSlide>
