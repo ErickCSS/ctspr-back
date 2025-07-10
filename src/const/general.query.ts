@@ -26,3 +26,19 @@ export const querySucursales = `query sucursales {
     }
   }
 }`;
+
+export const queryTestimonios = `query testimonios {
+  posts(where: {categoryName:"Testimonios"}){
+    nodes{
+      id
+      title
+      content
+    	excerpt
+      featuredImage{
+        node{
+          sourceUrl
+        }
+      }
+    }
+  }
+}`;

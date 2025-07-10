@@ -10,7 +10,7 @@ import { SliderProps } from "@/types/hero.types";
 import { Navigation } from "swiper/modules";
 import { parsePhoneNumbers } from "@/utils/parseContent.utils";
 
-export default ({ sliders }: { sliders: SliderProps[] }) => {
+export const SliderHero = ({ sliders }: { sliders: SliderProps[] }) => {
   return (
     <Swiper
       spaceBetween={0}
