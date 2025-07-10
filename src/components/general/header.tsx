@@ -29,7 +29,11 @@ export const Header = () => {
 
           <nav className="flex gap-x-8">
             {NAV_CONFIG.map((item) => (
-              <Link key={item.name} href={item.href} className="text-black">
+              <Link
+                key={item.name}
+                href={item.href}
+                className="text-lg text-black"
+              >
                 {item.name}
               </Link>
             ))}

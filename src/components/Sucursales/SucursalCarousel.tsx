@@ -39,9 +39,9 @@ export const SucursalCarousel = ({
                 className="h-[250px] w-full object-cover object-center"
               />
               <div className="mt-5">
-                <h2 className="text-secondaryColor text-3xl font-bold">
+                <h3 className="text-secondaryColor text-3xl font-bold">
                   {sucursal.title}
-                </h2>
+                </h3>
                 <div className="mt-1 text-lg text-black">
                   {parseContent(sucursal.excerpt)}
                 </div>
