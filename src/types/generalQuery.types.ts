@@ -153,3 +153,52 @@ export interface SomosTransformamosProps {
     }[];
   };
 }
+
+export interface ServiciosProps {
+  posts: {
+    nodes: {
+      id: string;
+      title: string;
+      content: string;
+    }[];
+  };
+}
+
+export interface PropuestaValorTitleProps {
+  posts: {
+    nodes: {
+      id: string;
+      title: string;
+      content: string;
+    }[];
+  };
+}
+
+export interface PropuestaValorProps {
+  posts: {
+    nodes: {
+      id: string;
+      title: string;
+      featuredImage: {
+        node: {
+          sourceUrl: string;
+        };
+      };
+    }[];
+  };
+}
+
+export interface ServiciosListProps {
+  posts: {
+    nodes: {
+      id: string;
+      title: string;
+      content: string;
+      featuredImage: {
+        node: {
+          sourceUrl: string;
+        };
+      };
+    }[];
+  };
+}

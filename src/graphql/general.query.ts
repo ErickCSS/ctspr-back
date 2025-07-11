@@ -156,3 +156,51 @@ export const querySomosTransformamos = `query somosTransformamos {
     }
   }
 }`;
+
+export const queryServiciosContent = `query servicios {
+  posts(where: {categoryName:"servicios", in:"cG9zdDoxNzI="}){
+    nodes{
+      id
+			content
+    }
+  }
+}`;
+
+export const queryPropuestaValorTitle = `query PropuestaValorTitle {
+  posts(where: {categoryName:"Propuesta Valor", in: "cG9zdDoxNjE="}){
+    nodes{
+      title
+      id
+			content
+    }
+  }
+}`;
+
+export const queryPropuestaValor = `query PropuestaValor {
+  posts(where: {categoryName:"Propuesta Valor", notIn: "cG9zdDoxNjE="}){
+    nodes{
+      title
+      id
+      featuredImage{
+        node {
+          sourceUrl
+        }
+      }
+    }
+  }
+}`;
+
+export const queryServiciosList = `query ServiciosList {
+  posts(where: {categoryName:"Servicios", notIn:["cG9zdDoxOTE=", "cG9zdDoxNzI=", "cG9zdDoxODY="]}){
+    nodes{
+      title
+      id
+			content
+      featuredImage{
+        node {
+          sourceUrl
+        }
+      }
+    }
+  }
+}`;
