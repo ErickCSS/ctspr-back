@@ -83,3 +83,26 @@ export const queryHero = (title: string) => {
   }
 }`;
 };
+
+export const queryAfiliados = `query Afiliados {
+  posts(where: {categoryName:"afiliaciones", notIn:"cG9zdDoxMjQ="}){
+    nodes{
+      id
+      title
+      featuredImage{
+        node{
+          sourceUrl
+        }
+      }
+    }
+  }
+}`;
+
+export const queryTitle = `query titleAfiliados {
+  posts(where: {categoryName:"afiliaciones", in:"cG9zdDoxMjQ="}){
+    nodes{
+      id
+      title
+    }
+  }
+}`;

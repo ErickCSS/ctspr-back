@@ -27,7 +27,7 @@ export const Footer = async () => {
 
   return (
     <>
-      <footer className="bg-primaryColor px-4 py-10">
+      <footer className="bg-[#1a2256] px-4 py-10">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 items-center gap-x-5 md:grid-cols-2 lg:grid-cols-3">
             <Image
@@ -70,7 +70,6 @@ export const Footer = async () => {
                     className: "text-lg text-white font-bold",
                   })}
                 </div>
-
                 <Link
                   className="mt-3 flex items-center gap-x-2 text-white"
                   href={

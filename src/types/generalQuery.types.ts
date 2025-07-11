@@ -80,3 +80,26 @@ export interface HeroProps {
     }[];
   };
 }
+
+export interface AfiliadosProps {
+  posts: {
+    nodes: {
+      id: string;
+      title: string;
+      featuredImage: {
+        node: {
+          sourceUrl: string;
+        };
+      };
+    }[];
+  };
+}
+
+export interface AfiliadosTitle {
+  posts: {
+    nodes: {
+      id: string;
+      title: string;
+    }[];
+  };
+}
