@@ -1,5 +1,5 @@
 import { WpQuery } from "@/services/wpQuery";
-import { queryTestimonios } from "@/const/general.query";
+import { queryTestimonios } from "@/graphql/general.query";
 import { TestimoniosProps } from "@/types/generalQuery.types";
 import { TestimonialCarousel } from "./TestimonialCarousel";
 

@@ -103,3 +103,53 @@ export interface AfiliadosTitle {
     }[];
   };
 }
+
+export interface titleValues {
+  posts: {
+    nodes: {
+      id: string;
+      title: string;
+      content: string;
+    }[];
+  };
+}
+
+export interface ValuesProps {
+  posts: {
+    nodes: {
+      id: string;
+      title: string;
+      featuredImage: {
+        node: {
+          sourceUrl: string;
+        };
+      };
+    }[];
+  };
+}
+
+export interface SomosNosotrosProps {
+  posts: {
+    nodes: {
+      id: string;
+      title: string;
+      content: string;
+    }[];
+  };
+}
+
+export interface SomosTransformamosProps {
+  posts: {
+    nodes: {
+      id: string;
+      title: string;
+      content: string;
+      excerpt: string;
+      featuredImage: {
+        node: {
+          sourceUrl: string;
+        };
+      };
+    }[];
+  };
+}

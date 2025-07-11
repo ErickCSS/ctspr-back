@@ -106,3 +106,53 @@ export const queryTitle = `query titleAfiliados {
     }
   }
 }`;
+
+export const queryValues = `query values {
+  posts(where: {categoryName:"valores", notIn:"cG9zdDoxNDc="}){
+    nodes{
+      id
+      title
+      featuredImage{
+        node{
+          sourceUrl
+        }
+      }
+    }
+  }
+}`;
+
+export const queryTitleValues = `query titleValues {
+  posts(where: {categoryName:"valores", in:"cG9zdDoxNDc="}){
+    nodes{
+      id
+      title
+			content
+    }
+  }
+}`;
+
+export const querySomosNosotros = `query somosNosotros {
+  posts(where: {categoryName:"somos"}){
+    nodes{
+      id
+      title
+			content
+    }
+  }
+}`;
+
+export const querySomosTransformamos = `query somosTransformamos {
+  posts(where: {categoryName:"transformamos"}){
+    nodes{
+      id
+      title
+			content
+      excerpt
+      featuredImage{
+        node{
+          sourceUrl
+        }
+      }
+    }
+  }
+}`;

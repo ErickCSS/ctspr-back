@@ -16,6 +16,23 @@ export const SomosCarousel = ({ afiliados }: { afiliados: AfiliadosProps }) => {
     <>
       <Swiper
         slidesPerView={5}
+        breakpoints={{
+          0: {
+            slidesPerView: 1,
+          },
+          640: {
+            slidesPerView: 2,
+          },
+          768: {
+            slidesPerView: 3,
+          },
+          1024: {
+            slidesPerView: 4,
+          },
+          1280: {
+            slidesPerView: 5,
+          },
+        }}
         spaceBetween={30}
         navigation={true}
         modules={[Navigation]}
@@ -29,7 +46,7 @@ export const SomosCarousel = ({ afiliados }: { afiliados: AfiliadosProps }) => {
               alt={afiliado.title}
               width={100}
               height={100}
-              className="h-auto w-42"
+              className="mx-auto h-auto w-52 lg:w-42"
               loading="lazy"
               decoding="async"
               quality={50}

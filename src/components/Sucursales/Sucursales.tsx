@@ -1,7 +1,7 @@
 import { SucursalCarousel } from "./SucursalCarousel";
 import { WpQuery } from "@/services/wpQuery";
 import { SucursalesProps } from "@/types/generalQuery.types";
-import { querySucursales } from "@/const/general.query";
+import { querySucursales } from "@/graphql/general.query";
 
 export const Sucursales = async () => {
   const sucursales: SucursalesProps = await WpQuery({

@@ -8,7 +8,7 @@ export const SomosGerencia = () => {
         <hr className="w-[120px] border-2 border-white outline-none" />
       </div>
 
-      <div className="mt-16 grid w-6xl grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-5">
+      <div className="mt-16 grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-5 lg:w-6xl">
         {Array.from({ length: 12 }).map((_, index) => (
           <SomosCard key={index} />
         ))}

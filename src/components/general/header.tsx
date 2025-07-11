@@ -6,7 +6,7 @@ import { NAV_CONFIG } from "@/config/nav.config";
 
 export const Header = () => {
   return (
-    <header className="flex w-full flex-col">
+    <header className="flex w-full flex-col overflow-hidden">
       <div className="bg-primaryColor flex w-full justify-end gap-x-8 px-10 py-3">
         <Social className="size-8" />
         <Link href="/" className="flex items-center gap-x-2 text-white">

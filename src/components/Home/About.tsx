@@ -1,6 +1,6 @@
 import { WpQuery } from "@/services/wpQuery";
 import { AboutProps } from "@/types/generalQuery.types";
-import { queryAbout } from "@/const/general.query";
+import { queryAbout } from "@/graphql/general.query";
 import { parseContent } from "@/utils/parseContent.utils";
 
 export const About = async () => {

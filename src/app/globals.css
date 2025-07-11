@@ -129,6 +129,10 @@
   }
 }
 
+.gradientCTS {
+  @apply from-primaryColor via-primaryColor to-secondaryColor bg-gradient-to-tr;
+}
+
 .SliderHero {
   .swiper-button-prev,
   .swiper-button-next {
@@ -139,9 +143,9 @@
 .SucursalCarousel {
   .swiper-button-prev,
   .swiper-button-next {
-    @apply size-20 rounded-full bg-white text-black shadow-xl;
+    @apply size-8 rounded-full bg-white text-black shadow-xl lg:size-20;
     &::after {
-      @apply text-3xl;
+      @apply text-lg lg:text-3xl;
     }
   }
 }

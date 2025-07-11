@@ -6,7 +6,7 @@ import { WpQuery } from "@/services/wpQuery";
 
 import { parseContent, parsePhoneNumbers } from "@/utils/parseContent.utils";
 import { MediaProps, SucursalesProps } from "@/types/generalQuery.types";
-import { queryMedia, querySucursales } from "@/const/general.query";
+import { queryMedia, querySucursales } from "@/graphql/general.query";
 import { IconBrandFacebookFilled } from "@tabler/icons-react";
 
 export const Footer = async () => {
