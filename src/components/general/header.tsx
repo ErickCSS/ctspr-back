@@ -1,10 +1,17 @@
+"use client";
+
 import { Link } from "next-view-transitions";
 import { Social } from "@components/shared/Social";
-import { IconMailFilled } from "@tabler/icons-react";
+import { IconMailFilled, IconMenu2, IconX } from "@tabler/icons-react";
 import Image from "next/image";
 import { NAV_CONFIG } from "@/config/nav.config";
+import { Button } from "@components/ui/button";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 export const Header = () => {
+  const [open, setOpen] = useState(false);
+
   return (
     <header className="flex w-full flex-col overflow-hidden">
       <div className="bg-primaryColor flex w-full justify-end gap-x-8 px-10 py-3">
@@ -16,28 +23,63 @@ export const Header = () => {
       </div>
 
       <div className="container mx-auto">
-        <div className="flex w-full items-center justify-between px-4 py-2">
+        <div className="flex w-full flex-row items-center justify-between px-4 py-2">
           <Link href="/" className="flex items-center gap-x-2 text-white">
             <Image
               src="https://stagingctspr.axesawebhosting9.net/wp-content/uploads/2025/07/cts-brand.webp"
               alt="logo"
               width={250}
               height={250}
-              className="h-auto w-[150px] xl:h-auto xl:w-[250px]"
+              className="h-auto w-[250px] xl:w-[250px]"
             />
           </Link>
 
-          <nav className="flex gap-x-8">
-            {NAV_CONFIG.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-lg text-black"
+          <div className="flex flex-col">
+            <Button
+              onClick={() => setOpen(!open)}
+              className="bg-primaryColor size-[42px] text-white lg:hidden"
+            >
+              <IconMenu2 className="size-[24px]" />
+            </Button>
+            <div
+              className={cn(
+                "fixed top-0 left-0 z-50 flex h-dvh w-full flex-col items-center justify-center bg-zinc-100 lg:static lg:h-full lg:bg-white",
+                open
+                  ? "translate-x-0 transition-transform duration-300"
+                  : "-translate-x-full transition-transform duration-300 lg:translate-x-0",
+              )}
+            >
+              <Button
+                onClick={() => setOpen(false)}
+                variant="outline"
+                size="icon"
+                className="absolute top-4 right-4 lg:hidden"
               >
-                {item.name}
-              </Link>
-            ))}
-          </nav>
+                <IconX />
+              </Button>
+              <div className="mb-10 block lg:hidden">
+                <Image
+                  src="https://stagingctspr.axesawebhosting9.net/wp-content/uploads/2025/07/cts-brand.webp"
+                  alt="logo"
+                  width={250}
+                  height={250}
+                  className="h-auto w-[250px] xl:w-[250px]"
+                />
+              </div>
+              <nav className="flex flex-col items-center gap-x-8 gap-y-5 lg:flex-row">
+                {NAV_CONFIG.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="text-2xl text-black lg:text-lg"
+                    onClick={() => setOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </nav>
+            </div>
+          </div>
         </div>
       </div>
     </header>

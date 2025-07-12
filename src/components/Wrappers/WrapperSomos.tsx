@@ -13,7 +13,7 @@ export const WrapperSomos = () => {
       <SomosNosotros />
       <SomosValues />
       <SomosTransformamos />
-      <SomosAfiliaciones />
+      <SomosAfiliaciones background="bg-zinc-100" />
       <Unete />
       <SomosComponent />
     </>

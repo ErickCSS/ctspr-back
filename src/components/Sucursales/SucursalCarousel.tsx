@@ -23,6 +23,17 @@ export const SucursalCarousel = ({
     <>
       <Swiper
         slidesPerView={3}
+        breakpoints={{
+          320: {
+            slidesPerView: 1,
+          },
+          640: {
+            slidesPerView: 2,
+          },
+          768: {
+            slidesPerView: 3,
+          },
+        }}
         spaceBetween={30}
         navigation={true}
         modules={[Navigation]}

@@ -9,6 +9,18 @@ export interface MediaProps {
   };
 }
 
+export interface CarouselProps {
+  id: string;
+  title: string;
+  content: string;
+  excerpt: string;
+  featuredImage: {
+    node: {
+      sourceUrl: string;
+    };
+  };
+}
+
 export interface SucursalesProps {
   posts: {
     nodes: {
@@ -199,6 +211,123 @@ export interface ServiciosListProps {
           sourceUrl: string;
         };
       };
+    }[];
+  };
+}
+
+export interface ServiciosCallActionsProps {
+  posts: {
+    nodes: {
+      id: string;
+      title: string;
+      content: string;
+      excerpt: string;
+      featuredImage: {
+        node: {
+          sourceUrl: string;
+        };
+      };
+    }[];
+  };
+}
+
+export interface RecursosHumanosTitleProps {
+  posts: {
+    nodes: {
+      id: string;
+      title: string;
+      content: string;
+    }[];
+  };
+}
+
+export interface RecursosHumanosProps {
+  posts: {
+    nodes: {
+      id: string;
+      title: string;
+      content: string;
+      featuredImage: {
+        node: {
+          sourceUrl: string;
+        };
+      };
+    }[];
+  };
+}
+
+export interface ServiciosPeritajeIndustriasProps {
+  posts: {
+    nodes: {
+      id: string;
+      title: string;
+      content: string;
+      featuredImage: {
+        node: {
+          sourceUrl: string;
+        };
+      };
+    }[];
+  };
+}
+
+export interface SeguridadSaludOcupacionalProps {
+  posts: {
+    nodes: {
+      id: string;
+      title: string;
+      content: string;
+      featuredImage: {
+        node: {
+          sourceUrl: string;
+        };
+      };
+    }[];
+  };
+}
+
+export interface EmpleosProps {
+  posts: {
+    nodes: {
+      id: string;
+      title: string;
+      content: string;
+    }[];
+  };
+}
+
+export interface EmpleosBeneficiosProps {
+  posts: {
+    nodes: {
+      id: string;
+      title: string;
+      content: string;
+      featuredImage: {
+        node: {
+          sourceUrl: string;
+        };
+      };
+    }[];
+  };
+}
+
+export interface BeneficiosUneteProps {
+  posts: {
+    nodes: {
+      id: string;
+      title: string;
+      content: string;
+      excerpt: string;
+    }[];
+  };
+}
+
+export interface BlogObjetivesProps {
+  posts: {
+    nodes: {
+      id: string;
+      title: string;
+      content: string;
     }[];
   };
 }

@@ -204,3 +204,160 @@ export const queryServiciosList = `query ServiciosList {
     }
   }
 }`;
+
+export const queryServicioSeguridadIntegral = `query ServicioSeguridadIntegral {
+  posts(where: {categoryName:"Servicios", in:["cG9zdDoxOTE="]}){
+    nodes{
+      title
+      id
+			content
+      featuredImage{
+        node {
+          sourceUrl
+        }
+      }
+    }
+  }
+}`;
+
+export const queryServiciosMedida = `query ServiciosMedida {
+  posts(where: {categoryName:"Servicios", in:["cG9zdDoxODY="]}){
+    nodes{
+      title
+      id
+			content
+      featuredImage{
+        node {
+          sourceUrl
+        }
+      }
+    }
+  }
+}`;
+
+export const queryServiciosCallActions = `query ServiciosCallAction {
+  posts(where: {categoryName:"call-action-servicios"}){
+    nodes{
+      title
+      id
+			content
+      excerpt
+      featuredImage{
+        node {
+          sourceUrl
+        }
+      }
+    }
+  }
+}`;
+
+export const queryRecursosHumanoTitle = `query RecursosHumanosTitle {
+  posts(where: {categoryName:"recursos-humanos", in:"cG9zdDoxOTg="}){
+    nodes{
+      title
+      id
+			content
+    }
+  }
+}`;
+
+export const queryRecursosHumanos = `query RecursosHumanos {
+  posts(where: {categoryName:"recursos-humanos", notIn:"cG9zdDoxOTg="}){
+    nodes{
+      title
+      id
+			content
+      featuredImage{
+        node {
+          sourceUrl
+        }
+      }
+    }
+  }
+}`;
+
+export const queryServiciosPeritajeIndustrias = `query PeritajeIndustrias {
+  posts(where: {categoryName:"peritaje-industrias"}){
+    nodes{
+      title
+      id
+			content
+      featuredImage{
+        node {
+          sourceUrl
+        }
+      }
+    }
+  }
+}`;
+
+export const querySeguridadSaludOcupacional = `query SeguridadSaludOcupacional {
+  posts(where: {categoryName:"seguridad-salud-ocupacional"}){
+    nodes{
+      title
+      id
+			content
+      featuredImage{
+        node {
+          sourceUrl
+        }
+      }
+    }
+  }
+}`;
+
+export const queryEmpleosTitle = `query EmpleosTitle {
+  posts(where: {categoryName:"empleos", in:"cG9zdDoyMTk="}){
+    nodes{
+      title
+      id
+			content
+    }
+  }
+}`;
+
+export const queryEmpleos = `query Empleos {
+  posts(where: {categoryName:"empleos", in:"cG9zdDoyMjI="}){
+    nodes{
+      title
+      id
+			content
+    }
+  }
+}`;
+
+export const queryEmpleosBeneficios = `query Beneficios {
+  posts(where: {categoryName:"empleos", in:"cG9zdDoyMjU="}){
+    nodes{
+      title
+      id
+			content
+      featuredImage{
+        node{
+          sourceUrl
+        }
+      }
+    }
+  }
+}`;
+
+export const queryBeneficiosUnete = `query BeneficiosUnete {
+  posts(where: {categoryName:"unete"}){
+    nodes{
+      title
+      id
+			content
+      excerpt
+    }
+  }
+}`;
+
+export const queryBlogObjetives = `query BlogObjetives {
+  posts(where: {categoryName:"blog-page"}){
+    nodes{
+      title
+      id
+			content
+    }
+  }
+}`;

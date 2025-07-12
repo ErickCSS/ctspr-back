@@ -11,10 +11,10 @@ export const About = async () => {
   return (
     <section className="bg-white px-4 py-20">
       <div className="container mx-auto space-y-5">
-        <h1 className="text-center text-4xl font-bold text-black">
+        <h1 className="text-center text-2xl font-bold text-black lg:text-4xl">
           {about.posts.nodes[0].title}
         </h1>
-        <h2 className="text-center text-4xl font-bold text-black">
+        <h2 className="text-center text-2xl font-bold text-black lg:text-4xl">
           {parseContent(about.posts.nodes[0].content)}
         </h2>
       </div>

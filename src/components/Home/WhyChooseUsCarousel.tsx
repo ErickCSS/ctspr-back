@@ -21,7 +21,23 @@ export const WhyChooseUsCarousel = ({
   return (
     <Swiper
       spaceBetween={10}
-      slidesPerView={5}
+      breakpoints={{
+        320: {
+          slidesPerView: 1,
+        },
+        640: {
+          slidesPerView: 2,
+        },
+        768: {
+          slidesPerView: 3,
+        },
+        1024: {
+          slidesPerView: 4,
+        },
+        1280: {
+          slidesPerView: 5,
+        },
+      }}
       navigation={true}
       modules={[Navigation]}
       className="whyChooseUsCarousel h-[500px]"

@@ -3,7 +3,11 @@ import { AfiliadosProps, AfiliadosTitle } from "@/types/generalQuery.types";
 import { WpQuery } from "@/services/wpQuery";
 import { queryAfiliados, queryTitle } from "@/graphql/general.query";
 
-export const SomosAfiliaciones = async () => {
+export const SomosAfiliaciones = async ({
+  background,
+}: {
+  background: string;
+}) => {
   const afiliados: AfiliadosProps = await WpQuery({
     query: queryAfiliados,
   });
@@ -13,7 +17,7 @@ export const SomosAfiliaciones = async () => {
   });
 
   return (
-    <section className="bg-zinc-100 px-4 py-26 lg:py-32">
+    <section className={`${background} px-4 py-26 lg:py-32`}>
       <div className="flex flex-col items-center gap-y-5">
         <h2 className="text-center text-4xl font-bold lg:text-5xl">
           {title.posts.nodes[0].title}
