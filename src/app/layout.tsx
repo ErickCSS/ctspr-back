@@ -4,6 +4,7 @@ import "./globals.css";
 import { Footer } from "@components/general/Footer";
 import { Header } from "@components/general/header";
 import { ViewTransitions } from "next-view-transitions";
+import { BackToTop } from "@components/shared/BackToTop";
 
 const lato = Lato({
   variable: "--font-lato",
@@ -47,6 +48,7 @@ export default function RootLayout({
       <html lang="es">
         <body className={` ${lato.variable} antialiased`}>
           <Header /> {children} <Footer />
+          <BackToTop />
         </body>
       </html>
     </ViewTransitions>

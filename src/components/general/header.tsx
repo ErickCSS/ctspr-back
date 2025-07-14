@@ -19,7 +19,10 @@ export const Header = () => {
     <header className="flex w-full flex-col overflow-hidden">
       <div className="bg-primaryColor flex w-full justify-end gap-x-8 px-10 py-3">
         <Social className="size-8" />
-        <Link href="/" className="flex items-center gap-x-2 text-white">
+        <Link
+          href="mailto:sales@ctspr.com"
+          className="flex items-center gap-x-2 text-white"
+        >
           <IconMailFilled size={18} />
           <span className="font-bold">sales@ctspr.com</span>
         </Link>
