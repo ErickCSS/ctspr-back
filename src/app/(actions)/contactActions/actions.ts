@@ -17,7 +17,7 @@ export const sendEmail = async ({ email }: { email: ContactSchemaType }) => {
   try {
     await transporter.sendMail({
       from: "formularios@axesa.com",
-      to: "e.cruz@caribemedia.com.do, e.gomez@caribemedia.com.do, a.rodriguez@caribemedia.com.do",
+      to: "sales@ctspr.com",
       subject: "Mensaje de tu Website: CTS PR",
       html: `<!DOCTYPE html>
 <html lang="es">
