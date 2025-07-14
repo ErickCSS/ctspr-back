@@ -9,12 +9,20 @@ import { CarouselProps } from "@/types/generalQuery.types";
 import { Navigation } from "swiper/modules";
 import { parseContent } from "@/utils/parseContent.utils";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export const CarouselButtonTop = ({
   carousels,
 }: {
   carousels: CarouselProps[];
 }) => {
+  const pathname = usePathname();
+  const isEmpleo = pathname.includes("empleo");
+
+  const styleImage = isEmpleo
+    ? "size-[180px] rounded-full border-8 border-white object-cover object-center shadow-2xl"
+    : "h-auto w-[170px] lg:w-full";
+
   return (
     <Swiper
       spaceBetween={0}
@@ -34,19 +42,21 @@ export const CarouselButtonTop = ({
               loading="lazy"
               decoding="async"
               quality={60}
-              className="h-auto w-[170px] lg:w-full"
+              className={styleImage}
             />
 
             <div className="flex flex-col space-y-2">
               <h4 className="mb-2 flex flex-col items-start gap-x-3 text-3xl font-bold lg:flex-row lg:items-end">
                 {carousel.title}{" "}
                 <span className="text-lg">
-                  {carousel.excerpt.includes("Casa Bacardí")
+                  {!isEmpleo && carousel.excerpt.includes("Casa Bacardí")
                     ? parseContent(carousel.excerpt)
-                    : ""}
+                    : isEmpleo && carousel.excerpt
+                      ? parseContent(carousel.excerpt)
+                      : ""}
                 </span>
               </h4>
-              <div className="text-lg">
+              <div className="text-lg [&>h6]:mb-4 [&>h6]:font-bold [&>h6]:text-zinc-500">
                 {parseContent(carousel.content, {
                   configs: {
                     p: {

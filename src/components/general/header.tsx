@@ -8,9 +8,12 @@ import { NAV_CONFIG } from "@/config/nav.config";
 import { Button } from "@components/ui/button";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
 export const Header = () => {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const isActive = (path: string) => pathname === path;
 
   return (
     <header className="flex w-full flex-col overflow-hidden">
@@ -71,7 +74,12 @@ export const Header = () => {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="text-2xl text-black lg:text-lg"
+                    className={cn(
+                      "text-2xl text-black lg:text-lg",
+                      isActive(item.href)
+                        ? "text-secondaryColor font-bold"
+                        : "",
+                    )}
                     onClick={() => setOpen(false)}
                   >
                     {item.name}

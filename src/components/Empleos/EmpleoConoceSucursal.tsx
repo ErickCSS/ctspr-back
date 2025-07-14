@@ -1,15 +1,15 @@
 import { WpQuery } from "@/services/wpQuery";
-import { queryTestimonios } from "@/graphql/general.query";
-import { TestimoniosProps } from "@/types/generalQuery.types";
+import { queryConoceSucursal } from "@/graphql/general.query";
+import { ConoceSucursalProps } from "@/types/generalQuery.types";
 import { CarouselButtonTop } from "@/components/shared/CarouselButtonTop";
 import { toReversed } from "@/utils/toReversed";
 
 export const EmpleoConoceSucursal = async () => {
-  const testimonios: TestimoniosProps = await WpQuery({
-    query: queryTestimonios,
+  const conoceSucursal: ConoceSucursalProps = await WpQuery({
+    query: queryConoceSucursal,
   });
 
-  const testimoniosReverse = toReversed(testimonios.posts.nodes);
+  const conoceSucursalReverse = toReversed(conoceSucursal.posts.nodes);
 
   return (
     <section className="bg-white px-4 py-20">
@@ -20,7 +20,7 @@ export const EmpleoConoceSucursal = async () => {
         </div>
 
         <div className="mt-14">
-          <CarouselButtonTop carousels={testimoniosReverse} />
+          <CarouselButtonTop carousels={conoceSucursalReverse} />
         </div>
       </div>
     </section>

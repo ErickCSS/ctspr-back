@@ -35,7 +35,7 @@ export const Footer = async () => {
               alt="logo"
               width={250}
               height={250}
-              className="h-auto w-[150px] lg:w-[450px]"
+              className="h-auto w-[150px] lg:w-[400px]"
               loading="lazy"
               decoding="async"
             />
