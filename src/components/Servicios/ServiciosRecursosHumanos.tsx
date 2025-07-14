@@ -9,6 +9,7 @@ import {
 } from "@/types/generalQuery.types";
 import { parseContent } from "@/utils/parseContent.utils";
 import Image from "next/image";
+import { toReversed } from "@/utils/toReversed";
 
 export const ServiciosRecursosHumanos = async () => {
   const recursosHumanosTitle: RecursosHumanosTitleProps = await WpQuery({
@@ -19,9 +20,11 @@ export const ServiciosRecursosHumanos = async () => {
     query: queryRecursosHumanos,
   });
 
+  const recursosHumanosReverse = toReversed(recursosHumanos.posts.nodes);
+
   const title = recursosHumanosTitle.posts.nodes[0].title;
   const content = recursosHumanosTitle.posts.nodes[0].content;
-  const servicios = recursosHumanos.posts.nodes;
+  const servicios = recursosHumanosReverse;
 
   const rows = [];
   for (let i = 0; i < servicios.length; i += 2) {
@@ -61,7 +64,7 @@ export const ServiciosRecursosHumanos = async () => {
                   />
                   <div className="space-y-2">
                     <h3 className="text-2xl font-semibold">{servicio.title}</h3>
-                    <div className="text-balance text-gray-600">
+                    <div className="text-lg text-balance text-gray-600">
                       {parseContent(servicio.content)}
                     </div>
                   </div>

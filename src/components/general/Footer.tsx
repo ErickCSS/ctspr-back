@@ -75,7 +75,11 @@ export const Footer = async () => {
                   href={
                     sucursal.title === "Salinas"
                       ? `https://www.facebook.com/CTSEmpleos`
-                      : `https://www.facebook.com/ctssucursal${sucursal.title.toLowerCase().replace(" ", "")}`
+                      : `https://www.facebook.com/ctssucursal${sucursal.title
+                          .toLowerCase()
+                          .normalize("NFD")
+                          .replace(/[\u0300-\u036f]/g, "")
+                          .replace(/\s+/g, "")}`
                   }
                   target="_blank"
                   rel="noopener noreferrer nofollow"

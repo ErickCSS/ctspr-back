@@ -16,7 +16,7 @@ export const ContactForm = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="font-sf mx-auto mt-10 space-y-4 lg:w-3xl"
       >
-        <Label>Nombre</Label>
+        <Label className="text-lg">Nombre</Label>
         <RenderFormField
           control={contactForm.control}
           name="name"
@@ -25,7 +25,7 @@ export const ContactForm = () => {
           errors={contactForm.formState.errors}
         />
 
-        <Label>Email</Label>
+        <Label className="text-lg">Email</Label>
         <RenderFormField
           control={contactForm.control}
           name="email"
@@ -34,7 +34,7 @@ export const ContactForm = () => {
           errors={contactForm.formState.errors}
         />
 
-        <Label>Teléfono</Label>
+        <Label className="text-lg">Teléfono</Label>
         <RenderFormField
           control={contactForm.control}
           name="phone"
@@ -43,7 +43,7 @@ export const ContactForm = () => {
           errors={contactForm.formState.errors}
         />
 
-        <Label>Mensaje</Label>
+        <Label className="text-lg">Mensaje</Label>
         <RenderFormField
           control={contactForm.control}
           name="message"

@@ -2,12 +2,17 @@ import { AccordionComponent } from "@components/shared/AccordionComponent";
 import { WpQuery } from "@/services/wpQuery";
 import { PreguntasFrecuentesProps } from "@/types/generalQuery.types";
 import { queryPreguntasFrecuentesCandidatos } from "@/graphql/general.query";
+import { toReversed } from "@/utils/toReversed";
 
 export const EmpleoPreguntaFrecuentes = async () => {
   const preguntasFrecuentesCandidatos: PreguntasFrecuentesProps = await WpQuery(
     {
       query: queryPreguntasFrecuentesCandidatos,
     },
+  );
+
+  const preguntasFrecuentesReverse = toReversed(
+    preguntasFrecuentesCandidatos.posts.nodes,
   );
 
   return (
@@ -21,9 +26,7 @@ export const EmpleoPreguntaFrecuentes = async () => {
         </div>
 
         <div className="mx-auto mt-20 max-w-5xl">
-          <AccordionComponent
-            contentAccordion={preguntasFrecuentesCandidatos.posts.nodes}
-          />
+          <AccordionComponent contentAccordion={preguntasFrecuentesReverse} />
         </div>
       </div>
     </section>

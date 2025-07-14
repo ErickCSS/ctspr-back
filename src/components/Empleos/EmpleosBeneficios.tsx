@@ -63,6 +63,9 @@ export const EmpleosBeneficios = async () => {
               alt={title}
               width={400}
               height={1000}
+              loading="lazy"
+              decoding="async"
+              quality={100}
               className="h-full w-[700px] lg:w-[500px] xl:w-[700px]"
             />
           </div>

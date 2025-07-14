@@ -94,7 +94,7 @@ export const RenderFormField = <T extends FieldValues>({
                 {...field}
                 placeholder={placeholder}
                 type={type}
-                className={`focus:border-brandPrimary h-12 w-full border-[#F7F7F7] bg-[#F7F7F7] text-sm focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none ${className} `}
+                className={`focus:border-brandPrimary h-12 w-full border-[#F7F7F7] bg-[#F7F7F7] text-sm placeholder:text-base focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none ${className} `}
                 style={style}
               />
             </FormControl>
@@ -121,7 +121,7 @@ export const RenderFormField = <T extends FieldValues>({
               <Textarea
                 {...field}
                 placeholder={placeholder}
-                className={`focus:border-brandPrimary h-12 w-full border-[#F7F7F7] bg-[#F7F7F7] text-sm focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none ${className} `}
+                className={`focus:border-brandPrimary h-12 w-full border-[#F7F7F7] bg-[#F7F7F7] text-sm placeholder:text-base focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none ${className} `}
                 style={style}
               />
             </FormControl>
