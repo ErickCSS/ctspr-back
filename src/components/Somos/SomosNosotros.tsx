@@ -2,6 +2,7 @@ import { WpQuery } from "@/services/wpQuery";
 import { SomosNosotrosProps } from "@/types/generalQuery.types";
 import { querySomosNosotros } from "@/graphql/general.query";
 import { parseContent } from "@/utils/parseContent.utils";
+import { SomosConoceSucursal } from "./SomosConoceSucursal";
 
 export const SomosNosotros = async () => {
   const somosNosotros: SomosNosotrosProps = await WpQuery({
@@ -26,6 +27,8 @@ export const SomosNosotros = async () => {
             <div className="space-y-7 text-center text-balance lg:text-left [&_h3]:mb-3 [&_h3]:text-4xl [&_h3]:font-bold [&_h3]:uppercase">
               {parseContent(content)}
             </div>
+
+            <SomosConoceSucursal />
           </div>
         </div>
       </div>

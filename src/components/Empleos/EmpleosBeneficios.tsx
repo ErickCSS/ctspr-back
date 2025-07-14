@@ -32,19 +32,21 @@ export const EmpleosBeneficios = async () => {
   return (
     <section className="gradientCTS relative overflow-hidden px-4 py-28">
       <div className="container mx-auto">
-        <div className="flex">
+        <div className="flex h-full min-h-[1800px] lg:min-h-auto">
           <div className="w-full lg:w-1/2">
             <h2 className="mb-10 text-center text-7xl font-black text-white lg:text-left">
               {title}
             </h2>
-            <div className="flex flex-col gap-y-10 text-xl text-white lg:text-2xl">
+            <div className="flex flex-col gap-y-10 text-xl text-white xl:text-2xl">
               {parseWithIcons(content, "text-secondaryColor size-10")}
             </div>
 
             <div className="flex flex-col gap-y-5">
-              <h3 className="text-7xl font-black text-white">{titleUnete}</h3>
-              <div className="flex flex-wrap items-center gap-2">
-                <div className="text-4xl text-white">
+              <h3 className="text-center text-7xl font-black text-white">
+                {titleUnete}
+              </h3>
+              <div className="flex flex-wrap items-center justify-center gap-2 lg:items-start">
+                <div className="text-center text-4xl text-white">
                   {parseContent(excerptUnete)}
                 </div>
                 <div className="text-white">
@@ -55,13 +57,13 @@ export const EmpleosBeneficios = async () => {
               </div>
             </div>
           </div>
-          <div className="absolute right-20 bottom-0">
+          <div className="absolute right-8 bottom-0 xl:right-20">
             <Image
               src={featuredImage}
               alt={title}
               width={400}
               height={1000}
-              className="h-full w-[700px]"
+              className="h-full w-[700px] lg:w-[500px] xl:w-[700px]"
             />
           </div>
         </div>

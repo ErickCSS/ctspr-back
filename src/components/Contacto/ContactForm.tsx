@@ -14,7 +14,7 @@ export const ContactForm = () => {
     <Form {...contactForm}>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="font-sf mx-auto mt-10 w-3xl space-y-4"
+        className="font-sf mx-auto mt-10 space-y-4 lg:w-3xl"
       >
         <Label>Nombre</Label>
         <RenderFormField

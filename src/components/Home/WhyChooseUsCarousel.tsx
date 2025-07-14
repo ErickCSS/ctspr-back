@@ -60,12 +60,12 @@ export const WhyChooseUsCarousel = ({
             />
 
             <div className="mt-3 flex flex-col space-y-2">
-              <div className="text-center text-7xl font-bold text-white">
+              <div className="text-center text-5xl font-bold text-white xl:text-7xl">
                 {choose.content && parseContent(choose.content)}
               </div>
 
               <h4
-                className={`text-center text-white ${choose.title.includes("HISTORIAS DE ÉXITO") ? "text-base font-normal" : "text-3xl font-bold"}`}
+                className={`text-center text-white ${choose.title.includes("HISTORIAS DE ÉXITO") ? "text-base font-normal" : "text-3xl font-bold lg:text-2xl xl:text-3xl"}`}
               >
                 {choose.title}
               </h4>

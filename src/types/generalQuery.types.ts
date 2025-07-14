@@ -331,3 +331,44 @@ export interface BlogObjetivesProps {
     }[];
   };
 }
+
+export interface EquiposProps {
+  posts: {
+    nodes: {
+      id: string;
+      title: string;
+      content: string;
+      featuredImage: {
+        node: {
+          sourceUrl: string;
+        };
+      };
+    }[];
+  };
+}
+
+export interface PreguntasFrecuentesProps {
+  posts: {
+    nodes: {
+      id: string;
+      title: string;
+      content: string;
+    }[];
+  };
+}
+
+export interface ConoceSucursalProps {
+  posts: {
+    nodes: {
+      id: string;
+      title: string;
+      content: string;
+      excerpt: string;
+      featuredImage: {
+        node: {
+          sourceUrl: string;
+        };
+      };
+    }[];
+  };
+}

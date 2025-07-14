@@ -15,8 +15,7 @@ export const WpQuery = async ({ query, variables }: WpQueryProps) => {
   });
 
   if (!responsePosts.ok) {
-    console.log(responsePosts);
-    return {};
+    throw new Error("Failed to fetch data");
   }
 
   const { data } = await responsePosts.json();

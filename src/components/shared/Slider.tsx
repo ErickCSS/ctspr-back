@@ -28,7 +28,7 @@ export const SliderHero = ({ sliders }: { sliders: SliderProps[] }) => {
           key={index}
           className="h-full bg-cover bg-center bg-no-repeat"
         >
-          <div className="container mx-auto flex h-full items-center">
+          <div className="container mx-auto flex h-full items-center px-4">
             <div className="flex w-[500px] flex-col bg-black/60 p-10">
               <h2 className="mb-2 text-4xl font-bold text-white">
                 {slider.title}

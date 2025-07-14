@@ -9,8 +9,6 @@ export const Hero = async ({ title }: { title: string }) => {
 
   const heroImage = hero.posts.nodes[0].featuredImage.node.sourceUrl;
 
-  console.log(heroImage);
-
   return (
     <section
       style={{

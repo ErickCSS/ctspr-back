@@ -27,11 +27,11 @@ export const ServiciosMiddle = async () => {
             />
           </div>
           <div className="flex w-full flex-col justify-center gap-y-8 lg:w-2/3">
-            <h2 className="text-center text-3xl font-bold text-balance text-white lg:text-[45px]">
+            <h2 className="text-center text-3xl font-bold text-balance text-white lg:text-4xl xl:text-[45px]">
               {title}
             </h2>
 
-            <div className="mx-auto w-full max-w-5xl text-center text-xl font-normal text-balance text-white lg:text-3xl">
+            <div className="mx-auto w-full max-w-5xl text-center text-xl font-normal text-balance text-white lg:text-2xl xl:text-3xl">
               {parseContent(content)}
             </div>
           </div>

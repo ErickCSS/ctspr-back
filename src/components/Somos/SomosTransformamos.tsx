@@ -24,16 +24,16 @@ export const SomosTransformamos = async () => {
             alt={title}
             width={400}
             height={400}
-            className="h-auto w-full"
+            className="h-full w-full object-cover object-center"
           />
 
           <div className="flex flex-col items-center justify-center gap-5 p-8 lg:p-14">
-            <h2 className="text-3xl font-bold text-balance lg:text-5xl">
+            <h2 className="text-3xl font-bold text-balance lg:text-4xl xl:text-5xl">
               {title}
             </h2>
 
             <div className="mt-10 w-full">
-              <div className="[&_h6]:text-secondaryColor/60 w-full space-y-10 [&_h6]:text-5xl [&_h6]:font-black [&_p]:text-lg [&_p]:text-balance lg:[&_p]:text-2xl [&>div_div]:flex [&>div_div]:flex-col [&>div_div]:gap-x-5 lg:[&>div_div]:flex-row lg:[&>div_div]:items-center">
+              <div className="[&_h6]:text-secondaryColor/60 w-full space-y-10 [&_h6]:text-5xl [&_h6]:font-black [&_p]:text-lg [&_p]:text-balance xl:[&_p]:text-2xl [&>div_div]:flex [&>div_div]:flex-col [&>div_div]:gap-x-5 lg:[&>div_div]:flex-row lg:[&>div_div]:items-center">
                 {parseContent(content)}
               </div>
             </div>

@@ -361,3 +361,72 @@ export const queryBlogObjetives = `query BlogObjetives {
     }
   }
 }`;
+
+export const queryEquipoAdministrativo = `query EquipoAdministrativo {
+  posts(where:{categoryName:"equipo-administrativo"}){
+    nodes{
+      title
+      id
+			content
+      featuredImage{
+        node{
+          sourceUrl
+        }
+      }
+    }
+  }
+}
+
+`;
+
+export const queryEquipoGerencial = `query EquipoGerencial {
+  posts(where:{categoryName:"equipo-gerencial"}){
+    nodes{
+      title
+      id
+			content
+      featuredImage{
+        node{
+          sourceUrl
+        }
+      }
+    }
+  }
+}
+`;
+
+export const queryPreguntasFrecuentesEmpresas = `query PreguntasFrecuentesEmpresas {
+  posts(where:{categoryName:"preguntas-frecuentes-empresas"}){
+    nodes{
+      title
+      id
+			content
+    }
+  }
+}`;
+
+export const queryPreguntasFrecuentesCandidatos = `query PreguntasFrecuentesCandidatos {
+  posts(where:{categoryName:"preguntas-frecuentes-candidatos"}){
+    nodes{
+      title
+      id
+			content
+    }
+  }
+}`;
+
+export const queryConoceSucursal = `query ConoceSucursal {
+  posts(where:{categoryName:"conoce-sucursal"}){
+    nodes{
+      title
+      id
+			content
+      excerpt
+      featuredImage{
+        node{
+          sourceUrl
+        }
+      }
+    }
+  }
+}`;

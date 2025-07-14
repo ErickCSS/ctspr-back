@@ -4,6 +4,7 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@components/ui/accordion";
+import { parseContent } from "@/utils/parseContent.utils";
 
 interface AccordionProps {
   contentAccordion: {
@@ -24,7 +25,7 @@ export const AccordionComponent = ({ contentAccordion }: AccordionProps) => {
           <AccordionTrigger className="cursor-pointer py-10 text-xl font-bold text-black hover:no-underline">
             {item.title}
           </AccordionTrigger>
-          <AccordionContent>{item.content}</AccordionContent>
+          <AccordionContent>{parseContent(item.content)}</AccordionContent>
         </AccordionItem>
       ))}
     </Accordion>
