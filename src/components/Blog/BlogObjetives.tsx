@@ -5,6 +5,7 @@ import { parseContent } from "@/utils/parseContent.utils";
 import { Button } from "@components/ui/button";
 import { Link } from "next-view-transitions";
 import { IconCaretRightFilled } from "@tabler/icons-react";
+import { YouTubeEmbed } from "@next/third-parties/google";
 
 export const BlogObjetives = async () => {
   const blogObjetives: BlogObjetivesProps = await WpQuery({
@@ -18,7 +19,9 @@ export const BlogObjetives = async () => {
     <section className="from-secondaryColor via-primaryColor to-primaryColor bg-gradient-to-br px-4 py-28">
       <div className="container mx-auto">
         <div className="flex flex-col items-center lg:flex-row">
-          <div className="w-full lg:w-1/2"></div>
+          <div className="w-full lg:w-1/2">
+            <YouTubeEmbed videoid="HkPqrIYt5Cc" />
+          </div>
           <div className="w-full space-y-10 lg:w-1/2">
             <h2 className="text-4xl font-black text-balance text-white lg:text-left">
               {title}
