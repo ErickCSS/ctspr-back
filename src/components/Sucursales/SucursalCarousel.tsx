@@ -13,12 +13,15 @@ import Image from "next/image";
 import { parseContent, parsePhoneNumbers } from "@/utils/parseContent.utils";
 import Link from "next/link";
 import { IconBrandFacebookFilled } from "@tabler/icons-react";
+import { toReversed } from "@/utils/toReversed";
 
 export const SucursalCarousel = ({
   sucursales,
 }: {
   sucursales: SucursalesProps;
 }) => {
+  const sucursalesReverse = toReversed(sucursales.posts.nodes);
+
   return (
     <>
       <Swiper
@@ -39,7 +42,7 @@ export const SucursalCarousel = ({
         modules={[Navigation]}
         className="SucursalCarousel mt-20"
       >
-        {sucursales.posts.nodes.reverse().map((sucursal, index) => (
+        {sucursalesReverse.map((sucursal, index) => (
           <SwiperSlide key={index} className="w-2xs">
             <article className="flex flex-col justify-center bg-white p-10">
               <Image
@@ -47,7 +50,7 @@ export const SucursalCarousel = ({
                 alt={sucursal.title}
                 width={500}
                 height={500}
-                className="h-[250px] w-full object-cover object-center"
+                className={`h-[250px] w-full object-cover ${sucursal.title === "Salinas" ? "object-left" : "object-center"}`}
               />
               <div className="mt-5">
                 <h3 className="text-secondaryColor text-3xl font-bold">
@@ -66,7 +69,7 @@ export const SucursalCarousel = ({
                   className="mt-3 flex w-fit items-center gap-x-2 bg-[#1877F2] p-2"
                   href={
                     sucursal.title === "Salinas"
-                      ? `https://www.facebook.com/CTSEmpleos`
+                      ? `https://www.facebook.com/ctssucursallaspiedras`
                       : `https://www.facebook.com/ctssucursal${sucursal.title
                           .toLowerCase()
                           .normalize("NFD")

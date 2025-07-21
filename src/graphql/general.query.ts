@@ -363,7 +363,7 @@ export const queryBlogObjetives = `query BlogObjetives {
 }`;
 
 export const queryEquipoAdministrativo = `query EquipoAdministrativo {
-  posts(where:{categoryName:"equipo-administrativo"}){
+  posts(where:{categoryName:"equipo-directivo"}){
     nodes{
       title
       id

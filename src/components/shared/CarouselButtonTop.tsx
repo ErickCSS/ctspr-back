@@ -49,7 +49,7 @@ export const CarouselButtonTop = ({
               <h4 className="mb-2 flex flex-col items-start gap-x-3 text-3xl font-bold lg:flex-row lg:items-end">
                 {carousel.title}{" "}
                 <span className="text-lg">
-                  {!isEmpleo && carousel.excerpt.includes("Casa Bacardí")
+                  {!isEmpleo && carousel.excerpt.includes("Christian")
                     ? parseContent(carousel.excerpt)
                     : isEmpleo && carousel.excerpt
                       ? parseContent(carousel.excerpt)

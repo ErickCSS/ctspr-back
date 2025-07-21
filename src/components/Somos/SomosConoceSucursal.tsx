@@ -14,7 +14,7 @@ export const SomosConoceSucursal = async () => {
   return (
     <div className="border border-zinc-500 p-10">
       <h4 className="mb-3 text-center text-3xl font-bold">
-        Conoce a tu sucursal
+        Conoce parte de nuestro equipo
       </h4>
 
       <CarouselVertical carousels={conoceSucursalReverse} />

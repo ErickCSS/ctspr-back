@@ -19,7 +19,7 @@ const LIST_SOCIAL = [
         className="size-[22px]"
       />
     ),
-    href: "https://www.indeed.com/",
+    href: "https://www.indeed.com/cmp/Caribbean-Temporary-Services,-Llc./about ",
   },
   {
     social: "linkedin",

@@ -13,7 +13,7 @@ export const ServiciosContent = async () => {
   return (
     <section className="bg-white px-4 py-20 lg:py-28">
       <div className="container mx-auto space-y-5">
-        <div className="mx-auto w-full max-w-5xl space-y-3 text-center text-xl font-normal text-balance text-black lg:text-left">
+        <div className="mx-auto w-full max-w-5xl space-y-3 text-xl font-normal text-black lg:text-left [&>p]:text-justify">
           {parseContent(content)}
         </div>
       </div>

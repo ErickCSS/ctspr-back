@@ -48,14 +48,8 @@ export const CarouselVertical = ({
                   {parseContent(carousel.excerpt)}
                 </h5>
               </div>
-              <div className="text-center text-base [&>h6]:mb-4 [&>h6]:font-bold [&>h6]:text-zinc-500">
-                {parseContent(carousel.content, {
-                  configs: {
-                    p: {
-                      className: "text-balance",
-                    },
-                  },
-                })}
+              <div className="text-center text-base [&_p]:text-justify [&>h6]:mb-4 [&>h6]:font-bold [&>h6]:text-zinc-500">
+                {parseContent(carousel.content)}
               </div>
             </div>
           </div>

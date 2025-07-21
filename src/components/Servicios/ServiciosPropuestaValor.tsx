@@ -27,7 +27,7 @@ export const ServiciosPropuestaValor = async () => {
   return (
     <section className="gradientCTS px-4 py-28">
       <div className="container mx-auto">
-        <h2 className="text-center text-5xl font-bold text-white">{title}</h2>
+        <h2 className="text-center text-5xl font-bold text-black">{title}</h2>
 
         <div className="mt-22">
           <article
@@ -44,9 +44,9 @@ export const ServiciosPropuestaValor = async () => {
               quality={50}
               className="h-auto w-42"
             />
-            <h4 className="max-w-96 text-center text-2xl font-normal text-balance text-white">
+            <h5 className="max-w-96 text-center text-2xl font-normal text-balance text-black">
               {firstValue.title}
-            </h4>
+            </h5>
           </article>
 
           <div className="mx-auto mt-20 grid max-w-6xl grid-cols-1 gap-10 md:grid-cols-2">
@@ -65,9 +65,9 @@ export const ServiciosPropuestaValor = async () => {
                   quality={50}
                   className="h-auto w-42"
                 />
-                <h4 className="max-w-96 text-center text-2xl font-normal text-balance text-white">
+                <h5 className="max-w-96 text-center text-2xl font-normal text-balance text-black">
                   {value.title}
-                </h4>
+                </h5>
               </article>
             ))}
           </div>

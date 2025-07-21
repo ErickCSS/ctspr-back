@@ -130,7 +130,7 @@
 }
 
 .gradientCTS {
-  @apply from-primaryColor via-primaryColor to-secondaryColor bg-gradient-to-tr;
+  @apply bg-gradient-to-br from-[#d3d3e3] via-[#ebdfeb] to-[#faf8fb];
 }
 
 .SliderHero {
