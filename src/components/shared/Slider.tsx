@@ -6,8 +6,9 @@ import parse from "html-react-parser";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
+
 import { SliderProps } from "@/types/hero.types";
-import { Navigation } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 import { parsePhoneNumbers } from "@/utils/parseContent.utils";
 
 export const SliderHero = ({ sliders }: { sliders: SliderProps[] }) => {
@@ -16,8 +17,12 @@ export const SliderHero = ({ sliders }: { sliders: SliderProps[] }) => {
       spaceBetween={0}
       slidesPerView={1}
       navigation={true}
-      modules={[Navigation]}
+      modules={[Navigation, Autoplay]}
       loop={true}
+      autoplay={{
+        delay: 5000,
+        disableOnInteraction: false,
+      }}
       className="SliderHero h-[700px]"
     >
       {sliders.map((slider, index) => (
