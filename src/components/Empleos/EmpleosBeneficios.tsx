@@ -34,22 +34,22 @@ export const EmpleosBeneficios = async () => {
       <div className="container mx-auto">
         <div className="flex h-full min-h-[1800px] lg:min-h-auto">
           <div className="w-full lg:w-1/2">
-            <h2 className="mb-10 text-center text-7xl font-black text-white lg:text-left">
+            <h2 className="mb-10 text-center text-7xl font-black text-black lg:text-left">
               {title}
             </h2>
-            <div className="flex flex-col gap-y-10 text-xl text-white xl:text-2xl">
+            <div className="flex flex-col gap-y-10 text-xl text-black xl:text-2xl">
               {parseWithIcons(content, "text-secondaryColor size-10")}
             </div>
 
             <div className="flex flex-col gap-y-5">
-              <h3 className="text-center text-7xl font-black text-white">
+              <h3 className="text-center text-7xl font-black text-black">
                 {titleUnete}
               </h3>
               <div className="flex flex-wrap items-center justify-center gap-2 lg:items-start">
-                <div className="text-center text-4xl text-white">
+                <div className="text-center text-4xl text-black">
                   {parseContent(excerptUnete)}
                 </div>
-                <div className="text-white">
+                <div className="text-black">
                   {parseContent(contentUnete, {
                     configs: { phone: { className: "font-black text-5xl" } },
                   })}

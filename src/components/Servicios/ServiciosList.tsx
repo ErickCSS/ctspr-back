@@ -35,7 +35,7 @@ export const ServiciosList = async () => {
             <div
               className={`flex w-full flex-col gap-y-5 lg:w-1/2 ${index % 2 === 0 ? "p-5 lg:p-10" : "p-5 lg:px-20 lg:py-10"}`}
             >
-              <h3 className="text-4xl font-bold text-black xl:text-5xl">
+              <h3 className="text-4xl font-bold text-black xl:text-[40px]">
                 {servicio.title}
               </h3>
               <hr className="w-3/4 border-2 border-zinc-300" />

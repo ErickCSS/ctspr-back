@@ -35,15 +35,17 @@ export const EmpleosMapSelect = async () => {
     <section className="bg-white px-4 py-28">
       <div className="container mx-auto">
         <div className="flex flex-col items-center gap-y-8 text-center">
-          <h2 className="text-5xl font-bold">{title}</h2>
+          <h2 className="text-4xl font-bold xl:text-5xl">{title}</h2>
           <hr className="border-secondaryColor my-3 w-[120px] border-2 outline-none" />
         </div>
 
         <div className="mx-auto mt-10 max-w-5xl bg-zinc-100 p-10">
           <div className="grid grid-cols-1 items-center gap-x-10 gap-y-10 lg:grid-cols-2">
             <div className="flex flex-col gap-y-2">
-              <h3 className="text-4xl font-bold">{foundEmpleos}</h3>
-              <div className="text-xl text-balance">
+              <h3 className="text-center text-4xl font-bold lg:text-left">
+                {foundEmpleos}
+              </h3>
+              <div className="text-center text-xl text-balance lg:text-left">
                 {parseContent(foundEmpleosContent)}
               </div>
             </div>
@@ -85,10 +87,17 @@ export const EmpleosMapSelect = async () => {
         </div>
 
         <div className="mx-auto mt-20 max-w-5xl">
-          <div className="bg-primaryColor rounded-xl p-14">
+          <div className="bg-primaryColor flex flex-col items-center gap-5 rounded-xl p-14">
             <div className="text-center text-white [&>h3]:text-4xl [&>h3]:font-black">
               {parseContent(content)}
             </div>
+
+            <Button
+              asChild
+              className="bg-secondaryColor min-h-[50px] w-[250px] text-xl text-white transition-colors duration-300 hover:bg-pink-700"
+            >
+              <Link href="/contacto">Más Información</Link>
+            </Button>
           </div>
         </div>
       </div>

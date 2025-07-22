@@ -1,4 +1,3 @@
-import { WhyChooseUsCarousel } from "./WhyChooseUsCarousel";
 import { WhyChooseUsProps } from "@/types/generalQuery.types";
 import { WpQuery } from "@/services/wpQuery";
 import { queryWhyChooseUs } from "@/graphql/general.query";

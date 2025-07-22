@@ -16,17 +16,19 @@ export const ServiciosPeritajeIndustrias = async () => {
 
   return (
     <section
-      className="flex min-h-[700px] flex-col items-center justify-center bg-cover bg-center bg-no-repeat px-4 py-20"
+      className="flex flex-col items-center justify-center bg-cover bg-center bg-no-repeat px-4 py-20 xl:min-h-[700px]"
       style={{ backgroundImage: `url(${featuredImage})` }}
     >
       <div className="container mx-auto">
         <div className="flex flex-col gap-y-10">
-          <h2 className="text-center text-5xl font-bold text-white">{title}</h2>
+          <h2 className="text-center text-4xl font-bold text-black lg:text-5xl">
+            {title}
+          </h2>
           <hr className="border-secondaryColor mx-auto w-[120px] border-2" />
         </div>
 
         <div className="mx-auto mt-16 max-w-6xl">
-          <div className="columns-1 space-y-4 text-2xl text-white md:columns-2 lg:columns-3">
+          <div className="columns-1 space-y-4 text-xl text-black md:columns-2 lg:columns-3 lg:text-2xl">
             {parseWithIcons(content, "text-secondaryColor size-8")}
           </div>
         </div>

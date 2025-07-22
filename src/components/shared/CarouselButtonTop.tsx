@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { CarouselProps } from "@/types/generalQuery.types";
-import { Navigation } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 import { parseContent } from "@/utils/parseContent.utils";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -28,7 +28,11 @@ export const CarouselButtonTop = ({
       spaceBetween={0}
       slidesPerView={1}
       navigation={true}
-      modules={[Navigation]}
+      modules={[Navigation, Autoplay]}
+      autoplay={{
+        delay: 5000,
+        disableOnInteraction: false,
+      }}
       className="TestimonialCarousel rounded-xl bg-zinc-100 xl:w-[1100px]"
     >
       {carousels?.map((carousel, index) => (

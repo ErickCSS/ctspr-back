@@ -8,7 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { CarouselProps } from "@/types/generalQuery.types";
-import { Navigation } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 import { parseContent } from "@/utils/parseContent.utils";
 import Image from "next/image";
 
@@ -22,7 +22,11 @@ export const CarouselVertical = ({
       spaceBetween={0}
       slidesPerView={1}
       navigation={true}
-      modules={[Navigation]}
+      autoplay={{
+        delay: 5000,
+        disableOnInteraction: false,
+      }}
+      modules={[Navigation, Autoplay]}
       className="carousel-vertical rounded-xl bg-white"
     >
       {carousels?.map((carousel, index) => (
@@ -36,7 +40,7 @@ export const CarouselVertical = ({
               loading="lazy"
               decoding="async"
               quality={60}
-              className="size-[180px] rounded-full border-8 border-white object-cover object-center shadow-2xl"
+              className="size-[180px] rounded-full border-8 border-white object-cover object-top shadow-2xl"
             />
 
             <div className="mt-2 flex flex-col">

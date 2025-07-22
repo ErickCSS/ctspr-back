@@ -55,16 +55,18 @@ export const ServiciosRecursosHumanos = async () => {
                   key={servicio.id}
                   className="flex items-start gap-4 border-dashed px-4 last:border-r-0 lg:border-r"
                 >
-                  <Image
-                    src={servicio.featuredImage?.node?.sourceUrl}
-                    alt={servicio.title}
-                    className="size-28 object-contain"
-                    width={64}
-                    height={64}
-                  />
-                  <div className="space-y-2">
+                  <div className="flex w-1/4 items-center justify-center">
+                    <Image
+                      src={servicio.featuredImage?.node?.sourceUrl}
+                      alt={servicio.title}
+                      className="size-28 object-contain"
+                      width={64}
+                      height={64}
+                    />
+                  </div>
+                  <div className="w-3/4 space-y-2">
                     <h3 className="text-2xl font-semibold">{servicio.title}</h3>
-                    <div className="text-lg text-balance text-gray-600">
+                    <div className="text-lg text-balance text-black">
                       {parseContent(servicio.content)}
                     </div>
                   </div>
