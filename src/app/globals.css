@@ -137,6 +137,10 @@
   .swiper-button-prev,
   .swiper-button-next {
     @apply text-white;
+
+    &::after {
+      @apply text-base md:text-2xl;
+    }
   }
 }
 

@@ -39,7 +39,17 @@ export const SomosTransformamos = async () => {
           </div>
         </div>
 
-        <video className="mx-auto mt-16" autoPlay loop muted>
+        <video
+          className="mx-auto mt-16"
+          autoPlay
+          loop
+          muted
+          playsInline
+          webkit-playsinline="true"
+          x5-playsinline="true"
+          x5-video-player-fullscreen="false"
+          x5-video-player-type="h5"
+        >
           <source src="/videos/text-animado-cts.mp4" type="video/mp4" />
         </video>
       </div>

@@ -16,17 +16,28 @@ export const BlogObjetives = async () => {
   const content = blogObjetives.posts.nodes[0].content;
 
   return (
-    <section className="from-secondaryColor via-primaryColor to-primaryColor bg-gradient-to-br px-4 py-28">
+    <section className="gradientCTS px-4 py-28">
       <div className="container mx-auto">
         <div className="flex flex-col items-center lg:flex-row">
           <div className="w-full lg:w-1/2">
             <YouTubeEmbed videoid="HkPqrIYt5Cc" />
           </div>
           <div className="w-full space-y-10 lg:w-1/2">
-            <h2 className="text-4xl font-black text-balance text-white lg:text-left">
+            <h2 className="text-4xl font-black text-balance text-black lg:text-left">
               {title}
             </h2>
-            <div className="flex flex-col">{parseContent(content)}</div>
+            <div className="flex flex-col">
+              {parseContent(content, {
+                configs: {
+                  phone: {
+                    className: "text-black text-4xl mt-2 font-normal",
+                  },
+                  email: {
+                    className: "text-black text-4xl mt-2 font-normal",
+                  },
+                },
+              })}
+            </div>
 
             <Button
               asChild

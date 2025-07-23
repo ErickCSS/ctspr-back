@@ -33,14 +33,18 @@ export const SliderHero = ({ sliders }: { sliders: SliderProps[] }) => {
           key={index}
           className="h-full bg-cover bg-[top_center] bg-no-repeat"
         >
-          <div className="container mx-auto hidden h-full items-center px-4 md:flex">
-            <div className="flex w-[500px] flex-col bg-black/60 p-10">
-              <h2 className="mb-2 text-4xl font-bold text-white">
+          <div className="container mx-auto flex h-full items-center px-4">
+            <div className="flex w-[500px] flex-col bg-black/60 p-5 md:p-10">
+              <h2 className="mb-2 text-xl font-bold text-white md:text-4xl">
                 {slider.title}
               </h2>
-              <hr className="border-secondaryColor my-3 w-[250px] border-2 outline-none" />
-              <div className="text-2xl text-white">{parse(slider.excerpt)}</div>
-              <div className="mt-3">{parsePhoneNumbers(slider.content)}</div>
+              <hr className="border-secondaryColor my-1 w-[250px] border outline-none md:my-3 md:w-[250px] md:border-2" />
+              <div className="text-base text-white md:text-2xl">
+                {parse(slider.excerpt)}
+              </div>
+              <div className="mt-3 [&>a]:text-xl md:[&>a]:text-4xl">
+                {parsePhoneNumbers(slider.content)}
+              </div>
             </div>
           </div>
         </SwiperSlide>
