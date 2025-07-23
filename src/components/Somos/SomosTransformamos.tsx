@@ -11,7 +11,6 @@ export const SomosTransformamos = async () => {
 
   const title = somosTransformamos.posts.nodes[0].title;
   const content = somosTransformamos.posts.nodes[0].content;
-  const excerpt = somosTransformamos.posts.nodes[0].excerpt;
   const featuredImage =
     somosTransformamos.posts.nodes[0].featuredImage.node.sourceUrl;
 
