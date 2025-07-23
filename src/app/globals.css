@@ -195,18 +195,3 @@
     @apply top-20 right-1/2 translate-x-32 sm:right-1/3 sm:translate-x-28;
   }
 }
-
-@property --num {
-  syntax: "<integer>";
-  initial-value: 0;
-  inherits: false;
-}
-
-.stat-value {
-  counter-reset: num var(--num);
-  position: relative;
-}
-
-.stat-value::after {
-  content: counter(num) "+";
-}

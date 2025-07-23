@@ -10,7 +10,9 @@ const extractNumberFromHTML = (htmlContent: string): number => {
   const textContent = htmlContent.replace(/<[^>]*>/g, "");
 
   const matches = textContent.match(/\d+/);
-  return matches ? parseInt(matches[0], 10) : 0;
+  const number = matches ? parseInt(matches[0], 10) : 0;
+
+  return number;
 };
 
 export const WhyChooseUs = async () => {
@@ -24,7 +26,7 @@ export const WhyChooseUs = async () => {
     <section className="bg-accentColor w-full">
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
         {whyChooseUsReversed?.map((choose, index) => {
-          const numericValue = choose.content
+          const formattedValue = choose.content
             ? extractNumberFromHTML(choose.content)
             : 0;
 
@@ -47,7 +49,7 @@ export const WhyChooseUs = async () => {
 
                 <div className="mt-3 flex flex-col space-y-2">
                   <div className="flex items-center justify-center gap-x-1 text-5xl font-bold text-white xl:text-7xl">
-                    <CounterAnimation value={numericValue} />
+                    <CounterAnimation value={formattedValue} />
                   </div>
 
                   <h4
