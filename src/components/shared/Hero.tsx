@@ -11,8 +11,6 @@ export const Hero = async ({ title }: { title: string }) => {
   const heroImage = hero.posts.nodes[0].featuredImage.node.sourceUrl;
   const isContact = title === "Contáctenos";
 
-  console.log(isContact);
-
   return (
     <section
       style={{

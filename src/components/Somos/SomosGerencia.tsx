@@ -11,7 +11,9 @@ export const SomosGerencia = async () => {
   return (
     <div className="mt-32 flex flex-col items-center justify-center">
       <div className="flex flex-col items-center gap-y-10">
-        <h2 className="text-5xl font-bold text-black">Equipo Gerencial</h2>
+        <h2 className="text-center text-5xl font-bold text-black">
+          Equipo Gerencial
+        </h2>
         <hr className="border-secondaryColor w-[120px] border-2 outline-none" />
       </div>
 

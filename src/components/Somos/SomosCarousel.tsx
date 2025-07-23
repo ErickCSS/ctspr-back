@@ -9,7 +9,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 // import required modules
-import { Navigation } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 
 export const SomosCarousel = ({ afiliados }: { afiliados: AfiliadosProps }) => {
   return (
@@ -35,7 +35,11 @@ export const SomosCarousel = ({ afiliados }: { afiliados: AfiliadosProps }) => {
         }}
         spaceBetween={30}
         navigation={true}
-        modules={[Navigation]}
+        modules={[Navigation, Autoplay]}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
         loop={true}
         className="SucursalCarousel mt-14 max-w-7xl [&>.swiper-wrapper]:items-center"
       >

@@ -40,9 +40,9 @@ export const SomosTransformamos = async () => {
           </div>
         </div>
 
-        <div className="mt-16 text-center text-3xl font-bold text-balance lg:text-5xl">
-          {parseContent(excerpt)}
-        </div>
+        <video className="mx-auto mt-16" autoPlay loop muted>
+          <source src="/videos/text-animado-cts.mp4" type="video/mp4" />
+        </video>
       </div>
     </section>
   );
