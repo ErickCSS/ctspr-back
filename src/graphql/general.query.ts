@@ -430,3 +430,21 @@ export const queryConoceSucursal = `query ConoceSucursal {
     }
   }
 }`;
+
+export const queryBlog = `query Blog {
+  posts(where: {categoryName:"blog"}){
+    nodes{
+      title
+      id
+			content
+      excerpt
+      dateGmt
+      slug
+      featuredImage{
+        node{
+          sourceUrl
+        }
+      }
+    }
+  }
+}`;

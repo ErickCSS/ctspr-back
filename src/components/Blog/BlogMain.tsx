@@ -1,6 +1,13 @@
 import { BlogCard } from "./BlogCard";
+import { WpQuery } from "@/services/wpQuery";
+import { queryBlog } from "@/graphql/general.query";
+import { BlogProps } from "@/types/blog.types";
 
-export const BlogMain = () => {
+export const BlogMain = async () => {
+  const blog: BlogProps = await WpQuery({
+    query: queryBlog,
+  });
+
   return (
     <section className="bg-white px-4 py-20">
       <div className="mx-auto max-w-7xl">
@@ -12,8 +19,8 @@ export const BlogMain = () => {
         </div>
 
         <div className="mt-20 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {Array.from({ length: 3 }).map((_, index) => (
-            <BlogCard key={index} />
+          {blog.posts.nodes.map((post, index) => (
+            <BlogCard key={index} post={post} />
           ))}
         </div>
       </div>

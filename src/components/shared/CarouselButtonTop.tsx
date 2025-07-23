@@ -46,7 +46,7 @@ export const CarouselButtonTop = ({
               <h4 className="mb-2 flex flex-col items-center gap-x-3 text-3xl font-bold lg:flex-row lg:items-end">
                 {carousel.title}{" "}
                 <span className="text-lg">
-                  {carousel.excerpt.includes("Christian")
+                  {carousel.excerpt.includes("BACARDÍ")
                     ? parseContent(carousel.excerpt)
                     : ""}
                 </span>

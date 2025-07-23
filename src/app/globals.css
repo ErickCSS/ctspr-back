@@ -199,3 +199,16 @@
     @apply top-20 right-1/2 translate-x-32 sm:right-1/3 sm:translate-x-28;
   }
 }
+
+.hashtags {
+  p {
+    a {
+      margin-top: 10px;
+      display: inline-block;
+      width: 100%;
+      white-space: normal;
+      overflow-wrap: break-word;
+      word-break: break-all;
+    }
+  }
+}
