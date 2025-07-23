@@ -11,6 +11,7 @@ import { CarouselProps } from "@/types/generalQuery.types";
 import { Navigation, Autoplay } from "swiper/modules";
 import { parseContent } from "@/utils/parseContent.utils";
 import Image from "next/image";
+import { TruncatedHtml } from "@/lib/Truncated";
 
 export const CarouselVertical = ({
   carousels,
@@ -52,8 +53,13 @@ export const CarouselVertical = ({
                   {parseContent(carousel.excerpt)}
                 </h5>
               </div>
-              <div className="text-center text-base [&_p]:text-justify [&>h6]:mb-4 [&>h6]:font-bold [&>h6]:text-zinc-500">
-                {parseContent(carousel.content)}
+              <div className="text-center text-base [&_h6]:mb-4 [&_h6]:font-bold [&_h6]:text-zinc-500 [&_p]:text-justify">
+                <TruncatedHtml
+                  html={carousel.content}
+                  limit={200}
+                  moreLabel="Leer más"
+                  lessLabel="Leer menos"
+                />
               </div>
             </div>
           </div>

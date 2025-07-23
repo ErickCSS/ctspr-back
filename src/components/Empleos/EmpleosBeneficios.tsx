@@ -32,21 +32,21 @@ export const EmpleosBeneficios = async () => {
   return (
     <section className="gradientCTS relative overflow-hidden px-4 py-28">
       <div className="container mx-auto">
-        <div className="flex h-full min-h-[1800px] lg:min-h-auto">
+        <div className="flex h-full min-h-[1600px] lg:min-h-auto">
           <div className="w-full lg:w-1/2">
-            <h2 className="mb-10 text-center text-7xl font-black text-black lg:text-left">
+            <h2 className="mb-10 text-center text-5xl font-black text-black lg:text-left lg:text-7xl">
               {title}
             </h2>
-            <div className="flex flex-col gap-y-10 text-xl text-black xl:text-2xl">
+            <div className="flex flex-col gap-y-10 text-lg text-black md:text-xl xl:text-2xl">
               {parseWithIcons(content, "text-secondaryColor size-10")}
             </div>
 
             <div className="flex flex-col gap-y-5">
-              <h3 className="text-center text-7xl font-black text-black">
+              <h3 className="text-center text-5xl font-black text-black lg:text-left lg:text-7xl">
                 {titleUnete}
               </h3>
               <div className="flex flex-wrap items-center justify-center gap-2 lg:items-start">
-                <div className="text-center text-4xl text-black">
+                <div className="text-center text-2xl text-black md:text-4xl">
                   {parseContent(excerptUnete)}
                 </div>
                 <div className="text-black">

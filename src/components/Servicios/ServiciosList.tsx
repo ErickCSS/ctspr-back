@@ -28,18 +28,18 @@ export const ServiciosList = async () => {
                 alt={servicio.title}
                 width={500}
                 height={500}
-                className="h-auto w-full"
+                className="h-auto w-full rounded-3xl"
               />
             </div>
 
             <div
-              className={`flex w-full flex-col gap-y-5 lg:w-1/2 ${index % 2 === 0 ? "p-5 lg:p-10" : "p-5 lg:px-20 lg:py-10"}`}
+              className={`flex w-full flex-col gap-y-5 lg:w-1/2 ${index % 2 === 0 ? "p-5 lg:p-10" : "p-5 lg:py-10 lg:pl-20"}`}
             >
               <h3 className="text-4xl font-bold text-black xl:text-[40px]">
                 {servicio.title}
               </h3>
               <hr className="w-3/4 border-2 border-zinc-300" />
-              <div className="text-xl text-balance lg:text-2xl">
+              <div className="text-xl text-balance">
                 {parseContent(servicio.content)}
               </div>
             </div>

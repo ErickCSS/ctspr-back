@@ -19,9 +19,9 @@ export const CarouselButtonTop = ({
   const pathname = usePathname();
   const isEmpleo = pathname.includes("empleo");
 
-  const styleImage = isEmpleo
-    ? "size-[180px] rounded-full border-8 border-white object-cover object-center shadow-2xl"
-    : "h-auto w-[170px] lg:w-full";
+  // const styleImage = isEmpleo
+  //   ? "size-[180px] rounded-full border-8 border-white object-cover object-center shadow-2xl"
+  //   : "h-auto w-[170px] lg:w-full";
 
   return (
     <Swiper
@@ -29,6 +29,7 @@ export const CarouselButtonTop = ({
       slidesPerView={1}
       navigation={true}
       modules={[Navigation, Autoplay]}
+      loop={true}
       autoplay={{
         delay: 5000,
         disableOnInteraction: false,
@@ -37,7 +38,7 @@ export const CarouselButtonTop = ({
     >
       {carousels?.map((carousel, index) => (
         <SwiperSlide key={index} className="px-10 pt-22 pb-10">
-          <div className="grid grid-cols-1 items-center gap-5 lg:grid-cols-[200px_1fr] lg:gap-10">
+          <div className="grid grid-cols-1 items-center gap-5 text-center md:text-left lg:grid-cols-[200px_1fr] lg:gap-10">
             <Image
               src={carousel.featuredImage.node.sourceUrl}
               alt={carousel.title}
@@ -46,21 +47,19 @@ export const CarouselButtonTop = ({
               loading="lazy"
               decoding="async"
               quality={60}
-              className={styleImage}
+              className="mx-auto h-auto w-[170px] md:m-auto lg:w-full"
             />
 
             <div className="flex flex-col space-y-2">
-              <h4 className="mb-2 flex flex-col items-start gap-x-3 text-3xl font-bold lg:flex-row lg:items-end">
+              <h4 className="mb-2 flex flex-col items-center gap-x-3 text-3xl font-bold lg:flex-row lg:items-end">
                 {carousel.title}{" "}
                 <span className="text-lg">
-                  {!isEmpleo && carousel.excerpt.includes("Christian")
+                  {carousel.excerpt.includes("Christian")
                     ? parseContent(carousel.excerpt)
-                    : isEmpleo && carousel.excerpt
-                      ? parseContent(carousel.excerpt)
-                      : ""}
+                    : ""}
                 </span>
               </h4>
-              <div className="text-lg [&>h6]:mb-4 [&>h6]:font-bold [&>h6]:text-zinc-500">
+              <div className="text-base md:text-lg [&>h6]:mb-4 [&>h6]:font-bold [&>h6]:text-zinc-500">
                 {parseContent(carousel.content, {
                   configs: {
                     p: {

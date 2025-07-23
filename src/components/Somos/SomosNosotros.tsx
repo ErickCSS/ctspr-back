@@ -23,8 +23,8 @@ export const SomosNosotros = async () => {
         </div>
 
         <div className="mx-auto mt-20 max-w-6xl">
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_400px]">
-            <div className="w-[600px] space-y-7 lg:text-left [&_h3]:mb-3 [&_h3]:text-4xl [&_h3]:font-bold [&_h3]:uppercase [&_p]:text-justify [&_p]:text-lg">
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1fr_400px]">
+            <div className="space-y-20 lg:w-[600px] lg:text-left [&_h3]:mb-3 [&_h3]:text-4xl [&_h3]:font-bold [&_h3]:uppercase [&_p]:text-justify [&_p]:text-lg">
               {parseContent(content)}
             </div>
 

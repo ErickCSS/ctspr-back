@@ -74,7 +74,7 @@ export const Footer = async () => {
                   className="mt-3 flex items-center gap-x-2 text-white"
                   href={
                     sucursal.title === "Salinas"
-                      ? `https://www.facebook.com/CTSEmpleos`
+                      ? `https://www.facebook.com/ctssucursallaspiedras`
                       : `https://www.facebook.com/ctssucursal${sucursal.title
                           .toLowerCase()
                           .normalize("NFD")

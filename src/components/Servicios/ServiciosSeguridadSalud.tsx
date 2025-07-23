@@ -29,7 +29,7 @@ export const ServiciosSeguridadSalud = async () => {
           />
 
           <div className="flex flex-col items-center justify-center gap-5 p-8 lg:p-14">
-            <h2 className="text-3xl font-bold text-balance lg:text-4xl xl:text-5xl">
+            <h2 className="text-[28px] font-bold text-balance lg:text-4xl xl:text-5xl">
               {title}
             </h2>
 
