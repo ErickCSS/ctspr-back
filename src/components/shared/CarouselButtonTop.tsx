@@ -9,20 +9,12 @@ import { CarouselProps } from "@/types/generalQuery.types";
 import { Navigation, Autoplay } from "swiper/modules";
 import { parseContent } from "@/utils/parseContent.utils";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 
 export const CarouselButtonTop = ({
   carousels,
 }: {
   carousels: CarouselProps[];
 }) => {
-  const pathname = usePathname();
-  const isEmpleo = pathname.includes("empleo");
-
-  // const styleImage = isEmpleo
-  //   ? "size-[180px] rounded-full border-8 border-white object-cover object-center shadow-2xl"
-  //   : "h-auto w-[170px] lg:w-full";
-
   return (
     <Swiper
       spaceBetween={0}
