@@ -18,7 +18,7 @@ export const BlogObjetives = async () => {
   return (
     <section className="gradientCTS px-4 py-28">
       <div className="container mx-auto">
-        <div className="flex flex-col items-center lg:flex-row">
+        <div className="flex flex-col items-center gap-5 lg:flex-row">
           <div className="w-full lg:w-1/2">
             <YouTubeEmbed videoid="HkPqrIYt5Cc" />
           </div>
