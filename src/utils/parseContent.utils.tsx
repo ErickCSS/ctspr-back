@@ -33,12 +33,17 @@ const transformations: Record<
     pattern: /(\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4})/,
     transform: (text: string, config?: TransformConfig) => {
       const rawPhone = text.replace(/\D/g, "");
+      // Formatear el teléfono con guiones para el href: XXX-XXX-XXXX
+      const formattedPhone = rawPhone.replace(
+        /(\d{3})(\d{3})(\d{4})/,
+        "$1-$2-$3",
+      );
       return (
         <Link
           className={
             config?.className || "mt-2 text-4xl font-normal text-white"
           }
-          href={`tel:${rawPhone}`}
+          href={`tel:${formattedPhone}`}
           {...config?.additionalProps}
         >
           {text}
