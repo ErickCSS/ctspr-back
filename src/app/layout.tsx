@@ -5,6 +5,7 @@ import { Footer } from "@components/general/Footer";
 import { Header } from "@components/general/header";
 import { ViewTransitions } from "next-view-transitions";
 import { BackToTop } from "@components/shared/BackToTop";
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 
 const lato = Lato({
   variable: "--font-lato",
@@ -46,10 +47,12 @@ export default function RootLayout({
   return (
     <ViewTransitions>
       <html lang="es">
+        <GoogleTagManager gtmId="GTM-MGMDLRV" />
         <body className={` ${lato.variable} antialiased`}>
           <Header /> {children} <Footer />
           <BackToTop />
         </body>
+        <GoogleAnalytics gaId="G-H82WJSV5G2" />
       </html>
     </ViewTransitions>
   );
