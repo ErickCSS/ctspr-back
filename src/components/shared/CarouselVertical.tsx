@@ -53,7 +53,7 @@ export const CarouselVertical = ({
                   {parseContent(carousel.excerpt)}
                 </h5>
               </div>
-              <div className="text-center text-base [&_h6]:mb-4 [&_h6]:font-bold [&_h6]:text-zinc-500 [&_p]:text-justify">
+              <div className="text-center text-base [&_h6]:mb-4 [&_h6]:font-bold [&_h6]:text-zinc-500 [&_p]:text-balance">
                 <TruncatedHtml
                   html={carousel.content}
                   limit={200}

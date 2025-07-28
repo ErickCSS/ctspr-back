@@ -11,7 +11,7 @@ import { IconBrandFacebookFilled } from "@tabler/icons-react";
 
 export const Footer = async () => {
   const logo: MediaProps = await WpQuery({
-    query: queryMedia({ title: "cts-white-brand" }),
+    query: queryMedia({ title: "CTS logo reverse" }),
   });
 
   const superpages: MediaProps = await WpQuery({
@@ -35,7 +35,7 @@ export const Footer = async () => {
               alt="logo"
               width={250}
               height={250}
-              className="h-auto w-[150px] lg:w-[400px]"
+              className="h-auto w-[150px] lg:w-[450px]"
               loading="lazy"
               decoding="async"
             />
