@@ -32,17 +32,18 @@ export const Header = () => {
         <div className="flex w-full flex-row items-center justify-between px-4 py-2">
           <Link href="/" className="flex items-center gap-x-2 text-white">
             <Image
-              src="https://stagingctspr.axesawebhosting9.net/wp-content/uploads/2025/07/cts-brand.webp"
+              src="https://blog.ctspr.com/wp-content/uploads/2025/07/CTS-LOGO-2018-Final-3D_page-0001.webp"
               alt="logo"
               width={250}
               height={250}
-              className="h-auto w-[250px] xl:w-[250px]"
+              className="h-auto w-[250px] xl:w-[350px]"
             />
           </Link>
 
           <div className="flex flex-col">
             <Button
               onClick={() => setOpen(!open)}
+              name="menu"
               className="bg-primaryColor size-[42px] text-white lg:hidden"
             >
               <IconMenu2 className="size-[24px]" />
@@ -59,13 +60,14 @@ export const Header = () => {
                 onClick={() => setOpen(false)}
                 variant="outline"
                 size="icon"
+                name="close"
                 className="absolute top-4 right-4 lg:hidden"
               >
                 <IconX />
               </Button>
               <div className="mb-10 block lg:hidden">
                 <Image
-                  src="https://stagingctspr.axesawebhosting9.net/wp-content/uploads/2025/07/cts-brand.webp"
+                  src="https://blog.ctspr.com/wp-content/uploads/2025/07/cts-brand.webp"
                   alt="logo"
                   width={250}
                   height={250}

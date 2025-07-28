@@ -21,13 +21,13 @@ export default async function BlogPost({
       <section
         style={{
           backgroundImage: `url("${post?.featuredImage?.node?.sourceUrl || "https://stagingctspr.axesawebhosting9.net/wp-content/uploads/2025/07/img-transformacion.webp"}")`,
-          boxShadow: "inset 0 0 0 200px rgba(0, 0, 0, 0.5)",
+          boxShadow: "inset 0 0 0 2000px rgba(0, 0, 0, 0.5)",
         }}
-        className="h-[250px] bg-cover bg-center bg-no-repeat md:h-[400px]"
+        className="h-[250px] bg-cover bg-[50%_40%] bg-no-repeat md:h-[600px]"
       >
         <div className="container mx-auto h-full px-4">
           <div className="flex h-full items-center">
-            <h1 className="text-4xl font-bold text-white lg:text-6xl">
+            <h1 className="text-3xl font-bold text-white md:text-4xl lg:text-6xl">
               {post?.title}
             </h1>
           </div>
@@ -37,7 +37,7 @@ export default async function BlogPost({
       <section className="bg-white px-4 py-20">
         <div className="mx-auto max-w-6xl">
           <div className="flex flex-col items-center gap-y-10">
-            <div className="hashtags w-full text-left text-pretty">
+            <div className="hashtags w-full text-left text-pretty [&_video]:h-[500px]">
               {parseContent(post?.content || "")}
             </div>
           </div>

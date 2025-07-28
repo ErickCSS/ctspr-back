@@ -53,7 +53,7 @@ export const WhyChooseUs = async () => {
                   </div>
 
                   <h4
-                    className={`text-center text-3xl font-bold text-white lg:text-2xl xl:text-3xl`}
+                    className={`text-center text-3xl font-bold tracking-[0.5px] text-white lg:text-2xl xl:text-3xl`}
                   >
                     {choose.title}
                   </h4>

@@ -34,7 +34,7 @@ export const EmpleosBeneficios = async () => {
       <div className="container mx-auto">
         <div className="flex h-full min-h-[1600px] lg:min-h-auto">
           <div className="w-full lg:w-1/2">
-            <h2 className="mb-10 text-center text-5xl font-black text-black lg:text-left lg:text-7xl">
+            <h2 className="mb-10 text-center text-5xl font-black tracking-[0.5px] text-black lg:text-left lg:text-7xl">
               {title}
             </h2>
             <div className="flex flex-col gap-y-10 text-lg text-black md:text-xl xl:text-2xl">
