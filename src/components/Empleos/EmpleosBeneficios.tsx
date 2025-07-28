@@ -42,7 +42,7 @@ export const EmpleosBeneficios = async () => {
             </div>
 
             <div className="flex flex-col gap-y-5">
-              <h3 className="text-center text-5xl font-black text-black lg:text-left lg:text-7xl">
+              <h3 className="text-center text-5xl font-black text-black lg:text-7xl">
                 {titleUnete}
               </h3>
               <div className="flex flex-wrap items-center justify-center gap-2 lg:items-start">

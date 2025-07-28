@@ -21,7 +21,7 @@ export const CallActions = () => {
             className="bg-primaryColor hover:bg-secondaryColor min-h-[60px] !px-14 !py-10 text-2xl transition-colors duration-300 lg:text-4xl"
             asChild
           >
-            <Link href="/contacto" className="flex items-center gap-x-10">
+            <Link href="/servicios" className="flex items-center gap-x-10">
               <span className="font-bold">¿Buscas Personal? </span>{" "}
               <IconCaretRightFilled size={32} className="size-[32px]" />
             </Link>

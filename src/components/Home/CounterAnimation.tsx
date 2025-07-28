@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 interface CounterAnimationProps {
   value: number;
@@ -8,11 +8,40 @@ interface CounterAnimationProps {
 
 const CounterAnimation = ({ value }: CounterAnimationProps) => {
   const counterRef = useRef<HTMLSpanElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    // Create the intersection observer
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        setIsVisible(entry.isIntersecting);
+      },
+      {
+        root: null, // viewport
+        threshold: 0.1, // trigger when 10% of the element is visible
+        rootMargin: "0px",
+      },
+    );
+
+    // Observe the container element
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    // Cleanup function
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const numericValue = value;
 
-    if (counterRef.current) {
+    if (counterRef.current && isVisible) {
       if (numericValue > 0) {
         let startTime: number;
         const duration = 2000;
@@ -46,9 +75,13 @@ const CounterAnimation = ({ value }: CounterAnimationProps) => {
         counterRef.current.textContent = "0+";
       }
     }
-  }, [value]);
+  }, [value, isVisible]);
 
-  return <span ref={counterRef}>0+</span>;
+  return (
+    <div ref={containerRef}>
+      <span ref={counterRef}>0+</span>
+    </div>
+  );
 };
 
 export default CounterAnimation;
