@@ -8,22 +8,28 @@ export const CallActions = () => {
       <div className="container mx-auto">
         <div className="flex flex-col items-center justify-center gap-x-20 gap-y-10 lg:flex-row">
           <Button
-            className="bg-primaryColor hover:bg-secondaryColor min-h-[60px] !px-14 !py-10 text-2xl transition-colors duration-300 lg:text-4xl"
+            className="bg-primaryColor hover:bg-secondaryColor min-h-[60px] !px-8 text-2xl transition-colors duration-300 lg:!px-14 lg:!py-10 lg:text-4xl"
             asChild
           >
             <Link href="/ofertas-empleo" className="flex items-center gap-x-10">
               <span className="font-bold">¿Buscas Empleo? </span>{" "}
-              <IconCaretRightFilled size={32} className="size-[32px]" />
+              <IconCaretRightFilled
+                size={32}
+                className="size-[24px] lg:size-[32px]"
+              />
             </Link>
           </Button>
 
           <Button
-            className="bg-primaryColor hover:bg-secondaryColor min-h-[60px] !px-14 !py-10 text-2xl transition-colors duration-300 lg:text-4xl"
+            className="bg-primaryColor hover:bg-secondaryColor min-h-[60px] !px-8 text-2xl transition-colors duration-300 lg:!px-14 lg:!py-10 lg:text-4xl"
             asChild
           >
             <Link href="/servicios" className="flex items-center gap-x-10">
               <span className="font-bold">¿Buscas Personal? </span>{" "}
-              <IconCaretRightFilled size={32} className="size-[32px]" />
+              <IconCaretRightFilled
+                size={32}
+                className="size-[24px] lg:size-[32px]"
+              />
             </Link>
           </Button>
         </div>

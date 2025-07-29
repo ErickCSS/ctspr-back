@@ -28,7 +28,7 @@ export const BackToTop = () => {
     <button
       onClick={scrollToTop}
       className={cn(
-        "hover:bg-secondaryColor fixed right-4 bottom-4 z-50 cursor-pointer rounded-full bg-black p-4 text-white shadow-lg transition-all duration-300",
+        "hover:bg-secondaryColor fixed bottom-4 left-4 z-50 cursor-pointer rounded-full bg-black p-4 text-white shadow-lg transition-all duration-300",
         showButton ? "visible opacity-100" : "invisible opacity-0",
       )}
     >
