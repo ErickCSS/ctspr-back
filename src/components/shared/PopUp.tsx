@@ -50,7 +50,7 @@ export const PopUp = () => {
                 router.push("https://ctspr.typeform.com/to/A5PCXQeP")
               }
             >
-              Como te enteraste de nosotros?
+              ¿Como te enteraste de nosotros?
             </Button>
           </motion.div>
         </motion.div>
