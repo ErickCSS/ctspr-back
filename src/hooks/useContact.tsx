@@ -1,16 +1,18 @@
+// hooks/useContact.ts
 "use client";
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { contactSchema } from "../schemas/contact.schema";
-import { ContactSchemaType } from "../schemas/contact.schema";
+import { contactSchema, ContactSchemaType } from "../schemas/contact.schema";
 import { sendEmail } from "@/app/(actions)/contactActions/actions";
 import { useTransitionRouter } from "next-view-transitions";
+import { useRecaptcha } from "@/hooks/useRecaptcha"; // tu hook de reCAPTCHA
 
 export const useContact = () => {
   const [error, setError] = useState<string | null>(null);
   const router = useTransitionRouter();
+  const { ready: recaptchaReady, execute: runRecaptcha } = useRecaptcha();
 
   const contactForm = useForm<ContactSchemaType>({
     resolver: zodResolver(contactSchema),
@@ -25,29 +27,41 @@ export const useContact = () => {
   const { handleSubmit, reset, formState } = contactForm;
   const isSubmitting = formState.isSubmitting;
 
-  const onSubmit = async (data: ContactSchemaType) => {
-    const { success, error } = await sendEmail({ email: data });
+  const onSubmit = handleSubmit(async (data) => {
+    setError(null);
 
-    if (!success) {
-      setError(error as string);
+    if (!recaptchaReady) {
+      setError("ReCAPTCHA aún no está listo. Intenta de nuevo en un momento.");
+      return;
     }
 
-    router.push("/gracias");
+    try {
+      const token = await runRecaptcha("contact");
 
-    return new Promise<void>((resolve) => {
-      setTimeout(() => {
-        resolve();
-        reset();
-      }, 4000);
-    });
-  };
+      const { success, error: sendError } = await sendEmail({
+        email: data,
+        recaptchaToken: token,
+      });
+
+      if (!success) {
+        setError(sendError as string);
+        return;
+      }
+
+      // 3️⃣ Si todo salió bien, redirigir y limpiar
+      router.push("/gracias");
+      reset();
+    } catch (err: any) {
+      console.error(err);
+      setError(err.message || "Error inesperado al enviar.");
+    }
+  });
 
   return {
     contactForm,
-    handleSubmit,
     onSubmit,
     error,
     isSubmitting,
-    reset,
+    recaptchaReady,
   };
 };

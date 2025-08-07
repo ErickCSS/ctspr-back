@@ -3,7 +3,30 @@
 import { ContactSchemaType } from "@/schemas/contact.schema";
 import Nodemailer from "nodemailer";
 
-export const sendEmail = async ({ email }: { email: ContactSchemaType }) => {
+export const sendEmail = async ({
+  email,
+  recaptchaToken,
+}: {
+  email: ContactSchemaType;
+  recaptchaToken: string;
+}) => {
+  const secret = process.env.RECAPTCHA_SECRET_KEY!;
+  const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${recaptchaToken}`;
+
+  const recaptchaRes = await fetch(verifyUrl, { method: "POST" });
+  const recaptchaJson = await recaptchaRes.json();
+
+  if (
+    !recaptchaJson.success ||
+    (recaptchaJson.score !== undefined && recaptchaJson.score < 0.5) ||
+    (recaptchaJson.action && recaptchaJson.action !== "contact")
+  ) {
+    return {
+      success: false,
+      error: "Verificación de reCAPTCHA fallida",
+    };
+  }
+
   const transporter = Nodemailer.createTransport({
     host: "email-smtp.us-east-1.amazonaws.com",
     port: 587,

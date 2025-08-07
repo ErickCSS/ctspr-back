@@ -7,6 +7,7 @@ import { ViewTransitions } from "next-view-transitions";
 import { BackToTop } from "@components/shared/BackToTop";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import { PopUp } from "@components/shared/PopUp";
+import Script from "next/script";
 
 const lato = Lato({
   variable: "--font-lato",
@@ -48,7 +49,13 @@ export default function RootLayout({
   return (
     <ViewTransitions>
       <html lang="es">
-        <GoogleTagManager gtmId="GTM-MGMDLRV" />
+        <head>
+          <GoogleTagManager gtmId="GTM-MGMDLRV" />
+          <Script
+            src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
+            strategy="beforeInteractive"
+          />
+        </head>
         <body className={` ${lato.variable} antialiased`}>
           <Header /> {children} <Footer />
           <BackToTop />
