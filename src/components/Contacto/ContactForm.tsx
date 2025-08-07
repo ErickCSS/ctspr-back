@@ -7,13 +7,12 @@ import { IconLoader2 } from "@tabler/icons-react";
 import { Label } from "@components/ui/label";
 
 export const ContactForm = () => {
-  const { contactForm, handleSubmit, onSubmit, error, isSubmitting } =
-    useContact();
+  const { contactForm, onSubmit, error, isSubmitting } = useContact();
 
   return (
     <Form {...contactForm}>
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={onSubmit}
         className="font-sf mx-auto mt-10 space-y-4 lg:w-3xl"
       >
         <Label className="text-lg">Nombre</Label>

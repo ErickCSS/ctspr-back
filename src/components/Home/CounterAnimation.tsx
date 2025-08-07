@@ -25,15 +25,18 @@ const CounterAnimation = ({ value }: CounterAnimationProps) => {
       },
     );
 
+    // Store the current ref value to use in cleanup
+    const currentContainer = containerRef.current;
+
     // Observe the container element
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
+    if (currentContainer) {
+      observer.observe(currentContainer);
     }
 
     // Cleanup function
     return () => {
-      if (containerRef.current) {
-        observer.unobserve(containerRef.current);
+      if (currentContainer) {
+        observer.unobserve(currentContainer);
       }
     };
   }, []);

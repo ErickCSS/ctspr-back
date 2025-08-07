@@ -35,26 +35,25 @@ export const useContact = () => {
       return;
     }
 
-    try {
-      const token = await runRecaptcha("contact");
+    const token = await runRecaptcha("contact");
 
-      const { success, error: sendError } = await sendEmail({
-        email: data,
-        recaptchaToken: token,
-      });
+    const { success, error: sendError } = await sendEmail({
+      email: data,
+      recaptchaToken: token,
+    });
 
-      if (!success) {
-        setError(sendError as string);
-        return;
-      }
-
-      // 3️⃣ Si todo salió bien, redirigir y limpiar
-      router.push("/gracias");
-      reset();
-    } catch (err: any) {
-      console.error(err);
-      setError(err.message || "Error inesperado al enviar.");
+    if (!success) {
+      setError(sendError as string);
+      return;
     }
+
+    return new Promise<void>((resolve) => {
+      setTimeout(() => {
+        resolve();
+        reset();
+        router.push("/gracias");
+      }, 4000);
+    });
   });
 
   return {

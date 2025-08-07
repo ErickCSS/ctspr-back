@@ -1,6 +1,5 @@
 // hooks/useRecaptcha.ts
 import { useCallback, useEffect, useState } from "react";
-import Script from "next/script";
 
 type UseRecaptcha = {
   ready: boolean;
