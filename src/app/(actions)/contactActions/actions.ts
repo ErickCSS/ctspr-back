@@ -18,7 +18,7 @@ export const sendEmail = async ({
 
   if (
     !recaptchaJson.success ||
-    (recaptchaJson.score !== undefined && recaptchaJson.score < 0.5) ||
+    (recaptchaJson.score !== undefined && recaptchaJson.score < 0.8) ||
     (recaptchaJson.action && recaptchaJson.action !== "contact")
   ) {
     return {
