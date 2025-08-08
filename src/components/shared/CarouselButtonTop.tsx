@@ -39,7 +39,7 @@ export const CarouselButtonTop = ({
               loading="lazy"
               decoding="async"
               quality={60}
-              className="mx-auto h-auto w-[170px] md:m-auto lg:w-full"
+              className="mx-auto size-[200px] rounded-full object-cover md:m-auto"
             />
 
             <div className="flex flex-col space-y-2">
@@ -51,7 +51,7 @@ export const CarouselButtonTop = ({
                     : ""}
                 </span>
               </h4>
-              <div className="text-base md:text-lg [&>h6]:mb-4 [&>h6]:font-bold [&>h6]:text-zinc-500">
+              <div className="text-base [&>h6]:mb-4 [&>h6]:font-bold [&>h6]:text-zinc-500">
                 {parseContent(carousel.content, {
                   configs: {
                     p: {
