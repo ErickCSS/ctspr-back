@@ -1,5 +1,6 @@
 "use server";
 
+import { getSheetData } from "@/app/(actions)/leads/googleSheet.actions";
 import { ContactSchemaType } from "@/schemas/contact.schema";
 import Nodemailer from "nodemailer";
 
@@ -28,18 +29,18 @@ export const sendEmail = async ({
   }
 
   const transporter = Nodemailer.createTransport({
-    host: "email-smtp.us-east-1.amazonaws.com",
+    host: process.env.SMTP_HOST!,
     port: 587,
     secure: false,
     auth: {
-      user: "AKIAXFJ6RNHPWN3EJ67Z",
-      pass: "BK1Ve+peCju7J0bKDSIXHyW528xTVHkSvZ9FBSTUeoJT",
+      user: process.env.SMTP_USER!,
+      pass: process.env.SMTP_PASS!,
     },
   });
 
   try {
     await transporter.sendMail({
-      from: "formularios@axesa.com",
+      from: process.env.SMTP_FROM,
       to: "sales@ctspr.com",
       subject: "Mensaje de tu Website: CTS PR",
       html: `<!DOCTYPE html>
@@ -107,6 +108,15 @@ export const sendEmail = async ({
   </body>
 </html>
 `,
+    });
+
+    await getSheetData({
+      valuesInput: {
+        name: email.name,
+        email: email.email,
+        phone: email.phone,
+        message: email.message,
+      },
     });
 
     return {
