@@ -58,7 +58,7 @@ export async function getSheetData({
     }
   } catch (error) {
     // If there's an error reading (e.g., sheet is empty), start with ID 1
-    console.log("No existing data found, starting with ID 1");
+    console.log("No existing data found, starting with ID 1", error);
   }
 
   const date = new Date().toLocaleString("es-PR");
