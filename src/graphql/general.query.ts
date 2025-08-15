@@ -416,7 +416,7 @@ export const queryPreguntasFrecuentesCandidatos = `query PreguntasFrecuentesCand
 }`;
 
 export const queryConoceSucursal = `query ConoceSucursal {
-  posts(where:{categoryName:"conoce-sucursal"}){
+  posts(where:{categoryName:"conoce-sucursal"}, first: 38){
     nodes{
       title
       id
