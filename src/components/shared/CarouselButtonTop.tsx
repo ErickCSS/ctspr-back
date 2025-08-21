@@ -9,6 +9,7 @@ import { CarouselProps } from "@/types/generalQuery.types";
 import { Navigation, Autoplay } from "swiper/modules";
 import { parseContent } from "@/utils/parseContent.utils";
 import Image from "next/image";
+import { TruncatedHtml } from "@/lib/Truncated";
 
 export const CarouselButtonTop = ({
   carousels,
@@ -52,13 +53,12 @@ export const CarouselButtonTop = ({
                 </span>
               </h4>
               <div className="text-base [&>h6]:mb-4 [&>h6]:font-bold [&>h6]:text-zinc-500">
-                {parseContent(carousel.content, {
-                  configs: {
-                    p: {
-                      className: "font-balance",
-                    },
-                  },
-                })}
+                <TruncatedHtml
+                  html={carousel.content}
+                  limit={200}
+                  moreLabel="Leer más"
+                  lessLabel="Leer menos"
+                />
               </div>
             </div>
           </div>

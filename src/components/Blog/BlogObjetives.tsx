@@ -20,7 +20,7 @@ export const BlogObjetives = async () => {
       <div className="container mx-auto">
         <div className="flex flex-col items-center gap-5 lg:flex-row">
           <div className="w-full lg:w-1/2">
-            <YouTubeEmbed videoid="27mJNeFXUcE" />
+            <YouTubeEmbed videoid="QffcVnTbff4" />
           </div>
           <div className="w-full space-y-10 lg:w-1/2">
             <h2 className="text-4xl font-black text-balance text-black lg:text-left">
