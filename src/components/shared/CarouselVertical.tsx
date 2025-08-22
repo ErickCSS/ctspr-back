@@ -23,10 +23,10 @@ export const CarouselVertical = ({
       spaceBetween={0}
       slidesPerView={1}
       navigation={true}
-      // autoplay={{
-      //   delay: 5000,
-      //   disableOnInteraction: false,
-      // }}
+      autoplay={{
+        delay: 5000,
+        disableOnInteraction: false,
+      }}
       modules={[Navigation, Autoplay]}
       className="carousel-vertical rounded-xl bg-white"
     >
