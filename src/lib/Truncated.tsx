@@ -12,10 +12,19 @@ interface TruncatedHtmlProps {
 function truncateHTML(htmlString: string, limit: number): string {
   // Check if we're in a browser environment
   if (typeof window === "undefined" || typeof DOMParser === "undefined") {
-    // Fallback for SSR: simple text truncation
+    // Fallback for SSR: simple text truncation by words
     const textOnly = htmlString.replace(/<[^>]*>/g, "");
     if (textOnly.length <= limit) return htmlString;
-    return textOnly.slice(0, limit) + "...";
+
+    const words = textOnly.split(" ");
+    let truncated = "";
+
+    for (const word of words) {
+      if ((truncated + word).length > limit) break;
+      truncated += (truncated ? " " : "") + word;
+    }
+
+    return truncated + "...";
   }
 
   const parser = new DOMParser();
@@ -36,9 +45,17 @@ function truncateHTML(htmlString: string, limit: number): string {
           target.appendChild(document.createTextNode(text));
           count += text.length;
         } else {
-          target.appendChild(
-            document.createTextNode(text.slice(0, remaining) + "..."),
-          );
+          // Truncate by complete words
+          const words = text.split(" ");
+          let truncatedText = "";
+
+          for (const word of words) {
+            const testText = truncatedText + (truncatedText ? " " : "") + word;
+            if (testText.length > remaining) break;
+            truncatedText = testText;
+          }
+
+          target.appendChild(document.createTextNode(truncatedText + "..."));
           count = limit;
         }
       } else if (node.nodeType === Node.ELEMENT_NODE) {
@@ -93,6 +110,7 @@ export function TruncatedHtml({
   if (!isClient) {
     return (
       <div
+        className="w-full overflow-hidden"
         dangerouslySetInnerHTML={{
           __html: truncated,
         }}
@@ -103,6 +121,7 @@ export function TruncatedHtml({
   return (
     <>
       <div
+        className="w-full overflow-hidden"
         dangerouslySetInnerHTML={{
           __html: expanded ? html : truncated,
         }}

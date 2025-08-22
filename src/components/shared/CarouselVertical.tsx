@@ -23,15 +23,15 @@ export const CarouselVertical = ({
       spaceBetween={0}
       slidesPerView={1}
       navigation={true}
-      autoplay={{
-        delay: 5000,
-        disableOnInteraction: false,
-      }}
+      // autoplay={{
+      //   delay: 5000,
+      //   disableOnInteraction: false,
+      // }}
       modules={[Navigation, Autoplay]}
       className="carousel-vertical rounded-xl bg-white"
     >
       {carousels?.map((carousel, index) => (
-        <SwiperSlide key={index}>
+        <SwiperSlide key={index} className="overflow-hidden">
           <div className="flex flex-col items-center justify-center">
             <Image
               src={carousel.featuredImage.node.sourceUrl}
@@ -44,7 +44,7 @@ export const CarouselVertical = ({
               className="size-[180px] rounded-full border-8 border-white object-cover object-top shadow-2xl"
             />
 
-            <div className="mt-2 flex flex-col">
+            <div className="mx-auto mt-2 flex w-full max-w-full flex-col px-4">
               <div className="flex flex-col items-center">
                 <h4 className="text-secondaryColor text-center text-3xl font-black">
                   {carousel.title}
@@ -53,7 +53,7 @@ export const CarouselVertical = ({
                   {parseContent(carousel.excerpt)}
                 </div>
               </div>
-              <div className="text-center text-base [&_h6]:mb-4 [&_h6]:font-bold [&_h6]:text-zinc-500 [&_p]:text-balance">
+              <div className="text-center text-base [&_h6]:mb-4 [&_h6]:font-bold [&_h6]:text-zinc-500 [&_p]:w-full [&_p]:border-none [&_p]:text-balance">
                 <TruncatedHtml
                   html={carousel.content}
                   limit={200}
