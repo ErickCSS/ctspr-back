@@ -49,9 +49,9 @@ export const CarouselVertical = ({
                 <h4 className="text-secondaryColor text-center text-3xl font-black">
                   {carousel.title}
                 </h4>
-                <h5 className="text-base font-bold text-black">
+                <div className="text-center text-base font-bold text-balance text-black">
                   {parseContent(carousel.excerpt)}
-                </h5>
+                </div>
               </div>
               <div className="text-center text-base [&_h6]:mb-4 [&_h6]:font-bold [&_h6]:text-zinc-500 [&_p]:text-balance">
                 <TruncatedHtml
