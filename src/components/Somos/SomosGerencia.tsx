@@ -21,9 +21,9 @@ export const SomosGerencia = async () => {
         {equipoAdministrativo.posts.nodes.map((equipo, index) => (
           <SomosCard
             key={index}
-            name={equipo.title}
-            position={equipo.content}
-            image={equipo.featuredImage.node.sourceUrl}
+            name={equipo?.title}
+            position={equipo?.content}
+            image={equipo?.featuredImage?.node?.sourceUrl}
           />
         ))}
       </div>
