@@ -363,7 +363,7 @@ export const queryBlogObjetives = `query BlogObjetives {
 }`;
 
 export const queryEquipoAdministrativo = `query EquipoAdministrativo {
-  posts(where:{categoryName:"equipo-directivo"}){
+  posts(where:{categoryName:"equipo-directivo"}, first: 30){
     nodes{
       title
       id
@@ -380,7 +380,7 @@ export const queryEquipoAdministrativo = `query EquipoAdministrativo {
 `;
 
 export const queryEquipoGerencial = `query EquipoGerencial {
-  posts(where:{categoryName:"equipo-gerencial"}){
+  posts(where:{categoryName:"equipo-gerencial"}, first: 30){
     nodes{
       title
       id
