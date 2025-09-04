@@ -10,8 +10,11 @@ import "swiper/css/navigation";
 
 // import required modules
 import { Navigation, Autoplay } from "swiper/modules";
+import { toReversed } from "@/utils/toReversed";
 
 export const SomosCarousel = ({ afiliados }: { afiliados: AfiliadosProps }) => {
+  const afiliadosList = toReversed(afiliados.posts.nodes);
+
   return (
     <>
       <Swiper
@@ -43,7 +46,7 @@ export const SomosCarousel = ({ afiliados }: { afiliados: AfiliadosProps }) => {
         loop={true}
         className="SucursalCarousel mt-14 max-w-7xl [&>.swiper-wrapper]:items-center"
       >
-        {afiliados.posts.nodes.reverse().map((afiliado, index) => (
+        {afiliadosList.map((afiliado, index) => (
           <SwiperSlide key={index}>
             <Image
               src={afiliado.featuredImage.node.sourceUrl}

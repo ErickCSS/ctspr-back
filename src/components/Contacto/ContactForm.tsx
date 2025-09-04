@@ -42,6 +42,17 @@ export const ContactForm = () => {
           errors={contactForm.formState.errors}
         />
 
+        <Label className="text-lg">
+          ¿En qué pueblo resides? ¿O donde está ubicada tu empresa?
+        </Label>
+        <RenderFormField
+          control={contactForm.control}
+          name="city"
+          type="text"
+          placeholder="San Juan"
+          errors={contactForm.formState.errors}
+        />
+
         <Label className="text-lg">Mensaje</Label>
         <RenderFormField
           control={contactForm.control}

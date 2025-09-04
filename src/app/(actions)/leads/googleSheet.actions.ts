@@ -6,6 +6,7 @@ interface ValuesInput {
   name: string;
   email: string;
   phone: string;
+  city: string;
   message: string;
 }
 
@@ -74,6 +75,7 @@ export async function getSheetData({
           valuesInput.email,
           valuesInput.phone,
           valuesInput.message,
+          valuesInput.city,
           date,
         ],
       ],

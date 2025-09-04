@@ -10,12 +10,19 @@ import { Navigation, Autoplay } from "swiper/modules";
 import { parseContent } from "@/utils/parseContent.utils";
 import Image from "next/image";
 import { TruncatedHtml } from "@/lib/Truncated";
+import { usePathname } from "next/navigation";
 
 export const CarouselButtonTop = ({
   carousels,
 }: {
   carousels: CarouselProps[];
 }) => {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const showFirstSix = carousels.slice(0, 6);
+  const showLastSix = carousels.slice(-6);
+  const SHOW_SLIDES = isHome ? showFirstSix : showLastSix;
+
   return (
     <Swiper
       spaceBetween={0}
@@ -29,7 +36,7 @@ export const CarouselButtonTop = ({
       }}
       className="TestimonialCarousel rounded-xl bg-zinc-100 xl:w-[1100px]"
     >
-      {carousels?.map((carousel, index) => (
+      {SHOW_SLIDES?.map((carousel, index) => (
         <SwiperSlide key={index} className="px-10 pt-22 pb-10">
           <div className="grid grid-cols-1 items-center gap-5 text-center md:text-left lg:grid-cols-[200px_1fr] lg:gap-10">
             <Image

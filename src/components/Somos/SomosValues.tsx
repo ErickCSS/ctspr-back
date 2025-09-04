@@ -26,7 +26,7 @@ export const SomosValues = async () => {
       <div className="container mx-auto">
         <div className="flex flex-col items-center gap-y-5 text-black">
           <h2 className="text-center text-5xl font-bold uppercase">{title}</h2>
-          <div className="text-center text-2xl">
+          <div className="text-center text-2xl tracking-wide">
             {content && parseContent(content)}
           </div>
         </div>

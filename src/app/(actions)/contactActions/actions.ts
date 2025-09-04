@@ -41,7 +41,7 @@ export const sendEmail = async ({
   try {
     await transporter.sendMail({
       from: process.env.SMTP_FROM,
-      to: "sales@ctspr.com",
+      to: "sales@ctspr.com", //sales@ctspr.com
       subject: "Mensaje de tu Website: CTS PR",
       html: `<!DOCTYPE html>
 <html lang="es">
@@ -84,6 +84,12 @@ export const sendEmail = async ({
                   </tr>
                   <tr>
                     <td style="padding-bottom: 18px;">
+                      <span style="font-weight: 600; color: #525d91; font-size: 14px; font-family: Inter, Arial, Helvetica, sans-serif;">Ciudad:</span><br>
+                      <span style="color: #232e3a; font-size: 15px; font-family: Inter, Arial, Helvetica, sans-serif;">${email.city}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding-bottom: 18px;">
                       <span style="font-weight: 600; color: #525d91; font-size: 14px; font-family: Inter, Arial, Helvetica, sans-serif;">Mensaje:</span><br>
                       <div style=" color: #232e3a; margin-top: 3px; font-size: 15px; font-family: Inter, Arial, Helvetica, sans-serif; line-height: 1.6;">
                         ${email.message}
@@ -115,6 +121,7 @@ export const sendEmail = async ({
         name: email.name,
         email: email.email,
         phone: email.phone,
+        city: email.city,
         message: email.message,
       },
     });

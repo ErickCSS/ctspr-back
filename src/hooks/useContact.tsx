@@ -20,6 +20,7 @@ export const useContact = () => {
       name: "",
       email: "",
       phone: "",
+      city: "",
       message: "",
     },
   });

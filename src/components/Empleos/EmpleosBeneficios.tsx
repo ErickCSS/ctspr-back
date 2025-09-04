@@ -41,7 +41,7 @@ export const EmpleosBeneficios = async () => {
               {parseWithIcons(content, "text-secondaryColor size-10")}
             </div>
 
-            <div className="flex flex-col gap-y-5">
+            <div className="flex flex-col justify-center gap-y-5">
               <h3 className="text-center text-5xl font-black text-black lg:text-7xl">
                 {titleUnete}
               </h3>
