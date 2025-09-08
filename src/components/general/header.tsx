@@ -34,9 +34,9 @@ export const Header = () => {
             <Image
               src="https://blog.ctspr.com/wp-content/uploads/2025/09/logo-ctspr-color.webp"
               alt="logo"
-              width={250}
-              height={250}
-              className="h-auto w-[250px] xl:w-[250px]"
+              width={330}
+              height={330}
+              className="h-auto w-[250px] xl:w-[330px]"
             />
           </Link>
 
