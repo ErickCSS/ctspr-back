@@ -32,11 +32,11 @@ export const Header = () => {
         <div className="flex w-full flex-row items-center justify-between px-4 py-2">
           <Link href="/" className="flex items-center gap-x-2 text-white">
             <Image
-              src="https://blog.ctspr.com/wp-content/uploads/2025/07/CTS-LOGO-2018-Final-3D_page-0001.webp"
+              src="https://blog.ctspr.com/wp-content/uploads/2025/09/logo-ctspr-color.webp"
               alt="logo"
               width={250}
               height={250}
-              className="h-auto w-[250px] xl:w-[350px]"
+              className="h-auto w-[250px] xl:w-[250px]"
             />
           </Link>
 
