@@ -92,9 +92,35 @@ export const Footer = async () => {
               </article>
             ))}
           </div>
+
+          <div className="mt-5 flex flex-col gap-y-4">
+            <h5 className="font-lato text-xl font-bold text-white">
+              Documentos:
+            </h5>
+
+            <div className="flex flex-wrap items-center gap-5">
+              <Link
+                href="https://blog.ctspr.com/wp-content/uploads/2025/09/normativa-cliente-espanol.pdf"
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                className="font-lato border-secondaryColor border-l-4 pl-2 text-base font-normal text-white"
+              >
+                Normativas del Cliente - Español
+              </Link>
+              <Link
+                href="https://blog.ctspr.com/wp-content/uploads/2025/09/normativa-cliente-ingles.pdf"
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                className="font-lato border-secondaryColor border-l-4 pl-2 text-base font-normal text-white"
+              >
+                Normativas del Cliente - Inglés
+              </Link>
+            </div>
+          </div>
         </div>
       </footer>
 
+      {/* ==== Copyright ==== */}
       <div className="bg-[#3d3d3d] px-4 py-3">
         <div className="container mx-auto">
           <div className="flex items-center justify-between">
