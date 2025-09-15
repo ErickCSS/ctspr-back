@@ -16,7 +16,7 @@ export const Header = () => {
   const isActive = (path: string) => pathname === path;
 
   return (
-    <header className="flex w-full flex-col overflow-hidden">
+    <header className="flex w-full flex-col overflow-hidden border-b border-zinc-200">
       <div className="bg-primaryColor flex w-full justify-end gap-x-8 px-10 py-3">
         <Social className="size-8" />
         <Link
