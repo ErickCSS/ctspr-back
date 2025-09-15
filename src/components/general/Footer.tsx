@@ -38,6 +38,7 @@ export const Footer = async () => {
               className="h-auto w-[280px] lg:w-[450px]"
               loading="lazy"
               decoding="async"
+              quality={80}
             />
 
             <div className="space-y-3">
