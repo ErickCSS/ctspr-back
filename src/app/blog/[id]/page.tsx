@@ -1,7 +1,7 @@
-import { BlogProps } from "@/types/blog.types";
-import { WpQuery } from "@/services/wpQuery";
-import { queryBlog } from "@/graphql/general.query";
-import { parseContent } from "@/utils/parseContent.utils";
+import { BlogProps } from "@/modules/shared/types/blog.types";
+import { WpQuery } from "@/modules/shared/services/wpQuery";
+import { queryBlog } from "@/modules/shared/graphql/general.query";
+import { parseContent } from "@/modules/shared/utils/parseContent.utils";
 
 export default async function BlogPost({
   params,

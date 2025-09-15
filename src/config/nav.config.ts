@@ -1,4 +1,4 @@
-import { NavProps } from "@/types/nav.types";
+import { NavProps } from "@/modules/shared/types/nav.types";
 
 export const NAV_CONFIG = [
   {

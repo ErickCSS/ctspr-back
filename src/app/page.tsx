@@ -1,4 +1,4 @@
-import { WrapperHome } from "@components/Wrappers/WrapperHome";
+import { WrapperHome } from "@modules/home/HomePage";
 
 export default function Home() {
   return <WrapperHome />;

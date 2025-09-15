@@ -1,5 +1,5 @@
-import { WrapperBlog } from "@components/Wrappers/WrapperBlog";
+import { BlogPage } from "@/modules/Blog/BlogPage";
 
 export default function Blog() {
-  return <WrapperBlog />;
+  return <BlogPage />;
 }

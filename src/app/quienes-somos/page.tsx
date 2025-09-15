@@ -1,5 +1,5 @@
-import { WrapperSomos } from "@components/Wrappers/WrapperSomos";
+import { SomosPage } from "@modules/Somos/SomosPage";
 
-export default function Nosotros() {
-  return <WrapperSomos />;
+export default function QuienesSomos() {
+  return <SomosPage />;
 }
