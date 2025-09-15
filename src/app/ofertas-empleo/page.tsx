@@ -1,5 +1,5 @@
-import { WrapperEmpleo } from "@components/Wrappers/WrapperEmpleo";
+import { EmpleoPage } from "@/modules/Empleos/EmpleoPage";
 
 export default function OfertasEmpleos() {
-  return <WrapperEmpleo />;
+  return <EmpleoPage />;
 }

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import "./globals.css";
-import { Footer } from "@components/general/Footer";
-import { Header } from "@components/general/header";
+import { Footer } from "@modules/shared/components/general/Footer";
+import { Header } from "@modules/shared/components/general/header";
 import { ViewTransitions } from "next-view-transitions";
-import { BackToTop } from "@components/shared/BackToTop";
+import { BackToTop } from "@modules/shared/components/BackToTop";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
-import { PopUp } from "@components/shared/PopUp";
+import { PopUp } from "@modules/shared/components/PopUp";
 import Script from "next/script";
 
 const lato = Lato({

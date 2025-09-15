@@ -1,5 +1,5 @@
-import { WrapperContact } from "@/components/Wrappers/WrapperContact";
+import { ContactPage } from "@/modules/contact/ContactPage";
 
 export default function Contactenos() {
-  return <WrapperContact />;
+  return <ContactPage />;
 }
