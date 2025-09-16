@@ -49,9 +49,9 @@ export const RenderFormField = <T extends FieldValues>({
         render={({ field }) => (
           <FormItem className="w-full">
             <FormControl>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select onValueChange={field.onChange} value={field.value}>
                 <SelectTrigger
-                  className={`focus:border-brandPrimary flex h-12 w-full items-center gap-2 border-[#F7F7F7] bg-[#F7F7F7] text-sm text-zinc-500 focus:ring-0 focus:ring-offset-0 focus:outline-none ${className}`}
+                  className={`focus:border-brandPrimary mb-0 flex !h-12 w-full items-center gap-2 border-[#F7F7F7] bg-[#F7F7F7] text-sm text-black focus:ring-0 focus:ring-offset-0 focus:outline-none ${className}`}
                 >
                   <SelectValue placeholder={placeholder} />
                 </SelectTrigger>
@@ -59,8 +59,8 @@ export const RenderFormField = <T extends FieldValues>({
                   {options?.map((option, index) => (
                     <SelectItem
                       key={option.value}
-                      value={field.value || option.value}
-                      className="hover:!bg-brandPrimary hover:!text-white"
+                      value={option.value}
+                      className="hover:!bg-primaryColor hover:!text-white"
                     >
                       <div className="flex items-center gap-2">
                         {Array.isArray(icons) && icons[index]}
@@ -94,7 +94,7 @@ export const RenderFormField = <T extends FieldValues>({
                 {...field}
                 placeholder={placeholder}
                 type={type}
-                className={`focus:border-brandPrimary h-12 w-full border-[#F7F7F7] bg-[#F7F7F7] text-sm placeholder:text-base focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none ${className} `}
+                className={`focus:border-brandPrimary h-12 w-full border-[#F7F7F7] bg-[#F7F7F7] text-sm placeholder:text-sm focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none ${className} `}
                 style={style}
               />
             </FormControl>
@@ -121,7 +121,7 @@ export const RenderFormField = <T extends FieldValues>({
               <Textarea
                 {...field}
                 placeholder={placeholder}
-                className={`focus:border-brandPrimary h-12 w-full border-[#F7F7F7] bg-[#F7F7F7] text-sm placeholder:text-base focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none ${className} `}
+                className={`focus:border-brandPrimary h-12 w-full border-[#F7F7F7] bg-[#F7F7F7] text-sm placeholder:text-sm focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none ${className} `}
                 style={style}
               />
             </FormControl>

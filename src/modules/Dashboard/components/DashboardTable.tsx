@@ -7,28 +7,17 @@ import {
   TableRow,
 } from "@modules/ui/table";
 
-export const MOCK_TABLE = [
-  {
-    id: 1,
-    vacante: "Oferta de Empleo en Santurce",
-    industria: "Tecnología",
-    ubicacion: "Santurce",
-    salario: "2,000",
-    fecha: "2025-09-15",
-    acciones: "Acciones",
-  },
-  {
-    id: 2,
-    vacante: "Oferta de Empleo en Santurce",
-    industria: "Tecnología",
-    ubicacion: "Santurce",
-    salario: "2,000",
-    fecha: "2025-09-15",
-    acciones: "Acciones",
-  },
-];
+import { CONVERT_MONEY } from "@/modules/shared/utils/convertMoney";
+import { DashboardServices } from "@modules/Dashboard/services/dashboard.services";
+import { format } from "date-fns";
+import { DashboardActions } from "./DashboardActions";
 
-export const DashboardTable = () => {
+export const DashboardTable = async () => {
+  const employees = await DashboardServices.getEmployees();
+  const formattedDate = (date: string) => {
+    return format(new Date(date), "dd/MM/yyyy");
+  };
+
   const TABLE_HEAD = [
     "ID",
     "Vacante",
@@ -40,7 +29,7 @@ export const DashboardTable = () => {
   ];
 
   return (
-    <Table>
+    <Table className="table-fixed">
       <TableHeader className="bg-zinc-100 p-2">
         <TableRow className="border-y border-zinc-200 px-2">
           {TABLE_HEAD.map((head) => (
@@ -51,15 +40,19 @@ export const DashboardTable = () => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {MOCK_TABLE.map((item) => (
+        {employees?.map((item) => (
           <TableRow key={item.id} className="border-zinc-200">
-            <TableCell className="py-4">{item.id}</TableCell>
-            <TableCell className="py-4">{item.vacante}</TableCell>
-            <TableCell className="py-4">{item.industria}</TableCell>
-            <TableCell className="py-4">{item.ubicacion}</TableCell>
-            <TableCell className="py-4">{item.salario}</TableCell>
-            <TableCell className="py-4">{item.fecha}</TableCell>
-            <TableCell className="py-4">{item.acciones}</TableCell>
+            <TableCell className="py-4">{item.code}</TableCell>
+            <TableCell className="py-4">{item.vacancy}</TableCell>
+            <TableCell className="py-4">{item.industry}</TableCell>
+            <TableCell className="py-4">{item.location}</TableCell>
+            <TableCell className="py-4">{CONVERT_MONEY(item.salary)}</TableCell>
+            <TableCell className="py-4">
+              {formattedDate(item.created_at)}
+            </TableCell>
+            <TableCell className="py-4">
+              <DashboardActions id={item.id} />
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>

@@ -19,6 +19,14 @@ export const DashboardSidebar = async () => {
     query: queryMedia({ title: "cts-brand" }),
   });
 
+  const SUCURSAL = [
+    "Barceloneta",
+    "Santurce",
+    "Las Piedras",
+    "San Germán",
+    "Salinas",
+  ];
+
   return (
     <Sidebar>
       <SidebarHeader>
@@ -36,7 +44,7 @@ export const DashboardSidebar = async () => {
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Buscador</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-sm">Buscador</SidebarGroupLabel>
           <SidebarGroupContent>
             <Input
               placeholder="Buscar empleo"
@@ -45,7 +53,7 @@ export const DashboardSidebar = async () => {
           </SidebarGroupContent>
         </SidebarGroup>
         <SidebarGroup>
-          <SidebarGroupLabel>Categorías</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-sm">Categorías</SidebarGroupLabel>
           <SidebarGroupContent className="mt-2">
             <SidebarMenuItem>
               <Button
@@ -56,6 +64,24 @@ export const DashboardSidebar = async () => {
                 Empleos
               </Button>
             </SidebarMenuItem>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        {/* === Sucursales === */}
+        <SidebarGroup>
+          <SidebarGroupLabel className="text-sm">Sucursales</SidebarGroupLabel>
+          <SidebarGroupContent className="mt-2 flex flex-wrap items-center gap-1">
+            {SUCURSAL.map((sucursal, index) => (
+              <SidebarMenuItem key={index} className="list-none">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="cursor-pointer border-zinc-300 bg-transparent text-xs shadow-none"
+                >
+                  {sucursal}
+                </Button>
+              </SidebarMenuItem>
+            ))}
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>

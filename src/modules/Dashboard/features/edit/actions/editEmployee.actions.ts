@@ -1,0 +1,144 @@
+"use server";
+
+import { createClient } from "@/modules/shared/utils/supabase/server";
+import { AddEmployeeSchemaType } from "@modules/Dashboard/features/add/schemas/addEmployee.schema";
+import { EmployeeType } from "@modules/Dashboard/types/employee.type";
+
+export const editEmployeeAction = async ({
+  data,
+  oldData,
+  employeeId,
+}: {
+  data: AddEmployeeSchemaType;
+  oldData: EmployeeType | null;
+  employeeId: number | undefined;
+}) => {
+  const supabase = await createClient();
+
+  let body: any = {};
+
+  if (data.code !== String(oldData?.code)) {
+    body = {
+      ...body,
+      code: data.code,
+    };
+  }
+
+  if (data.vacancy !== oldData?.vacancy) {
+    body = {
+      ...body,
+      vacancy: data.vacancy,
+    };
+  }
+
+  if (data.industry !== oldData?.industry) {
+    body = {
+      ...body,
+      industry: data.industry,
+    };
+  }
+
+  if (data.location !== oldData?.location) {
+    body = {
+      ...body,
+      location: data.location,
+    };
+  }
+
+  if (data.salary !== String(oldData?.salary)) {
+    body = {
+      ...body,
+      salary: data.salary,
+    };
+  }
+
+  if (data.hoursJob !== oldData?.hoursJob) {
+    body = {
+      ...body,
+      hoursJob: data.hoursJob,
+    };
+  }
+
+  if (data.description !== oldData?.description) {
+    body = {
+      ...body,
+      description: data.description,
+    };
+  }
+
+  if (data.academicRequirements !== oldData?.academicRequirements) {
+    body = {
+      ...body,
+      academicRequirements: data.academicRequirements,
+    };
+  }
+
+  if (data.licenseRequirements !== oldData?.licenseRequirements) {
+    body = {
+      ...body,
+      licenseRequirements: data.licenseRequirements,
+    };
+  }
+
+  if (data.certificateRequirements !== oldData?.certificateRequirements) {
+    body = {
+      ...body,
+      certificateRequirements: data.certificateRequirements,
+    };
+  }
+
+  if (data.experienceRequirements !== oldData?.experienceRequirements) {
+    body = {
+      ...body,
+      experienceRequirements: data.experienceRequirements,
+    };
+  }
+
+  if (data.typeOfEmployment !== oldData?.typeOfEmployment) {
+    body = {
+      ...body,
+      typeOfEmployment: data.typeOfEmployment,
+    };
+  }
+
+  if (data.skills !== oldData?.skills) {
+    body = {
+      ...body,
+      skills: data.skills,
+    };
+  }
+
+  if (data.benefits !== oldData?.benefits) {
+    body = {
+      ...body,
+      benefits: data.benefits,
+    };
+  }
+
+  if (data.regionalOffice !== oldData?.regionalOffice) {
+    body = {
+      ...body,
+      regionalOffice: data.regionalOffice,
+    };
+  }
+
+  if (data.linkToApply !== oldData?.linkToApply) {
+    body = {
+      ...body,
+      linkToApply: data.linkToApply,
+    };
+  }
+
+  const { error } = await supabase
+    .from("employees")
+    .update(body)
+    .eq("id", employeeId)
+    .single();
+
+  if (error) {
+    console.error("Error editing employee:", error);
+    throw error;
+  }
+
+  return true;
+};
