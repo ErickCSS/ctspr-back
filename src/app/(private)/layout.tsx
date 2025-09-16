@@ -1,6 +1,7 @@
 import { SidebarProvider } from "@/modules/ui/sidebar";
 import { DashboardHeader } from "@modules/Dashboard/components/DashabordHeader";
 import { DashboardSidebar } from "@modules/Dashboard/components/DashboardSidebar";
+import { Toaster } from "react-hot-toast";
 
 export default function PrivateLayout({
   children,
@@ -14,6 +15,7 @@ export default function PrivateLayout({
         <main className="w-full">
           <DashboardHeader />
           {children}
+          <Toaster />
         </main>
       </SidebarProvider>
     </>
