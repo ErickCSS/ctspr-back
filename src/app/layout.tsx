@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { ViewTransitions } from "next-view-transitions";
 import { BackToTop } from "@modules/shared/components/BackToTop";
+import { Toaster } from "react-hot-toast";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 
 import Script from "next/script";
@@ -58,6 +59,7 @@ export default function RootLayout({
         <body className={` ${lato.variable} antialiased`}>
           {children}
           <BackToTop />
+          <Toaster />
         </body>
         <GoogleAnalytics gaId="G-H82WJSV5G2" />
       </html>

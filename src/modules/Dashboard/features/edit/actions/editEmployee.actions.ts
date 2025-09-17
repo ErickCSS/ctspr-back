@@ -133,12 +133,12 @@ export const editEmployeeAction = async ({
     .from("employees")
     .update(body)
     .eq("id", employeeId)
-    .single();
+    .maybeSingle();
 
   if (error) {
     console.error("Error editing employee:", error);
-    throw error;
+    return { ok: false, status: 404, message: "No encontrado o sin permiso." };
   }
 
-  return true;
+  return { ok: true, status: 200, message: "Empleo editado exitosamente." };
 };

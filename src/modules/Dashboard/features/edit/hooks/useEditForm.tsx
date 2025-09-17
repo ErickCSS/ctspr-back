@@ -139,12 +139,12 @@ export const useEditForm = ({
       employeeId: employee?.id,
     });
 
-    if (employeeResponse) {
-      toast.success("Employee edited successfully");
+    if (employeeResponse && employeeResponse.ok) {
+      toast.success(employeeResponse.message);
       editEmployeeForm.reset();
       router.push("/dashboard");
     } else {
-      toast.error("Error editing employee");
+      toast.error(employeeResponse?.message || "Error editing employee");
     }
   };
 

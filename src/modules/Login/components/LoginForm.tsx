@@ -7,6 +7,10 @@ import { loginSchema, LoginSchema } from "@modules/Login/schemas/login.schema";
 import { Label } from "@modules/ui/label";
 import { RenderFormField } from "@/modules/shared/components/RenderFormField";
 import { Button } from "@/modules/ui/button";
+import { login } from "@modules/Login/actions/login.actions";
+import { createDelayedPromise } from "@modules/shared/utils";
+import { IconLoader2 } from "@tabler/icons-react";
+import { toast } from "react-hot-toast";
 
 export const LoginForm = () => {
   const loginForm = useForm<LoginSchema>({
@@ -17,8 +21,21 @@ export const LoginForm = () => {
     },
   });
 
-  const onSubmit = (data: LoginSchema) => {
-    console.log(data);
+  const isSubmitting = loginForm.formState.isSubmitting;
+
+  const onSubmit = async (data: LoginSchema) => {
+    const formData = new FormData();
+    formData.append("email", data.email);
+    formData.append("password", data.password);
+
+    const result = await login(formData);
+    console.log(result);
+    if (result.success === false) {
+      toast.error(result.message);
+      loginForm.reset();
+      return;
+    }
+    await createDelayedPromise();
   };
 
   return (
@@ -54,9 +71,17 @@ export const LoginForm = () => {
           </div>
           <Button
             type="submit"
-            className="bg-secondaryColor min-h-[45px] cursor-pointer text-base text-white transition-colors duration-300 hover:bg-pink-700"
+            className="bg-secondaryColor disabled:bg-secondaryColor/70 min-h-[45px] cursor-pointer text-base text-white transition-colors duration-300 hover:bg-pink-700 disabled:cursor-not-allowed"
+            disabled={isSubmitting}
           >
-            Login
+            {isSubmitting ? (
+              <div className="flex items-center gap-x-2">
+                <IconLoader2 className="animate-spin" />
+                Logging in...
+              </div>
+            ) : (
+              "Login"
+            )}
           </Button>
         </form>
       </Form>

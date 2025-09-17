@@ -22,11 +22,11 @@ export const EmployeeDeleteAlert = ({ employeeId }: { employeeId: number }) => {
   const handleDeleteEmployee = async () => {
     const employeeResponse = await deleteEmployeeAction({ employeeId });
 
-    if (!employeeResponse) {
-      toast.error("Employee deleted failed");
+    if (!employeeResponse.ok) {
+      toast.error(employeeResponse.message);
     } else {
       await createDelayedPromise(2000);
-      toast.success("Employee deleted successfully");
+      toast.success(employeeResponse.message);
     }
   };
 
