@@ -10,7 +10,17 @@ export const addEmployeeAction = async ({
 }) => {
   const supabase = await createClient();
 
-  const { error } = await supabase.from("employees").insert([data]).single();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const body = {
+    ...data,
+    owner_email: user?.email ?? "",
+    user_id: user?.id as string | undefined,
+  };
+
+  const { error } = await supabase.from("employees").insert([body]).single();
 
   if (error) {
     console.error("Error adding employee:", error);

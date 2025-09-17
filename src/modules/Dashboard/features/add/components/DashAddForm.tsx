@@ -248,7 +248,7 @@ export const DashAddForm = () => {
           >
             {isSubmitting ? (
               <div className="flex items-center gap-2">
-                <IconLoader2 stroke={1.5} />
+                <IconLoader2 stroke={1.5} className="animate-spin" />
                 <span>Agregando Empleo...</span>
               </div>
             ) : (

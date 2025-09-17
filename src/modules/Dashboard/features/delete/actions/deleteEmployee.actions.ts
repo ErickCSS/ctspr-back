@@ -9,15 +9,20 @@ export const deleteEmployeeAction = async ({
 }) => {
   const supabase = await createClient();
 
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from("employees")
     .delete()
-    .eq("id", employeeId);
+    .eq("id", employeeId)
+    .maybeSingle();
 
   if (error) {
     console.error("Error deleting employee:", error);
     throw error;
   }
 
-  return true;
+  if (!data) {
+    return { ok: false, message: "No encontrado o sin permiso." };
+  }
+
+  return { ok: true, message: "Empleo eliminado exitosamente." };
 };
