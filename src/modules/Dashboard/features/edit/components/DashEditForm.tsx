@@ -117,7 +117,7 @@ export const DashEditForm = ({
               <RenderFormField
                 control={editEmployeeForm.control}
                 name="academicRequirements"
-                type="text"
+                renderMulti
                 placeholder="Requerimientos Académicos"
                 errors={editEmployeeForm.formState.errors}
               />
@@ -129,7 +129,7 @@ export const DashEditForm = ({
               <RenderFormField
                 control={editEmployeeForm.control}
                 name="licenseRequirements"
-                type="text"
+                renderMulti
                 placeholder="Requisitos de licencia"
                 errors={editEmployeeForm.formState.errors}
               />
@@ -144,7 +144,7 @@ export const DashEditForm = ({
               <RenderFormField
                 control={editEmployeeForm.control}
                 name="certificateRequirements"
-                type="text"
+                renderMulti
                 placeholder="Requerimientos de certificado"
                 errors={editEmployeeForm.formState.errors}
               />
@@ -184,7 +184,7 @@ export const DashEditForm = ({
               <RenderFormField
                 control={editEmployeeForm.control}
                 name="skills"
-                type="text"
+                renderMulti
                 placeholder="Habilidades requeridas"
                 errors={editEmployeeForm.formState.errors}
               />
@@ -199,7 +199,7 @@ export const DashEditForm = ({
               <RenderFormField
                 control={editEmployeeForm.control}
                 name="benefits"
-                type="text"
+                renderMulti
                 placeholder="Beneficios ofrecidos"
                 errors={editEmployeeForm.formState.errors}
               />

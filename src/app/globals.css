@@ -221,3 +221,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+.multi-input__control {
+  @apply !h-auto !min-h-12 w-full !cursor-text !border !border-[#F7F7F7] !bg-[#F7F7F7] text-sm !shadow-none placeholder:text-sm focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none;
+}

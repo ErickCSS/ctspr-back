@@ -18,6 +18,8 @@ export const DashboardTable = async () => {
     return format(new Date(date), "dd/MM/yyyy");
   };
 
+  const employeesFilter = employees?.filter((item) => !item.is_deleted);
+
   const TABLE_HEAD = [
     "ID",
     "Vacante",
@@ -29,7 +31,7 @@ export const DashboardTable = async () => {
   ];
 
   return (
-    <Table className="table-fixed">
+    <Table className="table-auto">
       <TableHeader className="bg-zinc-100 p-2">
         <TableRow className="border-y border-zinc-200 px-2">
           {TABLE_HEAD.map((head) => (
@@ -40,7 +42,7 @@ export const DashboardTable = async () => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {employees?.map((item) => (
+        {employeesFilter?.map((item) => (
           <TableRow key={item.id} className="border-zinc-200">
             <TableCell className="py-4">{item.code}</TableCell>
             <TableCell className="py-4">{item.vacancy}</TableCell>

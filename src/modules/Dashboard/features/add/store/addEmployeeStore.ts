@@ -3,7 +3,10 @@ import { AddEmployeeSchemaType } from "@modules/Dashboard/features/add/schemas/a
 
 interface AddEmployeeStore {
   formData: AddEmployeeSchemaType;
-  updateField: (field: keyof AddEmployeeSchemaType, value: string) => void;
+  updateField: (
+    field: keyof AddEmployeeSchemaType,
+    value: string | Array<{ label?: string; value?: string } | undefined>,
+  ) => void;
   resetForm: () => void;
 }
 
@@ -17,15 +20,43 @@ const initialFormData: AddEmployeeSchemaType = {
   experienceRequirements: "",
   typeOfEmployment: "",
   hoursJob: "",
-  benefits: "",
-  skills: "",
+  academicRequirements: [
+    {
+      label: "",
+      value: "",
+    },
+  ],
+  licenseRequirements: [
+    {
+      label: "",
+      value: "",
+    },
+  ],
+  certificateRequirements: [
+    {
+      label: "",
+      value: "",
+    },
+  ],
+  benefits: [
+    {
+      label: "",
+      value: "",
+    },
+  ],
+  skills: [
+    {
+      label: "",
+      value: "",
+    },
+  ],
   regionalOffice: "",
   linkToApply: "",
 };
 
 export const useAddEmployeeStore = create<AddEmployeeStore>((set) => ({
   formData: initialFormData,
-  updateField: (field, value) =>
+  updateField: (field: keyof AddEmployeeSchemaType, value: any) =>
     set((state) => ({
       formData: {
         ...state.formData,
