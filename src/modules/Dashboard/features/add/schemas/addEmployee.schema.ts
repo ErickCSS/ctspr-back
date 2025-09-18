@@ -11,13 +11,42 @@ export const addEmployeeSchema = z.object({
   salary: z.string().min(1, "El salario es requerido"),
   hoursJob: z.string().min(1, "Las horas y dias de trabajo son requeridos"),
   description: z.string().min(1, "La descripción es requerida"),
-  academicRequirements: z.string().optional(),
-  licenseRequirements: z.string().optional(),
-  certificateRequirements: z.string().optional(),
+  academicRequirements: z.array(
+    z.object({
+      label: z.string(),
+      value: z.string(),
+    }),
+  ),
+  licenseRequirements: z.array(
+    z.object({
+      label: z.string(),
+      value: z.string(),
+    }),
+  ),
+  certificateRequirements: z.array(
+    z.object({
+      label: z.string(),
+      value: z.string(),
+    }),
+  ),
   experienceRequirements: z.string().min(1, "La experiencia es requerida"),
   typeOfEmployment: z.string().min(1, "El tipo de empleo es requerido"),
-  skills: z.string().min(1, "Las habilidades son requeridas"),
-  benefits: z.string().min(1, "Los beneficios son requeridos"),
+  skills: z
+    .array(
+      z.object({
+        label: z.string(),
+        value: z.string(),
+      }),
+    )
+    .min(1, "Las habilidades son requeridas"),
+  benefits: z
+    .array(
+      z.object({
+        label: z.string(),
+        value: z.string(),
+      }),
+    )
+    .min(1, "Los beneficios son requeridos"),
   regionalOffice: z.string().min(1, "La oficina regional es requerida"),
   linkToApply: z.string().min(1, "El link para aplicar es requerido"),
 });

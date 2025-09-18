@@ -9,6 +9,7 @@ import {
 } from "@modules/ui/select";
 import { FieldErrors, FieldPath, FieldValues, Control } from "react-hook-form";
 import { Textarea } from "@modules/ui/textarea";
+import { MultiInput } from "./MultiInput";
 
 interface FlexibleFormFieldProps<T extends FieldValues> {
   control: Control<T>;
@@ -20,6 +21,7 @@ interface FlexibleFormFieldProps<T extends FieldValues> {
   showPasswordRequirements?: boolean;
   renderSelect?: boolean;
   renderTextarea?: boolean;
+  renderMulti?: boolean;
   icons?: React.ReactNode;
   options?: { value: string; label: string }[];
   errors: FieldErrors<T>;
@@ -36,6 +38,7 @@ export const RenderFormField = <T extends FieldValues>({
   showPasswordRequirements,
   renderSelect,
   renderTextarea,
+  renderMulti,
   icons,
   options,
   errors,
@@ -137,9 +140,27 @@ export const RenderFormField = <T extends FieldValues>({
     );
   };
 
+  const renderMultiInput = () => {
+    return (
+      <FormField
+        control={control}
+        name={name}
+        render={({ field }) => (
+          <FormItem className="w-full">
+            <FormControl>
+              <MultiInput fields={field} placeholder={placeholder} />
+            </FormControl>
+          </FormItem>
+        )}
+      />
+    );
+  };
+
   return renderSelect
     ? renderSelectField()
     : renderTextarea
       ? renderTextareaField()
-      : renderInput();
+      : renderMulti
+        ? renderMultiInput()
+        : renderInput();
 };

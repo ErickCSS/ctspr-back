@@ -112,7 +112,7 @@ export const DashAddForm = () => {
               <RenderFormField
                 control={addEmployeeForm.control}
                 name="academicRequirements"
-                type="text"
+                renderMulti
                 placeholder="Requerimientos Académicos"
                 errors={addEmployeeForm.formState.errors}
               />
@@ -124,7 +124,7 @@ export const DashAddForm = () => {
               <RenderFormField
                 control={addEmployeeForm.control}
                 name="licenseRequirements"
-                type="text"
+                renderMulti
                 placeholder="Requisitos de licencia"
                 errors={addEmployeeForm.formState.errors}
               />
@@ -139,7 +139,7 @@ export const DashAddForm = () => {
               <RenderFormField
                 control={addEmployeeForm.control}
                 name="certificateRequirements"
-                type="text"
+                renderMulti
                 placeholder="Requerimientos de certificado"
                 errors={addEmployeeForm.formState.errors}
               />
@@ -179,7 +179,7 @@ export const DashAddForm = () => {
               <RenderFormField
                 control={addEmployeeForm.control}
                 name="skills"
-                type="text"
+                renderMulti
                 placeholder="Habilidades requeridas"
                 errors={addEmployeeForm.formState.errors}
               />
@@ -194,7 +194,7 @@ export const DashAddForm = () => {
               <RenderFormField
                 control={addEmployeeForm.control}
                 name="benefits"
-                type="text"
+                renderMulti
                 placeholder="Beneficios ofrecidos"
                 errors={addEmployeeForm.formState.errors}
               />

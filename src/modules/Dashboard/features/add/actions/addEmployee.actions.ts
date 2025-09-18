@@ -16,6 +16,11 @@ export const addEmployeeAction = async ({
 
   const body = {
     ...data,
+    benefits: JSON.stringify(data.benefits),
+    skills: JSON.stringify(data.skills),
+    academicRequirements: JSON.stringify(data.academicRequirements),
+    licenseRequirements: JSON.stringify(data.licenseRequirements),
+    certificateRequirements: JSON.stringify(data.certificateRequirements),
     owner_email: user?.email ?? "",
     user_id: user?.id as string | undefined,
   };

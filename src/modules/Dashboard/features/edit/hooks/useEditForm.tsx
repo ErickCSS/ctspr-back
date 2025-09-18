@@ -3,10 +3,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useMemo } from "react";
-import {
-  addEmployeeSchema,
-  AddEmployeeSchemaType,
-} from "@modules/Dashboard/features/add/schemas/addEmployee.schema";
+
 import { useAddEmployeeStore } from "@modules/Dashboard/features/add/store/addEmployeeStore";
 import { editEmployeeAction } from "@modules/Dashboard/features/edit/actions/editEmployee.actions";
 import { toast } from "react-hot-toast";
@@ -25,6 +22,11 @@ export const useEditForm = ({
   const { formData, updateField } = useAddEmployeeStore();
   const router = useTransitionRouter();
 
+  const parseData = (data: any) => {
+    const parsedData = JSON.parse(data);
+    return parsedData;
+  };
+
   const defaultValues = useMemo(() => {
     if (!employee) return formData;
     return {
@@ -35,13 +37,13 @@ export const useEditForm = ({
       salary: String(employee.salary),
       hoursJob: employee.hoursJob,
       description: employee.description,
-      academicRequirements: employee.academicRequirements,
-      licenseRequirements: employee.licenseRequirements,
-      certificateRequirements: employee.certificateRequirements,
+      academicRequirements: parseData(employee.academicRequirements),
+      licenseRequirements: parseData(employee.licenseRequirements),
+      certificateRequirements: parseData(employee.certificateRequirements),
       experienceRequirements: employee.experienceRequirements,
       typeOfEmployment: employee.typeOfEmployment,
-      skills: employee.skills,
-      benefits: employee.benefits,
+      skills: parseData(employee.skills),
+      benefits: parseData(employee.benefits),
       regionalOffice: employee.regionalOffice,
       linkToApply: employee.linkToApply,
     };
@@ -66,13 +68,13 @@ export const useEditForm = ({
         salary: String(employee.salary),
         hoursJob: employee.hoursJob,
         description: employee.description,
-        academicRequirements: employee.academicRequirements || "",
-        licenseRequirements: employee.licenseRequirements || "",
-        certificateRequirements: employee.certificateRequirements || "",
+        academicRequirements: parseData(employee.academicRequirements),
+        licenseRequirements: parseData(employee.licenseRequirements),
+        certificateRequirements: parseData(employee.certificateRequirements),
         experienceRequirements: employee.experienceRequirements,
         typeOfEmployment: employee.typeOfEmployment,
-        skills: employee.skills,
-        benefits: employee.benefits,
+        skills: parseData(employee.skills),
+        benefits: parseData(employee.benefits),
         regionalOffice: employee.regionalOffice,
         linkToApply: employee.linkToApply,
       }).forEach(([key, value]) => {
@@ -83,12 +85,18 @@ export const useEditForm = ({
 
   // Sync form changes with Zustand store
   useEffect(() => {
-    const subscription = editEmployeeForm.watch((value, { name }) => {
-      if (name && value[name] !== undefined) {
-        updateField(
-          name as keyof EditEmployeeSchemaType,
-          value[name] as string,
-        );
+    const subscription = editEmployeeForm.watch((value) => {
+      // Update all form fields in the store whenever any field changes
+      if (value) {
+        // Handle each top-level field individually
+        Object.keys(value).forEach((fieldName) => {
+          const typedFieldName = fieldName as keyof EditEmployeeSchemaType;
+          const fieldValue = value[typedFieldName];
+
+          if (fieldValue !== undefined) {
+            updateField(typedFieldName, fieldValue);
+          }
+        });
       }
     });
     return () => subscription.unsubscribe();

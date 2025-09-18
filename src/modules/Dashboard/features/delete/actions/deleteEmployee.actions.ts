@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { createClient } from "@/modules/shared/utils/supabase/server";
 
 export const deleteEmployeeAction = async ({
@@ -9,20 +10,18 @@ export const deleteEmployeeAction = async ({
 }) => {
   const supabase = await createClient();
 
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from("employees")
-    .delete()
+    .update({ is_deleted: true, deleted_at: new Date().toISOString() })
     .eq("id", employeeId)
+    .select()
     .maybeSingle();
 
   if (error) {
     console.error("Error deleting employee:", error);
-    throw error;
+    return { ok: false, message: "Este empleo no te pertenece." };
   }
 
-  if (!data) {
-    return { ok: false, message: "No encontrado o sin permiso." };
-  }
-
+  revalidatePath("/dashboard");
   return { ok: true, message: "Empleo eliminado exitosamente." };
 };

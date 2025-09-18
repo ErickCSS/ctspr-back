@@ -66,24 +66,35 @@ export const editEmployeeAction = async ({
     };
   }
 
-  if (data.academicRequirements !== oldData?.academicRequirements) {
+  if (
+    data.academicRequirements?.map((item) => item.value) !==
+    oldData?.academicRequirements
+  ) {
     body = {
       ...body,
-      academicRequirements: data.academicRequirements,
+      academicRequirements: data.academicRequirements.map((item) => item.value),
     };
   }
 
-  if (data.licenseRequirements !== oldData?.licenseRequirements) {
+  if (
+    data.licenseRequirements?.map((item) => item.value) !==
+    oldData?.licenseRequirements
+  ) {
     body = {
       ...body,
-      licenseRequirements: data.licenseRequirements,
+      licenseRequirements: data.licenseRequirements.map((item) => item.value),
     };
   }
 
-  if (data.certificateRequirements !== oldData?.certificateRequirements) {
+  if (
+    data.certificateRequirements?.map((item) => item.value) !==
+    oldData?.certificateRequirements
+  ) {
     body = {
       ...body,
-      certificateRequirements: data.certificateRequirements,
+      certificateRequirements: data.certificateRequirements.map(
+        (item) => item.value,
+      ),
     };
   }
 
@@ -101,17 +112,17 @@ export const editEmployeeAction = async ({
     };
   }
 
-  if (data.skills !== oldData?.skills) {
+  if (data.skills?.map((item) => item.value) !== oldData?.skills) {
     body = {
       ...body,
-      skills: data.skills,
+      skills: data.skills.map((item) => item.value),
     };
   }
 
-  if (data.benefits !== oldData?.benefits) {
+  if (data.benefits?.map((item) => item.value) !== oldData?.benefits) {
     body = {
       ...body,
-      benefits: data.benefits,
+      benefits: data.benefits.map((item) => item.value),
     };
   }
 

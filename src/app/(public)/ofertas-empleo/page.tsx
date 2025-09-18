@@ -1,5 +1,5 @@
-import { EmpleoPage } from "@/modules/Empleos/EmpleoPage";
+import { OfertaEmpleoPage } from "@modules/Empleos/OfertaEmpleoPage";
 
 export default function OfertasEmpleos() {
-  return <EmpleoPage />;
+  return <OfertaEmpleoPage />;
 }

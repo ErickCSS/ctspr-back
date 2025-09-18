@@ -7,14 +7,17 @@ export interface EmployeeType {
   location: string;
   salary: number;
   hoursJob: string;
-  academicRequirements: string;
-  licenseRequirements: string;
-  certificateRequirements: string;
+  academicRequirements: string[];
+  licenseRequirements: string[];
+  certificateRequirements: string[];
   experienceRequirements: string;
   typeOfEmployment: string;
-  skills: string;
-  benefits: string;
+  skills: string[];
+  benefits: string[];
   regionalOffice: string;
   linkToApply: string;
   description: string;
+  is_deleted: boolean;
+  deleted_at: string;
+  slug: string;
 }

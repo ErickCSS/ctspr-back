@@ -12,22 +12,55 @@ import { addEmployeeAction } from "../actions/addEmployee.actions";
 import { toast } from "react-hot-toast";
 import { useTransitionRouter } from "next-view-transitions";
 
+const initialFormData: AddEmployeeSchemaType = {
+  code: "",
+  vacancy: "",
+  industry: "",
+  location: "",
+  salary: "",
+  description: "",
+  experienceRequirements: "",
+  typeOfEmployment: "",
+  hoursJob: "",
+  academicRequirements: [],
+  licenseRequirements: [],
+  certificateRequirements: [],
+  benefits: [],
+  skills: [],
+  regionalOffice: "",
+  linkToApply: "",
+};
+
 export const useAddForm = () => {
-  const { formData, updateField } = useAddEmployeeStore();
+  const { updateField, resetForm } = useAddEmployeeStore();
   const router = useTransitionRouter();
+
+  // Reset the store when the component initializes to ensure clean state
+  useEffect(() => {
+    resetForm();
+  }, [resetForm]);
 
   const addEmployeeForm = useForm<AddEmployeeSchemaType>({
     resolver: zodResolver(addEmployeeSchema),
-    defaultValues: formData,
+    defaultValues: initialFormData,
   });
 
   const isSubmitting = addEmployeeForm.formState.isSubmitting;
 
   // Sync form changes with Zustand store
   useEffect(() => {
-    const subscription = addEmployeeForm.watch((value, { name }) => {
-      if (name && value[name] !== undefined) {
-        updateField(name as keyof AddEmployeeSchemaType, value[name] as string);
+    const subscription = addEmployeeForm.watch((value) => {
+      // Update all form fields in the store whenever any field changes
+      if (value) {
+        // Handle each top-level field individually
+        Object.keys(value).forEach((fieldName) => {
+          const typedFieldName = fieldName as keyof AddEmployeeSchemaType;
+          const fieldValue = value[typedFieldName];
+
+          if (fieldValue !== undefined) {
+            updateField(typedFieldName, fieldValue);
+          }
+        });
       }
     });
     return () => subscription.unsubscribe();
