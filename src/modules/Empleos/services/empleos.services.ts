@@ -13,9 +13,12 @@ export class EmpleosServices {
     return employees;
   }
 
-  static async getEmployeeById(id: number) {
+  static async getEmployeeBySlug(slug: string) {
     const supabase = await createClient();
-    const { data } = await supabase.from("employees").select("*").eq("id", id);
+    const { data } = await supabase
+      .from("employees")
+      .select("*")
+      .eq("slug", slug);
 
     const employee = data?.[0] as EmployeeType | null;
 

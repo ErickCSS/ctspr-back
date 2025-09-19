@@ -9,7 +9,13 @@ import { EmployeeDeleteAlert } from "@modules/Dashboard/features/delete/componen
 import { Link } from "next-view-transitions";
 import { IconEdit } from "@tabler/icons-react";
 
-export const DashboardActions = ({ id }: { id: number }) => {
+export const DashboardActions = ({
+  id,
+  slug,
+}: {
+  id: number;
+  slug: string;
+}) => {
   return (
     <div className="flex items-center gap-2">
       <Button
@@ -17,7 +23,9 @@ export const DashboardActions = ({ id }: { id: number }) => {
         size="sm"
         className="bg-secondaryColor border-secondaryColor hover:bg-secondaryColor/20 hover:border-secondaryColor hover:text-secondaryColor cursor-pointer border text-white transition-colors duration-300"
       >
-        <Link href={`/dashboard/${id}`}>Ver Detalle</Link>
+        <Link href={`/empleos/${slug}`} target="_blank">
+          Ver Detalle
+        </Link>
       </Button>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>

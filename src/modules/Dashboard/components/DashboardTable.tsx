@@ -53,7 +53,7 @@ export const DashboardTable = async () => {
               {formattedDate(item.created_at)}
             </TableCell>
             <TableCell className="py-4">
-              <DashboardActions id={item.id} />
+              <DashboardActions id={item.id} slug={item.slug} />
             </TableCell>
           </TableRow>
         ))}

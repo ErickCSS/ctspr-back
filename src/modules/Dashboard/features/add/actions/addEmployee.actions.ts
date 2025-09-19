@@ -23,6 +23,10 @@ export const addEmployeeAction = async ({
     certificateRequirements: JSON.stringify(data.certificateRequirements),
     owner_email: user?.email ?? "",
     user_id: user?.id as string | undefined,
+    slug:
+      data.vacancy.split(" ").join("-").replace(/\s/g, "-").toLowerCase() +
+      "-" +
+      data.code,
   };
 
   const { error } = await supabase.from("employees").insert([body]).single();

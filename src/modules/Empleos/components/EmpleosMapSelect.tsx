@@ -10,7 +10,7 @@ import {
 } from "@/modules/shared/types/generalQuery.types";
 import { parseContent } from "@/modules/shared/utils/parseContent.utils";
 import { Button } from "@modules/ui/button";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import Image from "next/image";
 
 export const EmpleosMapSelect = async () => {
@@ -53,28 +53,19 @@ export const EmpleosMapSelect = async () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-2">
-              {[
-                "Barceloneta",
-                "Santurce",
-                "Las Piedras",
-                "San German",
-                "Salinas",
-              ].map((item) => (
-                <Button
-                  key={item}
-                  asChild
-                  className="bg-secondaryColor h-12 text-lg text-white transition-colors duration-300 hover:bg-pink-700"
+            <div className="flex flex-col gap-y-2">
+              <Button
+                asChild
+                className="bg-secondaryColor h-12 text-lg text-white transition-colors duration-300 hover:bg-pink-700"
+              >
+                <Link
+                  href="/empleos"
+                  target="_self"
+                  rel="noopener noreferrer nofollow"
                 >
-                  <Link
-                    href={`https://empleos.ctspr.com/jobs/index.php?q=${item === "Salinas" ? "LasPiedras" : item.charAt(0).toUpperCase() + item.slice(1).replace(" ", "")}`}
-                    target="_blank"
-                    rel="noopener noreferrer nofollow"
-                  >
-                    {item}
-                  </Link>
-                </Button>
-              ))}
+                  Ver todos los empleos
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
