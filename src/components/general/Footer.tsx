@@ -101,7 +101,7 @@ export const Footer = async () => {
 
             <div className="flex flex-wrap items-center gap-5">
               <Link
-                href="https://blog.ctspr.com/wp-content/uploads/2025/09/normativa-cliente-espanol.pdf"
+                href="https://blog.ctspr.com/wp-content/uploads/2025/09/normativa-cliente-spanish.pdf"
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 className="font-lato border-secondaryColor border-l-4 pl-2 text-base font-normal text-white"
@@ -109,7 +109,7 @@ export const Footer = async () => {
                 Normativas del Cliente - Español
               </Link>
               <Link
-                href="https://blog.ctspr.com/wp-content/uploads/2025/09/normativa-cliente-ingles.pdf"
+                href="https://blog.ctspr.com/wp-content/uploads/2025/09/normativa-cliente-english.pdf"
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 className="font-lato border-secondaryColor border-l-4 pl-2 text-base font-normal text-white"
