@@ -31,7 +31,7 @@ export const SliderHero = ({ sliders }: { sliders: SliderProps[] }) => {
             backgroundImage: `url(${slider.featuredImage.node.sourceUrl})`,
           }}
           key={index}
-          className="h-full bg-cover bg-[top_center] bg-no-repeat"
+          className={`h-full bg-cover bg-[top_center] bg-no-repeat ${index === 1 ? "bg-center" : ""}`}
         >
           <div className="container mx-auto flex h-full items-center px-4">
             <div className="flex w-[500px] flex-col bg-black/60 p-5 md:p-10">
