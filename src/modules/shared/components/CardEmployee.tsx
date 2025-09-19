@@ -11,13 +11,23 @@ import { Badge } from "@modules/ui/badge";
 import { CONVERT_MONEY } from "@modules/shared/utils/convertMoney";
 import { useAddEmployeeStore } from "@modules/Dashboard/features/add/store/addEmployeeStore";
 import { CONVERT_UPPER } from "@modules/shared/utils";
+import { formatDistanceToNow } from "date-fns";
+import { es } from "date-fns/locale";
 import { EmployeeType } from "@modules/Dashboard/types/employee.type";
 
 export const CardEmployee = ({ employee }: { employee?: EmployeeType }) => {
   const { formData } = useAddEmployeeStore();
 
+  const formattedDate = formatDistanceToNow(
+    employee?.created_at ?? new Date(),
+    {
+      addSuffix: true,
+      locale: es,
+    },
+  );
+
   return (
-    <Card className="shadow-sm">
+    <Card className="h-full justify-between shadow-sm">
       <CardHeader>
         <div className="flex items-center justify-between">
           <h4 className="font-lato text-xl font-bold">
@@ -27,7 +37,7 @@ export const CardEmployee = ({ employee }: { employee?: EmployeeType }) => {
             #{formData.code || employee?.code || "000000"}
           </div>
         </div>
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
           <div className="flex items-center gap-x-2 text-sm text-zinc-500">
             <IconMapPin stroke={1.5} size={20} />
             <span className="font-lato">
@@ -36,7 +46,7 @@ export const CardEmployee = ({ employee }: { employee?: EmployeeType }) => {
           </div>
           <div className="flex items-center gap-x-2 text-sm text-zinc-500">
             <IconCalendarClock stroke={1.5} size={20} />
-            <span className="font-lato">Hoy</span>
+            <span className="font-lato">{formattedDate}</span>
           </div>
           <div className="flex items-center gap-x-2 text-sm text-zinc-500">
             <IconBuildingEstate stroke={1.5} size={20} />
