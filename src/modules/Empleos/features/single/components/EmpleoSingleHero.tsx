@@ -21,9 +21,9 @@ export const EmpleoSingleHero = async ({ slug }: { slug: string }) => {
   }
 
   return (
-    <section className="bg-[#ffe5ec] px-4 py-24">
+    <section className="bg-[#ffe5ec] px-4 py-10 md:py-24">
       <div className="mx-auto max-w-7xl">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col items-start justify-between gap-10 md:flex-row md:items-center md:gap-0">
           <LeftSide employee={employee} />
           <RightSide employee={employee} />
         </div>
@@ -39,7 +39,7 @@ const LeftSide = ({ employee }: { employee: EmployeeType }) => {
   });
 
   return (
-    <div className="flex items-start gap-5">
+    <div className="flex flex-col items-start gap-5 md:flex-row">
       <div className="flex size-20 items-center justify-center rounded-xl bg-pink-400 p-2">
         {MapHeroIcons[employee.industry.toLowerCase()]}
       </div>
@@ -86,7 +86,7 @@ const LeftSide = ({ employee }: { employee: EmployeeType }) => {
 
 const RightSide = ({ employee }: { employee: EmployeeType }) => {
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-row gap-5 md:flex-col">
       <Button
         size="lg"
         className="bg-primaryColor hover:bg-secondaryColor font-lato cursor-pointer py-6 text-base font-bold text-white transition-colors duration-300"
