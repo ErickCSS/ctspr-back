@@ -3,6 +3,7 @@ import { SliderHero } from "../shared/Slider";
 import { sliderQuery } from "@/graphql/slider.query";
 import { HeroProps } from "@/types/hero.types";
 import { toReversed } from "@/utils/toReversed";
+import { createYouTubeSlide, combineSlides } from "@/utils/sliderUtils";
 
 export const Hero = async () => {
   const sliders: HeroProps = await WpQuery({
@@ -10,6 +11,11 @@ export const Hero = async () => {
   });
 
   const slidersReverse = toReversed(sliders.posts.nodes);
+  const videoSlides = [
+    createYouTubeSlide("/videos/cts-video-slider.webm", "", "", ""),
+  ];
 
-  return <SliderHero sliders={slidersReverse} />;
+  const combinedSlides = combineSlides(slidersReverse, videoSlides, 0);
+
+  return <SliderHero sliders={combinedSlides} />;
 };

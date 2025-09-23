@@ -21,4 +21,8 @@ export interface SliderProps {
     };
   };
   date: string;
+
+  youtubeVideoId?: string;
+
+  isVideo?: boolean;
 }
