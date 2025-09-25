@@ -13,14 +13,20 @@ import { useAddEmployeeStore } from "@modules/Dashboard/features/add/store/addEm
 import { CONVERT_UPPER } from "@modules/shared/utils";
 import { formatDistanceToNow } from "date-fns";
 import { es } from "date-fns/locale";
-import { EmployeeType } from "@modules/Dashboard/types/employee.type";
+import { EmployeeType } from "@/modules/shared/types/employee.type";
 import { usePathname } from "next/navigation";
 import { cn } from "@modules/shared/lib/utils";
+import {
+  SELECT_EMPLOYMENT,
+  SELECT_INDUSTRIES,
+} from "@modules/shared/lib/SelectInifo";
+import { useMediaQuery } from "@modules/shared/hooks/useMediaQuery.hooks";
 
 export const CardEmployee = ({ employee }: { employee?: EmployeeType }) => {
   const { formData } = useAddEmployeeStore();
   const pathname = usePathname();
   const isDashboard = pathname.includes("dashboard");
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
   const formattedDate = formatDistanceToNow(
     employee?.created_at ?? new Date(),
@@ -71,17 +77,26 @@ export const CardEmployee = ({ employee }: { employee?: EmployeeType }) => {
       <CardContent>
         <Separator className="mb-4" />
 
-        <div className="flex items-center justify-between gap-4">
+        <div
+          className={cn(
+            "flex items-center justify-between gap-4",
+            isDesktop ? "" : "flex-wrap",
+          )}
+        >
           <div className="flex items-center gap-2">
             <Badge className="bg-primaryColor text-sm text-white">
               {CONVERT_UPPER(formData.typeOfEmployment) ||
-                CONVERT_UPPER(employee?.typeOfEmployment ?? "") ||
+                SELECT_EMPLOYMENT.find(
+                  (type) => type.value === employee?.typeOfEmployment,
+                )?.label ||
                 "Full-Time"}
             </Badge>
             <Badge className="bg-secondaryColor text-sm text-white">
               {CONVERT_UPPER(formData.industry) ||
-                CONVERT_UPPER(employee?.industry ?? "") ||
-                "Development"}
+                SELECT_INDUSTRIES.find(
+                  (industry) => industry.value === employee?.industry,
+                )?.label ||
+                "Industria"}
             </Badge>
           </div>
 

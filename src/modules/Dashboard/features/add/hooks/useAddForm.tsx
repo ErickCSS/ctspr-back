@@ -66,21 +66,6 @@ export const useAddForm = () => {
     return () => subscription.unsubscribe();
   }, [addEmployeeForm, updateField]);
 
-  const TYPE_OF_EMPLOYMENT = [
-    {
-      value: "full-time",
-      label: "Full-time",
-    },
-    {
-      value: "part-time",
-      label: "Part-time",
-    },
-    {
-      value: "contract",
-      label: "Contract",
-    },
-  ];
-
   const REGIONAL_OFFICE = [
     {
       value: "barceloneta",
@@ -118,7 +103,6 @@ export const useAddForm = () => {
 
   return {
     addEmployeeForm,
-    TYPE_OF_EMPLOYMENT,
     REGIONAL_OFFICE,
     onSubmit,
     isSubmitting,

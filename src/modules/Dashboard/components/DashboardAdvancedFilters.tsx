@@ -14,7 +14,7 @@ import {
   SidebarGroupContent,
   SidebarGroupLabel,
 } from "@modules/ui/sidebar";
-import { useEmployeeFiltersStore } from "../store/employeeFiltersStore";
+import { useEmployeeFiltersStore } from "../store/dahsEmployeeFiltersStore";
 import { DashboardServices } from "../services/dashboard.services";
 
 export const DashboardAdvancedFilters = () => {

@@ -1,6 +1,6 @@
 import { create } from "zustand";
-import { EmployeeType } from "../types/employee.type";
-import { DashboardServices } from "../services/dashboard.services";
+import { EmployeeType } from "@modules/shared/types/employee.type";
+import { DashboardServices } from "@modules/Dashboard/services/dashboard.services";
 
 export interface FilterParams {
   regionalOffice?: string;

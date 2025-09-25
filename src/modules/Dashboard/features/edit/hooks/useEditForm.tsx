@@ -8,7 +8,7 @@ import { useAddEmployeeStore } from "@modules/Dashboard/features/add/store/addEm
 import { editEmployeeAction } from "@modules/Dashboard/features/edit/actions/editEmployee.actions";
 import { toast } from "react-hot-toast";
 import { useTransitionRouter } from "next-view-transitions";
-import { EmployeeType } from "@modules/Dashboard/types/employee.type";
+import { EmployeeType } from "@/modules/shared/types/employee.type";
 import {
   editEmployeeSchema,
   EditEmployeeSchemaType,

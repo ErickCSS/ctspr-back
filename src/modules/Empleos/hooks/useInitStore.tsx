@@ -1,8 +1,8 @@
 "use client";
 import { useEffect } from "react";
-import { useEmployeeFiltersStore } from "../store/dahsEmployeeFiltersStore";
+import { useEmployeeFiltersStore } from "../store/EmployeeFilterStore";
 
-export const useEmployeeFiltersInit = () => {
+export const useInitStore = () => {
   const { applyFilters, employees } = useEmployeeFiltersStore();
 
   useEffect(() => {

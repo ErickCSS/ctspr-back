@@ -6,15 +6,15 @@ import { Label } from "@modules/ui/label";
 import { RenderFormField } from "@/modules/shared/components/RenderFormField";
 import { Button } from "@/modules/ui/button";
 import { IconLoader2 } from "@tabler/icons-react";
+import {
+  SELECT_INDUSTRIES,
+  SELECT_LOCATION,
+  SELECT_EMPLOYMENT,
+} from "@modules/shared/lib/SelectInifo";
 
 export const DashAddForm = () => {
-  const {
-    addEmployeeForm,
-    onSubmit,
-    TYPE_OF_EMPLOYMENT,
-    REGIONAL_OFFICE,
-    isSubmitting,
-  } = useAddForm();
+  const { addEmployeeForm, onSubmit, REGIONAL_OFFICE, isSubmitting } =
+    useAddForm();
 
   return (
     <div className="mx-auto mt-5 w-full">
@@ -59,6 +59,8 @@ export const DashAddForm = () => {
                 control={addEmployeeForm.control}
                 name="industry"
                 type="text"
+                renderSelect
+                options={SELECT_INDUSTRIES}
                 placeholder="Industria de la Vacante"
                 errors={addEmployeeForm.formState.errors}
               />
@@ -71,6 +73,8 @@ export const DashAddForm = () => {
                 control={addEmployeeForm.control}
                 name="location"
                 type="text"
+                renderSelect
+                options={SELECT_LOCATION}
                 placeholder="Ubicación de la Vacante"
                 errors={addEmployeeForm.formState.errors}
               />
@@ -167,7 +171,7 @@ export const DashAddForm = () => {
                 control={addEmployeeForm.control}
                 name="typeOfEmployment"
                 renderSelect
-                options={TYPE_OF_EMPLOYMENT}
+                options={SELECT_EMPLOYMENT}
                 placeholder="Tipo de empleo"
                 errors={addEmployeeForm.formState.errors}
               />

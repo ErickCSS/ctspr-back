@@ -1,6 +1,6 @@
 import { EmpleosServices } from "@/modules/Empleos/services/empleos.services";
 import { CONVERT_UPPER } from "@/modules/shared/utils";
-import { EmployeeType } from "@modules/Dashboard/types/employee.type";
+import { EmployeeType } from "@/modules/shared/types/employee.type";
 import {
   IconCalendar,
   IconMap,

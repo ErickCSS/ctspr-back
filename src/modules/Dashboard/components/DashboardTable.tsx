@@ -12,7 +12,7 @@ import {
 import { CONVERT_MONEY } from "@/modules/shared/utils/convertMoney";
 import { format } from "date-fns";
 import { DashboardActions } from "./DashboardActions";
-import { useEmployeeFiltersStore } from "../store/employeeFiltersStore";
+import { useEmployeeFiltersStore } from "../store/dahsEmployeeFiltersStore";
 import { useEmployeeFiltersInit } from "../hooks/useEmployeeFiltersInit";
 import { useEffect } from "react";
 

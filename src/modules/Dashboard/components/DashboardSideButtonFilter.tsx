@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@modules/ui/button";
-import { useEmployeeFiltersStore } from "../store/employeeFiltersStore";
+import { useEmployeeFiltersStore } from "../store/dahsEmployeeFiltersStore";
 import { useEffect } from "react";
 
 export const DashboardSideButtonFilter = ({

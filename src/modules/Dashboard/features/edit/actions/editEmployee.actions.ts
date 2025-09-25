@@ -2,7 +2,7 @@
 
 import { createClient } from "@/modules/shared/utils/supabase/server";
 import { AddEmployeeSchemaType } from "@modules/Dashboard/features/add/schemas/addEmployee.schema";
-import { EmployeeType } from "@modules/Dashboard/types/employee.type";
+import { EmployeeType } from "@/modules/shared/types/employee.type";
 
 export const editEmployeeAction = async ({
   data,

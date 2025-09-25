@@ -12,7 +12,8 @@ import { formatDistanceToNow } from "date-fns";
 import { es } from "date-fns/locale";
 import { Button } from "@modules/ui/button";
 import { Link } from "next-view-transitions";
-import { EmployeeType } from "@modules/Dashboard/types/employee.type";
+import { EmployeeType } from "@/modules/shared/types/employee.type";
+import { SELECT_INDUSTRIES } from "@modules/shared/lib/SelectInifo";
 
 export const EmpleoSingleHero = async ({ slug }: { slug: string }) => {
   const employee = await EmpleosServices.getEmployeeBySlug(slug);
@@ -76,7 +77,9 @@ const LeftSide = ({ employee }: { employee: EmployeeType }) => {
             {CONVERT_UPPER(employee?.typeOfEmployment ?? "") || "Full-Time"}
           </Badge>
           <Badge className="bg-secondaryColor px-3 text-base text-white">
-            {CONVERT_UPPER(employee?.industry ?? "") || "Development"}
+            {SELECT_INDUSTRIES.find(
+              (industry) => industry.value === employee?.industry,
+            )?.label || "Development"}
           </Badge>
         </div>
       </div>

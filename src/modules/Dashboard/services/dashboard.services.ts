@@ -1,5 +1,5 @@
 import { createClient } from "@modules/shared/utils/supabase/client";
-import { EmployeeType } from "@modules/Dashboard/types/employee.type";
+import { EmployeeType } from "@/modules/shared/types/employee.type";
 
 export interface FilterParams {
   regionalOffice?: string;

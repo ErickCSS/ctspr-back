@@ -6,7 +6,7 @@ import { Label } from "@modules/ui/label";
 import { RenderFormField } from "@/modules/shared/components/RenderFormField";
 import { Button } from "@/modules/ui/button";
 import { IconLoader2 } from "@tabler/icons-react";
-import { EmployeeType } from "@modules/Dashboard/types/employee.type";
+import { EmployeeType } from "@/modules/shared/types/employee.type";
 
 export const DashEditForm = ({
   employee,
