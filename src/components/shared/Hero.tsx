@@ -11,6 +11,7 @@ export const Hero = async ({ title }: { title: string }) => {
   const heroImage = hero.posts.nodes[0].featuredImage.node.sourceUrl;
   const isContact = title === "Contáctenos";
   const isEmpleos = title === "Empleo";
+  const isAbout = title === "Quiénes Somos";
 
   return (
     <section
@@ -19,7 +20,11 @@ export const Hero = async ({ title }: { title: string }) => {
       }}
       className={cn(
         "relative h-[120px] bg-cover bg-no-repeat md:h-[400px]",
-        isContact ? "bg-[70%_center] md:bg-center" : "bg-center",
+        isContact
+          ? "bg-[70%_center] md:bg-center"
+          : isAbout
+            ? "bg-[14%_center] md:bg-center"
+            : "bg-center",
       )}
     >
       {isEmpleos && (

@@ -55,6 +55,9 @@ export const SliderHero = ({ sliders }: { sliders: SliderProps[] }) => {
                   autoPlay
                   loop
                   muted={muted}
+                  playsInline
+                  controls={false}
+                  preload="metadata"
                   className="h-full w-full object-cover"
                 />
               </div>
