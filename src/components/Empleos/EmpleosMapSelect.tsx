@@ -42,10 +42,10 @@ export const EmpleosMapSelect = async () => {
         <div className="mx-auto mt-10 max-w-5xl bg-zinc-100 p-10">
           <div className="grid grid-cols-1 items-center gap-x-10 gap-y-10 lg:grid-cols-2">
             <div className="flex flex-col gap-y-2">
-              <h3 className="text-center text-4xl font-bold lg:text-left">
+              <h3 className="text-center text-3xl font-bold text-pretty md:text-4xl lg:text-left">
                 {foundEmpleos}
               </h3>
-              <div className="text-center text-xl text-balance lg:text-left">
+              <div className="text-center text-lg text-balance md:text-xl lg:text-left">
                 {parseContent(foundEmpleosContent)}
               </div>
             </div>

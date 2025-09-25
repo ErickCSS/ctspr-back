@@ -27,7 +27,7 @@ export const SliderHero = ({ sliders }: { sliders: SliderProps[] }) => {
       //   delay: 5000,
       //   disableOnInteraction: false,
       // }}
-      className="SliderHero h-[250px] md:h-[720px]"
+      className="SliderHero h-[250px] md:h-[750px]"
     >
       {sliders.map((slider, index) => (
         <SwiperSlide

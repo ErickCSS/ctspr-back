@@ -18,7 +18,7 @@ export const Hero = async ({ title }: { title: string }) => {
         backgroundImage: `url(${heroImage})`,
       }}
       className={cn(
-        "relative h-[250px] bg-cover bg-no-repeat md:h-[400px]",
+        "relative h-[120px] bg-cover bg-no-repeat md:h-[400px]",
         isContact ? "bg-[70%_center] md:bg-center" : "bg-center",
       )}
     >
@@ -27,7 +27,7 @@ export const Hero = async ({ title }: { title: string }) => {
       )}
       <div className="relative z-5 container mx-auto h-full px-4">
         <div className="flex h-full items-center">
-          <h1 className="text-4xl font-bold text-white lg:text-6xl">
+          <h1 className="text-2xl font-bold text-white md:text-4xl lg:text-6xl">
             {hero.posts.nodes[0].title}
           </h1>
         </div>
