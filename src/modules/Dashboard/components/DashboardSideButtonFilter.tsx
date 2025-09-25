@@ -15,30 +15,13 @@ export const DashboardSideButtonFilter = ({
   const { updateFilter, removeFilter, activeFilters } =
     useEmployeeFiltersStore();
 
-  // Log para debugging
-  useEffect(() => {
-    console.log(
-      `🏢 SideButtonFilter (${sucursal}) (Store) - Filtros activos:`,
-      activeFilters,
-    );
-  }, [activeFilters, sucursal]);
-
   const handleFilter = async () => {
-    console.log(`🏢 SideButtonFilter (${sucursal}) (Store) - Click en filtro`);
     const isCurrentlyActive =
       activeFilters.regionalOffice === sucursal.toLowerCase();
 
     if (isCurrentlyActive) {
-      // Si ya está activo, remover el filtro
-      console.log(
-        `🏢 SideButtonFilter (${sucursal}) (Store) - Removiendo filtro`,
-      );
       await removeFilter("regionalOffice");
     } else {
-      // Si no está activo, aplicar el filtro
-      console.log(
-        `🏢 SideButtonFilter (${sucursal}) (Store) - Aplicando filtro`,
-      );
       await updateFilter("regionalOffice", sucursal.toLowerCase());
     }
 

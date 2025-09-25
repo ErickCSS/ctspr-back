@@ -76,8 +76,7 @@ export class DashboardServices {
       .from("employees")
       .select("*")
       .eq("id", id)
-      .eq("is_deleted", false)
-      .maybeSingle();
+      .eq("is_deleted", false);
 
     const employee = data?.[0] as EmployeeType | null;
 

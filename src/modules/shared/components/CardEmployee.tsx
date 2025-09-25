@@ -14,9 +14,13 @@ import { CONVERT_UPPER } from "@modules/shared/utils";
 import { formatDistanceToNow } from "date-fns";
 import { es } from "date-fns/locale";
 import { EmployeeType } from "@modules/Dashboard/types/employee.type";
+import { usePathname } from "next/navigation";
+import { cn } from "@modules/shared/lib/utils";
 
 export const CardEmployee = ({ employee }: { employee?: EmployeeType }) => {
   const { formData } = useAddEmployeeStore();
+  const pathname = usePathname();
+  const isDashboard = pathname.includes("dashboard");
 
   const formattedDate = formatDistanceToNow(
     employee?.created_at ?? new Date(),
@@ -27,7 +31,12 @@ export const CardEmployee = ({ employee }: { employee?: EmployeeType }) => {
   );
 
   return (
-    <Card className="h-full justify-between shadow-sm">
+    <Card
+      className={cn(
+        "justify-between shadow-sm",
+        isDashboard ? "h-fit" : "h-full",
+      )}
+    >
       <CardHeader>
         <div className="flex items-center justify-between">
           <h4 className="font-lato text-xl font-bold">

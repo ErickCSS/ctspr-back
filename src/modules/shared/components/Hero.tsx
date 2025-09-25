@@ -18,7 +18,7 @@ export const Hero = async ({ title }: { title: string }) => {
         backgroundImage: `url(${heroImage})`,
       }}
       className={cn(
-        "relative h-[250px] bg-cover bg-no-repeat md:h-[400px]",
+        "relative h-[120px] bg-cover bg-no-repeat md:h-[400px]",
         isContact ? "bg-[70%_center] md:bg-center" : "bg-center",
       )}
     >

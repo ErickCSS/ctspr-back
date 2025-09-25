@@ -24,13 +24,6 @@ export const DashboardTable = () => {
   const { employees, loading, error, activeFilters } =
     useEmployeeFiltersStore();
 
-  // Log para debugging
-  useEffect(() => {
-    console.log("📋 DashboardTable (Store) - Empleados:", employees?.length);
-    console.log("📋 DashboardTable (Store) - Filtros activos:", activeFilters);
-    console.log("📋 DashboardTable (Store) - Loading:", loading);
-  }, [employees, activeFilters, loading]);
-
   const formattedDate = (date: string) => {
     return format(new Date(date), "dd/MM/yyyy");
   };
