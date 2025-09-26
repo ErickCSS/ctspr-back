@@ -42,7 +42,7 @@ const LeftSide = ({ employee }: { employee: EmployeeType }) => {
   return (
     <div className="flex flex-col items-start gap-5 md:flex-row">
       <div className="flex size-20 items-center justify-center rounded-xl bg-pink-400 p-2">
-        {MapHeroIcons[employee.industry.toLowerCase()]}
+        {MapHeroIcons[employee.industry]}
       </div>
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-2">

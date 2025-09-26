@@ -1,8 +1,27 @@
 import {
+  IconBackhoe,
+  IconBeach,
+  IconBrush,
+  IconBuildingCog,
+  IconBuildingFactory,
+  IconBuildingFactory2,
+  IconBuildingSkyscraper,
+  IconBuildingStore,
+  IconChefHat,
+  IconCoin,
   IconCpu,
+  IconCrane,
+  IconEyeSearch,
+  IconGavel,
+  IconGeometry,
+  IconHorse,
   IconMedicalCross,
+  IconMicrophone,
   IconReportMoney,
+  IconSchema,
   IconSchool,
+  IconTrees,
+  IconTruckLoading,
   IconWriting,
 } from "@tabler/icons-react";
 import { JSX } from "react";
@@ -17,39 +36,34 @@ export const MapHeroIcons: MapHeroIcons = {
   Finanzas: <IconReportMoney stroke={1.5} size={50} className="text-white" />,
   Salud: <IconMedicalCross stroke={1.5} size={50} className="text-white" />,
   Educacion: <IconSchool stroke={1.5} size={50} className="text-white" />,
-  Gobierno: <IconReportMoney stroke={1.5} size={50} className="text-white" />,
-  Arquitectura: (
-    <IconReportMoney stroke={1.5} size={50} className="text-white" />
+  Gobierno: (
+    <IconBuildingSkyscraper stroke={1.5} size={50} className="text-white" />
   ),
-  Ingenieria: <IconReportMoney stroke={1.5} size={50} className="text-white" />,
-  Legal: <IconReportMoney stroke={1.5} size={50} className="text-white" />,
-  Ventas: <IconReportMoney stroke={1.5} size={50} className="text-white" />,
-  RecursosHumanos: (
-    <IconReportMoney stroke={1.5} size={50} className="text-white" />
-  ),
+  Arquitectura: <IconGeometry stroke={1.5} size={50} className="text-white" />,
+  Ingenieria: <IconBackhoe stroke={1.5} size={50} className="text-white" />,
+  Legal: <IconGavel stroke={1.5} size={50} className="text-white" />,
+  Ventas: <IconCoin stroke={1.5} size={50} className="text-white" />,
+  RecursosHumanos: <IconSchema stroke={1.5} size={50} className="text-white" />,
   Manufactura: (
-    <IconReportMoney stroke={1.5} size={50} className="text-white" />
+    <IconBuildingFactory2 stroke={1.5} size={50} className="text-white" />
   ),
-  Logistica: <IconReportMoney stroke={1.5} size={50} className="text-white" />,
-  Construccion: (
-    <IconReportMoney stroke={1.5} size={50} className="text-white" />
-  ),
-  ArteDiseno: <IconReportMoney stroke={1.5} size={50} className="text-white" />,
+
+  Logistica: <IconTruckLoading stroke={1.5} size={50} className="text-white" />,
+  Construccion: <IconCrane stroke={1.5} size={50} className="text-white" />,
+  ArteDiseno: <IconBrush stroke={1.5} size={50} className="text-white" />,
   Comunicacion: (
-    <IconReportMoney stroke={1.5} size={50} className="text-white" />
+    <IconMicrophone stroke={1.5} size={50} className="text-white" />
   ),
-  Ciencias: <IconReportMoney stroke={1.5} size={50} className="text-white" />,
-  Turismo: <IconReportMoney stroke={1.5} size={50} className="text-white" />,
-  Gastronomia: (
-    <IconReportMoney stroke={1.5} size={50} className="text-white" />
+  Ciencias: <IconEyeSearch stroke={1.5} size={50} className="text-white" />,
+  Turismo: <IconBeach stroke={1.5} size={50} className="text-white" />,
+  Gastronomia: <IconChefHat stroke={1.5} size={50} className="text-white" />,
+  Energia: (
+    <IconBuildingFactory stroke={1.5} size={50} className="text-white" />
   ),
-  Energia: <IconReportMoney stroke={1.5} size={50} className="text-white" />,
   RecursosNaturales: (
-    <IconReportMoney stroke={1.5} size={50} className="text-white" />
+    <IconTrees stroke={1.5} size={50} className="text-white" />
   ),
-  Agropecuario: (
-    <IconReportMoney stroke={1.5} size={50} className="text-white" />
-  ),
-  Retail: <IconReportMoney stroke={1.5} size={50} className="text-white" />,
-  Startup: <IconReportMoney stroke={1.5} size={50} className="text-white" />,
+  Agropecuario: <IconHorse stroke={1.5} size={50} className="text-white" />,
+  Retail: <IconBuildingStore stroke={1.5} size={50} className="text-white" />,
+  Startup: <IconBuildingCog stroke={1.5} size={50} className="text-white" />,
 };
