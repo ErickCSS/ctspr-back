@@ -8,7 +8,9 @@ export const addEmployeeSchema = z.object({
   vacancy: z.string().min(1, "La vacante es requerida"),
   industry: z.string().min(1, "La industria es requerida"),
   location: z.string().min(1, "La ubicación es requerida"),
-  salary: z.string().min(1, "El salario es requerido"),
+  min_salary: z.string().optional(),
+  max_salary: z.string().optional(),
+  payment_frequency: z.string().optional(),
   hoursJob: z.string().min(1, "Las horas y dias de trabajo son requeridos"),
   description: z.string().min(1, "La descripción es requerida"),
   academicRequirements: z.array(

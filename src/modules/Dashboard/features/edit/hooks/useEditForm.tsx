@@ -29,14 +29,17 @@ export const useEditForm = ({
 
   const defaultValues = useMemo(() => {
     if (!employee) return formData;
+
     return {
       code: String(employee.code),
       vacancy: employee.vacancy,
       industry: employee.industry,
       location: employee.location,
-      salary: String(employee.salary),
+      min_salary: String(employee.min_salary),
+      max_salary: String(employee.max_salary),
       hoursJob: employee.hoursJob,
       description: employee.description,
+      payment_frequency: employee.payment_frequency,
       academicRequirements: parseData(employee.academicRequirements),
       licenseRequirements: parseData(employee.licenseRequirements),
       certificateRequirements: parseData(employee.certificateRequirements),
@@ -65,9 +68,11 @@ export const useEditForm = ({
         vacancy: employee.vacancy,
         industry: employee.industry,
         location: employee.location,
-        salary: String(employee.salary),
+        min_salary: String(employee.min_salary),
+        max_salary: String(employee.max_salary),
         hoursJob: employee.hoursJob,
         description: employee.description,
+        payment_frequency: employee.payment_frequency,
         academicRequirements: parseData(employee.academicRequirements),
         licenseRequirements: parseData(employee.licenseRequirements),
         certificateRequirements: parseData(employee.certificateRequirements),

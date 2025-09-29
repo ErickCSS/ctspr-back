@@ -23,6 +23,27 @@ export class DashboardServices {
     return employees;
   }
 
+  static async getEmployeesPagination() {
+    const supabase = await createClient();
+    const totalRecords = await supabase
+      .from("employees")
+      .select("*", { count: "exact", head: true })
+      .eq("is_deleted", false);
+
+    const ITEMS_PER_PAGE = 20;
+
+    const totalEmployees = totalRecords.count as number;
+
+    return {
+      records: totalEmployees,
+      items_per_page: ITEMS_PER_PAGE,
+      previous_page: null,
+      current_page: 1,
+      next_page: null,
+      total_pages: Math.ceil(totalEmployees / ITEMS_PER_PAGE),
+    };
+  }
+
   static async getEmployeesWithFilters(filters: FilterParams) {
     const supabase = await createClient();
     let query = supabase.from("employees").select("*").eq("is_deleted", false);

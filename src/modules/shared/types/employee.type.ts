@@ -5,7 +5,9 @@ export interface EmployeeType {
   vacancy: string;
   industry: string;
   location: string;
-  salary: number;
+  min_salary: number;
+  max_salary: number;
+  payment_frequency: string;
   hoursJob: string;
   academicRequirements: string[];
   licenseRequirements: string[];

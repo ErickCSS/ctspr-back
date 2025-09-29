@@ -1,5 +1,5 @@
 export const SELECT_INDUSTRIES = [
-  { value: "IT", label: "Tecnología / Software" },
+  { value: "IT", label: "Tecnología" },
   { value: "Marketing", label: "Marketing" },
   { value: "Finanzas", label: "Finanzas" },
   { value: "Salud", label: "Salud" },
@@ -7,7 +7,7 @@ export const SELECT_INDUSTRIES = [
   { value: "Gobierno", label: "Gobierno" },
   { value: "Arquitectura", label: "Arquitectura" },
   { value: "Ingenieria", label: "Ingeniería" },
-  { value: "Legal", label: "Legal / Derecho" },
+  { value: "Legal", label: "Legal" },
   { value: "Ventas", label: "Ventas y Comercio" },
   { value: "RecursosHumanos", label: "Recursos Humanos" },
   { value: "Manufactura", label: "Manufactura" },
@@ -138,4 +138,12 @@ export const REGIONAL_OFFICE = [
     value: "salinas",
     label: "Salinas",
   },
+];
+
+export const SELECT_FREQUENCY_PAYMENT = [
+  { value: "semanal", label: "Semanal" },
+  { value: "mensual", label: "Mensual" },
+  { value: "anual", label: "Anual" },
+  { value: "diario", label: "Diario" },
+  { value: "hora", label: "Hora" },
 ];

@@ -16,6 +16,7 @@ const initialFormData: AddEmployeeSchemaType = {
   industry: "",
   location: "",
   salary: "",
+  frequencyPayment: "",
   description: "",
   experienceRequirements: "",
   typeOfEmployment: "",

@@ -14,7 +14,6 @@ import { format } from "date-fns";
 import { DashboardActions } from "./DashboardActions";
 import { useEmployeeFiltersStore } from "../store/dahsEmployeeFiltersStore";
 import { useEmployeeFiltersInit } from "../hooks/useEmployeeFiltersInit";
-import { useEffect } from "react";
 
 export const DashboardTable = () => {
   // Inicializar el store
@@ -33,7 +32,7 @@ export const DashboardTable = () => {
     "Vacante",
     "Industria",
     "Ubicación",
-    "Salario",
+    "Rango Salarial",
     "Fecha",
     "Acciones",
   ];
@@ -82,7 +81,10 @@ export const DashboardTable = () => {
             <TableCell className="py-4">{item.vacancy}</TableCell>
             <TableCell className="py-4">{item.industry}</TableCell>
             <TableCell className="py-4">{item.location}</TableCell>
-            <TableCell className="py-4">{CONVERT_MONEY(item.salary)}</TableCell>
+            <TableCell className="py-4">
+              {CONVERT_MONEY(item.min_salary)} -{" "}
+              {CONVERT_MONEY(item.max_salary)}
+            </TableCell>
             <TableCell className="py-4">
               {formattedDate(item.created_at)}
             </TableCell>

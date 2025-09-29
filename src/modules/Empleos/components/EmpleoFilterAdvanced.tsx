@@ -100,7 +100,7 @@ export const EmpleoFilterAdvanced = () => {
           <label className="text-sm font-medium text-gray-700">Búsqueda</label>
           <Input
             placeholder="Buscar en vacantes..."
-            className="min-h-12 bg-white text-sm shadow-none"
+            className="min-h-12 bg-white text-sm shadow-none focus-visible:ring-0 focus-visible:outline-none"
             value={localFilters.search || ""}
             onChange={(e) =>
               setLocalFilters({ ...localFilters, search: e.target.value })
@@ -231,7 +231,7 @@ export const EmpleoFilterAdvanced = () => {
             <Input
               type="number"
               placeholder="Salario mínimo"
-              className="min-h-12 bg-white text-sm shadow-none"
+              className="min-h-12 bg-white text-sm shadow-none focus-visible:ring-0 focus-visible:outline-none"
               value={localFilters.salaryMin || ""}
               onChange={(e) =>
                 setLocalFilters({
@@ -243,7 +243,7 @@ export const EmpleoFilterAdvanced = () => {
             <Input
               type="number"
               placeholder="Salario máximo"
-              className="min-h-12 bg-white text-sm shadow-none"
+              className="min-h-12 bg-white text-sm shadow-none focus-visible:ring-0 focus-visible:outline-none"
               value={localFilters.salaryMax || ""}
               onChange={(e) =>
                 setLocalFilters({
@@ -257,11 +257,20 @@ export const EmpleoFilterAdvanced = () => {
       </div>
 
       {/* Botones de Acción */}
-      <div className="mt-6 flex flex-col gap-3 border-t border-gray-200 pt-6 sm:flex-row">
+      <div className="mt-6 flex flex-col gap-3 border-t border-gray-200 pt-6 sm:flex-row md:justify-between">
+        <Button
+          variant="ghost"
+          onClick={handleClearFilters}
+          className="flex-1 cursor-pointer border-gray-300 text-sm font-bold sm:flex-none"
+        >
+          Limpiar Filtros
+        </Button>
+
         <Button
           onClick={handleApplyFilters}
           disabled={loading}
-          className="bg-primaryColor hover:bg-primaryColor/90 flex-1 cursor-pointer text-sm sm:flex-none"
+          size="lg"
+          className="bg-primaryColor/90 hover:bg-primaryColor flex-1 cursor-pointer py-5 text-sm font-bold sm:flex-none"
         >
           {loading ? (
             <div className="flex items-center gap-2">
@@ -271,13 +280,6 @@ export const EmpleoFilterAdvanced = () => {
           ) : (
             "Aplicar Filtros"
           )}
-        </Button>
-        <Button
-          variant="outline"
-          onClick={handleClearFilters}
-          className="flex-1 cursor-pointer border-gray-300 text-sm sm:flex-none"
-        >
-          Limpiar Filtros
         </Button>
       </div>
     </div>

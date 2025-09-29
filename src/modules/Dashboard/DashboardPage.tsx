@@ -2,8 +2,30 @@ import { Button } from "@modules/ui/button";
 import { Card, CardContent, CardHeader } from "@modules/ui/card";
 import { DashboardTable } from "./components/DashboardTable";
 import { Link } from "next-view-transitions";
+import Pagination from "@modules/shared/components/pagination/Pagination";
+import { DashboardServices } from "./services/dashboard.services";
 
-export const DashboardPage = () => {
+export const DashboardPage = async () => {
+  const {
+    records,
+    items_per_page,
+    previous_page,
+    current_page,
+    next_page,
+    total_pages,
+  } = await DashboardServices.getEmployeesPagination();
+
+  console.log(records);
+
+  const pagination = {
+    records: records,
+    items_per_page: items_per_page,
+    previous_page: previous_page,
+    current_page: current_page,
+    next_page: next_page,
+    total_pages: total_pages,
+  };
+
   return (
     <section className="bg-white px-4 py-20">
       <div className="container mx-auto overflow-hidden">
@@ -22,6 +44,7 @@ export const DashboardPage = () => {
           </CardHeader>
           <CardContent>
             <DashboardTable />
+            <Pagination pagination={pagination} />
           </CardContent>
         </Card>
       </div>

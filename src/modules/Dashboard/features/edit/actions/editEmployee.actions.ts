@@ -1,15 +1,16 @@
 "use server";
 
 import { createClient } from "@/modules/shared/utils/supabase/server";
-import { AddEmployeeSchemaType } from "@modules/Dashboard/features/add/schemas/addEmployee.schema";
+import { EditEmployeeSchemaType } from "@modules/Dashboard/features/edit/schemas/editEmployee.schema";
 import { EmployeeType } from "@/modules/shared/types/employee.type";
+import { revalidatePath } from "next/cache";
 
 export const editEmployeeAction = async ({
   data,
   oldData,
   employeeId,
 }: {
-  data: AddEmployeeSchemaType;
+  data: EditEmployeeSchemaType;
   oldData: EmployeeType | null;
   employeeId: number | undefined;
 }) => {
@@ -45,10 +46,24 @@ export const editEmployeeAction = async ({
     };
   }
 
-  if (data.salary !== String(oldData?.salary)) {
+  if (data.min_salary !== String(oldData?.min_salary)) {
     body = {
       ...body,
-      salary: data.salary,
+      min_salary: data.min_salary,
+    };
+  }
+
+  if (data.max_salary !== String(oldData?.max_salary)) {
+    body = {
+      ...body,
+      max_salary: data.max_salary,
+    };
+  }
+
+  if (data.payment_frequency !== oldData?.payment_frequency) {
+    body = {
+      ...body,
+      payment_frequency: data.payment_frequency,
     };
   }
 
@@ -72,7 +87,7 @@ export const editEmployeeAction = async ({
   ) {
     body = {
       ...body,
-      academicRequirements: data.academicRequirements.map((item) => item.value),
+      academicRequirements: JSON.stringify(data.academicRequirements),
     };
   }
 
@@ -82,7 +97,7 @@ export const editEmployeeAction = async ({
   ) {
     body = {
       ...body,
-      licenseRequirements: data.licenseRequirements.map((item) => item.value),
+      licenseRequirements: JSON.stringify(data.licenseRequirements),
     };
   }
 
@@ -92,9 +107,7 @@ export const editEmployeeAction = async ({
   ) {
     body = {
       ...body,
-      certificateRequirements: data.certificateRequirements.map(
-        (item) => item.value,
-      ),
+      certificateRequirements: JSON.stringify(data.certificateRequirements),
     };
   }
 
@@ -115,14 +128,14 @@ export const editEmployeeAction = async ({
   if (data.skills?.map((item) => item.value) !== oldData?.skills) {
     body = {
       ...body,
-      skills: data.skills.map((item) => item.value),
+      skills: JSON.stringify(data.skills),
     };
   }
 
   if (data.benefits?.map((item) => item.value) !== oldData?.benefits) {
     body = {
       ...body,
-      benefits: data.benefits.map((item) => item.value),
+      benefits: JSON.stringify(data.benefits),
     };
   }
 
@@ -151,5 +164,6 @@ export const editEmployeeAction = async ({
     return { ok: false, status: 404, message: "No encontrado o sin permiso." };
   }
 
+  revalidatePath("/dashboard");
   return { ok: true, status: 200, message: "Empleo editado exitosamente." };
 };

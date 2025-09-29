@@ -102,7 +102,8 @@ const RightSide = ({ employee }: { employee: EmployeeType }) => {
 
       <div className="font-lato flex items-center gap-1 text-2xl">
         <span className="font-bold">
-          {CONVERT_MONEY(employee?.salary || 0)}
+          {CONVERT_MONEY(employee?.min_salary || 0)} -{" "}
+          {CONVERT_MONEY(employee?.max_salary || 0)}
         </span>
 
         <span className="text-base font-normal text-zinc-500">/mensual</span>

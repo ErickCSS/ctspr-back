@@ -2,6 +2,7 @@
 
 import { createClient } from "@/modules/shared/utils/supabase/server";
 import { AddEmployeeSchemaType } from "@modules/Dashboard/features/add/schemas/addEmployee.schema";
+import { revalidatePath } from "next/cache";
 
 export const addEmployeeAction = async ({
   data,
@@ -36,5 +37,6 @@ export const addEmployeeAction = async ({
     throw error;
   }
 
+  revalidatePath("/dashboard");
   return true;
 };

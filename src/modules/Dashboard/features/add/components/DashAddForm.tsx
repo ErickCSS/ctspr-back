@@ -10,6 +10,7 @@ import {
   SELECT_INDUSTRIES,
   SELECT_LOCATION,
   SELECT_EMPLOYMENT,
+  SELECT_FREQUENCY_PAYMENT,
 } from "@modules/shared/lib/SelectInifo";
 
 export const DashAddForm = () => {
@@ -65,35 +66,7 @@ export const DashAddForm = () => {
                 errors={addEmployeeForm.formState.errors}
               />
             </div>
-            <div className="flex w-1/2 flex-col gap-y-2">
-              <Label htmlFor="vacancy" className="text-base">
-                Ubicación
-              </Label>
-              <RenderFormField
-                control={addEmployeeForm.control}
-                name="location"
-                type="text"
-                renderSelect
-                options={SELECT_LOCATION}
-                placeholder="Ubicación de la Vacante"
-                errors={addEmployeeForm.formState.errors}
-              />
-            </div>
-          </div>
 
-          <div className="flex items-center gap-2">
-            <div className="flex w-1/2 flex-col gap-y-2">
-              <Label htmlFor="code" className="text-base">
-                Salario
-              </Label>
-              <RenderFormField
-                control={addEmployeeForm.control}
-                name="salary"
-                type="number"
-                placeholder="Salario de la Vacante"
-                errors={addEmployeeForm.formState.errors}
-              />
-            </div>
             <div className="flex w-1/2 flex-col gap-y-2">
               <Label htmlFor="vacancy" className="text-base">
                 Horas y días de trabajo
@@ -103,6 +76,49 @@ export const DashAddForm = () => {
                 name="hoursJob"
                 type="text"
                 placeholder="Horas y días de trabajo"
+                errors={addEmployeeForm.formState.errors}
+              />
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <div className="flex w-1/2 items-center gap-2">
+              <div className="flex w-1/2 flex-col gap-y-2">
+                <Label htmlFor="code" className="text-base">
+                  Salario Minimo
+                </Label>
+                <RenderFormField
+                  control={addEmployeeForm.control}
+                  name="min_salary"
+                  type="number"
+                  placeholder="Salario Minimo"
+                  errors={addEmployeeForm.formState.errors}
+                />
+              </div>
+              <div className="flex w-1/2 flex-col gap-y-2">
+                <Label htmlFor="code" className="text-base">
+                  Salario Maximo
+                </Label>
+                <RenderFormField
+                  control={addEmployeeForm.control}
+                  name="max_salary"
+                  type="number"
+                  placeholder="Salario Maximo"
+                  errors={addEmployeeForm.formState.errors}
+                />
+              </div>
+            </div>
+
+            <div className="flex w-1/2 flex-col gap-y-2">
+              <Label htmlFor="code" className="text-base">
+                Frecuencia del Pago
+              </Label>
+              <RenderFormField
+                control={addEmployeeForm.control}
+                name="payment_frequency"
+                renderSelect
+                options={SELECT_FREQUENCY_PAYMENT}
+                placeholder="Frecuencia del Pago"
                 errors={addEmployeeForm.formState.errors}
               />
             </div>
@@ -205,6 +221,23 @@ export const DashAddForm = () => {
             </div>
             <div className="flex w-1/2 flex-col gap-y-2">
               <Label htmlFor="vacancy" className="text-base">
+                Ubicación
+              </Label>
+              <RenderFormField
+                control={addEmployeeForm.control}
+                name="location"
+                type="text"
+                renderSelect
+                options={SELECT_LOCATION}
+                placeholder="Ubicación de la Vacante"
+                errors={addEmployeeForm.formState.errors}
+              />
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <div className="flex w-1/2 flex-col gap-y-2">
+              <Label htmlFor="vacancy" className="text-base">
                 Oficina Regional
               </Label>
               <RenderFormField
@@ -216,10 +249,8 @@ export const DashAddForm = () => {
                 errors={addEmployeeForm.formState.errors}
               />
             </div>
-          </div>
 
-          <div className="flex flex-col gap-2">
-            <div className="flex w-full flex-col gap-y-2">
+            <div className="flex w-1/2 flex-col gap-y-2">
               <Label htmlFor="code" className="text-base">
                 Link para aplicar
               </Label>
@@ -231,6 +262,9 @@ export const DashAddForm = () => {
                 errors={addEmployeeForm.formState.errors}
               />
             </div>
+          </div>
+
+          <div className="flex flex-col gap-2">
             <div className="flex w-full flex-col gap-y-2">
               <Label htmlFor="vacancy" className="text-base">
                 Descripción de la vacante

@@ -8,18 +8,20 @@ import { Button } from "@/modules/ui/button";
 import { IconLoader2 } from "@tabler/icons-react";
 import { EmployeeType } from "@/modules/shared/types/employee.type";
 
+import {
+  SELECT_INDUSTRIES,
+  SELECT_LOCATION,
+  SELECT_EMPLOYMENT,
+  SELECT_FREQUENCY_PAYMENT,
+} from "@modules/shared/lib/SelectInifo";
+
 export const DashEditForm = ({
   employee,
 }: {
   employee: EmployeeType | null;
 }) => {
-  const {
-    editEmployeeForm,
-    onSubmit,
-    TYPE_OF_EMPLOYMENT,
-    REGIONAL_OFFICE,
-    isSubmitting,
-  } = useEditForm({ employee });
+  const { editEmployeeForm, onSubmit, REGIONAL_OFFICE, isSubmitting } =
+    useEditForm({ employee });
 
   return (
     <div className="mx-auto mt-5 w-full">
@@ -64,37 +66,13 @@ export const DashEditForm = ({
                 control={editEmployeeForm.control}
                 name="industry"
                 type="text"
+                renderSelect
+                options={SELECT_INDUSTRIES}
                 placeholder="Industria de la Vacante"
                 errors={editEmployeeForm.formState.errors}
               />
             </div>
-            <div className="flex w-1/2 flex-col gap-y-2">
-              <Label htmlFor="vacancy" className="text-base">
-                Ubicación
-              </Label>
-              <RenderFormField
-                control={editEmployeeForm.control}
-                name="location"
-                type="text"
-                placeholder="Ubicación de la Vacante"
-                errors={editEmployeeForm.formState.errors}
-              />
-            </div>
-          </div>
 
-          <div className="flex items-center gap-2">
-            <div className="flex w-1/2 flex-col gap-y-2">
-              <Label htmlFor="code" className="text-base">
-                Salario
-              </Label>
-              <RenderFormField
-                control={editEmployeeForm.control}
-                name="salary"
-                type="number"
-                placeholder="Salario de la Vacante"
-                errors={editEmployeeForm.formState.errors}
-              />
-            </div>
             <div className="flex w-1/2 flex-col gap-y-2">
               <Label htmlFor="vacancy" className="text-base">
                 Horas y días de trabajo
@@ -104,6 +82,49 @@ export const DashEditForm = ({
                 name="hoursJob"
                 type="text"
                 placeholder="Horas y días de trabajo"
+                errors={editEmployeeForm.formState.errors}
+              />
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <div className="flex w-1/2 items-center gap-2">
+              <div className="flex w-1/2 flex-col gap-y-2">
+                <Label htmlFor="code" className="text-base">
+                  Salario Mínimo
+                </Label>
+                <RenderFormField
+                  control={editEmployeeForm.control}
+                  name="min_salary"
+                  type="number"
+                  placeholder="Salario Mínimo"
+                  errors={editEmployeeForm.formState.errors}
+                />
+              </div>
+              <div className="flex w-1/2 flex-col gap-y-2">
+                <Label htmlFor="code" className="text-base">
+                  Salario Máximo
+                </Label>
+                <RenderFormField
+                  control={editEmployeeForm.control}
+                  name="max_salary"
+                  type="number"
+                  placeholder="Salario Máximo"
+                  errors={editEmployeeForm.formState.errors}
+                />
+              </div>
+            </div>
+
+            <div className="flex w-1/2 flex-col gap-y-2">
+              <Label htmlFor="code" className="text-base">
+                Frecuencia del Pago
+              </Label>
+              <RenderFormField
+                control={editEmployeeForm.control}
+                name="payment_frequency"
+                renderSelect
+                options={SELECT_FREQUENCY_PAYMENT}
+                placeholder="Frecuencia del Pago"
                 errors={editEmployeeForm.formState.errors}
               />
             </div>
@@ -172,7 +193,7 @@ export const DashEditForm = ({
                 control={editEmployeeForm.control}
                 name="typeOfEmployment"
                 renderSelect
-                options={TYPE_OF_EMPLOYMENT}
+                options={SELECT_EMPLOYMENT}
                 placeholder="Tipo de empleo"
                 errors={editEmployeeForm.formState.errors}
               />
@@ -206,6 +227,23 @@ export const DashEditForm = ({
             </div>
             <div className="flex w-1/2 flex-col gap-y-2">
               <Label htmlFor="vacancy" className="text-base">
+                Ubicación
+              </Label>
+              <RenderFormField
+                control={editEmployeeForm.control}
+                name="location"
+                type="text"
+                renderSelect
+                options={SELECT_LOCATION}
+                placeholder="Ubicación de la Vacante"
+                errors={editEmployeeForm.formState.errors}
+              />
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <div className="flex w-1/2 flex-col gap-y-2">
+              <Label htmlFor="vacancy" className="text-base">
                 Oficina Regional
               </Label>
               <RenderFormField
@@ -217,10 +255,8 @@ export const DashEditForm = ({
                 errors={editEmployeeForm.formState.errors}
               />
             </div>
-          </div>
 
-          <div className="flex flex-col gap-2">
-            <div className="flex w-full flex-col gap-y-2">
+            <div className="flex w-1/2 flex-col gap-y-2">
               <Label htmlFor="code" className="text-base">
                 Link para aplicar
               </Label>
@@ -232,6 +268,9 @@ export const DashEditForm = ({
                 errors={editEmployeeForm.formState.errors}
               />
             </div>
+          </div>
+
+          <div className="flex flex-col gap-2">
             <div className="flex w-full flex-col gap-y-2">
               <Label htmlFor="vacancy" className="text-base">
                 Descripción de la vacante
