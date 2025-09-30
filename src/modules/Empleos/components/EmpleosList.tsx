@@ -7,10 +7,12 @@ import { useEmployeeFiltersStore } from "@modules/Empleos/store/EmployeeFilterSt
 
 import { useInitStore } from "@modules/Empleos/hooks/useInitStore";
 import { CardEmployeeSkeleton } from "@modules/shared/skeletons/CardEmployeeSkeleton";
+import Pagination from "@modules/shared/components/pagination/Pagination";
 
 export const EmpleosList = () => {
   useInitStore();
-  const { employees, loading } = useEmployeeFiltersStore();
+  const { employees, loading, pagination, page, setPage } =
+    useEmployeeFiltersStore();
 
   if (loading || !employees) {
     return (
@@ -20,10 +22,11 @@ export const EmpleosList = () => {
             <EmpleoDrawerDialog />
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {Array.from({ length: 6 }).map((_, index) => (
+            {Array.from({ length: 20 }).map((_, index) => (
               <CardEmployeeSkeleton key={index} />
             ))}
           </div>
+          <Pagination pagination={pagination} page={page} setPage={setPage} />
         </div>
       </section>
     );
@@ -43,6 +46,7 @@ export const EmpleosList = () => {
             </Link>
           ))}
         </div>
+        <Pagination pagination={pagination} page={page} setPage={setPage} />
       </div>
     </section>
   );

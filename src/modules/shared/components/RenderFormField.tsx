@@ -25,6 +25,7 @@ interface FlexibleFormFieldProps<T extends FieldValues> {
   icons?: React.ReactNode;
   options?: { value: string; label: string }[];
   errors: FieldErrors<T>;
+  disabled?: boolean;
   errorClassName?: string;
 }
 
@@ -42,6 +43,7 @@ export const RenderFormField = <T extends FieldValues>({
   icons,
   options,
   errors,
+  disabled,
   errorClassName = "text-sm text-red-500",
 }: FlexibleFormFieldProps<T>) => {
   const renderSelectField = () => {
@@ -96,6 +98,7 @@ export const RenderFormField = <T extends FieldValues>({
               <Input
                 {...field}
                 placeholder={placeholder}
+                disabled={disabled}
                 type={type}
                 className={`focus:border-brandPrimary h-12 w-full border-[#F7F7F7] bg-[#F7F7F7] text-sm placeholder:text-sm focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none ${className} `}
                 style={style}

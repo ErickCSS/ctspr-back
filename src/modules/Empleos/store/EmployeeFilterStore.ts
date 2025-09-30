@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { EmployeeType } from "@/modules/shared/types/employee.type";
 import { EmpleosServices } from "@modules/Empleos/services/empleos.services";
+import { Pagination } from "@modules/shared/types/pagination.type";
 
 export interface FilterParams {
   regionalOffice?: string;
@@ -17,6 +18,8 @@ interface EmployeeFiltersState {
   loading: boolean;
   error: string | null;
   activeFilters: FilterParams;
+  page: number;
+  pagination: Pagination;
 
   // Actions
   setLoading: (loading: boolean) => void;
@@ -27,6 +30,7 @@ interface EmployeeFiltersState {
   clearFilters: () => Promise<void>;
   updateFilter: (key: keyof FilterParams, value: any) => Promise<void>;
   removeFilter: (key: keyof FilterParams) => Promise<void>;
+  setPage: (page: number) => Promise<void>;
 }
 
 export const useEmployeeFiltersStore = create<EmployeeFiltersState>(
@@ -35,22 +39,39 @@ export const useEmployeeFiltersStore = create<EmployeeFiltersState>(
     loading: false,
     error: null,
     activeFilters: {},
+    page: 1,
+    pagination: {
+      records: 0,
+      items_per_page: 20,
+      previous_page: null,
+      current_page: 1,
+      next_page: null,
+      total_pages: 1,
+    },
 
     setLoading: (loading) => set({ loading }),
     setError: (error) => set({ error }),
     setEmployees: (employees) => set({ employees }),
     setActiveFilters: (activeFilters) => set({ activeFilters }),
-
+    setPage: async (page) => {
+      set({ page });
+      const { activeFilters, applyFilters } = get();
+      await applyFilters(activeFilters);
+    },
     applyFilters: async (filters) => {
       set({ loading: true, error: null });
 
       try {
         const filteredEmployees =
-          await EmpleosServices.getEmployeesWithFilters(filters);
+          await EmpleosServices.getEmployeesWithFiltersPagination({
+            ...filters,
+            page: get().page,
+          });
         set({
-          employees: filteredEmployees,
+          employees: filteredEmployees.data,
           activeFilters: filters,
           loading: false,
+          pagination: filteredEmployees.pagination,
         });
       } catch (err) {
         const errorMessage =

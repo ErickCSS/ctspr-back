@@ -1,16 +1,23 @@
 "use client";
 
-import type { Pagination } from "@modules/shared/types/pagination.type";
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import { useTransitionRouter } from "next-view-transitions";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useMemo } from "react";
-import { useStore } from "zustand";
-import { usePaginationStore } from "@modules/shared/store/usePaginationStore";
 
-export const ListPagination = ({ pagination }: { pagination: Pagination }) => {
-  const setPage = useStore(usePaginationStore, (state) => state.setPage);
-  const pageStore = useStore(usePaginationStore, (state) => state.page);
+import { Pagination } from "@modules/shared/types/pagination.type";
+
+interface PaginationProps {
+  pagination: Pagination;
+  page: number;
+  setPage: (page: number) => Promise<void>;
+}
+
+export const ListPagination = ({
+  pagination,
+  page,
+  setPage,
+}: PaginationProps) => {
   const router = useTransitionRouter();
 
   const pathname = usePathname();
@@ -27,14 +34,14 @@ export const ListPagination = ({ pagination }: { pagination: Pagination }) => {
 
   const currentPage = useMemo(() => {
     if (pageFromUrl) return parseInt(pageFromUrl);
-    return isDetailPage ? pageStore : pagination?.current_page || pageStore;
-  }, [pageFromUrl, isDetailPage, pagination?.current_page, pageStore]);
+    return isDetailPage ? page : pagination?.current_page || page;
+  }, [pageFromUrl, isDetailPage, pagination?.current_page, page]);
 
   useEffect(() => {
-    if (currentPage !== pageStore) {
+    if (currentPage !== page) {
       setPage(currentPage);
     }
-  }, [currentPage, pageStore, setPage]);
+  }, [currentPage, page, setPage]);
 
   const handlePageChange = (pageNumber: number) => {
     setPage(pageNumber);

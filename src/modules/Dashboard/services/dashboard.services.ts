@@ -1,5 +1,6 @@
 import { createClient } from "@modules/shared/utils/supabase/client";
-import { EmployeeType } from "@/modules/shared/types/employee.type";
+import { EmployeeType } from "@modules/shared/types/employee.type";
+import { Pagination } from "@modules/shared/types/pagination.type";
 
 export interface FilterParams {
   regionalOffice?: string;
@@ -9,6 +10,12 @@ export interface FilterParams {
   salaryMin?: number;
   salaryMax?: number;
   search?: string;
+  page?: number;
+}
+
+export interface PaginatedResponse<T> {
+  data: T[];
+  pagination: Pagination;
 }
 export class DashboardServices {
   static async getEmployees() {
@@ -21,27 +28,6 @@ export class DashboardServices {
 
     const employees = data as EmployeeType[] | null;
     return employees;
-  }
-
-  static async getEmployeesPagination() {
-    const supabase = await createClient();
-    const totalRecords = await supabase
-      .from("employees")
-      .select("*", { count: "exact", head: true })
-      .eq("is_deleted", false);
-
-    const ITEMS_PER_PAGE = 20;
-
-    const totalEmployees = totalRecords.count as number;
-
-    return {
-      records: totalEmployees,
-      items_per_page: ITEMS_PER_PAGE,
-      previous_page: null,
-      current_page: 1,
-      next_page: null,
-      total_pages: Math.ceil(totalEmployees / ITEMS_PER_PAGE),
-    };
   }
 
   static async getEmployeesWithFilters(filters: FilterParams) {
@@ -89,6 +75,75 @@ export class DashboardServices {
 
     const employees = data as EmployeeType[] | null;
     return employees;
+  }
+
+  static async getEmployeesWithFiltersPagination(
+    filters: FilterParams,
+  ): Promise<PaginatedResponse<EmployeeType>> {
+    const supabase = await createClient();
+    const ITEMS_PER_PAGE = 10;
+    const currentPage = filters.page || 1;
+    const from = (currentPage - 1) * ITEMS_PER_PAGE;
+    const to = from + ITEMS_PER_PAGE - 1;
+
+    let query = supabase
+      .from("employees")
+      .select("*", { count: "exact" })
+      .eq("is_deleted", false);
+
+    // Aplicar filtros dinámicamente
+    if (filters.regionalOffice) {
+      query = query.eq("regionalOffice", filters.regionalOffice.toLowerCase());
+    }
+
+    if (filters.industry) {
+      query = query.eq("industry", filters.industry);
+    }
+
+    if (filters.location) {
+      query = query.ilike("location", `%${filters.location}%`);
+    }
+
+    if (filters.typeOfEmployment) {
+      query = query.eq("typeOfEmployment", filters.typeOfEmployment);
+    }
+
+    if (filters.salaryMin) {
+      query = query.gte("salary", filters.salaryMin);
+    }
+
+    if (filters.salaryMax) {
+      query = query.lte("salary", filters.salaryMax);
+    }
+
+    if (filters.search) {
+      query = query.or(
+        `vacancy.ilike.%${filters.search}%,description.ilike.%${filters.search}%,industry.ilike.%${filters.search}%`,
+      );
+    }
+
+    const { data, error, count } = await query
+      .order("created_at", { ascending: false })
+      .range(from, to);
+
+    if (error) {
+      throw new Error(`Error al filtrar empleados: ${error.message}`);
+    }
+
+    const totalRecords = count || 0;
+    const totalPages = Math.ceil(totalRecords / ITEMS_PER_PAGE);
+
+    return {
+      data: data as EmployeeType[],
+      pagination: {
+        records: totalRecords,
+        items_per_page: ITEMS_PER_PAGE,
+        previous_page: currentPage > 1 ? currentPage - 1 : null,
+        current_page: currentPage,
+        next_page: currentPage < totalPages ? currentPage + 1 : null,
+        total_pages: totalPages,
+      },
+    };
   }
 
   static async getEmployeeById(id: number) {

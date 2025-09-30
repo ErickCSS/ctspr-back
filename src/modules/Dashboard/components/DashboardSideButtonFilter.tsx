@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@modules/ui/button";
-import { useEmployeeFiltersStore } from "../store/dahsEmployeeFiltersStore";
+import { useDashboardEmployeeFiltersStore } from "../store/dahsEmployeeFiltersStore";
 import { useEffect } from "react";
 
 export const DashboardSideButtonFilter = ({
@@ -13,7 +13,7 @@ export const DashboardSideButtonFilter = ({
   onFilterApplied?: () => void;
 }) => {
   const { updateFilter, removeFilter, activeFilters } =
-    useEmployeeFiltersStore();
+    useDashboardEmployeeFiltersStore();
 
   const handleFilter = async () => {
     const isCurrentlyActive =

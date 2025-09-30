@@ -22,9 +22,26 @@ export const useEditForm = ({
   const { formData, updateField } = useAddEmployeeStore();
   const router = useTransitionRouter();
 
+  // const parseData = (data: any) => {
+  //   const parsedData = JSON.parse(data);
+  //   return parsedData;
+  // };
+
   const parseData = (data: any) => {
-    const parsedData = JSON.parse(data);
-    return parsedData;
+    if (typeof data === "object" && data !== null) {
+      return data;
+    }
+
+    if (typeof data === "string") {
+      try {
+        return JSON.parse(data);
+      } catch (error) {
+        console.warn("Failed to parse JSON data:", data, error);
+        return [];
+      }
+    }
+
+    return [];
   };
 
   const defaultValues = useMemo(() => {

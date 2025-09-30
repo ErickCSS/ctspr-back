@@ -14,7 +14,7 @@ export const SELECT_INDUSTRIES = [
   { value: "Logistica", label: "Logística y Transporte" },
   { value: "Construccion", label: "Construcción" },
   { value: "ArteDiseno", label: "Arte y Diseño" },
-  { value: "Comunicacion", label: "Comunicación y Medios" },
+  { value: "Comunicacion", label: "Comunicación" },
   { value: "Ciencias", label: "Ciencias e Investigación" },
   { value: "Turismo", label: "Turismo y Hotelería" },
   { value: "Gastronomia", label: "Gastronomía" },

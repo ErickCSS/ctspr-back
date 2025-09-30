@@ -17,6 +17,10 @@ export const DashAddForm = () => {
   const { addEmployeeForm, onSubmit, REGIONAL_OFFICE, isSubmitting } =
     useAddForm();
 
+  const code = addEmployeeForm.watch("code");
+  const MAX_CODE = 6;
+  const isCodeValid = code.length === MAX_CODE;
+
   return (
     <div className="mx-auto mt-5 w-full">
       <Form {...addEmployeeForm}>
@@ -33,6 +37,7 @@ export const DashAddForm = () => {
                 control={addEmployeeForm.control}
                 name="code"
                 type="text"
+                disabled={isCodeValid}
                 placeholder="Código del empleo"
                 errors={addEmployeeForm.formState.errors}
               />

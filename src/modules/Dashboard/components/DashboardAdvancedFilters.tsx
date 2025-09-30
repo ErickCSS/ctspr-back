@@ -14,12 +14,12 @@ import {
   SidebarGroupContent,
   SidebarGroupLabel,
 } from "@modules/ui/sidebar";
-import { useEmployeeFiltersStore } from "../store/dahsEmployeeFiltersStore";
+import { useDashboardEmployeeFiltersStore } from "../store/dahsEmployeeFiltersStore";
 import { DashboardServices } from "../services/dashboard.services";
 
 export const DashboardAdvancedFilters = () => {
   const { activeFilters, applyFilters, clearFilters } =
-    useEmployeeFiltersStore();
+    useDashboardEmployeeFiltersStore();
   const [filterOptions, setFilterOptions] = useState<any>({});
   const [localFilters, setLocalFilters] = useState(activeFilters);
 

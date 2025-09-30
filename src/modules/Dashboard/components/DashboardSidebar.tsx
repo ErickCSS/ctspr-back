@@ -11,8 +11,7 @@ import Image from "next/image";
 import { WpQuery } from "@/modules/shared/services/wpQuery";
 import { queryMedia } from "@/modules/shared/graphql/general.query";
 import { MediaProps } from "@/modules/shared/types/generalQuery.types";
-import { Button } from "@modules/ui/button";
-import { Input } from "@modules/ui/input";
+
 import { DashboardSideButtonFilter } from "./DashboardSideButtonFilter";
 import { DashboardAdvancedFilters } from "./DashboardAdvancedFilters";
 

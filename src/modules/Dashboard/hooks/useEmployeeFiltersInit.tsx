@@ -1,9 +1,9 @@
 "use client";
 import { useEffect } from "react";
-import { useEmployeeFiltersStore } from "../store/dahsEmployeeFiltersStore";
+import { useDashboardEmployeeFiltersStore } from "../store/dahsEmployeeFiltersStore";
 
 export const useEmployeeFiltersInit = () => {
-  const { applyFilters, employees } = useEmployeeFiltersStore();
+  const { applyFilters, employees } = useDashboardEmployeeFiltersStore();
 
   useEffect(() => {
     // Solo cargar empleados iniciales si no hay datos

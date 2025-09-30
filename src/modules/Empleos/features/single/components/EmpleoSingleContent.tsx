@@ -104,9 +104,21 @@ const EmployeeOverview = ({ employee }: { employee: EmployeeType }) => {
 };
 
 const EmployeeContent = ({ employee }: { employee: EmployeeType }) => {
-  const parsedDate = (data: any) => {
-    const parsed = JSON.parse(data);
-    return parsed;
+  const parseData = (data: any) => {
+    if (typeof data === "object" && data !== null) {
+      return data;
+    }
+
+    if (typeof data === "string") {
+      try {
+        return JSON.parse(data);
+      } catch (error) {
+        console.warn("Failed to parse JSON data:", data, error);
+        return [];
+      }
+    }
+
+    return [];
   };
 
   return (
@@ -124,7 +136,7 @@ const EmployeeContent = ({ employee }: { employee: EmployeeType }) => {
         </h3>
         <div className="text-base text-balance text-zinc-600">
           <ul className="list-disc space-y-3 pl-6">
-            {parsedDate(employee.academicRequirements).map(
+            {parseData(employee.academicRequirements).map(
               (requirement: { value: string; label: string }) => (
                 <li key={requirement.value}>{requirement.label}</li>
               ),
@@ -139,7 +151,7 @@ const EmployeeContent = ({ employee }: { employee: EmployeeType }) => {
         </h3>
         <div className="text-base text-balance text-zinc-600">
           <ul className="list-disc space-y-3 pl-6">
-            {parsedDate(employee.skills).map(
+            {parseData(employee.skills).map(
               (skill: { value: string; label: string }) => (
                 <li key={skill.value}>{skill.label}</li>
               ),
@@ -154,7 +166,7 @@ const EmployeeContent = ({ employee }: { employee: EmployeeType }) => {
         </h3>
         <div className="text-base text-balance text-zinc-600">
           <ul className="list-disc space-y-3 pl-6">
-            {parsedDate(employee.certificateRequirements).map(
+            {parseData(employee.certificateRequirements).map(
               (certificate: { value: string; label: string }) => (
                 <li key={certificate.value}>{certificate.label}</li>
               ),
@@ -169,7 +181,7 @@ const EmployeeContent = ({ employee }: { employee: EmployeeType }) => {
         </h3>
         <div className="text-base text-balance text-zinc-600">
           <ul className="list-disc space-y-3 pl-6">
-            {parsedDate(employee.licenseRequirements).map(
+            {parseData(employee.licenseRequirements).map(
               (license: { value: string; label: string }) => (
                 <li key={license.value}>{license.label}</li>
               ),
@@ -184,7 +196,7 @@ const EmployeeContent = ({ employee }: { employee: EmployeeType }) => {
         </h3>
         <div className="text-base text-balance text-zinc-600">
           <ul className="list-disc space-y-3 pl-6">
-            {parsedDate(employee.benefits).map(
+            {parseData(employee.benefits).map(
               (benefit: { value: string; label: string }) => (
                 <li key={benefit.value}>{benefit.label}</li>
               ),

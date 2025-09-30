@@ -9,11 +9,12 @@ import {
   TableRow,
 } from "@modules/ui/table";
 
-import { CONVERT_MONEY } from "@/modules/shared/utils/convertMoney";
+import { CONVERT_MONEY } from "@modules/shared/utils/convertMoney";
 import { format } from "date-fns";
 import { DashboardActions } from "./DashboardActions";
-import { useEmployeeFiltersStore } from "../store/dahsEmployeeFiltersStore";
-import { useEmployeeFiltersInit } from "../hooks/useEmployeeFiltersInit";
+import { useDashboardEmployeeFiltersStore } from "@modules/Dashboard/store/dahsEmployeeFiltersStore";
+import { useEmployeeFiltersInit } from "@modules/Dashboard/hooks/useEmployeeFiltersInit";
+import { EmployeesTableSkeleton } from "@modules/shared/skeletons/TableSkeleton";
 
 export const DashboardTable = () => {
   // Inicializar el store
@@ -21,7 +22,7 @@ export const DashboardTable = () => {
 
   // Usar el store global
   const { employees, loading, error, activeFilters } =
-    useEmployeeFiltersStore();
+    useDashboardEmployeeFiltersStore();
 
   const formattedDate = (date: string) => {
     return format(new Date(date), "dd/MM/yyyy");
@@ -37,23 +38,15 @@ export const DashboardTable = () => {
     "Acciones",
   ];
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center py-8">
-        <div className="text-zinc-500">Cargando empleados...</div>
-      </div>
-    );
+  if (loading || !employees || employees?.length === 0) {
+    return <EmployeesTableSkeleton />;
   }
 
   if (error) {
-    return (
-      <div className="flex items-center justify-center py-8">
-        <div className="text-red-500">Error: {error}</div>
-      </div>
-    );
+    return <EmployeesTableSkeleton />;
   }
 
-  if (!employees || employees.length === 0) {
+  if (!employees && activeFilters) {
     return (
       <div className="flex items-center justify-center py-8">
         <div className="text-zinc-500">
@@ -75,7 +68,7 @@ export const DashboardTable = () => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {employees.map((item) => (
+        {employees?.map((item) => (
           <TableRow key={item.id} className="border-zinc-200">
             <TableCell className="py-4">{item.code}</TableCell>
             <TableCell className="py-4">{item.vacancy}</TableCell>

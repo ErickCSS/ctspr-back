@@ -37,6 +37,6 @@ export const addEmployeeAction = async ({
     throw error;
   }
 
-  revalidatePath("/dashboard");
+  revalidatePath("/dashboard", "page");
   return true;
 };
