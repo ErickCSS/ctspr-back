@@ -42,7 +42,7 @@ export const useEmployeeFiltersStore = create<EmployeeFiltersState>(
     page: 1,
     pagination: {
       records: 0,
-      items_per_page: 20,
+      items_per_page: 15,
       previous_page: null,
       current_page: 1,
       next_page: null,

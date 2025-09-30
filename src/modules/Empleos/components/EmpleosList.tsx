@@ -22,7 +22,7 @@ export const EmpleosList = () => {
             <EmpleoDrawerDialog />
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {Array.from({ length: 20 }).map((_, index) => (
+            {Array.from({ length: 15 }).map((_, index) => (
               <CardEmployeeSkeleton key={index} />
             ))}
           </div>

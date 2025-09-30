@@ -93,7 +93,7 @@ export class EmpleosServices {
     filters: FilterParams,
   ): Promise<PaginatedResponse<EmployeeType>> {
     const supabase = await createClient();
-    const ITEMS_PER_PAGE = 20;
+    const ITEMS_PER_PAGE = 15;
     const currentPage = filters.page || 1;
     const from = (currentPage - 1) * ITEMS_PER_PAGE;
     const to = from + ITEMS_PER_PAGE - 1;
