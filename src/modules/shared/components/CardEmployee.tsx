@@ -52,20 +52,21 @@ export const CardEmployee = ({ employee }: { employee?: EmployeeType }) => {
             #{formData.code || employee?.code || "000000"}
           </div>
         </div>
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-          <div className="flex items-center gap-x-2 text-sm text-zinc-500">
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
+          <div className="flex items-center gap-x-1 text-sm text-zinc-500">
             <IconMapPin stroke={1.5} size={20} />
             <span className="font-lato">
               {formData.location || employee?.location || "Ciudad, Pais"}
             </span>
           </div>
-          <div className="flex items-center gap-x-2 text-sm text-zinc-500">
+          <div className="flex items-center gap-x-1 text-sm text-zinc-500">
             <IconCalendarClock stroke={1.5} size={20} />
             <span className="font-lato">{formattedDate}</span>
           </div>
-          <div className="flex items-center gap-x-2 text-sm text-zinc-500">
+          <div className="flex items-center gap-x-1 text-sm text-zinc-500">
             <IconBuildingEstate stroke={1.5} size={20} />
             <span className="font-lato">
+              Oficina:{" "}
               {CONVERT_UPPER(formData.regionalOffice) ||
                 CONVERT_UPPER(employee?.regionalOffice ?? "") ||
                 "Oficina Regional"}

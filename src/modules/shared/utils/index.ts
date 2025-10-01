@@ -1,5 +1,7 @@
 export const CONVERT_UPPER = (str: string) => {
-  return str.charAt(0).toUpperCase() + str.slice(1);
+  const separateWords = str.includes("-") ? str.replace("-", " ") : str;
+
+  return separateWords.charAt(0).toUpperCase() + separateWords.slice(1);
 };
 
 export const createDelayedPromise = (delay: number = 2000) => {

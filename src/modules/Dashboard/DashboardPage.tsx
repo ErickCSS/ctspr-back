@@ -1,7 +1,6 @@
-import { Button } from "@modules/ui/button";
 import { Card, CardContent, CardHeader } from "@modules/ui/card";
 import { DashboardList } from "./components/DashboardList";
-import { Link } from "next-view-transitions";
+import { DashboardBarButtons } from "./components/DashboardBarButtons";
 
 export const DashboardPage = async () => {
   return (
@@ -12,13 +11,7 @@ export const DashboardPage = async () => {
             <div className="w-full">
               <h2 className="text-2xl font-bold">Lista de Empleos</h2>
             </div>
-            <Button
-              variant="outline"
-              asChild
-              className="bg-primaryColor border-primaryColor hover:text-primaryColor cursor-pointer text-white transition-colors duration-300 hover:bg-transparent"
-            >
-              <Link href="/dashboard/add">Agregar Empleo</Link>
-            </Button>
+            <DashboardBarButtons />
           </CardHeader>
           <CardContent>
             <DashboardList />

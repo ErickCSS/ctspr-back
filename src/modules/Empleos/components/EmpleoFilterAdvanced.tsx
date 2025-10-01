@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+
 import { Button } from "@modules/ui/button";
 import { Input } from "@modules/ui/input";
 import {
@@ -9,88 +9,27 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@modules/ui/select";
-import { useEmployeeFiltersStore } from "@modules/Empleos/store/EmployeeFilterStore";
-import { EmpleosServices } from "@modules/Empleos/services/empleos.services";
+
 import { IconLoader2 } from "@tabler/icons-react";
 import {
   REGIONAL_OFFICE,
   SELECT_INDUSTRIES,
 } from "@modules/shared/lib/SelectInifo";
-import { useDialogStore } from "@modules/Empleos/store/DialogStore";
+import { useFilterEmpleo } from "@modules/Empleos/hooks/useFilterEmpleo";
 
 export const EmpleoFilterAdvanced = () => {
-  const { activeFilters, applyFilters, clearFilters, loading } =
-    useEmployeeFiltersStore();
-  const { open, setOpen } = useDialogStore();
-
-  const [filterOptions, setFilterOptions] = useState<any>({});
-  const [localFilters, setLocalFilters] = useState(activeFilters);
-
-  useEffect(() => {
-    const loadFilterOptions = async () => {
-      try {
-        const options = await EmpleosServices.getFilterOptions();
-        setFilterOptions(options);
-      } catch (error) {
-        console.error("Error loading filter options:", error);
-      }
-    };
-    loadFilterOptions();
-  }, []);
-
-  useEffect(() => {
-    setLocalFilters(activeFilters);
-  }, [activeFilters]);
-
-  const handleApplyFilters = () => {
-    applyFilters(localFilters);
-    setOpen(false);
-  };
-
-  const handleClearFilters = () => {
-    setLocalFilters({});
-    clearFilters();
-  };
-
-  const handleIndustryChange = (value: string) => {
-    const newFilters = { ...localFilters };
-    if (value === "all") {
-      delete newFilters.industry;
-    } else {
-      newFilters.industry = value;
-    }
-    setLocalFilters(newFilters);
-  };
-
-  const handleLocationChange = (value: string) => {
-    const newFilters = { ...localFilters };
-    if (value === "all") {
-      delete newFilters.location;
-    } else {
-      newFilters.location = value;
-    }
-    setLocalFilters(newFilters);
-  };
-
-  const handleEmploymentTypeChange = (value: string) => {
-    const newFilters = { ...localFilters };
-    if (value === "all") {
-      delete newFilters.typeOfEmployment;
-    } else {
-      newFilters.typeOfEmployment = value;
-    }
-    setLocalFilters(newFilters);
-  };
-
-  const handleRegionalOfficeChange = (value: string) => {
-    const newFilters = { ...localFilters };
-    if (value === "all") {
-      delete newFilters.regionalOffice;
-    } else {
-      newFilters.regionalOffice = value;
-    }
-    setLocalFilters(newFilters);
-  };
+  const {
+    filterOptions,
+    localFilters,
+    handleApplyFilters,
+    handleClearFilters,
+    handleIndustryChange,
+    handleLocationChange,
+    handleEmploymentTypeChange,
+    handleRegionalOfficeChange,
+    loading,
+    setLocalFilters,
+  } = useFilterEmpleo();
 
   return (
     <div className="bg-white">

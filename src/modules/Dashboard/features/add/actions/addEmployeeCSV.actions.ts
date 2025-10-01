@@ -11,8 +11,8 @@ export const addEmployeeCSVAction = async ({ data }: { data: CsvRow[] }) => {
   const { error } = await supabase.from("employees").insert(data);
 
   if (error) {
-    console.error("Error adding employee:", error);
-    throw error;
+    console.error("Error adding employee:", error.message);
+    throw error.code;
   }
 
   revalidatePath("/dashboard", "page");
