@@ -14,6 +14,8 @@ import { IconLoader2 } from "@tabler/icons-react";
 import {
   REGIONAL_OFFICE,
   SELECT_INDUSTRIES,
+  SELECT_LOCATION,
+  SELECT_EMPLOYMENT,
 } from "@modules/shared/lib/SelectInifo";
 import { useFilterEmpleo } from "@modules/Empleos/hooks/useFilterEmpleo";
 
@@ -54,7 +56,7 @@ export const EmpleoFilterAdvanced = () => {
               Industria
             </label>
             <Select
-              value={localFilters.industry || "all"}
+              value={localFilters.industry}
               onValueChange={handleIndustryChange}
             >
               <SelectTrigger className="min-h-12 w-full bg-white text-sm shadow-none">
@@ -83,7 +85,7 @@ export const EmpleoFilterAdvanced = () => {
               Ubicación
             </label>
             <Select
-              value={localFilters.location || "all"}
+              value={localFilters.location}
               onValueChange={handleLocationChange}
             >
               <SelectTrigger className="min-h-12 w-full bg-white text-sm shadow-none">
@@ -93,13 +95,13 @@ export const EmpleoFilterAdvanced = () => {
                 <SelectItem value="all" className="text-sm">
                   Todas las ubicaciones
                 </SelectItem>
-                {filterOptions.locations?.map((location: string) => (
+                {SELECT_LOCATION?.map((location) => (
                   <SelectItem
-                    key={location}
-                    value={location}
+                    key={location.value}
+                    value={location.value}
                     className="text-sm"
                   >
-                    {location}
+                    {location.label}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -112,7 +114,7 @@ export const EmpleoFilterAdvanced = () => {
               Tipo de Empleo
             </label>
             <Select
-              value={localFilters.typeOfEmployment || "all"}
+              value={localFilters.typeOfEmployment}
               onValueChange={handleEmploymentTypeChange}
             >
               <SelectTrigger className="min-h-12 w-full bg-white text-sm shadow-none">
@@ -122,9 +124,13 @@ export const EmpleoFilterAdvanced = () => {
                 <SelectItem value="all" className="text-sm">
                   Todos los tipos
                 </SelectItem>
-                {filterOptions.employmentTypes?.map((type: string) => (
-                  <SelectItem key={type} value={type} className="text-sm">
-                    {type}
+                {SELECT_EMPLOYMENT?.map((type) => (
+                  <SelectItem
+                    key={type.value}
+                    value={type.value}
+                    className="text-sm"
+                  >
+                    {type.label}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -137,7 +143,7 @@ export const EmpleoFilterAdvanced = () => {
               Sucursal
             </label>
             <Select
-              value={localFilters.regionalOffice || "all"}
+              value={localFilters.regionalOffice}
               onValueChange={handleRegionalOfficeChange}
             >
               <SelectTrigger className="min-h-12 w-full bg-white text-sm shadow-none">

@@ -16,6 +16,11 @@ import {
 } from "@modules/ui/sidebar";
 import { useDashboardEmployeeFiltersStore } from "../store/dahsEmployeeFiltersStore";
 import { DashboardServices } from "../services/dashboard.services";
+import {
+  SELECT_EMPLOYMENT,
+  SELECT_INDUSTRIES,
+  SELECT_LOCATION,
+} from "@/modules/shared/lib/SelectInifo";
 
 export const DashboardAdvancedFilters = () => {
   const { activeFilters, applyFilters, clearFilters } =
@@ -110,9 +115,13 @@ export const DashboardAdvancedFilters = () => {
               <SelectItem value="all" className="text-xs">
                 Todas las industrias
               </SelectItem>
-              {filterOptions.industries?.map((industry: string) => (
-                <SelectItem key={industry} value={industry} className="text-xs">
-                  {industry}
+              {SELECT_INDUSTRIES?.map((industry) => (
+                <SelectItem
+                  key={industry.value}
+                  value={industry.value}
+                  className="text-xs"
+                >
+                  {industry.label}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -135,9 +144,13 @@ export const DashboardAdvancedFilters = () => {
               <SelectItem value="all" className="text-xs">
                 Todas las ubicaciones
               </SelectItem>
-              {filterOptions.locations?.map((location: string) => (
-                <SelectItem key={location} value={location} className="text-xs">
-                  {location}
+              {SELECT_LOCATION?.map((location) => (
+                <SelectItem
+                  key={location.value}
+                  value={location.value}
+                  className="text-xs"
+                >
+                  {location.label}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -162,9 +175,13 @@ export const DashboardAdvancedFilters = () => {
               <SelectItem value="all" className="text-xs">
                 Todos los tipos
               </SelectItem>
-              {filterOptions.employmentTypes?.map((type: string) => (
-                <SelectItem key={type} value={type} className="text-xs">
-                  {type}
+              {SELECT_EMPLOYMENT?.map((type) => (
+                <SelectItem
+                  key={type.value}
+                  value={type.value}
+                  className="text-xs"
+                >
+                  {type.label}
                 </SelectItem>
               ))}
             </SelectContent>
