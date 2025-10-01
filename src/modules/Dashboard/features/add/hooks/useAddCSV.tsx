@@ -10,14 +10,18 @@ import { SELECT_INDUSTRIES } from "@/modules/shared/lib/SelectInifo";
 import { SELECT_LOCATION } from "@/modules/shared/lib/SelectInifo";
 import { REGIONAL_OFFICE } from "@/modules/shared/lib/SelectInifo";
 import Papa from "papaparse";
+import { useRouter } from "next/navigation";
+import { useDashboardEmployeeFiltersStore } from "@/modules/Dashboard/store/dahsEmployeeFiltersStore";
+import { generateSearchText } from "@/modules/shared/utils/generateSearchText";
 
 export const useAddCSV = ({ user }: { user: User }) => {
   const [rows, setRows] = React.useState<CsvRow[]>([]);
   const [loading, setLoading] = React.useState(false);
   const [message, setMessage] = React.useState<string | null>(null);
   const [isDragging, setIsDragging] = React.useState(false);
+  const { setEmployees } = useDashboardEmployeeFiltersStore();
   const fileInputRef = React.useRef<HTMLInputElement>(null);
-  const router = useTransitionRouter();
+  const router = useRouter();
 
   type CsvRow = Record<string, string>;
 
@@ -105,15 +109,23 @@ export const useAddCSV = ({ user }: { user: User }) => {
     r.vacancy ??= "";
     r.hoursJob ??= "Full-time";
     r.experienceRequirements ??= "";
-    r.typeOfEmployment ??= "Permanent";
+    r.typeOfEmployment ??= "Full-time";
     r.linkToApply ??= "https://empleos.ejemplo.com";
     r.description ??= "";
     r.user_id = user.id;
     r.slug ??= `${(r.vacancy || "empleo").toLowerCase().replace(/\s+/g, "-")}-${r.code}`;
-
-    r.created_at ??= new Date().toISOString();
-
+    r.created_at = new Date().toISOString();
+    r.is_deleted = "FALSE";
     if (r.deleted_at === "") delete r.deleted_at;
+
+    r.search_text = generateSearchText({
+      vacancy: r.vacancy,
+      description: r.description,
+      industry: r.industry,
+      location: r.location,
+      typeOfEmployment: r.typeOfEmployment,
+      regionalOffice: r.regionalOffice,
+    });
 
     return r;
   }
@@ -178,6 +190,8 @@ export const useAddCSV = ({ user }: { user: User }) => {
 
       if (employeeResponse) {
         toast.success("Employee added successfully");
+        setEmployees(null);
+        router.refresh();
         router.push("/dashboard");
       } else {
         toast.error("Error adding employee");

@@ -27,7 +27,6 @@ export const SELECT_INDUSTRIES = [
 
 // Puerto Rico
 export const SELECT_LOCATION = [
-  { value: "all", label: "Todos" },
   { value: "remote", label: "Remoto" },
   { value: "Adjuntas", label: "Adjuntas" },
   { value: "Aguada", label: "Aguada" },
@@ -110,7 +109,6 @@ export const SELECT_LOCATION = [
 ];
 
 export const SELECT_EMPLOYMENT = [
-  { value: "all", label: "Todos" },
   { value: "full-time", label: "Full-time" },
   { value: "part-time", label: "Part-time" },
   { value: "contract", label: "Contract" },

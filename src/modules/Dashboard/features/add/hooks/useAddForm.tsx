@@ -11,6 +11,8 @@ import { useAddEmployeeStore } from "@modules/Dashboard/features/add/store/addEm
 import { addEmployeeAction } from "../actions/addEmployee.actions";
 import { toast } from "react-hot-toast";
 import { useTransitionRouter } from "next-view-transitions";
+import { useDashboardEmployeeFiltersStore } from "@modules/Dashboard/store/dahsEmployeeFiltersStore";
+import { generateSearchText } from "@modules/shared/utils/generateSearchText";
 
 const initialFormData: AddEmployeeSchemaType = {
   code: "",
@@ -35,6 +37,7 @@ const initialFormData: AddEmployeeSchemaType = {
 
 export const useAddForm = () => {
   const { updateField, resetForm } = useAddEmployeeStore();
+  const { setEmployees } = useDashboardEmployeeFiltersStore();
   const router = useTransitionRouter();
 
   // Reset the store when the component initializes to ensure clean state
@@ -92,11 +95,17 @@ export const useAddForm = () => {
   ];
 
   const onSubmit = async (data: AddEmployeeSchemaType) => {
-    const employeeResponse = await addEmployeeAction({ data });
+    const dataWithSearch = {
+      ...data,
+      search_text: generateSearchText(data),
+    };
+    const employeeResponse = await addEmployeeAction({ data: dataWithSearch });
 
     if (employeeResponse) {
       toast.success("Employee added successfully");
       addEmployeeForm.reset();
+      setEmployees(null);
+      router.refresh();
       router.push("/dashboard");
     } else {
       toast.error("Error adding employee");

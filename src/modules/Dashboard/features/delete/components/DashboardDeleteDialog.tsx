@@ -17,8 +17,12 @@ import { IconFileX } from "@tabler/icons-react";
 import { createDelayedPromise } from "@modules/shared/utils/index";
 import toast from "react-hot-toast";
 import { deleteEmployeeAction } from "@modules/Dashboard/features/delete/actions/deleteEmployee.actions";
+import { useTransitionRouter } from "next-view-transitions";
+import { useDashboardEmployeeFiltersStore } from "@modules/Dashboard/store/dahsEmployeeFiltersStore";
 
 export const EmployeeDeleteAlert = ({ employeeId }: { employeeId: number }) => {
+  const router = useTransitionRouter();
+  const { setEmployees } = useDashboardEmployeeFiltersStore();
   const handleDeleteEmployee = async () => {
     const employeeResponse = await deleteEmployeeAction({ employeeId });
 
@@ -27,6 +31,8 @@ export const EmployeeDeleteAlert = ({ employeeId }: { employeeId: number }) => {
     } else {
       await createDelayedPromise(2000);
       toast.success(employeeResponse.message);
+      setEmployees(null);
+      router.refresh();
     }
   };
 

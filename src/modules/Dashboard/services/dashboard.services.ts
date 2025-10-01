@@ -1,6 +1,7 @@
 import { createClient } from "@modules/shared/utils/supabase/client";
 import { EmployeeType } from "@modules/shared/types/employee.type";
 import { Pagination } from "@modules/shared/types/pagination.type";
+import { normalizeText } from "@modules/shared/utils/normalizeText";
 
 export interface FilterParams {
   regionalOffice?: string;
@@ -117,9 +118,8 @@ export class DashboardServices {
     }
 
     if (filters.search) {
-      query = query.or(
-        `vacancy.ilike.%${filters.search}%,description.ilike.%${filters.search}%,industry.ilike.%${filters.search}%`,
-      );
+      const normalizedSearch = normalizeText(filters.search);
+      query = query.ilike("search_text", `%${normalizedSearch}%`);
     }
 
     const { data, error, count } = await query

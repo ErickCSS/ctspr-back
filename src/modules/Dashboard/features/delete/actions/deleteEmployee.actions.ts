@@ -22,6 +22,7 @@ export const deleteEmployeeAction = async ({
     return { ok: false, message: "Este empleo no te pertenece." };
   }
 
-  revalidatePath("/dashboard");
+  revalidatePath("/dashboard", "layout");
+  revalidatePath("/dashboard", "page");
   return { ok: true, message: "Empleo eliminado exitosamente." };
 };

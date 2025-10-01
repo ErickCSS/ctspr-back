@@ -16,5 +16,6 @@ export const addEmployeeCSVAction = async ({ data }: { data: CsvRow[] }) => {
   }
 
   revalidatePath("/dashboard", "page");
+  revalidatePath("/dashboard", "layout");
   return true;
 };
