@@ -100,14 +100,30 @@ const RightSide = ({ employee }: { employee: EmployeeType }) => {
         </Link>
       </Button>
 
-      <div className="font-lato flex items-center gap-1 text-2xl">
-        <span className="font-bold">
-          {CONVERT_MONEY(employee?.min_salary || 0)} -{" "}
-          {CONVERT_MONEY(employee?.max_salary || 0)}
-        </span>
+      {/* ===== SALARY ===== */}
+      {(() => {
+        const minSalaryEmployee = Number(employee?.min_salary);
+        const maxSalaryEmployee = Number(employee?.max_salary);
 
-        <span className="text-base font-normal text-zinc-500">/mensual</span>
-      </div>
+        // Check if any salary value is greater than 0
+        const hasValidSalary = minSalaryEmployee > 0 || maxSalaryEmployee > 0;
+
+        // Don't render salary section if no valid salary exists
+        if (!hasValidSalary) return null;
+
+        return (
+          <div className="font-lato flex items-center gap-1 text-2xl">
+            <span className="font-bold">
+              {CONVERT_MONEY(minSalaryEmployee)} -{" "}
+              {CONVERT_MONEY(maxSalaryEmployee)}
+            </span>
+
+            <span className="text-base font-normal text-zinc-500">
+              /mensual
+            </span>
+          </div>
+        );
+      })()}
     </div>
   );
 };

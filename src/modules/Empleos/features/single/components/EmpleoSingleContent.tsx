@@ -87,7 +87,7 @@ const EmployeeOverview = ({ employee }: { employee: EmployeeType }) => {
       <div className="grid grid-cols-1 gap-y-4 md:grid-cols-3">
         {description.map((item) => (
           <div key={item.title} className="flex items-center gap-2">
-            {item.icon}
+            <div className="w-full max-w-12">{item.icon}</div>
             <div className="flex flex-col">
               <span className="text-medium text-base text-zinc-600">
                 {item.title}:

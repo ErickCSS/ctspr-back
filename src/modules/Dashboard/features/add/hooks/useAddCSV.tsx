@@ -13,6 +13,10 @@ import Papa from "papaparse";
 import { useRouter } from "next/navigation";
 import { useDashboardEmployeeFiltersStore } from "@/modules/Dashboard/store/dahsEmployeeFiltersStore";
 import { generateSearchText } from "@/modules/shared/utils/generateSearchText";
+import {
+  looksLikeModernHeaders,
+  mapLegacyArrayToModernObject,
+} from "../lib/legacyCSV";
 
 export const useAddCSV = ({ user }: { user: User }) => {
   const [rows, setRows] = React.useState<CsvRow[]>([]);
@@ -36,8 +40,8 @@ export const useAddCSV = ({ user }: { user: User }) => {
   ] as const;
 
   const REQUIRED_DEFAULT: LabelValue = {
-    label: "No requiere",
-    value: "No requiere",
+    label: "No suministrado",
+    value: "No suministrado",
   };
 
   function toLabelValueArray(input?: string): LabelValue[] {
@@ -98,13 +102,14 @@ export const useAddCSV = ({ user }: { user: User }) => {
     }
 
     const industries = new Set(SELECT_INDUSTRIES.map((f) => f.value));
-    if (!industries.has(r.industry || "")) r.industry = "IT";
+    if (!industries.has(r.industry || "")) r.industry = "Empleo";
 
     const locations = new Set(SELECT_LOCATION.map((f) => f.value));
-    if (!locations.has(r.location || "")) r.location = "remote";
+    if (!locations.has(r.location || "")) r.location = "No suministrada";
 
     const offices = new Set(REGIONAL_OFFICE.map((f) => f.value));
-    if (!offices.has(r.regionalOffice || "")) r.regionalOffice = "barceloneta";
+    if (!offices.has(r.regionalOffice || ""))
+      r.regionalOffice = "No suministrada";
 
     r.vacancy ??= "";
     r.hoursJob ??= "Full-time";
@@ -132,15 +137,55 @@ export const useAddCSV = ({ user }: { user: User }) => {
 
   const onFile = (file: File) => {
     setMessage(null);
-    Papa.parse<CsvRow>(file, {
+    // Papa.parse<CsvRow>(file, {
+    //   header: true,
+    //   skipEmptyLines: true,
+    //   transformHeader: (h) => h.trim(),
+    //   complete: (result) => {
+    //     const normalized = result.data.map((row) =>
+    //       normalizeRowForDB(row, user),
+    //     );
+    //     setRows(normalized);
+    //   },
+    //   error: (err) => setMessage(err.message),
+    // });
+
+    Papa.parse<Record<string, string>>(file, {
       header: true,
       skipEmptyLines: true,
       transformHeader: (h) => h.trim(),
       complete: (result) => {
-        const normalized = result.data.map((row) =>
-          normalizeRowForDB(row, user),
-        );
-        setRows(normalized);
+        const fields = result.meta?.fields || [];
+        if (looksLikeModernHeaders(fields)) {
+          // Formato nuevo -> seguimos con tu flujo actual
+          const normalized = result.data.map((row) =>
+            normalizeRowForDB(row, user),
+          );
+          setRows(normalized);
+          return;
+        }
+
+        // 2) Si NO parece moderno, reprocesamos como LEGACY (sin headers)
+        Papa.parse<string[]>(file, {
+          header: false,
+          skipEmptyLines: true,
+          complete: (legacy) => {
+            try {
+              // cada row es un array: [code, vacancy, city, blob, row_index]
+              const modernRows = legacy.data.map((arr) =>
+                mapLegacyArrayToModernObject(arr as any),
+              );
+              // ahora pasa por tu normalización habitual (JSONB, defaults, etc.)
+              const normalized = modernRows.map((r) =>
+                normalizeRowForDB(r, user),
+              );
+              setRows(normalized);
+            } catch (e: any) {
+              setMessage(e?.message || "Error procesando CSV legacy");
+            }
+          },
+          error: (err) => setMessage(err.message),
+        });
       },
       error: (err) => setMessage(err.message),
     });

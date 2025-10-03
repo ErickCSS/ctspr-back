@@ -23,6 +23,7 @@ export const SELECT_INDUSTRIES = [
   { value: "Agropecuario", label: "Agropecuario" },
   { value: "Retail", label: "Retail" },
   { value: "Startup", label: "Startups" },
+  { value: "Empleo", label: "Empleo" },
 ];
 
 // Puerto Rico
@@ -106,6 +107,7 @@ export const SELECT_LOCATION = [
   { value: "Villalba", label: "Villalba" },
   { value: "Yabucoa", label: "Yabucoa" },
   { value: "Yauco", label: "Yauco" },
+  { value: "Santurce", label: "Santurce" },
 ];
 
 export const SELECT_EMPLOYMENT = [

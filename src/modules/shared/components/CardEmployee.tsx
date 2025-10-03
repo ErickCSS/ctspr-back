@@ -101,57 +101,71 @@ export const CardEmployee = ({ employee }: { employee?: EmployeeType }) => {
             </Badge>
           </div>
 
-          <div className="font-lato flex items-center gap-1 text-lg">
-            <span className="font-bold">
-              {(() => {
-                const formMinSalary = Number(formData.min_salary);
-                const minSalaryEmployee = Number(employee?.min_salary);
+          {/* ===== SALARY ===== */}
+          {(() => {
+            const formMinSalary = Number(formData.min_salary);
+            const minSalaryEmployee = Number(employee?.min_salary);
+            const formMaxSalary = Number(formData.max_salary);
+            const maxSalaryEmployee = Number(employee?.max_salary);
 
-                // Use formData.salary if it's a valid number > 0
-                if (formMinSalary && formMinSalary > 0) {
-                  return CONVERT_MONEY(formMinSalary);
-                }
+            // Check if any salary value is greater than 0
+            const hasValidSalary =
+              formMinSalary > 0 ||
+              minSalaryEmployee > 0 ||
+              formMaxSalary > 0 ||
+              maxSalaryEmployee > 0;
 
-                // Fallback to employee.salary if it's a valid number > 0
-                if (minSalaryEmployee && minSalaryEmployee > 0) {
-                  return CONVERT_MONEY(minSalaryEmployee);
-                }
+            // Don't render salary section if no valid salary exists
+            if (!hasValidSalary) return null;
 
-                // Default fallback
-                return CONVERT_MONEY(1000);
-              })()}
-            </span>
+            return (
+              <div className="font-lato flex items-center gap-1 text-lg">
+                <span className="font-bold">
+                  {(() => {
+                    // Use formData.salary if it's a valid number > 0
+                    if (formMinSalary && formMinSalary > 0) {
+                      return CONVERT_MONEY(formMinSalary);
+                    }
 
-            <span className="text-lg font-bold text-black">-</span>
+                    // Fallback to employee.salary if it's a valid number > 0
+                    if (minSalaryEmployee && minSalaryEmployee > 0) {
+                      return CONVERT_MONEY(minSalaryEmployee);
+                    }
 
-            <span className="font-bold">
-              {(() => {
-                const formMaxSalary = Number(formData.max_salary);
-                const maxSalaryEmployee = Number(employee?.max_salary);
+                    // Default fallback
+                    return CONVERT_MONEY(1000);
+                  })()}
+                </span>
 
-                // Use formData.salary if it's a valid number > 0
-                if (formMaxSalary && formMaxSalary > 0) {
-                  return CONVERT_MONEY(formMaxSalary);
-                }
+                <span className="text-lg font-bold text-black">-</span>
 
-                // Fallback to employee.salary if it's a valid number > 0
-                if (maxSalaryEmployee && maxSalaryEmployee > 0) {
-                  return CONVERT_MONEY(maxSalaryEmployee);
-                }
+                <span className="font-bold">
+                  {(() => {
+                    // Use formData.salary if it's a valid number > 0
+                    if (formMaxSalary && formMaxSalary > 0) {
+                      return CONVERT_MONEY(formMaxSalary);
+                    }
 
-                // Default fallback
-                return CONVERT_MONEY(1000);
-              })()}
-            </span>
+                    // Fallback to employee.salary if it's a valid number > 0
+                    if (maxSalaryEmployee && maxSalaryEmployee > 0) {
+                      return CONVERT_MONEY(maxSalaryEmployee);
+                    }
 
-            <span className="text-sm font-normal text-zinc-500">
-              {" "}
-              /
-              {formData.payment_frequency ||
-                employee?.payment_frequency ||
-                "Mensual"}
-            </span>
-          </div>
+                    // Default fallback
+                    return CONVERT_MONEY(1000);
+                  })()}
+                </span>
+
+                <span className="text-sm font-normal text-zinc-500">
+                  {" "}
+                  /
+                  {formData.payment_frequency ||
+                    employee?.payment_frequency ||
+                    "Mensual"}
+                </span>
+              </div>
+            );
+          })()}
         </div>
       </CardContent>
     </Card>
