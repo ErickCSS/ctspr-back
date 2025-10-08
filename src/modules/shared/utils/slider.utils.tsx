@@ -15,9 +15,9 @@ export const createYouTubeSlide = (
   content: string = "",
 ): SliderProps => {
   return {
-    id: `youtube-${videoId}`,
+    id: `video-${videoId}`,
     title,
-    slug: `youtube-${videoId}`,
+    slug: `video-${videoId}`,
     content,
     excerpt,
     categories: {
@@ -29,7 +29,7 @@ export const createYouTubeSlide = (
       },
     },
     date: new Date().toISOString(),
-    youtubeVideoId: videoId,
+    routeVideo: videoId,
     isVideo: true,
   };
 };
