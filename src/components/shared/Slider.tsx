@@ -58,21 +58,33 @@ export const SliderHero = ({ sliders }: { sliders: SliderProps[] }) => {
                   playsInline
                   controls={false}
                   preload="metadata"
-                  className="h-full w-full object-cover"
+                  className="aspect-video h-full w-full object-cover"
                 />
               </div>
 
               {/* Muted Button */}
-              <button
-                onClick={() => setMuted(!muted)}
-                className="absolute top-4 right-4 z-10 cursor-pointer rounded-full bg-white p-2 shadow-md transition-opacity duration-300 md:opacity-50 md:hover:opacity-100"
-              >
-                {muted ? (
-                  <IconVolumeOff stroke={1.5} />
-                ) : (
-                  <IconVolume stroke={1.5} />
-                )}
-              </button>
+              <div className="group absolute top-4 right-4 z-10 flex cursor-pointer items-center gap-2">
+                {/* Call to action - solo visible cuando está muted */}
+                {/* {muted && (
+                  <div
+                    onClick={() => setMuted(!muted)}
+                    className="flex items-center gap-2 rounded-full bg-white px-3 py-2 text-sm text-black opacity-50 shadow-md backdrop-blur-sm transition-all duration-300 group-hover:opacity-100"
+                  >
+                    <span>Activa el audio para una mejor experiencia</span>
+                  </div>
+                )} */}
+
+                <button
+                  onClick={() => setMuted(!muted)}
+                  className="cursor-pointer rounded-full bg-white p-2 shadow-md transition-opacity duration-300 group-hover:opacity-100 md:opacity-50 md:hover:opacity-100"
+                >
+                  {muted ? (
+                    <IconVolumeOff stroke={1.5} />
+                  ) : (
+                    <IconVolume stroke={1.5} />
+                  )}
+                </button>
+              </div>
 
               {/* Overlay oscuro para legibilidad del texto */}
               {/* <div className="absolute inset-0 bg-black/40"></div> */}
