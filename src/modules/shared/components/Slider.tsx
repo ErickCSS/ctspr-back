@@ -7,9 +7,9 @@ import parse from "html-react-parser";
 import "swiper/css";
 import "swiper/css/navigation";
 
-import { SliderProps } from "@/modules/shared/types/hero.types";
+import { SliderProps } from "@modules/shared/types/hero.types";
 import { Navigation, Autoplay } from "swiper/modules";
-import { parsePhoneNumbers } from "@/modules/shared/utils/parseContent.utils";
+import { parsePhoneNumbers } from "@modules/shared/utils/parseContent.utils";
 import { IconVolume, IconVolumeOff } from "@tabler/icons-react";
 import { useState } from "react";
 
@@ -35,7 +35,7 @@ export const SliderHero = ({ sliders }: { sliders: SliderProps[] }) => {
           className={`h-full ${
             slider.isVideo
               ? "flex items-center justify-center bg-black"
-              : `bg-cover bg-[top_center] bg-no-repeat ${index === 1 ? "bg-center" : ""}`
+              : `bg-cover bg-[top_center] bg-no-repeat ${index === 2 ? "bg-center" : ""}`
           }`}
           style={
             !slider.isVideo

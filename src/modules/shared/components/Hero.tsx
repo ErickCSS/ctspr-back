@@ -14,6 +14,7 @@ export const Hero = async ({ title }: { title: string }) => {
   const isEmpleos = title === "Empleo";
   const isListEmpleos = title === "Listado de Empleos";
   const isAbout = title === "Quiénes Somos";
+  const isBlog = title === "Blog";
 
   return (
     <section
@@ -27,6 +28,7 @@ export const Hero = async ({ title }: { title: string }) => {
           : isAbout
             ? "bg-[14%_center] md:bg-center"
             : "bg-center",
+        isBlog ? "bg-right md:bg-center" : "",
       )}
     >
       {isEmpleos ||
