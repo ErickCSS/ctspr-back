@@ -18,6 +18,12 @@ export const Header = () => {
   return (
     <header className="flex w-full flex-col overflow-hidden border-b border-zinc-200">
       <div className="bg-primaryColor flex w-full justify-end gap-x-8 px-10 py-3">
+        <Button
+          asChild
+          className="hover:bg-secondaryColor rounded-3xl bg-white px-10 text-black transition-colors duration-300 hover:text-white"
+        >
+          <Link href="/login-employee">Login</Link>
+        </Button>
         <Social className="size-8" />
         <Link
           href="mailto:sales@ctspr.com"
