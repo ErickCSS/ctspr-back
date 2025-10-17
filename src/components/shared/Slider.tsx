@@ -51,15 +51,24 @@ export const SliderHero = ({ sliders }: { sliders: SliderProps[] }) => {
               {/* Video de fondo */}
               <div className="absolute inset-0 h-full w-full">
                 <video
-                  src={slider.youtubeVideoId}
                   autoPlay
                   loop
                   muted={muted}
                   playsInline
                   controls={false}
                   preload="metadata"
+                  poster="/images/fallback-video.webp"
                   className="h-full w-full object-cover xl:h-[810px] xl:object-fill"
-                />
+                >
+                  <source
+                    src={`${slider.youtubeVideoId}.mp4`}
+                    type="video/mp4"
+                  />
+                  <source
+                    src={`${slider.youtubeVideoId}.webm`}
+                    type="video/webm"
+                  />
+                </video>
               </div>
 
               {/* Muted Button */}

@@ -11,9 +11,7 @@ export const Hero = async () => {
   });
 
   const slidersReverse = toReversed(sliders.posts.nodes);
-  const videoSlides = [
-    createYouTubeSlide("/videos/video-cts.webm", "", "", ""),
-  ];
+  const videoSlides = [createYouTubeSlide("/videos/video-cts", "", "", "")];
 
   const combinedSlides = combineSlides(slidersReverse, videoSlides, 0);
 
