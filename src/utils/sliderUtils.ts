@@ -65,7 +65,7 @@ export const addCTSVideoToSlider = (
   wordpressSlides: SliderProps[],
 ): SliderProps[] => {
   const ctsVideoSlide = createYouTubeSlide(
-    "QffcVnTbff4",
+    "/videos/video-cts.webm",
     "Conoce más sobre CTS PR",
     "Descubre nuestros servicios y cómo podemos ayudarte",
     "Contáctanos para más información",
