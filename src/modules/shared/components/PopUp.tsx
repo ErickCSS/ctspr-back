@@ -41,8 +41,8 @@ export const PopUp = () => {
           <motion.div className="w-full space-y-2 rounded-xl bg-white p-6">
             <h3 className="text-2xl font-bold">Gracias por visitarnos</h3>
             <p className="text-base">
-              En CTS, conectamos a personas en busca de empleo temporero con
-              empresas que desean fortalecer sus equipos.
+              En CTS, conectamos a personas en busca de empleo con empresas que
+              desean fortalecer sus equipos.
             </p>
             <Button
               className="min-h-[40px] w-full cursor-pointer"

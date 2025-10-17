@@ -43,7 +43,7 @@ export const ContactForm = () => {
         />
 
         <Label className="text-lg">
-          ¿En qué pueblo resides? ¿O donde está ubicada tu empresa?
+          ¿En qué pueblo resides? ¿O dónde está ubicada tu empresa?
         </Label>
         <RenderFormField
           control={contactForm.control}
@@ -67,7 +67,7 @@ export const ContactForm = () => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="bg-secondaryColor disabled:bg-secondaryColor/80 flex h-12 w-45 items-center justify-center text-lg font-bold text-white uppercase"
+          className="bg-secondaryColor disabled:bg-secondaryColor/80 flex h-12 w-45 cursor-pointer items-center justify-center text-lg font-bold text-white uppercase"
         >
           {isSubmitting ? (
             <span className="flex items-center gap-2">

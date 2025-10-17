@@ -17,21 +17,23 @@ export const Header = () => {
 
   return (
     <header className="flex w-full flex-col overflow-hidden border-b border-zinc-200">
-      <div className="bg-primaryColor flex w-full justify-end gap-x-8 px-10 py-3">
+      <div className="bg-primaryColor flex w-full flex-col-reverse items-center justify-end gap-x-8 px-10 py-3 md:flex-row">
         <Button
           asChild
           className="hover:bg-secondaryColor rounded-3xl bg-white px-10 text-black transition-colors duration-300 hover:text-white"
         >
           <Link href="/login-employee">Login</Link>
         </Button>
-        <Social className="size-8" />
-        <Link
-          href="mailto:sales@ctspr.com"
-          className="flex items-center gap-x-2 text-white"
-        >
-          <IconMailFilled size={18} />
-          <span className="font-bold">sales@ctspr.com</span>
-        </Link>
+        <div className="flex items-center gap-x-8">
+          <Social className="size-8" />
+          <Link
+            href="mailto:sales@ctspr.com"
+            className="flex items-center gap-x-2 text-white"
+          >
+            <IconMailFilled size={18} />
+            <span className="font-bold">sales@ctspr.com</span>
+          </Link>
+        </div>
       </div>
 
       <div className="container mx-auto">
@@ -96,6 +98,14 @@ export const Header = () => {
                     {item.name}
                   </Link>
                 ))}
+                {/* <div className="mt-5">
+                  <Button
+                    asChild
+                    className="hover:bg-secondaryColor bg-primaryColor block !h-auto w-fit rounded-3xl px-10 text-base text-white transition-colors duration-300 hover:text-white md:hidden"
+                  >
+                    <Link href="/login-employee">Login</Link>
+                  </Button>
+                </div> */}
               </nav>
             </div>
           </div>

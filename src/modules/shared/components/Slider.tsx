@@ -58,7 +58,7 @@ export const SliderHero = ({ sliders }: { sliders: SliderProps[] }) => {
                   playsInline
                   controls={false}
                   preload="metadata"
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover xl:h-[810px] xl:object-fill"
                 />
               </div>
 

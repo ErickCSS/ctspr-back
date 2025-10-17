@@ -7,6 +7,8 @@ interface TruncatedHtmlProps {
   limit?: number;
   moreLabel?: string;
   lessLabel?: string;
+  onClickMore?: () => void;
+  onClickLess?: () => void;
 }
 
 function truncateHTML(htmlString: string, limit: number): string {
@@ -87,6 +89,8 @@ export function TruncatedHtml({
   limit = 300,
   moreLabel = "Show more",
   lessLabel = "Show less",
+  onClickMore,
+  onClickLess,
 }: TruncatedHtmlProps) {
   const [expanded, setExpanded] = useState(false);
   const [isClient, setIsClient] = useState(false);
@@ -128,14 +132,20 @@ export function TruncatedHtml({
       />
       {!expanded ? (
         <button
-          onClick={() => setExpanded(true)}
+          onClick={() => {
+            setExpanded(true);
+            onClickMore?.();
+          }}
           className="text-secondaryColor mt-2 cursor-pointer hover:underline"
         >
           {moreLabel}
         </button>
       ) : (
         <button
-          onClick={() => setExpanded(false)}
+          onClick={() => {
+            setExpanded(false);
+            onClickLess?.();
+          }}
           className="text-secondaryColor mt-2 cursor-pointer hover:underline"
         >
           {lessLabel}
