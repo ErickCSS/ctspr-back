@@ -14,13 +14,21 @@ export default async function BlogPost({
     query: queryBlog,
   });
 
-  const post = blog.posts.nodes.find((post) => post.slug === id);
+  const post = blog.posts.edges.find((edge) => edge.node.slug === id);
+
+  if (!post) {
+    return (
+      <div className="container mx-auto px-4 py-20">Post no encontrado</div>
+    );
+  }
+
+  const { title, content, featuredImage } = post.node;
 
   return (
     <>
       <section
         style={{
-          backgroundImage: `url("${post?.featuredImage?.node?.sourceUrl || "https://stagingctspr.axesawebhosting9.net/wp-content/uploads/2025/07/img-transformacion.webp"}")`,
+          backgroundImage: `url("${featuredImage?.node?.sourceUrl || "https://stagingctspr.axesawebhosting9.net/wp-content/uploads/2025/07/img-transformacion.webp"}")`,
           boxShadow: "inset 0 0 0 2000px rgba(0, 0, 0, 0.5)",
         }}
         className="h-[250px] bg-cover bg-[50%_40%] bg-no-repeat md:h-[600px]"
@@ -28,7 +36,7 @@ export default async function BlogPost({
         <div className="container mx-auto h-full px-4">
           <div className="flex h-full items-center">
             <h1 className="text-3xl font-bold text-white md:text-4xl lg:text-6xl">
-              {post?.title}
+              {title}
             </h1>
           </div>
         </div>
@@ -38,7 +46,7 @@ export default async function BlogPost({
         <div className="mx-auto max-w-6xl">
           <div className="flex flex-col items-center gap-y-10">
             <div className="hashtags w-full text-left text-pretty [&_video]:h-[500px]">
-              {parseContent(post?.content || "")}
+              {parseContent(content || "")}
             </div>
           </div>
         </div>

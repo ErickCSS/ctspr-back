@@ -12,6 +12,12 @@ interface UseBlogDataReturn {
   cursors: { [key: number]: string }; // Almacena cursores para cada página
 }
 
+interface BlogVariables {
+  category: string;
+  first: number;
+  after?: string;
+}
+
 export const useBlogData = (page: number): UseBlogDataReturn => {
   const [blog, setBlog] = useState<BlogProps | null>(null);
   const [loading, setLoading] = useState(true);
@@ -28,7 +34,7 @@ export const useBlogData = (page: number): UseBlogDataReturn => {
         const after = page > 1 ? cursors[page - 1] : undefined;
 
         // Construir variables requeridas por el query
-        const variables: any = {
+        const variables: BlogVariables = {
           category: "blog",
           first: 6,
         };
