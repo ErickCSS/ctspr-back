@@ -431,20 +431,37 @@ export const queryConoceSucursal = `query ConoceSucursal {
   }
 }`;
 
-export const queryBlog = `query Blog {
-  posts(where: {categoryName:"blog"}){
-    nodes{
-      title
-      id
-			content
-      excerpt
-      dateGmt
-      slug
-      featuredImage{
-        node{
-          sourceUrl
+export const queryBlog = `query Blog(
+  $category: String! = "blog"
+  $first: Int! = 6
+  $after: String
+) {
+  posts(
+    where: { categoryName: $category, orderby: { field: DATE, order: DESC } }
+    first: $first
+    after: $after
+  ) {
+    edges {
+      cursor
+      node {
+        id
+        title
+        slug
+        dateGmt
+        excerpt
+        content
+        featuredImage {
+          node {
+            sourceUrl
+          }
         }
       }
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+      hasPreviousPage
+      startCursor
     }
   }
 }`;

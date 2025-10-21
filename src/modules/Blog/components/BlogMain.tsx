@@ -1,12 +1,8 @@
-import { BlogCard } from "./BlogCard";
-import { WpQuery } from "@/modules/shared/services/wpQuery";
-import { queryBlog } from "@/modules/shared/graphql/general.query";
-import { BlogProps } from "@/modules/shared/types/blog.types";
+import { TotalPost } from "@modules/shared/services/TotalPost";
+import { BlogList } from "./BlogList";
 
 export const BlogMain = async () => {
-  const blog: BlogProps = await WpQuery({
-    query: queryBlog,
-  });
+  const { totalPages } = await TotalPost();
 
   return (
     <section className="bg-white px-4 py-20">
@@ -18,11 +14,7 @@ export const BlogMain = async () => {
           <hr className="border-secondaryColor w-[120px] border-2 outline-none" />
         </div>
 
-        <div className="mt-20 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {blog.posts.nodes.map((post, index) => (
-            <BlogCard key={index} post={post} />
-          ))}
-        </div>
+        <BlogList totalPages={totalPages} />
       </div>
     </section>
   );

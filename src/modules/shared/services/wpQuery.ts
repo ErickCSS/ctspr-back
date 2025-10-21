@@ -6,7 +6,7 @@ interface WpQueryProps {
 export const WpQuery = async ({ query, variables }: WpQueryProps) => {
   const API_URL = process.env.API_URL;
 
-  const responsePosts = await fetch(`${API_URL}`, {
+  const responsePosts = await fetch(`https://blog.ctspr.com/graphql`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -16,10 +16,19 @@ export const WpQuery = async ({ query, variables }: WpQueryProps) => {
   });
 
   if (!responsePosts.ok) {
-    throw new Error("Failed to fetch data");
+    const errorText = await responsePosts.text();
+    throw new Error(
+      `Failed to fetch data: ${responsePosts.status} - ${errorText}`,
+    );
   }
 
-  const { data } = await responsePosts.json();
+  const responseData = await responsePosts.json();
+
+  if (responseData.errors) {
+    throw new Error(`GraphQL error: ${JSON.stringify(responseData.errors)}`);
+  }
+
+  const { data } = responseData;
 
   return data;
 };
