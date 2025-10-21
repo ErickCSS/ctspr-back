@@ -6,7 +6,7 @@ interface WpQueryProps {
 export const WpQuery = async ({ query, variables }: WpQueryProps) => {
   const API_URL = process.env.API_URL;
 
-  const responsePosts = await fetch(`${API_URL}`, {
+  const responsePosts = await fetch(`https://blog.ctspr.com/graphql`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

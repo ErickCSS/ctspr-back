@@ -17,8 +17,13 @@ import { parseContent } from "@/utils/parseContent.utils";
 
 export const BlogCard = ({ post }: { post: Post }) => {
   const router = useTransitionRouter();
+  const { dateGmt, featuredImage, slug, title, excerpt } = post.node;
 
-  const parseISODate = parseISO(post?.dateGmt || "");
+  if (!dateGmt || !featuredImage || !slug || !title || !excerpt) {
+    return null;
+  }
+
+  const parseISODate = parseISO(dateGmt || "");
   const date = format(parseISODate, "dd-MM-yyyy");
 
   return (
@@ -26,10 +31,10 @@ export const BlogCard = ({ post }: { post: Post }) => {
       <CardHeader className="p-0">
         <Image
           src={
-            post?.featuredImage?.node?.sourceUrl ||
+            featuredImage?.node?.sourceUrl ||
             "https://stagingctspr.axesawebhosting9.net/wp-content/uploads/2025/07/img-transformacion.webp"
           }
-          alt={post?.title || "owner"}
+          alt={title || "owner"}
           width={500}
           height={500}
           className="h-[300px] w-full object-cover object-center"
@@ -41,10 +46,10 @@ export const BlogCard = ({ post }: { post: Post }) => {
 
       <CardContent className="flex-1">
         <CardTitle className="text-center text-3xl font-bold text-balance">
-          {post?.title || "Detén el Contagio COVID-19"}
+          {title || "Detén el Contagio COVID-19"}
         </CardTitle>
         <CardDescription className="mt-6 text-center text-balance text-black">
-          {parseContent(post?.excerpt || "") || "Card description"}
+          {parseContent(excerpt || "") || "Card description"}
         </CardDescription>
       </CardContent>
 
@@ -52,7 +57,7 @@ export const BlogCard = ({ post }: { post: Post }) => {
         <div className="text-primaryColor">{date}</div>
         <Button
           className="bg-secondaryColor hover:bg-primaryColor cursor-pointer text-white transition-colors duration-300"
-          onClick={() => router.push(`/blog/${post?.slug}`)}
+          onClick={() => router.push(`/blog/${slug}`)}
         >
           Leer más
         </Button>

@@ -11,7 +11,8 @@ import { parseContent } from "@/utils/parseContent.utils";
 import Image from "next/image";
 import { TruncatedHtml } from "@/lib/Truncated";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import type { Swiper as SwiperType } from "swiper";
 
 export const CarouselButtonTop = ({
   carousels,
@@ -24,6 +25,14 @@ export const CarouselButtonTop = ({
   const showLastSix = carousels.slice(-6);
   const SHOW_SLIDES = isHome ? showFirstSix : showLastSix;
   const [autoplay, setAutoplay] = useState(true);
+  const swiperRef = useRef<SwiperType | null>(null);
+
+  useEffect(() => {
+    if (swiperRef.current) {
+      swiperRef.current.autoplay.stop();
+      swiperRef.current.autoplay.start();
+    }
+  }, [autoplay]);
 
   return (
     <Swiper
@@ -35,6 +44,9 @@ export const CarouselButtonTop = ({
       autoplay={{
         delay: autoplay === true ? 10000 : 600000,
         disableOnInteraction: false,
+      }}
+      onSwiper={(swiper) => {
+        swiperRef.current = swiper;
       }}
       className="TestimonialCarousel rounded-xl bg-zinc-100 xl:w-[1100px]"
     >
