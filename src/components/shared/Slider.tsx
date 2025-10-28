@@ -74,14 +74,14 @@ export const SliderHero = ({ sliders }: { sliders: SliderProps[] }) => {
               {/* Muted Button */}
               <div className="group absolute top-4 right-4 z-10 flex cursor-pointer items-center gap-2">
                 {/* Call to action - solo visible cuando está muted */}
-                {/* {muted && (
+                {muted && (
                   <div
                     onClick={() => setMuted(!muted)}
                     className="flex items-center gap-2 rounded-full bg-white px-3 py-2 text-sm text-black opacity-50 shadow-md backdrop-blur-sm transition-all duration-300 group-hover:opacity-100"
                   >
                     <span>Activa el audio para una mejor experiencia</span>
                   </div>
-                )} */}
+                )}
 
                 <button
                   onClick={() => setMuted(!muted)}
