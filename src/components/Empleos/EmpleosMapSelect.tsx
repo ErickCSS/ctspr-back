@@ -55,7 +55,7 @@ export const EmpleosMapSelect = async () => {
                 "Barceloneta",
                 "Santurce",
                 "Las Piedras",
-                "San German",
+                "San Germán",
                 "Salinas",
               ].map((item) => (
                 <Button
