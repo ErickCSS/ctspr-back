@@ -1,6 +1,6 @@
 import { BlogProps } from "@/types/blog.types";
 import { WpQuery } from "@/services/wpQuery";
-import { queryBlog } from "@/graphql/general.query";
+import { queryBlogBySlug } from "@/graphql/general.query";
 import { parseContent } from "@/utils/parseContent.utils";
 
 export default async function BlogPost({
@@ -11,10 +11,13 @@ export default async function BlogPost({
   const id = (await params).id;
 
   const blog: BlogProps = await WpQuery({
-    query: queryBlog,
+    query: queryBlogBySlug,
+    variables: {
+      slug: id,
+    },
   });
 
-  const post = blog.posts.edges.find((edge) => edge.node.slug === id);
+  const post = blog.posts.edges[0];
 
   if (!post) {
     return (

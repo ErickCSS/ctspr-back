@@ -465,3 +465,23 @@ export const queryBlog = `query Blog(
     }
   }
 }`;
+
+export const queryBlogBySlug = `query BlogBySlug($slug: String!) {
+  posts(where: { categoryName: "blog", name: $slug }) {
+    edges {
+      node {
+        id
+        title
+        slug
+        dateGmt
+        excerpt
+        content
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+    }
+  }
+}`;

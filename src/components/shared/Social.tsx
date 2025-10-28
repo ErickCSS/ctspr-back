@@ -2,6 +2,7 @@ import {
   IconBrandFacebook,
   IconBrandInstagram,
   IconBrandLinkedinFilled,
+  IconBrandYoutubeFilled,
 } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -35,6 +36,11 @@ const LIST_SOCIAL = [
     social: "instagram",
     icon: <IconBrandInstagram className="text-primaryColor size-[22px]" />,
     href: "https://www.instagram.com/ctsempleos/",
+  },
+  {
+    social: "youtube",
+    icon: <IconBrandYoutubeFilled className="text-primaryColor size-[22px]" />,
+    href: "https://www.youtube.com/@ctsempleos",
   },
 ];
 
