@@ -52,9 +52,10 @@ export const Footer = async () => {
 
             <div className="space-y-3">
               <p className="text-sm text-white md:text-base lg:text-lg">
-                Caribbean Temporary Services, LLC. (CTS), es una Agencia de
-                Empleos local establecida en 1983 con la misión de proveer
-                amplias oportunidades de empleo.
+                Caribbean Temporary Services, LLC (CTS) es una Agencia de Empleo
+                establecida en el 1983 con la misión de conectar empresas con
+                talento calificado mediante soluciones flexibles, ágiles y
+                responsables en recursos humanos.
               </p>
               <p className="text-sm text-white md:text-base lg:text-lg">
                 Patrono con Igualdad de Oportunidades en el Empleo.
