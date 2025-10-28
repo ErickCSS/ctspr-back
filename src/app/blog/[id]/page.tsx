@@ -45,7 +45,7 @@ export default async function BlogPost({
       <section className="bg-white px-4 py-20">
         <div className="mx-auto max-w-6xl">
           <div className="flex flex-col items-center gap-y-10">
-            <div className="hashtags w-full text-left text-pretty [&_video]:h-[500px]">
+            <div className="hashtags w-full text-left text-pretty">
               {parseContent(content || "")}
             </div>
           </div>
