@@ -20,7 +20,7 @@ export const EmpleosMapSelect = async () => {
   });
 
   const mapa: MediaProps = await WpQuery({
-    query: queryMedia({ title: "mapa-sucursales" }),
+    query: queryMedia({ title: "mapa-sucursales-cts" }),
   });
 
   const title = empleosTitle.posts.nodes[0].title;
