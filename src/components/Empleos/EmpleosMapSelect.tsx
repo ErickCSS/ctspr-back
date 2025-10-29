@@ -64,7 +64,7 @@ export const EmpleosMapSelect = async () => {
                   className="bg-secondaryColor h-12 text-lg text-white transition-colors duration-300 hover:bg-pink-700"
                 >
                   <Link
-                    href={`https://empleos.ctspr.com/jobs/index.php?q=${item === "Salinas" ? "LasPiedras" : item.charAt(0).toUpperCase() + item.slice(1).replace(" ", "")}`}
+                    href={`https://empleos.ctspr.com/jobs/index.php?q=${item === "Salinas" ? "LasPiedras" : item === "San Germán" ? "SanGerman" : item.charAt(0).toUpperCase() + item.slice(1).replace(" ", "")}`}
                     target="_blank"
                     rel="noopener noreferrer nofollow"
                   >
