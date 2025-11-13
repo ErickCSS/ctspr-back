@@ -156,6 +156,26 @@ export function mapLegacyArrayToModernObject(
   const comp = parseLegacyCompensation(compText);
   const convertCity = toKebabIfMulti(city, { lowercaseSingle: true });
 
+  const FORM_SANTURCE = "https://ctspr.typeform.com/to/ZUNTWj";
+  const FORM_LAS_PIEDRAS = "https://ctspr.typeform.com/to/BtYyWuqq";
+  const FORM_SAN_GERMAN = "https://ctspr.typeform.com/to/wBjjgLk7";
+  const FORM_BARCELONETA = "https://ctspr.typeform.com/to/tkuaVHCH";
+
+  const SelectForm = () => {
+    switch (convertCity) {
+      case "santurce":
+        return FORM_SANTURCE;
+      case "las-piedras":
+        return FORM_LAS_PIEDRAS;
+      case "san-german":
+        return FORM_SAN_GERMAN;
+      case "barceloneta":
+        return FORM_BARCELONETA;
+      default:
+        return "";
+    }
+  };
+
   // Objeto base con tus headers modernos (vacíos donde no haya dato)
   const modern: Record<string, string> = {
     code: String(code || ""),
@@ -173,7 +193,7 @@ export function mapLegacyArrayToModernObject(
     skills: "", // opcional
     benefits: "", // opcional
     regionalOffice: convertCity, // si aparece una ciudad alterna
-    linkToApply: "",
+    linkToApply: SelectForm(),
     description: [
       buckets.availability.join("; "),
       buckets.notes.join("; "),
