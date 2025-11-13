@@ -188,12 +188,24 @@ const EmployeeContent = ({ employee }: { employee: EmployeeType }) => {
     );
   };
 
+  // Metodo para detectar ";" y hacer un salto de linea con bullets
+  const LIST_DESCRIPTION = (description: string) => {
+    const list = description.split(";");
+    return (
+      <ul className="list-disc space-y-3 pl-6">
+        {list.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
+    );
+  };
+
   return (
     <div className="space-y-10">
       <div className="flex flex-col gap-4">
         <h3 className="font-lato text-2xl font-bold text-black">Descripción</h3>
         <div className="text-base text-pretty text-zinc-600">
-          {employee.description}
+          {LIST_DESCRIPTION(employee.description)}
         </div>
       </div>
 
