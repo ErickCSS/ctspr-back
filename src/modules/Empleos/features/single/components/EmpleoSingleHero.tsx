@@ -60,10 +60,10 @@ const LeftSide = ({ employee }: { employee: EmployeeType }) => {
               {employee.location || "Ciudad, Pais"}
             </span>
           </div>
-          <div className="flex items-center gap-x-2 text-base text-zinc-600">
+          {/* <div className="flex items-center gap-x-2 text-base text-zinc-600">
             <IconCalendarClock stroke={1.5} size={20} />
             <span className="font-lato">{formattedDate}</span>
-          </div>
+          </div> */}
           <div className="flex items-center gap-x-2 text-base text-zinc-600">
             <IconBuildingEstate stroke={1.5} size={20} />
             <span className="font-lato">
@@ -88,17 +88,29 @@ const LeftSide = ({ employee }: { employee: EmployeeType }) => {
 };
 
 const RightSide = ({ employee }: { employee: EmployeeType }) => {
+  const IS_SHOW_BUTTON = ({ linkToApply }: { linkToApply: string }) => {
+    if (!linkToApply) {
+      return null;
+    }
+
+    return (
+      <div className="flex flex-col gap-4">
+        <Button
+          size="lg"
+          className="bg-primaryColor hover:bg-secondaryColor font-lato max-w-sm cursor-pointer py-6 text-lg font-bold text-white transition-colors duration-300"
+          asChild
+        >
+          <Link href={`${linkToApply}`} target="_blank">
+            Aplicar Ahora
+          </Link>
+        </Button>
+      </div>
+    );
+  };
+
   return (
     <div className="flex flex-row gap-5 md:flex-col">
-      <Button
-        size="lg"
-        className="bg-primaryColor hover:bg-secondaryColor font-lato cursor-pointer py-6 text-base font-bold text-white transition-colors duration-300"
-        asChild
-      >
-        <Link href={`${employee.linkToApply}`} target="_blank">
-          Aplicar Ahora
-        </Link>
-      </Button>
+      {IS_SHOW_BUTTON({ linkToApply: employee.linkToApply })}
 
       {/* ===== SALARY ===== */}
       {(() => {

@@ -12,7 +12,7 @@ import {
 
 import { IconLoader2 } from "@tabler/icons-react";
 import {
-  REGIONAL_OFFICE,
+  SELECT_REGIONAL_OFFICE,
   SELECT_INDUSTRIES,
   SELECT_LOCATION,
   SELECT_EMPLOYMENT,
@@ -153,7 +153,7 @@ export const EmpleoFilterAdvanced = () => {
                 <SelectItem value="all" className="text-sm">
                   Todas las Sucursales
                 </SelectItem>
-                {REGIONAL_OFFICE?.map((office) => (
+                {SELECT_REGIONAL_OFFICE?.map((office) => (
                   <SelectItem
                     key={office.value}
                     value={office.value}

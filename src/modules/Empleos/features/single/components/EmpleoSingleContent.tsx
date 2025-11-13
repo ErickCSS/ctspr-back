@@ -46,7 +46,12 @@ export const EmpleoSingleContent = async ({ slug }: { slug: string }) => {
 };
 
 const EmployeeOverview = ({ employee }: { employee: EmployeeType }) => {
-  const description = [
+  type DescriptionType = {
+    title: string;
+    description: string;
+    icon: React.ReactNode;
+  };
+  const description: DescriptionType[] = [
     {
       title: "Fecha de Publicación",
       description: formatDate(employee.created_at, "dd MMMM, yyyy", {
@@ -79,13 +84,22 @@ const EmployeeOverview = ({ employee }: { employee: EmployeeType }) => {
     },
   ];
 
-  return (
-    <div className="flex flex-col gap-8">
-      <h3 className="font-lato text-2xl font-bold text-black">
-        Descripción General
-      </h3>
-      <div className="grid grid-cols-1 gap-y-4 md:grid-cols-3">
-        {description.map((item) => (
+  const SHOW_CONTENT = ({
+    description,
+  }: {
+    description: DescriptionType[];
+  }) => {
+    // Filtrar elementos con valores vacíos, nulos o undefined
+    const filteredDescription = description.filter(
+      (item) =>
+        item.description &&
+        item.description.trim() !== "" &&
+        item.description.toLowerCase() !== "no suministrado",
+    );
+
+    return (
+      <>
+        {filteredDescription.map((item) => (
           <div key={item.title} className="flex items-center gap-2">
             <div className="w-full max-w-12">{item.icon}</div>
             <div className="flex flex-col">
@@ -93,11 +107,23 @@ const EmployeeOverview = ({ employee }: { employee: EmployeeType }) => {
                 {item.title}:
               </span>
               <span className="text-base font-bold text-black">
-                {item.description}
+                {item.description.charAt(0).toUpperCase() +
+                  item.description.slice(1).toLowerCase()}
               </span>
             </div>
           </div>
         ))}
+      </>
+    );
+  };
+
+  return (
+    <div className="flex flex-col gap-8">
+      <h3 className="font-lato text-2xl font-bold text-black">
+        Descripción General
+      </h3>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        {SHOW_CONTENT({ description })}
       </div>
     </div>
   );
@@ -121,6 +147,47 @@ const EmployeeContent = ({ employee }: { employee: EmployeeType }) => {
     return [];
   };
 
+  const SHOW_CONTENT = (data: any, title: string) => {
+    const dataParsed = parseData(data);
+
+    if (dataParsed[0].label === "No suministrado") {
+      return null;
+    }
+
+    return (
+      <div className="flex flex-col gap-4">
+        <h3 className="font-lato text-2xl font-bold text-black">{title}</h3>
+        <div className="text-base text-balance text-zinc-600">
+          <ul className="list-disc space-y-3 pl-6">
+            {dataParsed.map((requirement: { value: string; label: string }) => (
+              <li key={requirement.value}>{requirement.label}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    );
+  };
+
+  const IS_SHOW_BUTTON = ({ linkToApply }: { linkToApply: string }) => {
+    if (!linkToApply) {
+      return null;
+    }
+
+    return (
+      <div className="flex flex-col gap-4">
+        <Button
+          size="lg"
+          className="bg-primaryColor hover:bg-secondaryColor font-lato max-w-sm cursor-pointer py-6 text-lg font-bold text-white transition-colors duration-300"
+          asChild
+        >
+          <Link href={`${linkToApply}`} target="_blank">
+            Aplicar Ahora
+          </Link>
+        </Button>
+      </div>
+    );
+  };
+
   return (
     <div className="space-y-10">
       <div className="flex flex-col gap-4">
@@ -130,92 +197,16 @@ const EmployeeContent = ({ employee }: { employee: EmployeeType }) => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-4">
-        <h3 className="font-lato text-2xl font-bold text-black">
-          Requisitos Académicos
-        </h3>
-        <div className="text-base text-balance text-zinc-600">
-          <ul className="list-disc space-y-3 pl-6">
-            {parseData(employee.academicRequirements).map(
-              (requirement: { value: string; label: string }) => (
-                <li key={requirement.value}>{requirement.label}</li>
-              ),
-            )}
-          </ul>
-        </div>
-      </div>
+      {SHOW_CONTENT(employee.academicRequirements, "Requisitos Académicos")}
+      {SHOW_CONTENT(employee.skills, "Habilidades Requeridas")}
+      {SHOW_CONTENT(
+        employee.certificateRequirements,
+        "Certificados Requeridos",
+      )}
+      {SHOW_CONTENT(employee.licenseRequirements, "Licencias Requeridas")}
+      {SHOW_CONTENT(employee.benefits, "Compensaciones y Beneficios")}
 
-      <div className="flex flex-col gap-4">
-        <h3 className="font-lato text-2xl font-bold text-black">
-          Habilidades Requeridas
-        </h3>
-        <div className="text-base text-balance text-zinc-600">
-          <ul className="list-disc space-y-3 pl-6">
-            {parseData(employee.skills).map(
-              (skill: { value: string; label: string }) => (
-                <li key={skill.value}>{skill.label}</li>
-              ),
-            )}
-          </ul>
-        </div>
-      </div>
-
-      <div className="flex flex-col gap-4">
-        <h3 className="font-lato text-2xl font-bold text-black">
-          Certificados Requeridos
-        </h3>
-        <div className="text-base text-balance text-zinc-600">
-          <ul className="list-disc space-y-3 pl-6">
-            {parseData(employee.certificateRequirements).map(
-              (certificate: { value: string; label: string }) => (
-                <li key={certificate.value}>{certificate.label}</li>
-              ),
-            )}
-          </ul>
-        </div>
-      </div>
-
-      <div className="flex flex-col gap-4">
-        <h3 className="font-lato text-2xl font-bold text-black">
-          Licencias Requeridas
-        </h3>
-        <div className="text-base text-balance text-zinc-600">
-          <ul className="list-disc space-y-3 pl-6">
-            {parseData(employee.licenseRequirements).map(
-              (license: { value: string; label: string }) => (
-                <li key={license.value}>{license.label}</li>
-              ),
-            )}
-          </ul>
-        </div>
-      </div>
-
-      <div className="flex flex-col gap-4">
-        <h3 className="font-lato text-2xl font-bold text-black">
-          Compensaciones y Beneficios
-        </h3>
-        <div className="text-base text-balance text-zinc-600">
-          <ul className="list-disc space-y-3 pl-6">
-            {parseData(employee.benefits).map(
-              (benefit: { value: string; label: string }) => (
-                <li key={benefit.value}>{benefit.label}</li>
-              ),
-            )}
-          </ul>
-        </div>
-      </div>
-
-      <div className="flex flex-col gap-4">
-        <Button
-          size="lg"
-          className="bg-primaryColor hover:bg-secondaryColor font-lato max-w-sm cursor-pointer py-6 text-lg font-bold text-white transition-colors duration-300"
-          asChild
-        >
-          <Link href={`${employee.linkToApply}`} target="_blank">
-            Aplicar Ahora
-          </Link>
-        </Button>
-      </div>
+      {IS_SHOW_BUTTON({ linkToApply: employee.linkToApply })}
     </div>
   );
 };

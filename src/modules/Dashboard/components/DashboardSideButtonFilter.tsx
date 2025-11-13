@@ -1,7 +1,15 @@
 "use client";
 import { Button } from "@modules/ui/button";
-import { useDashboardEmployeeFiltersStore } from "../store/dahsEmployeeFiltersStore";
-import { useEffect } from "react";
+import { useDashboardEmployeeFiltersStore } from "@modules/Dashboard/store/dahsEmployeeFiltersStore";
+
+// Función para normalizar strings: lowercase + remover acentos + espacios a guiones
+const normalizeString = (str: string): string => {
+  return str
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, "-"); // Reemplazar espacios con guiones
+};
 
 export const DashboardSideButtonFilter = ({
   sucursal,
@@ -12,24 +20,34 @@ export const DashboardSideButtonFilter = ({
   isActive?: boolean;
   onFilterApplied?: () => void;
 }) => {
-  const { updateFilter, removeFilter, activeFilters } =
-    useDashboardEmployeeFiltersStore();
+  // Suscribirse específicamente a regionalOffice para re-renderizar cuando cambie
+  const regionalOffice = useDashboardEmployeeFiltersStore(
+    (state) => state.activeFilters.regionalOffice,
+  );
+  const { updateFilter, removeFilter } = useDashboardEmployeeFiltersStore();
+
+  const normalizedSucursal = normalizeString(sucursal);
+  const isFilterActive =
+    regionalOffice && normalizeString(regionalOffice) === normalizedSucursal;
 
   const handleFilter = async () => {
-    const isCurrentlyActive =
-      activeFilters.regionalOffice === sucursal.toLowerCase();
+    // Leer el estado ACTUAL del store en el momento del click
+    const currentRegionalOffice =
+      useDashboardEmployeeFiltersStore.getState().activeFilters.regionalOffice;
+    const currentIsActive =
+      currentRegionalOffice &&
+      normalizeString(currentRegionalOffice) === normalizedSucursal;
 
-    if (isCurrentlyActive) {
+    if (currentIsActive) {
+      // Si ya está activo, lo desactivamos
       await removeFilter("regionalOffice");
     } else {
-      await updateFilter("regionalOffice", sucursal.toLowerCase());
+      // Si no está activo, lo activamos con el valor del botón
+      await updateFilter("regionalOffice", normalizedSucursal);
     }
 
     onFilterApplied?.();
   };
-
-  const isFilterActive =
-    activeFilters.regionalOffice === sucursal.toLowerCase();
 
   return (
     <Button

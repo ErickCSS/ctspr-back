@@ -59,10 +59,10 @@ export const CardEmployee = ({ employee }: { employee?: EmployeeType }) => {
               {formData.location || employee?.location || "Ciudad, Pais"}
             </span>
           </div>
-          <div className="flex items-center gap-x-1 text-sm text-zinc-500">
+          {/* <div className="flex items-center gap-x-1 text-sm text-zinc-500">
             <IconCalendarClock stroke={1.5} size={20} />
             <span className="font-lato">{formattedDate}</span>
-          </div>
+          </div> */}
           <div className="flex items-center gap-x-1 text-sm text-zinc-500">
             <IconBuildingEstate stroke={1.5} size={20} />
             <span className="font-lato">

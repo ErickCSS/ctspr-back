@@ -20,13 +20,7 @@ export const DashboardSidebar = async () => {
     query: queryMedia({ title: "cts-brand" }),
   });
 
-  const SUCURSAL = [
-    "Barceloneta",
-    "Santurce",
-    "Las Piedras",
-    "San Germán",
-    "Salinas",
-  ];
+  const SUCURSAL = ["Barceloneta", "Santurce", "Las Piedras", "San Germán"];
 
   return (
     <Sidebar>

@@ -110,6 +110,13 @@ export const SELECT_LOCATION = [
   { value: "Santurce", label: "Santurce" },
 ];
 
+export const SELECT_REGIONAL_OFFICE = [
+  { value: "barceloneta", label: "Barceloneta" },
+  { value: "santurce", label: "Santurce" },
+  { value: "las-piedras", label: "Las Piedras" },
+  { value: "san-german", label: "San Germán" },
+];
+
 export const SELECT_EMPLOYMENT = [
   { value: "full-time", label: "Full-time" },
   { value: "part-time", label: "Part-time" },

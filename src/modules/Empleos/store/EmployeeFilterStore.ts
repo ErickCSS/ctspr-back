@@ -3,6 +3,15 @@ import { EmployeeType } from "@/modules/shared/types/employee.type";
 import { EmpleosServices } from "@modules/Empleos/services/empleos.services";
 import { Pagination } from "@modules/shared/types/pagination.type";
 
+// Función para normalizar strings: lowercase + remover acentos + espacios a guiones
+const normalizeString = (str: string): string => {
+  return str
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, "-"); // Reemplazar espacios con guiones
+};
+
 export interface FilterParams {
   regionalOffice?: string;
   industry?: string;
@@ -86,7 +95,12 @@ export const useEmployeeFiltersStore = create<EmployeeFiltersState>(
 
     updateFilter: async (key, value) => {
       const { activeFilters, applyFilters } = get();
-      const newFilters = { ...activeFilters, [key]: value };
+      // Normalizar el valor si es regionalOffice (remover acentos + espacios a guiones)
+      const normalizedValue =
+        key === "regionalOffice" && typeof value === "string"
+          ? normalizeString(value)
+          : value;
+      const newFilters = { ...activeFilters, [key]: normalizedValue };
       await applyFilters(newFilters);
     },
 
