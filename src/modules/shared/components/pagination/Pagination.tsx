@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { ListPagination } from "./ListPagination";
 import type { Pagination } from "@modules/shared/types/pagination.type";
 
@@ -12,7 +13,9 @@ interface PaginationProps {
 const Pagination = ({ pagination, page, setPage }: PaginationProps) => {
   return (
     <div className="mt-10 flex w-full items-center justify-center lg:-col-start-5 lg:-col-end-2">
-      <ListPagination pagination={pagination} page={page} setPage={setPage} />
+      <Suspense fallback={<div className="text-center">Loading...</div>}>
+        <ListPagination pagination={pagination} page={page} setPage={setPage} />
+      </Suspense>
     </div>
   );
 };
