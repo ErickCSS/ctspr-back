@@ -68,7 +68,7 @@ export const useBlogData = (page: number): UseBlogDataReturn => {
     };
 
     fetchBlogData();
-  }, [page]);
+  }, [page, cursors]);
 
   return { blog, loading, error, cursors };
 };

@@ -128,3 +128,62 @@ export const parsePhoneNumbers = (
     configs: { phone: config || {} },
   });
 };
+
+/**
+ * Normalizes a slug by decoding URL-encoded characters
+ * This handles emojis and special characters that may be encoded in URLs
+ *
+ * @param slug - The slug from the URL (may contain encoded characters)
+ * @returns The normalized slug that matches WordPress's internal slug format
+ */
+export function normalizeSlug(slug: string): string {
+  try {
+    // First, decode the URL-encoded slug
+    // decodeURIComponent handles %XX encoded characters
+    const decoded = decodeURIComponent(slug);
+
+    // WordPress may store slugs with or without certain emoji modifiers
+    // We need to try both the original and a normalized version
+    return decoded;
+  } catch (error) {
+    // If decoding fails, return the original slug
+    console.error("Error decoding slug:", error);
+    return slug;
+  }
+}
+
+/**
+ * Creates multiple slug variations to try when querying WordPress
+ * This helps handle cases where emojis are encoded differently
+ *
+ * @param slug - The slug from the URL
+ * @returns An array of possible slug variations
+ */
+export function getSlugVariations(slug: string): string[] {
+  const variations = new Set<string>();
+
+  // Add the original slug
+  variations.add(slug);
+
+  try {
+    // Add the decoded version
+    const decoded = decodeURIComponent(slug);
+    variations.add(decoded);
+
+    // Remove variation selectors (U+FE0F) which are sometimes stripped
+    // These are invisible characters that modify emoji appearance
+    const withoutVariationSelector = decoded.replace(/\uFE0F/g, "");
+    variations.add(withoutVariationSelector);
+
+    // Also try with variation selectors explicitly added to emojis
+    const withVariationSelector = decoded.replace(
+      /([\u{1F300}-\u{1F9FF}])/gu,
+      "$1\uFE0F",
+    );
+    variations.add(withVariationSelector);
+  } catch (error) {
+    console.error("Error creating slug variations:", error);
+  }
+
+  return Array.from(variations);
+}
