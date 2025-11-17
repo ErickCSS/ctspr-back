@@ -212,11 +212,24 @@
       word-break: break-all;
     }
   }
-  .wp-block-post-author-name {
-    @apply mb-8 flex items-center gap-1 text-lg font-bold;
+  .wp-block-post-author {
+    @apply mb-8 flex items-center gap-2;
 
-    &::before {
-      content: "Escrito por:";
+    & .wp-block-post-author__avatar {
+      img {
+        @apply size-16 rounded-full border border-zinc-500 object-cover object-center;
+      }
+    }
+
+    & .wp-block-post-author__content {
+      & .wp-block-post-author__name {
+        @apply flex flex-col justify-center gap-1 text-base font-bold;
+
+        &::before {
+          content: "Escrito por:";
+          @apply text-sm font-normal;
+        }
+      }
     }
   }
 

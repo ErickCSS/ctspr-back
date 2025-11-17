@@ -1,7 +1,11 @@
 import { BlogProps } from "@/types/blog.types";
 import { WpQuery } from "@/services/wpQuery";
 import { queryBlogBySlug } from "@/graphql/general.query";
-import { parseContent } from "@/utils/parseContent.utils";
+import {
+  parseContent,
+  normalizeSlug,
+  getSlugVariations,
+} from "@/utils/parseContent.utils";
 
 export default async function BlogPost({
   params,
@@ -10,14 +14,40 @@ export default async function BlogPost({
 }) {
   const id = (await params).id;
 
-  const blog: BlogProps = await WpQuery({
+  // Normalize the slug to handle emoji encoding issues
+  const normalizedSlug = normalizeSlug(id);
+
+  let blog: BlogProps = await WpQuery({
     query: queryBlogBySlug,
     variables: {
-      slug: id,
+      slug: normalizedSlug,
     },
   });
 
-  const post = blog.posts.edges[0];
+  let post = blog.posts.edges[0];
+
+  // If post not found, try slug variations (handles different emoji encodings)
+  if (!post) {
+    const slugVariations = getSlugVariations(id);
+
+    for (const variation of slugVariations) {
+      if (variation === normalizedSlug) continue; // Skip already tried
+
+      try {
+        blog = await WpQuery({
+          query: queryBlogBySlug,
+          variables: {
+            slug: variation,
+          },
+        });
+
+        post = blog.posts.edges[0];
+        if (post) break; // Found it!
+      } catch (error) {
+        console.error(`Error trying slug variation "${variation}":`, error);
+      }
+    }
+  }
 
   if (!post) {
     return (
