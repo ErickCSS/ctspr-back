@@ -51,12 +51,12 @@ export const SomosCarousel = ({ afiliados }: { afiliados: AfiliadosProps }) => {
             <Image
               src={afiliado.featuredImage.node.sourceUrl}
               alt={afiliado.title}
-              width={100}
-              height={100}
+              width={200}
+              height={200}
               className="mx-auto h-auto w-52 lg:w-42"
               loading="lazy"
               decoding="async"
-              quality={50}
+              quality={100}
             />
           </SwiperSlide>
         ))}

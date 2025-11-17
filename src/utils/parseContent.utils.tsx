@@ -140,7 +140,7 @@ export function normalizeSlug(slug: string): string {
   try {
     // First, decode the URL-encoded slug
     // decodeURIComponent handles %XX encoded characters
-    let decoded = decodeURIComponent(slug);
+    const decoded = decodeURIComponent(slug);
 
     // WordPress may store slugs with or without certain emoji modifiers
     // We need to try both the original and a normalized version
