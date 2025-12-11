@@ -43,6 +43,10 @@ export const useAddCSV = ({ user }: { user: User }) => {
     value: "No suministrado",
   };
 
+  function cleanRequirementWords(text: string): string {
+    return text.replace(/\b(requisitos?|requerimientos?)\b[:\s]*/gi, "").trim();
+  }
+
   function toLabelValueArray(input?: string): LabelValue[] {
     if (!input || !input.trim()) return [REQUIRED_DEFAULT];
 
@@ -51,12 +55,20 @@ export const useAddCSV = ({ user }: { user: User }) => {
       if (Array.isArray(parsed)) {
         if (parsed.length === 0) return [REQUIRED_DEFAULT];
         if (typeof parsed[0] === "string") {
-          return (parsed as string[]).map((s) => ({
-            label: s.trim(),
-            value: s.trim(),
-          }));
+          const cleaned = (parsed as string[])
+            .map((s) => cleanRequirementWords(s.trim()))
+            .filter(Boolean);
+          if (cleaned.length === 0) return [REQUIRED_DEFAULT];
+          return cleaned.map((s) => ({ label: s, value: s }));
         }
-        return parsed as LabelValue[];
+        // Para objetos LabelValue, limpiar el label y value
+        const cleanedObjects = (parsed as LabelValue[])
+          .map((item) => ({
+            label: cleanRequirementWords(item.label),
+            value: cleanRequirementWords(item.value),
+          }))
+          .filter((item) => item.label && item.value);
+        return cleanedObjects.length > 0 ? cleanedObjects : [REQUIRED_DEFAULT];
       }
     } catch {
       // no era JSON, seguimos
@@ -64,7 +76,7 @@ export const useAddCSV = ({ user }: { user: User }) => {
 
     const parts = input
       .split(/[,;|]/)
-      .map((s) => s.trim())
+      .map((s) => cleanRequirementWords(s.trim()))
       .filter(Boolean);
     if (parts.length === 0) return [REQUIRED_DEFAULT];
     return parts.map((s) => ({ label: s, value: s }));

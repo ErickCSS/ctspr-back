@@ -27,19 +27,19 @@ export const CardEmployeeSkeleton = () => {
         </div>
 
         {/* Sub-header: Location, Date, Regional Office */}
-        <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2">
+        <div className="mt-3 flex flex-col justify-center gap-x-3 gap-y-2">
           <div className="flex items-center gap-x-2">
             <Skeleton className="h-4 w-4 rounded-full" />
-            <Skeleton className="h-4 w-20 rounded-md" />
+            <Skeleton className="h-4 w-32 rounded-md" />
           </div>
           <div className="flex items-center gap-x-2">
             <Skeleton className="h-4 w-4 rounded-full" />
-            <Skeleton className="h-4 w-20 rounded-md" />
+            <Skeleton className="h-4 w-32 rounded-md" />
           </div>
-          <div className="flex items-center gap-x-2">
+          {/* <div className="flex items-center gap-x-2">
             <Skeleton className="h-4 w-4 rounded-full" />
             <Skeleton className="h-4 w-20 rounded-md" />
-          </div>
+          </div> */}
         </div>
       </CardHeader>
 

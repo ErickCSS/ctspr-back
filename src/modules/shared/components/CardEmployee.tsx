@@ -52,9 +52,10 @@ export const CardEmployee = ({ employee }: { employee?: EmployeeType }) => {
             #{formData.code || employee?.code || "000000"}
           </div>
         </div>
-        <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
+        <div className="flex flex-col justify-center gap-x-2 gap-y-2">
           <div className="flex items-center gap-x-1 text-sm text-zinc-500">
             <IconMapPin stroke={1.5} size={20} />
+            <span>Ubicación del Empleo:</span>
             <span className="font-lato">
               {formData.location || employee?.location || "Ciudad, Pais"}
             </span>
@@ -66,7 +67,7 @@ export const CardEmployee = ({ employee }: { employee?: EmployeeType }) => {
           <div className="flex items-center gap-x-1 text-sm text-zinc-500">
             <IconBuildingEstate stroke={1.5} size={20} />
             <span className="font-lato">
-              Oficina:{" "}
+              Oficina de CTS:{" "}
               {CONVERT_UPPER(formData.regionalOffice) ||
                 CONVERT_UPPER(employee?.regionalOffice ?? "") ||
                 "Oficina Regional"}
@@ -85,20 +86,23 @@ export const CardEmployee = ({ employee }: { employee?: EmployeeType }) => {
           )}
         >
           <div className="flex items-center gap-2">
-            <Badge className="bg-primaryColor text-sm text-white">
+            <Badge className="bg-secondaryColor text-sm text-white">
+              Ver Detalle del Empleo
+            </Badge>
+            {/* <Badge className="bg-primaryColor text-sm text-white">
               {CONVERT_UPPER(formData.typeOfEmployment) ||
                 SELECT_EMPLOYMENT.find(
                   (type) => type.value === employee?.typeOfEmployment,
                 )?.label ||
                 "Full-Time"}
-            </Badge>
-            <Badge className="bg-secondaryColor text-sm text-white">
+            </Badge> */}
+            {/* <Badge className="bg-secondaryColor text-sm text-white">
               {CONVERT_UPPER(formData.industry) ||
                 SELECT_INDUSTRIES.find(
                   (industry) => industry.value === employee?.industry,
                 )?.label ||
                 "Industria"}
-            </Badge>
+            </Badge> */}
           </div>
 
           {/* ===== SALARY ===== */}

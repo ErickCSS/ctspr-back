@@ -52,15 +52,15 @@ const EmployeeOverview = ({ employee }: { employee: EmployeeType }) => {
     icon: React.ReactNode;
   };
   const description: DescriptionType[] = [
+    // {
+    //   title: "Fecha de Publicación",
+    //   description: formatDate(employee.created_at, "dd MMMM, yyyy", {
+    //     locale: es,
+    //   }),
+    //   icon: <IconCalendar stroke={1.2} size={42} className="text-black" />,
+    // },
     {
-      title: "Fecha de Publicación",
-      description: formatDate(employee.created_at, "dd MMMM, yyyy", {
-        locale: es,
-      }),
-      icon: <IconCalendar stroke={1.2} size={42} className="text-black" />,
-    },
-    {
-      title: "Localidad",
+      title: "Ubicación del Empleo",
       description: employee.location,
       icon: <IconMap stroke={1.2} size={42} className="text-black" />,
     },
@@ -77,11 +77,11 @@ const EmployeeOverview = ({ employee }: { employee: EmployeeType }) => {
       ),
     },
 
-    {
-      title: "Tipo de Contrato",
-      description: CONVERT_UPPER(employee.typeOfEmployment),
-      icon: <IconContract stroke={1.2} size={42} className="text-black" />,
-    },
+    // {
+    //   title: "Tipo de Contrato",
+    //   description: CONVERT_UPPER(employee.typeOfEmployment),
+    //   icon: <IconContract stroke={1.2} size={42} className="text-black" />,
+    // },
   ];
 
   const SHOW_CONTENT = ({
@@ -181,7 +181,7 @@ const EmployeeContent = ({ employee }: { employee: EmployeeType }) => {
           asChild
         >
           <Link href={`${linkToApply}`} target="_blank">
-            Aplicar Ahora
+            Solicitar Ahora
           </Link>
         </Button>
       </div>

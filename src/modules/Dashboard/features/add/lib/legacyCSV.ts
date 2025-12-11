@@ -144,13 +144,38 @@ export function mapLegacyArrayToModernObject(
   }
 
   // Distribuimos requirements en campos más específicos si procede:
-  const reqText = buckets.requirements.join("; ");
-  const academic = /BACHILLERATO|DIPLOMA|GRADO|T[ÍI]TULO/i.test(reqText)
-    ? reqText
-    : "";
-  const license = /LICENCI/i.test(reqText) ? reqText : "";
-  const certs = /CERTIFIC/i.test(reqText) ? reqText : "";
-  const exp = /EXPERIEN/i.test(reqText) ? reqText : "";
+  const reqItems = buckets.requirements
+    .flatMap((r) => r.split(/[,;|]/))
+    .map((s) =>
+      s.replace(/\b(requisitos?|requerimientos?)\b[:\s]*/gi, "").trim(),
+    )
+    .filter(Boolean);
+
+  const academicItems: string[] = [];
+  const licenseItems: string[] = [];
+  const certItems: string[] = [];
+  const expItems: string[] = [];
+
+  for (const item of reqItems) {
+    const up = item.toUpperCase();
+    if (/LICEN[CS]I/i.test(item)) {
+      licenseItems.push(item);
+    } else if (/CERTIFIC/i.test(item)) {
+      certItems.push(item);
+    } else if (/EXPERIEN/i.test(item)) {
+      expItems.push(item);
+    } else if (/BACHILLERATO|DIPLOMA|GRADO|T[ÍI]TULO|ESTUDIOS/i.test(item)) {
+      academicItems.push(item);
+    } else {
+      // Si no coincide con ninguna categoría específica, va a academic por defecto
+      academicItems.push(item);
+    }
+  }
+
+  const academic = academicItems.join("; ");
+  const license = licenseItems.join("; ");
+  const certs = certItems.join("; ");
+  const exp = expItems.join("; ");
 
   const compText = buckets.compensation.join("; ");
   const comp = parseLegacyCompensation(compText);

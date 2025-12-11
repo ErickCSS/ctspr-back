@@ -56,6 +56,7 @@ const LeftSide = ({ employee }: { employee: EmployeeType }) => {
         <div className="flex flex-wrap items-center gap-3">
           <div className="flex items-center gap-x-2 text-base text-zinc-600">
             <IconMapPin stroke={1.5} size={20} />
+            <span>Ubicación del Empleo:</span>
             <span className="font-lato">
               {employee.location || "Ciudad, Pais"}
             </span>
@@ -66,13 +67,14 @@ const LeftSide = ({ employee }: { employee: EmployeeType }) => {
           </div> */}
           <div className="flex items-center gap-x-2 text-base text-zinc-600">
             <IconBuildingEstate stroke={1.5} size={20} />
+            <span>Oficina de CTS:</span>
             <span className="font-lato">
               {CONVERT_UPPER(employee.regionalOffice.replace("-", " ") ?? "") ||
                 "Oficina Regional"}
             </span>
           </div>
         </div>
-        <div className="mt-2 flex items-center gap-2">
+        {/* <div className="mt-2 flex items-center gap-2">
           <Badge className="bg-primaryColor px-3 text-base text-white">
             {CONVERT_UPPER(employee?.typeOfEmployment ?? "") || "Full-Time"}
           </Badge>
@@ -81,7 +83,7 @@ const LeftSide = ({ employee }: { employee: EmployeeType }) => {
               (industry) => industry.value === employee?.industry,
             )?.label || "Development"}
           </Badge>
-        </div>
+        </div> */}
       </div>
     </div>
   );
@@ -101,7 +103,7 @@ const RightSide = ({ employee }: { employee: EmployeeType }) => {
           asChild
         >
           <Link href={`${linkToApply}`} target="_blank">
-            Aplicar Ahora
+            Solicitar Ahora
           </Link>
         </Button>
       </div>

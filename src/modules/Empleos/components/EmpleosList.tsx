@@ -8,6 +8,7 @@ import { useEmployeeFiltersStore } from "@modules/Empleos/store/EmployeeFilterSt
 import { useInitStore } from "@modules/Empleos/hooks/useInitStore";
 import { CardEmployeeSkeleton } from "@modules/shared/skeletons/CardEmployeeSkeleton";
 import Pagination from "@modules/shared/components/pagination/Pagination";
+import { Search } from "lucide-react";
 
 export const EmpleosList = () => {
   useInitStore();
@@ -25,6 +26,34 @@ export const EmpleosList = () => {
             {Array.from({ length: 15 }).map((_, index) => (
               <CardEmployeeSkeleton key={index} />
             ))}
+          </div>
+          <Pagination pagination={pagination} page={page} setPage={setPage} />
+        </div>
+      </section>
+    );
+  }
+
+  if (employees.length === 0) {
+    return (
+      <section className="bg-white px-4 py-20">
+        <div className="mx-auto w-full max-w-7xl">
+          <div className="mb-4">
+            <EmpleoDrawerDialog />
+          </div>
+          <div className="flex min-h-[400px] items-center justify-center">
+            <div className="flex flex-col items-center justify-center gap-6 text-center">
+              <div className="rounded-full bg-zinc-200 p-4">
+                <Search className="h-8 w-8 text-zinc-500" />
+              </div>
+              <div>
+                <h3 className="mb-2 text-xl font-semibold text-zinc-900">
+                  No se encontraron resultados
+                </h3>
+                <p className="text-sm text-zinc-600">
+                  Intenta ajustar tus filtros o realiza una nueva búsqueda
+                </p>
+              </div>
+            </div>
           </div>
           <Pagination pagination={pagination} page={page} setPage={setPage} />
         </div>

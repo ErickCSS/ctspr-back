@@ -51,7 +51,7 @@ export const EmpleoFilterAdvanced = () => {
 
         {/* Industria */}
         <div className="grid grid-cols-2 gap-2">
-          <div className="space-y-2">
+          {/* <div className="space-y-2">
             <label className="text-sm font-medium text-gray-700">
               Industria
             </label>
@@ -77,7 +77,7 @@ export const EmpleoFilterAdvanced = () => {
                 ))}
               </SelectContent>
             </Select>
-          </div>
+          </div> */}
 
           {/* Ubicación */}
           <div className="space-y-2">
@@ -109,7 +109,7 @@ export const EmpleoFilterAdvanced = () => {
           </div>
 
           {/* Tipo de Empleo */}
-          <div className="space-y-2">
+          {/* <div className="space-y-2">
             <label className="text-sm font-medium text-gray-700">
               Tipo de Empleo
             </label>
@@ -135,7 +135,7 @@ export const EmpleoFilterAdvanced = () => {
                 ))}
               </SelectContent>
             </Select>
-          </div>
+          </div> */}
 
           {/* Sucursal */}
           <div className="space-y-2">
@@ -168,7 +168,7 @@ export const EmpleoFilterAdvanced = () => {
         </div>
 
         {/* Rango Salarial */}
-        <div className="space-y-2 md:col-span-2 lg:col-span-1">
+        {/* <div className="space-y-2 md:col-span-2 lg:col-span-1">
           <label className="text-sm font-medium text-gray-700">
             Rango Salarial
           </label>
@@ -198,7 +198,7 @@ export const EmpleoFilterAdvanced = () => {
               }
             />
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Botones de Acción */}
