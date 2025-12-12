@@ -31,9 +31,9 @@ export const DashboardTable = () => {
   const TABLE_HEAD = [
     "ID",
     "Vacante",
-    "Industria",
+    // "Industria",
     "Ubicación",
-    "Rango Salarial",
+    // "Rango Salarial",
     "Fecha",
     "Acciones",
   ];
@@ -57,7 +57,7 @@ export const DashboardTable = () => {
   }
 
   return (
-    <Table className="table-auto">
+    <Table className="table-fixed">
       <TableHeader className="bg-zinc-100 p-2">
         <TableRow className="border-y border-zinc-200 px-2">
           {TABLE_HEAD.map((head) => (
@@ -72,12 +72,12 @@ export const DashboardTable = () => {
           <TableRow key={item.id} className="border-zinc-200">
             <TableCell className="py-4">{item.code}</TableCell>
             <TableCell className="py-4">{item.vacancy}</TableCell>
-            <TableCell className="py-4">{item.industry}</TableCell>
+            {/* <TableCell className="py-4">{item.industry}</TableCell> */}
             <TableCell className="py-4">{item.location}</TableCell>
-            <TableCell className="py-4">
+            {/* <TableCell className="py-4">
               {CONVERT_MONEY(item.min_salary)} -{" "}
               {CONVERT_MONEY(item.max_salary)}
-            </TableCell>
+            </TableCell> */}
             <TableCell className="py-4">
               {formattedDate(item.created_at)}
             </TableCell>

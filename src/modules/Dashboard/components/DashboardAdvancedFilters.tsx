@@ -101,7 +101,7 @@ export const DashboardAdvancedFilters = () => {
       </SidebarGroup>
 
       {/* Industria */}
-      <SidebarGroup>
+      {/* <SidebarGroup>
         <SidebarGroupLabel className="text-sm">Industria</SidebarGroupLabel>
         <SidebarGroupContent>
           <Select
@@ -127,7 +127,7 @@ export const DashboardAdvancedFilters = () => {
             </SelectContent>
           </Select>
         </SidebarGroupContent>
-      </SidebarGroup>
+      </SidebarGroup> */}
 
       {/* Ubicación */}
       <SidebarGroup>
@@ -159,7 +159,7 @@ export const DashboardAdvancedFilters = () => {
       </SidebarGroup>
 
       {/* Tipo de Empleo */}
-      <SidebarGroup>
+      {/* <SidebarGroup>
         <SidebarGroupLabel className="text-sm">
           Tipo de Empleo
         </SidebarGroupLabel>
@@ -187,10 +187,10 @@ export const DashboardAdvancedFilters = () => {
             </SelectContent>
           </Select>
         </SidebarGroupContent>
-      </SidebarGroup>
+      </SidebarGroup> */}
 
       {/* Rango Salarial */}
-      <SidebarGroup>
+      {/* <SidebarGroup>
         <SidebarGroupLabel className="text-sm">
           Rango Salarial
         </SidebarGroupLabel>
@@ -220,7 +220,7 @@ export const DashboardAdvancedFilters = () => {
             }
           />
         </SidebarGroupContent>
-      </SidebarGroup>
+      </SidebarGroup> */}
 
       {/* Botones de Acción */}
       <SidebarGroup>
