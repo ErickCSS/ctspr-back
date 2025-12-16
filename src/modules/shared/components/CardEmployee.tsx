@@ -69,7 +69,11 @@ export const CardEmployee = ({ employee }: { employee?: EmployeeType }) => {
             <span className="font-lato">
               Oficina de CTS:{" "}
               {CONVERT_UPPER(formData.regionalOffice) ||
-                CONVERT_UPPER(employee?.regionalOffice ?? "") ||
+                CONVERT_UPPER(
+                  employee?.regionalOffice === "san-german"
+                    ? "San Germán"
+                    : (employee?.regionalOffice ?? ""),
+                ) ||
                 "Oficina Regional"}
             </span>
           </div>

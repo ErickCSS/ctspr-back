@@ -107,7 +107,12 @@ export class EmpleosServices {
 
     // Aplicar filtros dinámicamente
     if (filters.regionalOffice) {
-      query = query.eq("regionalOffice", filters.regionalOffice.toLowerCase());
+      // Salinas usa los datos de las-piedras
+      const officeValue =
+        filters.regionalOffice === "salinas"
+          ? "las-piedras"
+          : filters.regionalOffice.toLowerCase();
+      query = query.eq("regionalOffice", officeValue);
     }
 
     if (filters.industry) {

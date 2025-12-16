@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@algolia/autocomplete-core": "^1.19.4",
     "@hookform/resolvers": "5.1.1",
     "@next/third-parties": "15.3.5",
     "@radix-ui/react-accordion": "1.2.11",

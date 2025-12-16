@@ -22,4 +22,5 @@ export interface EmployeeType {
   is_deleted: boolean;
   deleted_at: string;
   slug: string;
+  [key: string]: any;
 }

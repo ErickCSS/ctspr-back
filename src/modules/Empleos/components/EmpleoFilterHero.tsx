@@ -56,9 +56,9 @@ export const EmpleoFilterHero = () => {
               <SelectItem value="all" className="text-sm">
                 Todas las oficinas
               </SelectItem>
-              {SELECT_REGIONAL_OFFICE.map((location) => (
+              {SELECT_REGIONAL_OFFICE.map((location, index) => (
                 <SelectItem
-                  key={location.value}
+                  key={index}
                   value={location.value}
                   className="text-sm"
                 >

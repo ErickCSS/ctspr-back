@@ -115,6 +115,7 @@ export const SELECT_REGIONAL_OFFICE = [
   { value: "santurce", label: "Santurce" },
   { value: "las-piedras", label: "Las Piedras" },
   { value: "san-german", label: "San Germán" },
+  { value: "salinas", label: "Salinas" },
 ];
 
 export const SELECT_EMPLOYMENT = [
