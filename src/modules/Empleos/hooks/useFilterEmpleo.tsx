@@ -5,7 +5,12 @@ import { EmpleosServices } from "@modules/Empleos/services/empleos.services";
 import { useState, useEffect, useRef, useMemo } from "react";
 import { useDialogStore } from "@modules/Empleos/store/DialogStore";
 import { useSearchParams, useRouter } from "next/navigation";
-import { createAutocomplete } from "@algolia/autocomplete-core";
+import {
+  BaseItem,
+  createAutocomplete,
+  AutocompleteState,
+} from "@algolia/autocomplete-core";
+import { EmployeeType } from "@/modules/shared/types/employee.type";
 
 export const useFilterEmpleo = () => {
   const { activeFilters, applyFilters, clearFilters, loading } =
@@ -18,31 +23,56 @@ export const useFilterEmpleo = () => {
 
   const [filterOptions, setFilterOptions] = useState<any>({});
   const [localFilters, setLocalFilters] = useState(activeFilters);
-  const [autocompleteValue, setAutocompleteValue] = useState({});
+  const [autocompleteState, setAutocompleteState] = useState<
+    AutocompleteState<EmployeeType>
+  >({
+    collections: [],
+    isOpen: false,
+    activeItemId: null,
+    query: "",
+    completion: null,
+    status: "idle",
+    context: {},
+  });
 
-  const autocomplete = useMemo(() => {
-    createAutocomplete({
-      onStateChange: ({ state }) => {
-        setAutocompleteValue(state);
-      },
-      getSources: () => [
-        {
-          sourceId: "autocomplete-ctspr",
-          getItems: async ({ query }) => {
-            if (query) {
-              const empleos =
-                await EmpleosServices.getEmployeesWithFiltersPagination({
-                  search: query,
-                });
-
-              return empleos.data ?? [];
-            }
-            return [];
-          },
+  const autocomplete = useMemo(
+    () =>
+      createAutocomplete<EmployeeType>({
+        placeholder: "Buscar en vacantes...",
+        onStateChange: ({ state }) => {
+          setAutocompleteState(state);
         },
-      ],
-    });
-  }, []);
+        getSources: () => [
+          {
+            sourceId: "autocomplete-ctspr",
+            getItems: async ({ query }) => {
+              if (query) {
+                const empleos =
+                  await EmpleosServices.getEmployeesWithFiltersPagination({
+                    search: query,
+                  });
+
+                return empleos.data ?? [];
+              }
+              return [];
+            },
+          },
+        ],
+      }),
+    [],
+  );
+
+  const formRef = useRef(null);
+  const inputRef = useRef(null);
+  const panelRef = useRef(null);
+
+  const formProps = autocomplete.getFormProps({
+    inputElement: inputRef.current,
+  });
+
+  const inputProps = autocomplete.getInputProps({
+    inputElement: inputRef.current,
+  });
 
   useEffect(() => {
     const loadFilterOptions = async () => {
@@ -139,5 +169,10 @@ export const useFilterEmpleo = () => {
     handleRegionalOfficeChange,
     loading,
     setLocalFilters,
+    formProps,
+    inputProps,
+    autocompleteState,
+    panelRef,
+    autocomplete,
   };
 };

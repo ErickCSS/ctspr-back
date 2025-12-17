@@ -15,6 +15,7 @@ import {
   SELECT_LOCATION,
 } from "@modules/shared/lib/SelectInifo";
 import { Button } from "@/modules/ui/button";
+import { Link } from "next-view-transitions";
 
 export const EmpleoFilterHero = () => {
   const {
@@ -24,6 +25,11 @@ export const EmpleoFilterHero = () => {
     handleLocationChange,
     loading,
     setLocalFilters,
+    formProps,
+    inputProps,
+    autocompleteState,
+    panelRef,
+    autocomplete,
   } = useFilterEmpleo();
 
   return (
@@ -31,14 +37,57 @@ export const EmpleoFilterHero = () => {
       <div className="flex items-center gap-2 rounded-md bg-white p-3">
         <div className="relative flex w-1/3 items-center gap-1">
           <IconSearch stroke={1.5} size={20} className="absolute left-2" />
-          <Input
-            placeholder="Buscar en vacantes..."
-            className="min-h-12 border-none bg-white pl-10 text-base shadow-none placeholder:text-base focus-visible:ring-0 focus-visible:outline-none"
-            value={localFilters.search || ""}
-            onChange={(e) =>
-              setLocalFilters({ ...localFilters, search: e.target.value })
+          <form
+            onSubmit={
+              formProps.onSubmit as unknown as React.FormEventHandler<HTMLFormElement>
             }
-          />
+            onReset={
+              formProps.onReset as unknown as React.FormEventHandler<HTMLFormElement>
+            }
+            role={formProps.role}
+            noValidate={formProps.noValidate}
+            action={formProps.action}
+            className="w-full"
+          >
+            <Input
+              className="min-h-12 w-full border-none bg-white pl-10 text-base shadow-none placeholder:text-base focus-visible:ring-0 focus-visible:outline-none"
+              {...(inputProps as unknown as React.InputHTMLAttributes<HTMLInputElement>)}
+            />
+
+            {autocompleteState.isOpen && (
+              <div
+                className="absolute top-16 w-[350px] rounded-lg bg-white shadow-md"
+                ref={panelRef}
+                {...(autocomplete.getPanelProps() as unknown as React.HTMLAttributes<HTMLDivElement>)}
+              >
+                {autocompleteState.collections.map((collection, index) => {
+                  const { items } = collection;
+
+                  return (
+                    <div key={`section-${index}`}>
+                      {items.length > 0 && (
+                        <ul {...autocomplete.getListProps()}>
+                          {items.map((item, index) => (
+                            <li key={index}>
+                              <Button asChild variant="ghost">
+                                <Link
+                                  href={`/empleos/${item.slug}`}
+                                  className="w-full !justify-between gap-3 text-left"
+                                >
+                                  <span>{item.vacancy}</span>
+                                  <span>{item.code}</span>
+                                </Link>
+                              </Button>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </form>
         </div>
         <div className="h-[28px] !w-[1px] bg-zinc-300" />
         <div className="flex w-1/3 items-center gap-1">
