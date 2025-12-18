@@ -6,6 +6,7 @@ import {
   normalizeSlug,
   getSlugVariations,
 } from "@/modules/shared/utils/parseContent.utils";
+import { SharePopover } from "@/modules/shared/components/SharePopover";
 
 export default async function BlogPost({
   params,
@@ -77,7 +78,8 @@ export default async function BlogPost({
 
       <section className="bg-white px-4 py-20">
         <div className="mx-auto max-w-6xl">
-          <div className="flex flex-col items-center gap-y-10">
+          <SharePopover />
+          <div className="mt-10 flex flex-col items-center gap-y-10">
             <div className="hashtags w-full text-left text-pretty">
               {parseContent(content || "")}
             </div>

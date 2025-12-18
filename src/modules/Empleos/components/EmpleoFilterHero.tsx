@@ -75,7 +75,9 @@ export const EmpleoFilterHero = () => {
                                   className="w-full !justify-between gap-3 text-left"
                                 >
                                   <span>{item.vacancy}</span>
-                                  <span>{item.code}</span>
+                                  <span className="text-xs text-zinc-500">
+                                    #{item.code}
+                                  </span>
                                 </Link>
                               </Button>
                             </li>
