@@ -9,14 +9,20 @@ import { Button } from "@modules/ui/button";
 import { useState } from "react";
 import { cn } from "@/modules/shared/lib/utils";
 import { usePathname } from "next/navigation";
+import SelectLang from "@modules/shared/components/SelectLang";
+import { useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 
 export const Header = () => {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const isActive = (path: string) => pathname === path;
 
+  // Translation
+  const t = useTranslations("nav");
+
   return (
-    <header className="flex w-full flex-col overflow-hidden border-b border-zinc-200">
+    <header className="relative flex w-full flex-col overflow-hidden border-b border-zinc-200">
       <div className="bg-primaryColor flex w-full flex-col-reverse items-center justify-end gap-x-8 px-10 py-3 md:flex-row">
         <Button
           asChild
@@ -95,7 +101,7 @@ export const Header = () => {
                     )}
                     onClick={() => setOpen(false)}
                   >
-                    {item.name}
+                    {t(item.name)}
                   </Link>
                 ))}
                 {/* <div className="mt-5">
@@ -106,6 +112,7 @@ export const Header = () => {
                     <Link href="/login-employee">Login</Link>
                   </Button>
                 </div> */}
+                <SelectLang />
               </nav>
             </div>
           </div>

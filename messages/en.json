@@ -1,0 +1,15 @@
+{
+  "nav": {
+    "Home": "Home",
+    "About Us": "About Us",
+    "Services": "Services",
+    "Job Offers": "Job Offers",
+    "Available Jobs": "Available Jobs",
+    "Blog": "Blog",
+    "Contact Us": "Contact Us"
+  },
+  "slider": {
+    "sound": "Activate the audio for a better experience"
+  }
+}
+

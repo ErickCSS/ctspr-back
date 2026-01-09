@@ -2,23 +2,23 @@ import { NavProps } from "@/modules/shared/types/nav.types";
 
 export const NAV_CONFIG = [
   {
-    name: "Inicio",
+    name: "Home",
     href: "/",
   },
   {
-    name: "Quiénes Somos",
+    name: "About Us",
     href: "/quienes-somos",
   },
   {
-    name: "Servicios",
+    name: "Services",
     href: "/servicios",
   },
   {
-    name: "Ofertas de Empleo",
+    name: "Job Offers",
     href: "/ofertas-empleo",
   },
   {
-    name: "Empleos Disponibles",
+    name: "Available Jobs",
     href: "/empleos",
   },
   {
@@ -26,7 +26,7 @@ export const NAV_CONFIG = [
     href: "/blog",
   },
   {
-    name: "Contáctenos",
+    name: "Contact Us",
     href: "/contacto",
   },
 ] as NavProps[];

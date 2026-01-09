@@ -1,5 +1,5 @@
-export const sliderQuery = `query getPosts {
-  posts(where: {categoryName:"slider"}) {
+export const sliderQuery = `query getPosts($lang: String!) {
+  posts(where: {categoryName: $lang}) {
     nodes {
       id
       title

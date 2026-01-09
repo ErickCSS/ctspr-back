@@ -7,10 +7,16 @@ import {
   createYouTubeSlide,
   combineSlides,
 } from "@modules/shared/utils/slider.utils";
+import { getLocale } from "next-intl/server";
 
 export const Hero = async () => {
+  const locale = await getLocale();
+
   const sliders: HeroProps = await WpQuery({
     query: sliderQuery,
+    variables: {
+      lang: `slider-${locale}`,
+    },
   });
 
   const slidersReverse = toReversed(sliders.posts.nodes);

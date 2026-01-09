@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
+import { NextIntlClientProvider } from "next-intl";
 import "./globals.css";
 
 import { ViewTransitions } from "next-view-transitions";
 import { BackToTop } from "@modules/shared/components/BackToTop";
 import { Toaster } from "react-hot-toast";
+import { notFound } from "next/navigation";
+import { routing } from "@/i18n/routing";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 
 import Script from "next/script";
@@ -41,11 +44,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default async function RootLayout(
+  props: Readonly<{
+    children: React.ReactNode;
+    params: Promise<{ locale: string }>;
+  }>,
+) {
+  const params = await props.params;
+  const { locale } = params;
+  const { children } = props;
+
+  if (!routing.locales.includes(locale as "es" | "en")) {
+    notFound();
+  }
+
   return (
     <ViewTransitions>
       <html lang="es">
@@ -56,8 +68,11 @@ export default function RootLayout({
             strategy="beforeInteractive"
           />
         </head>
+
         <body className={` ${lato.variable} antialiased`}>
-          {children}
+          <NextIntlClientProvider locale={locale}>
+            {children}
+          </NextIntlClientProvider>
           <BackToTop />
           <Toaster />
         </body>

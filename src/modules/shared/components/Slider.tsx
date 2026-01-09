@@ -12,9 +12,11 @@ import { Navigation, Autoplay } from "swiper/modules";
 import { parsePhoneNumbers } from "@modules/shared/utils/parseContent.utils";
 import { IconVolume, IconVolumeOff } from "@tabler/icons-react";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export const SliderHero = ({ sliders }: { sliders: SliderProps[] }) => {
   const [muted, setMuted] = useState(true);
+  const t = useTranslations("slider");
 
   return (
     <Swiper
@@ -49,7 +51,7 @@ export const SliderHero = ({ sliders }: { sliders: SliderProps[] }) => {
             // Slide con video de YouTube como fondo
             <div className="relative h-full w-full">
               {/* Video de fondo */}
-              <div className="absolute inset-0 h-full w-full">
+              <div className="absolute inset-0 z-0 h-full w-full">
                 <video
                   autoPlay
                   loop
@@ -73,7 +75,7 @@ export const SliderHero = ({ sliders }: { sliders: SliderProps[] }) => {
                     onClick={() => setMuted(!muted)}
                     className="flex items-center gap-2 rounded-full bg-white px-3 py-2 text-sm text-black opacity-50 shadow-md backdrop-blur-sm transition-all duration-300 group-hover:opacity-100"
                   >
-                    <span>Activa el audio para una mejor experiencia</span>
+                    <span>{t("sound")}</span>
                   </div>
                 )}
 
