@@ -6,7 +6,7 @@ interface WpQueryProps {
 export const WpQuery = async ({ query, variables }: WpQueryProps) => {
   const API_URL =
     process.env.NEXT_PUBLIC_WORDPRESS_API_URL ||
-    `https://blog.ctspr.com/graphql`;
+    `https://stagingctspr.axesawebhosting9.net/graphql`;
   const MAX_RETRIES = 3;
   let lastError: any;
 
