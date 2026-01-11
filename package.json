@@ -8,6 +8,9 @@
     "start": "next start",
     "lint": "next lint"
   },
+   "engines": {
+    "node": ">=20.9.0"
+  },
   "dependencies": {
     "@algolia/autocomplete-core": "^1.19.4",
     "@hookform/resolvers": "5.1.1",
