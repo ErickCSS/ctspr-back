@@ -52,11 +52,41 @@ export const WpQuery = async ({ query, variables }: WpQueryProps) => {
   // Retornamos una estructura mínima para evitar que los componentes rompan el renderizado
   return {
     posts: {
-      nodes: [{ title: "Cargando...", content: "", featuredImage: { node: { sourceUrl: "" } } }],
-      edges: []
+      nodes: [
+        {
+          id: "mock-1",
+          title: "Cargando...",
+          content: "",
+          excerpt: "",
+          slug: "cargando",
+          date: new Date().toISOString(),
+          categories: {
+            nodes: [{ name: "General" }],
+          },
+          featuredImage: {
+            node: {
+              sourceUrl: "https://stagingctspr.axesawebhosting9.net/wp-content/uploads/2025/07/cts-brand.webp",
+            },
+          },
+        },
+      ],
+      edges: [],
+      pageInfo: {
+        hasNextPage: false,
+        endCursor: "",
+        hasPreviousPage: false,
+        startCursor: "",
+      },
     },
     mediaItems: {
-      nodes: [{ link: "" }]
-    }
+      nodes: [
+        {
+          id: "media-1",
+          title: "Mock Image",
+          file: "mock-image.png",
+          link: "https://stagingctspr.axesawebhosting9.net/wp-content/uploads/2025/07/cts-brand.webp",
+        },
+      ],
+    },
   };
 };
