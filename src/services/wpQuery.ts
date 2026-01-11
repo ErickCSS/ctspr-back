@@ -4,6 +4,8 @@ interface WpQueryProps {
 }
 
 export const WpQuery = async ({ query, variables }: WpQueryProps) => {
+  // DEBUG: Comentamos el fetch para aislar el error de ECONNRESET en Vercel
+  /*
   const API_URL = process.env.NEXT_PUBLIC_WORDPRESS_API_URL || `https://blog.ctspr.com/graphql`;
   const MAX_RETRIES = 3;
   let lastError: any;
@@ -34,8 +36,7 @@ export const WpQuery = async ({ query, variables }: WpQueryProps) => {
     } catch (error: any) {
       lastError = error;
       console.error(`Attempt ${attempt + 1} failed:`, error.message);
-
-      // Only retry on network errors or connection resets
+      
       if (error.message.includes('fetch failed') || error.code === 'ECONNRESET' || error.code === 'ETIMEDOUT') {
         if (attempt < MAX_RETRIES - 1) {
           const delay = 1000 * (attempt + 1);
@@ -46,6 +47,16 @@ export const WpQuery = async ({ query, variables }: WpQueryProps) => {
       break;
     }
   }
+  */
 
-  throw lastError;
+  // Retornamos una estructura mínima para evitar que los componentes rompan el renderizado
+  return {
+    posts: {
+      nodes: [{ title: "Cargando...", content: "", featuredImage: { node: { sourceUrl: "" } } }],
+      edges: []
+    },
+    mediaItems: {
+      nodes: [{ link: "" }]
+    }
+  };
 };
