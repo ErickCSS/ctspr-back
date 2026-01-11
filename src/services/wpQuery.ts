@@ -4,23 +4,33 @@ interface WpQueryProps {
 }
 
 export const WpQuery = async ({ query, variables }: WpQueryProps) => {
-  // DEBUG: Comentamos el fetch para aislar el error de ECONNRESET en Vercel
-  /*
-  const API_URL = process.env.NEXT_PUBLIC_WORDPRESS_API_URL || `https://blog.ctspr.com/graphql`;
+  const API_URL =
+    process.env.NEXT_PUBLIC_WORDPRESS_API_URL ||
+    `https://blog.ctspr.com/graphql`;
   const MAX_RETRIES = 3;
   let lastError: any;
 
   for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
+
       const responsePosts = await fetch(API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+          Accept: "application/json",
+          "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+          Referer: "https://www.ctspr.com/",
+          Origin: "https://www.ctspr.com",
         },
         body: JSON.stringify({ query, variables }),
         cache: "no-store",
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
 
       if (!responsePosts.ok) {
         throw new Error(`Failed to fetch data: ${responsePosts.statusText}`);
@@ -36,10 +46,15 @@ export const WpQuery = async ({ query, variables }: WpQueryProps) => {
     } catch (error: any) {
       lastError = error;
       console.error(`Attempt ${attempt + 1} failed:`, error.message);
-      
-      if (error.message.includes('fetch failed') || error.code === 'ECONNRESET' || error.code === 'ETIMEDOUT') {
+
+      if (
+        error.message.includes("fetch failed") ||
+        error.code === "ECONNRESET" ||
+        error.code === "ETIMEDOUT" ||
+        error.name === "AbortError"
+      ) {
         if (attempt < MAX_RETRIES - 1) {
-          const delay = 1000 * (attempt + 1);
+          const delay = 2000 * (attempt + 1); // Exponential backoff
           await new Promise((resolve) => setTimeout(resolve, delay));
           continue;
         }
@@ -47,46 +62,6 @@ export const WpQuery = async ({ query, variables }: WpQueryProps) => {
       break;
     }
   }
-  */
 
-  // Retornamos una estructura mínima para evitar que los componentes rompan el renderizado
-  return {
-    posts: {
-      nodes: [
-        {
-          id: "mock-1",
-          title: "Cargando...",
-          content: "",
-          excerpt: "",
-          slug: "cargando",
-          date: new Date().toISOString(),
-          categories: {
-            nodes: [{ name: "General" }],
-          },
-          featuredImage: {
-            node: {
-              sourceUrl: "https://stagingctspr.axesawebhosting9.net/wp-content/uploads/2025/07/cts-brand.webp",
-            },
-          },
-        },
-      ],
-      edges: [],
-      pageInfo: {
-        hasNextPage: false,
-        endCursor: "",
-        hasPreviousPage: false,
-        startCursor: "",
-      },
-    },
-    mediaItems: {
-      nodes: [
-        {
-          id: "media-1",
-          title: "Mock Image",
-          file: "mock-image.png",
-          link: "https://stagingctspr.axesawebhosting9.net/wp-content/uploads/2025/07/cts-brand.webp",
-        },
-      ],
-    },
-  };
+  throw lastError;
 };
