@@ -17,6 +17,12 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "blogctspr.axesawebhosting.net",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };
