@@ -12,7 +12,7 @@ export const WpQuery = async ({ query, variables }: WpQueryProps) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ query, variables }),
-    cache: "no-store",
+    cache: "no-cache",
   });
 
   if (!responsePosts.ok) {
