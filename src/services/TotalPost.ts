@@ -1,6 +1,6 @@
 export const TotalPost = async () => {
   const url =
-    "https://blog.ctspr.com/wp-json/wp/v2/posts?per_page=6&categories=1";
+    "https://blogctspr.axesawebhosting.net/wp-json/wp/v2/posts?per_page=6&categories=1";
   const response = await fetch(url);
 
   if (!response.ok) {

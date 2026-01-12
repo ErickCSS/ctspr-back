@@ -29,7 +29,6 @@ export const Footer = async () => {
     <>
       <footer className="bg-[#1a2256] px-4 py-10">
         <div className="container mx-auto">
-          <p className="text-xs text-red-500 font-bold mb-4">DEBUG: FETCH DESACTIVADO - VERSIÓN 2</p>
           <div className="grid grid-cols-1 items-center gap-x-5 md:grid-cols-2 lg:grid-cols-3">
             <Image
               src={logo.mediaItems.nodes[0].link}
