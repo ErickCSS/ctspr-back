@@ -75,7 +75,7 @@ export const Header = () => {
               </Button>
               <div className="mb-10 block lg:hidden">
                 <Image
-                  src="https://blog.ctspr.com/wp-content/uploads/2025/07/cts-brand.webp"
+                  src="https://blogctspr.axesawebhosting.net/wp-content/uploads/2025/07/cts-brand.webp"
                   alt="logo"
                   width={250}
                   height={250}
