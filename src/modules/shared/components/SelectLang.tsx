@@ -24,7 +24,7 @@ const SelectItem = () => {
       label: (
         <div className="flex gap-2">
           <span className="font-primary text-base font-light">ES</span>
-          <span className="fi fi-do"></span>
+          <span className="fi fi-pr"></span>
         </div>
       ),
     },
