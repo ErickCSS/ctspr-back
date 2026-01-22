@@ -432,7 +432,7 @@ export const queryConoceSucursal = `query ConoceSucursal {
 }`;
 
 export const queryBlog = `query Blog(
-  $category: String! = "blog"
+  $category: String!
   $first: Int! = 6
   $after: String
 ) {

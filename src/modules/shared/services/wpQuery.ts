@@ -4,16 +4,19 @@ interface WpQueryProps {
 }
 
 export const WpQuery = async ({ query, variables }: WpQueryProps) => {
-  const API_URL = process.env.API_URL;
+  const API_URL = process.env.API_URL!;
 
-  const responsePosts = await fetch(`https://blog.ctspr.com/graphql`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
+  const responsePosts = await fetch(
+    `https://blogctspr.axesawebhosting.net/graphql`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ query, variables }),
+      cache: "no-cache",
     },
-    body: JSON.stringify({ query, variables }),
-    cache: "no-cache",
-  });
+  );
 
   if (!responsePosts.ok) {
     const errorText = await responsePosts.text();

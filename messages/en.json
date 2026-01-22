@@ -10,6 +10,10 @@
   },
   "slider": {
     "sound": "Activate the audio for a better experience"
+  },
+  "callActions": {
+    "jobOffers": "Do you look for a job?",
+    "services": "Do you look for a personal?"
   }
 }
 

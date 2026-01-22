@@ -1,8 +1,11 @@
 import { Button } from "@modules/ui/button";
 import { IconCaretRightFilled } from "@tabler/icons-react";
 import { Link } from "next-view-transitions";
+import { getTranslations } from "next-intl/server";
 
-export const CallActions = () => {
+export const CallActions = async () => {
+  const t = await getTranslations("callActions");
+
   return (
     <section className="bg-zinc-100 px-4 py-20">
       <div className="container mx-auto">
@@ -12,7 +15,7 @@ export const CallActions = () => {
             asChild
           >
             <Link href="/ofertas-empleo" className="flex items-center gap-x-10">
-              <span className="font-bold">¿Buscas Empleo? </span>{" "}
+              <span className="font-bold">{t("jobOffers")} </span>{" "}
               <IconCaretRightFilled
                 size={32}
                 className="size-[24px] lg:size-[32px]"
@@ -25,7 +28,7 @@ export const CallActions = () => {
             asChild
           >
             <Link href="/servicios" className="flex items-center gap-x-10">
-              <span className="font-bold">¿Buscas Personal? </span>{" "}
+              <span className="font-bold">{t("services")} </span>{" "}
               <IconCaretRightFilled
                 size={32}
                 className="size-[24px] lg:size-[32px]"

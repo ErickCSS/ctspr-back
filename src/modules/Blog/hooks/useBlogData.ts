@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { WpQuery } from "@modules/shared/services/wpQuery";
 import { queryBlog } from "@modules/shared/graphql/general.query";
 import { BlogProps } from "@modules/shared/types/blog.types";
+import { useLocale } from "next-intl";
 
 interface UseBlogDataReturn {
   blog: BlogProps | null;
@@ -17,6 +18,7 @@ export const useBlogData = (page: number): UseBlogDataReturn => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [cursors, setCursors] = useState<{ [key: number]: string }>({});
+  const locale = useLocale();
 
   useEffect(() => {
     const fetchBlogData = async () => {
@@ -29,7 +31,7 @@ export const useBlogData = (page: number): UseBlogDataReturn => {
 
         // Construir variables requeridas por el query
         const variables: any = {
-          category: "blog",
+          category: `blog-${locale.toLowerCase()}`,
           first: 6,
         };
 
