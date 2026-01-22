@@ -3,7 +3,7 @@ import { WpQuery } from "@/modules/shared/services/wpQuery";
 import { queryWhyChooseUs } from "@/modules/shared/graphql/general.query";
 import { toReversed } from "@/modules/shared/utils/toReversed";
 import Image from "next/image";
-
+import { getLocale } from "next-intl/server";
 import CounterAnimation from "./CounterAnimation";
 
 const extractNumberFromHTML = (htmlContent: string): number => {
@@ -16,8 +16,13 @@ const extractNumberFromHTML = (htmlContent: string): number => {
 };
 
 export const WhyChooseUs = async () => {
+  const locale = await getLocale();
+
   const whyChooseUs: WhyChooseUsProps = await WpQuery({
     query: queryWhyChooseUs,
+    variables: {
+      category: `porque-elegirnos-${locale}`,
+    },
   });
 
   const whyChooseUsReversed = toReversed(whyChooseUs.posts.nodes);

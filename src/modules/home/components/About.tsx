@@ -2,10 +2,16 @@ import { WpQuery } from "@/modules/shared/services/wpQuery";
 import { AboutProps } from "@/modules/shared/types/generalQuery.types";
 import { queryAbout } from "@/modules/shared/graphql/general.query";
 import { parseContent } from "@/modules/shared/utils/parseContent.utils";
+import { getLocale } from "next-intl/server";
 
 export const About = async () => {
+  const locale = await getLocale();
+
   const about: AboutProps = await WpQuery({
     query: queryAbout,
+    variables: {
+      category: `nosotros-${locale}`,
+    },
   });
 
   return (

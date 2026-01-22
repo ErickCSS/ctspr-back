@@ -11,8 +11,8 @@ mediaItems(where:{title: "${title}"}){
 }`;
 };
 
-export const queryAbout = `query About {
-  posts(where: {categoryName:"Nosotros"}){
+export const queryAbout = `query About($category: String!) {
+  posts(where: {categoryName: $category}){
     nodes{
       id
       title
@@ -53,8 +53,8 @@ export const queryTestimonios = `query testimonios {
   }
 }`;
 
-export const queryWhyChooseUs = `query WhyChooseUs {
-  posts(where: {categoryName:"Porque Elegirnos"}){
+export const queryWhyChooseUs = `query WhyChooseUs($category: String!) {
+  posts(where: {categoryName:$category}){
     nodes{
       id
       title
