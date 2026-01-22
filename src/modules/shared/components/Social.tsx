@@ -39,11 +39,7 @@ const LIST_SOCIAL = [
   },
   {
     social: "youtube",
-<<<<<<< HEAD:src/components/shared/Social.tsx
     icon: <IconBrandYoutubeFilled className="text-primaryColor size-[22px]" />,
-=======
-    icon: <IconBrandYoutubeFilled className="size-[22px]" />,
->>>>>>> fase2-developer:src/modules/shared/components/Social.tsx
     href: "https://www.youtube.com/@ctsempleos",
   },
 ];

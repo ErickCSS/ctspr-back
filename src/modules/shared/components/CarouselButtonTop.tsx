@@ -11,12 +11,8 @@ import { parseContent } from "@/modules/shared/utils/parseContent.utils";
 import Image from "next/image";
 import { TruncatedHtml } from "@/modules/shared/lib/Truncated";
 import { usePathname } from "next/navigation";
-<<<<<<< HEAD:src/components/shared/CarouselButtonTop.tsx
 import { useState, useRef, useEffect } from "react";
 import type { Swiper as SwiperType } from "swiper";
-=======
-import { useState } from "react";
->>>>>>> fase2-developer:src/modules/shared/components/CarouselButtonTop.tsx
 
 export const CarouselButtonTop = ({
   carousels,
@@ -29,7 +25,6 @@ export const CarouselButtonTop = ({
   const showLastSix = carousels.slice(-6);
   const SHOW_SLIDES = isHome ? showFirstSix : showLastSix;
   const [autoplay, setAutoplay] = useState(true);
-<<<<<<< HEAD:src/components/shared/CarouselButtonTop.tsx
   const swiperRef = useRef<SwiperType | null>(null);
 
   useEffect(() => {
@@ -38,8 +33,6 @@ export const CarouselButtonTop = ({
       swiperRef.current.autoplay.start();
     }
   }, [autoplay]);
-=======
->>>>>>> fase2-developer:src/modules/shared/components/CarouselButtonTop.tsx
 
   return (
     <Swiper

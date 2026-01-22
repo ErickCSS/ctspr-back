@@ -22,19 +22,11 @@ export const Header = () => {
   const t = useTranslations("nav");
 
   return (
-<<<<<<< HEAD:src/components/general/header.tsx
-    <header className="flex w-full flex-col overflow-hidden">
-      <div className="bg-primaryColor flex w-full flex-col-reverse items-center justify-end gap-x-8 gap-y-4 px-10 py-3 md:flex-row">
-        <Button
-          asChild
-          className="hover:bg-secondaryColor w-fit rounded-3xl bg-white px-10 text-black transition-colors duration-300 hover:text-white"
-=======
     <header className="relative flex w-full flex-col overflow-hidden border-b border-zinc-200">
       <div className="bg-primaryColor flex w-full flex-col-reverse items-center justify-end gap-x-8 px-10 py-3 md:flex-row">
         <Button
           asChild
           className="hover:bg-secondaryColor rounded-3xl bg-white px-10 text-black transition-colors duration-300 hover:text-white"
->>>>>>> fase2-developer:src/modules/shared/components/general/header.tsx
         >
           <Link href="/login-employee">Login</Link>
         </Button>
@@ -120,10 +112,7 @@ export const Header = () => {
                     <Link href="/login-employee">Login</Link>
                   </Button>
                 </div> */}
-<<<<<<< HEAD:src/components/general/header.tsx
-=======
                 <SelectLang />
->>>>>>> fase2-developer:src/modules/shared/components/general/header.tsx
               </nav>
             </div>
           </div>
