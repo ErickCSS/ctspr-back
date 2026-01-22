@@ -1,12 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext",
-      "ES2022"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext", "ES2022"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -23,19 +18,10 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@components/*": [
-        "./src/components/*"
-<<<<<<< HEAD
-=======
-      ],
-      "@modules/*": [
-        "./src/modules/*"
->>>>>>> fase2-developer
-      ]
+      "@/*": ["src/*"],
+      "@modules/*": ["src/modules/*"]
     }
   },
   "include": [
@@ -45,7 +31,5 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }
