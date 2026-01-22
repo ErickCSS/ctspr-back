@@ -29,6 +29,12 @@
       ],
       "@components/*": [
         "./src/components/*"
+<<<<<<< HEAD
+=======
+      ],
+      "@modules/*": [
+        "./src/modules/*"
+>>>>>>> fase2-developer
       ]
     }
   },
