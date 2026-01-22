@@ -17,6 +17,7 @@ import {
   querySucursales,
 } from "@/modules/shared/graphql/general.query";
 import { IconBrandFacebookFilled } from "@tabler/icons-react";
+import { getTranslations } from "next-intl/server";
 
 export const Footer = async () => {
   const logo: MediaProps = await WpQuery({
@@ -33,6 +34,8 @@ export const Footer = async () => {
   const sucursales: SucursalesProps = await WpQuery({
     query: querySucursales,
   });
+
+  const t = await getTranslations("footer");
 
   return (
     <>
@@ -52,13 +55,10 @@ export const Footer = async () => {
 
             <div className="space-y-3">
               <p className="text-sm text-white md:text-base lg:text-lg">
-                Caribbean Temporary Services, LLC (CTS) es una Agencia de Empleo
-                establecida en el 1983 con la misión de conectar empresas con
-                talento calificado mediante soluciones flexibles, ágiles y
-                responsables en recursos humanos.
+                {t("description")}
               </p>
               <p className="text-sm text-white md:text-base lg:text-lg">
-                Patrono con Igualdad de Oportunidades en el Empleo.
+                {t("EqualOpportunity")}
               </p>
             </div>
 
@@ -87,10 +87,10 @@ export const Footer = async () => {
                     sucursal.title === "Salinas"
                       ? `https://www.facebook.com/ctssucursallaspiedras`
                       : `https://www.facebook.com/ctssucursal${sucursal.title
-                        .toLowerCase()
-                        .normalize("NFD")
-                        .replace(/[\u0300-\u036f]/g, "")
-                        .replace(/\s+/g, "")}`
+                          .toLowerCase()
+                          .normalize("NFD")
+                          .replace(/[\u0300-\u036f]/g, "")
+                          .replace(/\s+/g, "")}`
                   }
                   target="_blank"
                   rel="noopener noreferrer nofollow"
@@ -98,7 +98,7 @@ export const Footer = async () => {
                   <div className="flex size-7 items-center justify-center bg-white">
                     <IconBrandFacebookFilled className="text-primaryColor" />
                   </div>
-                  <span>Síguenos en Facebook</span>
+                  <span>{t("FollowUs")}</span>
                 </Link>
               </article>
             ))}
@@ -106,7 +106,7 @@ export const Footer = async () => {
 
           <div className="mt-5 flex flex-col gap-y-4">
             <h5 className="font-lato text-xl font-bold text-white">
-              Documentos:
+              {t("documents")}
             </h5>
 
             <div className="flex flex-wrap items-center gap-5">
@@ -116,7 +116,7 @@ export const Footer = async () => {
                 rel="noopener noreferrer nofollow"
                 className="font-lato border-secondaryColor border-l-4 pl-2 text-base font-normal text-white"
               >
-                Normativas del Cliente - Español
+                {t("normativeClient")}
               </Link>
               <Link
                 href="https://blog.ctspr.com/wp-content/uploads/2025/09/normativa-cliente-english.pdf"
@@ -124,7 +124,7 @@ export const Footer = async () => {
                 rel="noopener noreferrer nofollow"
                 className="font-lato border-secondaryColor border-l-4 pl-2 text-base font-normal text-white"
               >
-                Normativas del Cliente - Inglés
+                {t("normativeClientEnglish")}
               </Link>
             </div>
           </div>

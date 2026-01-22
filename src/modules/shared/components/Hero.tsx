@@ -3,17 +3,24 @@ import { HeroProps } from "@/modules/shared/types/generalQuery.types";
 import { queryHero } from "@/modules/shared/graphql/general.query";
 import { cn } from "@/modules/shared/lib/utils";
 import { EmpleoFilterHero } from "@modules/Empleos/components/EmpleoFilterHero";
+import { getLocale } from "next-intl/server";
 
 export const Hero = async ({ title }: { title: string }) => {
+  const locale = await getLocale();
+  const isEnglish = locale === "en";
+
   const hero: HeroProps = await WpQuery({
     query: queryHero(title),
+    variables: {
+      category: isEnglish ? `hero-en` : `hero`,
+    },
   });
 
   const heroImage = hero.posts.nodes[0].featuredImage.node.sourceUrl;
   const isContact = title === "Contáctenos";
   const isEmpleos = title === "Empleo";
   const isListEmpleos = title === "Listado de Empleos";
-  const isAbout = title === "Quiénes Somos";
+  const isAbout = title === "Quiénes Somos" || title === "About Us";
   const isBlog = title === "Blog";
 
   return (

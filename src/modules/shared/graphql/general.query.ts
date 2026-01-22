@@ -69,8 +69,8 @@ export const queryWhyChooseUs = `query WhyChooseUs($category: String!) {
 }`;
 
 export const queryHero = (title: string) => {
-  return `query Hero {
-  posts(where: {categoryName:"hero", title:"${title}"}) {
+  return `query Hero($category: String!) {
+  posts(where: {categoryName:$category, title:"${title}"}) {
     nodes {
       id
       title

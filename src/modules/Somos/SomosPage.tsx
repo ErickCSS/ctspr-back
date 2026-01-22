@@ -5,11 +5,15 @@ import { SomosAfiliaciones } from "@modules/Somos/components/SomosAfiliaciones";
 import { SomosValues } from "@modules/Somos/components/SomosValues";
 import { SomosNosotros } from "@modules/Somos/components/SomosNosotros";
 import { SomosTransformamos } from "@modules/Somos/components/SomosTransformamos";
+import { getLocale } from "next-intl/server";
 
-export const SomosPage = () => {
+export const SomosPage = async () => {
+  const locale = await getLocale();
+  const isEnglish = locale === "en";
+
   return (
     <>
-      <Hero title="Quiénes Somos" />
+      <Hero title={isEnglish ? "About Us" : "Quiénes Somos"} />
       <SomosNosotros />
       <SomosValues />
       <SomosTransformamos />

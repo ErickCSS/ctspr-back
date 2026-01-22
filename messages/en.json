@@ -12,8 +12,23 @@
     "sound": "Activate the audio for a better experience"
   },
   "callActions": {
-    "jobOffers": "Do you look for a job?",
-    "services": "Do you look for a personal?"
+    "jobOffers": "Seeking Employment?",
+    "services": "Looking to Hire Qualified Talent?"
+  },
+  "testimonials": {
+    "title": "Testimonials"
+  },
+  "sucursales": {
+    "title": "Branches",
+    "FollowUs": "Follow us on Facebook"
+  },
+  "footer": {
+    "description": "Caribbean Temporary Services, LLC (CTS) is a staffing agency established in 1983, dedicated to connecting businesses with qualified talent through flexible, efficient, and responsible human resources solutions.",
+    "EqualOpportunity": "Equal opportunity employer.",
+    "FollowUs": "Follow us on Facebook",
+    "documents": "Documents",
+    "normativeClient": "Normative Client",
+    "normativeClientEnglish": "CTS Business and Ethics Rules Publication for Clients"
   }
 }
 

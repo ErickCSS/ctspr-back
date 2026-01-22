@@ -17,12 +17,14 @@ import {
 import Link from "next/link";
 import { IconBrandFacebookFilled } from "@tabler/icons-react";
 import { toReversed } from "@/modules/shared/utils/toReversed";
+import { useTranslations } from "next-intl";
 
 export const SucursalCarousel = ({
   sucursales,
 }: {
   sucursales: SucursalesProps;
 }) => {
+  const t = useTranslations("sucursales");
   const sucursalesReverse = toReversed(sucursales.posts.nodes);
 
   return (
@@ -88,7 +90,7 @@ export const SucursalCarousel = ({
                       stroke={1.5}
                     />
                   </div>
-                  <span className="text-white">Síguenos en Facebook</span>
+                  <span className="text-white">{t("FollowUs")}</span>
                 </Link>
               </div>
             </article>
