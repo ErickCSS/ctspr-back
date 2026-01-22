@@ -1,20 +1,11 @@
 "use client";
 
-<<<<<<< HEAD:src/components/Blog/BlogList.tsx
-import Pagination from "@components/shared/pagination/Pagination";
-import { BlogCard } from "./BlogCard";
-import { usePaginationBlog } from "@/store/usePaginationBlog";
-import { useBlogData } from "@/hooks/useBlogData";
-import { Pagination as PaginationType } from "@/types/pagination.type";
-import { BlogCardSkeleton } from "@components/skeletons/CardBlogSkeletons";
-=======
 import Pagination from "@modules/shared/components/pagination/Pagination";
 import { BlogCard } from "./BlogCard";
 import { usePaginationBlog } from "@modules/Blog/store/usePaginationBlog";
 import { useBlogData } from "@modules/Blog/hooks/useBlogData";
 import { Pagination as PaginationType } from "@modules/shared/types/pagination.type";
 import { BlogCardSkeleton } from "@modules/shared/skeletons/CardBlogSkeleton";
->>>>>>> fase2-developer:src/modules/Blog/components/BlogList.tsx
 
 interface BlogListProps {
   totalPages: number;

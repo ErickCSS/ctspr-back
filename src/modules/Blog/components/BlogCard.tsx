@@ -23,11 +23,7 @@ export const BlogCard = ({ post }: { post: Post }) => {
     return null;
   }
 
-<<<<<<< HEAD:src/components/Blog/BlogCard.tsx
-  const parseISODate = parseISO(dateGmt || "");
-=======
   const parseISODate = parseISO(dateGmt);
->>>>>>> fase2-developer:src/modules/Blog/components/BlogCard.tsx
   const date = format(parseISODate, "dd-MM-yyyy");
 
   return (

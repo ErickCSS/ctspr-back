@@ -21,12 +21,6 @@ export interface SliderProps {
     };
   };
   date: string;
-<<<<<<< HEAD:src/types/hero.types.ts
-
-  youtubeVideoId?: string;
-
-=======
   routeVideo?: string;
->>>>>>> fase2-developer:src/modules/shared/types/hero.types.ts
   isVideo?: boolean;
 }
