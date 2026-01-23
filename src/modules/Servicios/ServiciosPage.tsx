@@ -10,11 +10,15 @@ import { ServiciosRecursosHumanos } from "@modules/Servicios/components/Servicio
 import { ServiciosPeritajeIndustrias } from "@modules/Servicios/components/ServiciosPeritajeIndustrias";
 import { ServiciosSeguridadSalud } from "@modules/Servicios/components/ServiciosSeguridadSalud";
 import { ServiciosPreguntasFrecuentes } from "@modules/Servicios/components/ServiciosPreguntasFrecuentes";
+import { getLocale } from "next-intl/server";
 
-export const ServiciosPage = () => {
+export const ServiciosPage = async () => {
+  const locale = await getLocale();
+  const isEnglish = locale === "en";
+
   return (
     <>
-      <Hero title="Servicios" />
+      <Hero title={isEnglish ? "Services" : "Servicios"} />
       <ServiciosContent />
       <ServiciosPropuestaValor />
       <ServiciosList />

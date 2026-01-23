@@ -16,10 +16,11 @@ export const Hero = async ({ title }: { title: string }) => {
     },
   });
 
-  const heroImage = hero.posts.nodes[0].featuredImage.node.sourceUrl;
-  const isContact = title === "Contáctenos";
+  const heroImage = hero.posts.nodes[0]?.featuredImage.node.sourceUrl;
+  const isContact = title === "Contáctenos" || title === "Contact Us";
   const isEmpleos = title === "Empleo";
-  const isListEmpleos = title === "Listado de Empleos";
+  const isListEmpleos =
+    title === "Listado de Empleos" || title === "Job Listing";
   const isAbout = title === "Quiénes Somos" || title === "About Us";
   const isBlog = title === "Blog";
 
@@ -45,7 +46,7 @@ export const Hero = async ({ title }: { title: string }) => {
       <div className="relative z-5 container mx-auto h-full px-4">
         <div className="flex h-full flex-col justify-center">
           <h1 className="text-4xl font-bold text-white lg:text-6xl">
-            {hero.posts.nodes[0].title}
+            {hero.posts.nodes[0]?.title}
           </h1>
           {isListEmpleos && <EmpleoFilterHero />}
         </div>
