@@ -2,8 +2,10 @@ import { SomosCard } from "./SomosCard";
 import { WpQuery } from "@/modules/shared/services/wpQuery";
 import { queryEquipoGerencial } from "@/modules/shared/graphql/general.query";
 import { EquiposProps } from "@/modules/shared/types/generalQuery.types";
+import { getTranslations } from "next-intl/server";
 
 export const SomosGerencia = async () => {
+  const t = await getTranslations("WeAre");
   const equipoAdministrativo: EquiposProps = await WpQuery({
     query: queryEquipoGerencial,
   });
@@ -12,7 +14,7 @@ export const SomosGerencia = async () => {
     <div className="mt-32 flex flex-col items-center justify-center">
       <div className="flex flex-col items-center gap-y-10">
         <h2 className="text-center text-5xl font-bold text-black">
-          Equipo Gerencial
+          {t("gerencial")}
         </h2>
         <hr className="border-secondaryColor w-[120px] border-2 outline-none" />
       </div>

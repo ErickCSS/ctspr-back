@@ -13,7 +13,7 @@ import { Navigation, Autoplay } from "swiper/modules";
 import { toReversed } from "@/modules/shared/utils/toReversed";
 
 export const SomosCarousel = ({ afiliados }: { afiliados: AfiliadosProps }) => {
-  const afiliadosList = toReversed(afiliados.posts.nodes);
+  const afiliadosList = toReversed(afiliados?.posts?.nodes);
 
   return (
     <>
@@ -49,8 +49,8 @@ export const SomosCarousel = ({ afiliados }: { afiliados: AfiliadosProps }) => {
         {afiliadosList.map((afiliado, index) => (
           <SwiperSlide key={index}>
             <Image
-              src={afiliado.featuredImage.node.sourceUrl}
-              alt={afiliado.title}
+              src={afiliado?.featuredImage?.node?.sourceUrl}
+              alt={afiliado?.title}
               width={200}
               height={200}
               className="mx-auto h-auto w-52 lg:w-42"

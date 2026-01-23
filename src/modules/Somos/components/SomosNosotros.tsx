@@ -3,10 +3,17 @@ import { SomosNosotrosProps } from "@/modules/shared/types/generalQuery.types";
 import { querySomosNosotros } from "@/modules/shared/graphql/general.query";
 import { parseContent } from "@/modules/shared/utils/parseContent.utils";
 import { SomosConoceSucursal } from "./SomosConoceSucursal";
+import { getLocale } from "next-intl/server";
 
 export const SomosNosotros = async () => {
+  const locale = await getLocale();
+  const isEnglish = locale === "en";
+
   const somosNosotros: SomosNosotrosProps = await WpQuery({
     query: querySomosNosotros,
+    variables: {
+      category: isEnglish ? `somos-en` : `somos`,
+    },
   });
 
   const title = somosNosotros.posts.nodes[0].title;

@@ -84,8 +84,8 @@ export const queryHero = (title: string) => {
 }`;
 };
 
-export const queryAfiliados = `query Afiliados {
-  posts(where: {categoryName:"afiliaciones", notIn:"cG9zdDoxMjQ="}){
+export const queryAfiliados = `query Afiliados($category: String!, $notIn: [ID]!) {
+  posts(where: {categoryName:$category, notIn:$notIn}){
     nodes{
       id
       title
@@ -98,8 +98,8 @@ export const queryAfiliados = `query Afiliados {
   }
 }`;
 
-export const queryTitle = `query titleAfiliados {
-  posts(where: {categoryName:"afiliaciones", in:"cG9zdDoxMjQ="}){
+export const queryTitle = `query titleAfiliados($category: String!, $in: [ID]!) {
+  posts(where: {categoryName:$category, in:$in}){
     nodes{
       id
       title
@@ -107,8 +107,8 @@ export const queryTitle = `query titleAfiliados {
   }
 }`;
 
-export const queryValues = `query values {
-  posts(where: {categoryName:"valores", notIn:"cG9zdDoxNDc="}){
+export const queryValues = `query values($category: String!, $notIn: [ID]!) {
+  posts(where: {categoryName:$category, notIn:$notIn}){
     nodes{
       id
       title
@@ -121,8 +121,8 @@ export const queryValues = `query values {
   }
 }`;
 
-export const queryTitleValues = `query titleValues {
-  posts(where: {categoryName:"valores", in:"cG9zdDoxNDc="}){
+export const queryTitleValues = `query titleValues($category: String!, $in: [ID]!) {
+  posts(where: {categoryName:$category, in:$in}){
     nodes{
       id
       title
@@ -131,8 +131,8 @@ export const queryTitleValues = `query titleValues {
   }
 }`;
 
-export const querySomosNosotros = `query somosNosotros {
-  posts(where: {categoryName:"somos"}){
+export const querySomosNosotros = `query somosNosotros($category: String!) {
+  posts(where: {categoryName:$category}){
     nodes{
       id
       title
@@ -141,8 +141,8 @@ export const querySomosNosotros = `query somosNosotros {
   }
 }`;
 
-export const querySomosTransformamos = `query somosTransformamos {
-  posts(where: {categoryName:"transformamos"}){
+export const querySomosTransformamos = `query somosTransformamos($category: String!) {
+  posts(where: {categoryName:$category}){
     nodes{
       id
       title

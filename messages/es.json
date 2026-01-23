@@ -29,6 +29,14 @@
     "documents": "Documentos",
     "normativeClient": "Normativa del Cliente - Español",
     "normativeClientEnglish": "Normativas del Cliente - Inglés"
+  },
+  "JoinUs": {
+    "title": "Únete a CTS!",
+    "subtitle": "¡Llámanos o solicita en línea hoy!"
+  },
+  "WeAre": {
+    "administrative": "Equipo Directivo",
+    "gerencial": "Equipo Gerencial"
   }
 }
 

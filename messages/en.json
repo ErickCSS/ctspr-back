@@ -29,6 +29,15 @@
     "documents": "Documents",
     "normativeClient": "Normative Client",
     "normativeClientEnglish": "CTS Business and Ethics Rules Publication for Clients"
+  },
+  "JoinUs": {
+    "title": "Join CTS!",
+    "subtitle": "Take the next step in your career with confidence. Call us or apply online today!"
+  },
+  "WeAre":  {
+    "administrative": "Executive Team",
+    "gerencial": "Management Team"
+
   }
 }
 

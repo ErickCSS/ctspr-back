@@ -3,10 +3,17 @@ import { querySomosTransformamos } from "@/modules/shared/graphql/general.query"
 import { SomosTransformamosProps } from "@/modules/shared/types/generalQuery.types";
 import { parseContent } from "@/modules/shared/utils/parseContent.utils";
 import Image from "next/image";
+import { getLocale } from "next-intl/server";
 
 export const SomosTransformamos = async () => {
+  const locale = await getLocale();
+  const isEnglish = locale === "en";
+
   const somosTransformamos: SomosTransformamosProps = await WpQuery({
     query: querySomosTransformamos,
+    variables: {
+      category: isEnglish ? "transformamos-en" : "transformamos",
+    },
   });
 
   const title = somosTransformamos.posts.nodes[0].title;

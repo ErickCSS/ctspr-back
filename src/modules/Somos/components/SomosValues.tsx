@@ -13,18 +13,30 @@ import {
   queryTitleValues,
   queryValues,
 } from "@/modules/shared/graphql/general.query";
+import { getLocale } from "next-intl/server";
 
 export const SomosValues = async () => {
+  const locale = await getLocale();
+  const isEnglish = locale === "en";
+
   const values: ValuesProps = await WpQuery({
     query: queryValues,
+    variables: {
+      category: isEnglish ? `Valores-en` : `Valores`,
+      notIn: isEnglish ? `cG9zdDo5NjU=` : `cG9zdDoxNDc=`,
+    },
   });
 
   const titleValues: titleValues = await WpQuery({
     query: queryTitleValues,
+    variables: {
+      category: isEnglish ? `Valores-en` : `Valores`,
+      in: isEnglish ? `cG9zdDo5NjU=` : `cG9zdDoxNDc=`,
+    },
   });
 
-  const title = titleValues.posts.nodes[0].title;
-  const content = titleValues.posts.nodes[0].content;
+  const title = titleValues.posts.nodes[0]?.title;
+  const content = titleValues.posts.nodes[0]?.content;
   const valuesList = toReversed(values.posts.nodes);
 
   return (
@@ -48,7 +60,7 @@ export const SomosValues = async () => {
                   {value.title}
                 </h4>
                 <Image
-                  src={value.featuredImage.node.sourceUrl}
+                  src={value.featuredImage?.node.sourceUrl}
                   alt={value.title}
                   width={500}
                   height={500}
