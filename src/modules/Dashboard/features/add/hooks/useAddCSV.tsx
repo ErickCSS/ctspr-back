@@ -200,6 +200,7 @@ export const useAddCSV = ({ user }: { user: User }) => {
         // 3) Si NO parece ninguno de los anteriores, reprocesamos como LEGACY (sin headers)
         Papa.parse<string[]>(file, {
           header: false,
+          encoding: "utf-8",
           skipEmptyLines: true,
           complete: (legacy) => {
             try {
