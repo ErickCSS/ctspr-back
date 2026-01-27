@@ -166,6 +166,7 @@ export const useAddCSV = ({ user }: { user: User }) => {
     Papa.parse<Record<string, string>>(file, {
       header: true,
       skipEmptyLines: true,
+      encoding: "utf-8",
       transformHeader: (h) => h.trim(),
       complete: (result) => {
         const fields = result.meta?.fields || [];
