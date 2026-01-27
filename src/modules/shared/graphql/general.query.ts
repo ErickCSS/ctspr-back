@@ -157,8 +157,8 @@ export const querySomosTransformamos = `query somosTransformamos($category: Stri
   }
 }`;
 
-export const queryServiciosContent = `query servicios {
-  posts(where: {categoryName:"servicios", in:"cG9zdDoxNzI="}){
+export const queryServiciosContent = `query servicios($category: String!, $in: [ID]!) {
+  posts(where: {categoryName:$category, in:$in}){
     nodes{
       id
 			content
@@ -379,8 +379,8 @@ export const queryEquipoAdministrativo = `query EquipoAdministrativo($category: 
 
 `;
 
-export const queryEquipoGerencial = `query EquipoGerencial {
-  posts(where:{categoryName:"equipo-gerencial"}, first: 30){
+export const queryEquipoGerencial = `query EquipoGerencial($category: String!) {
+  posts(where:{categoryName:$category}, first: 30){
     nodes{
       title
       id
