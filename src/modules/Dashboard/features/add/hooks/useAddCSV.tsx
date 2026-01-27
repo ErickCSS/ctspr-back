@@ -14,7 +14,9 @@ import { useDashboardEmployeeFiltersStore } from "@/modules/Dashboard/store/dahs
 import { generateSearchText } from "@/modules/shared/utils/generateSearchText";
 import {
   looksLikeModernHeaders,
+  looksLikeNewCSVFormat,
   mapLegacyArrayToModernObject,
+  mapNewCSVFormatToModernObject,
 } from "../lib/legacyCSV";
 
 export const useAddCSV = ({ user }: { user: User }) => {
@@ -167,8 +169,26 @@ export const useAddCSV = ({ user }: { user: User }) => {
       transformHeader: (h) => h.trim(),
       complete: (result) => {
         const fields = result.meta?.fields || [];
+
+        // 1) Verificar si es el nuevo formato CSV (Orden, Labor Description, etc.)
+        if (looksLikeNewCSVFormat(fields)) {
+          try {
+            const modernRows = result.data.map((row) =>
+              mapNewCSVFormatToModernObject(row),
+            );
+            const normalized = modernRows.map((r) =>
+              normalizeRowForDB(r, user),
+            );
+            setRows(normalized);
+            return;
+          } catch (e: any) {
+            setMessage(e?.message || "Error procesando nuevo formato CSV");
+            return;
+          }
+        }
+
+        // 2) Verificar si es el formato moderno estándar
         if (looksLikeModernHeaders(fields)) {
-          // Formato nuevo -> seguimos con tu flujo actual
           const normalized = result.data.map((row) =>
             normalizeRowForDB(row, user),
           );
@@ -176,7 +196,7 @@ export const useAddCSV = ({ user }: { user: User }) => {
           return;
         }
 
-        // 2) Si NO parece moderno, reprocesamos como LEGACY (sin headers)
+        // 3) Si NO parece ninguno de los anteriores, reprocesamos como LEGACY (sin headers)
         Papa.parse<string[]>(file, {
           header: false,
           skipEmptyLines: true,

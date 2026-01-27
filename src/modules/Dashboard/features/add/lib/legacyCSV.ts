@@ -45,7 +45,18 @@ function extractCitiesFromText(text: string): string[] {
 
 function classifyLegacyPart(p: string): keyof LegacyBuckets | "notes" {
   const up = p.toUpperCase();
-  if (/\b(AM|PM)\b/.test(up) || /\d{1,2}:\d{2}/.test(p)) return "schedule";
+
+  // Detectar horarios: AM/PM, horas con/sin dos puntos, días de la semana, turnos
+  if (
+    /\b(AM|PM)\b/.test(up) ||
+    /\d{1,2}:\d{2}/.test(p) ||
+    /\d{1,2}\s*(AM|PM)/.test(up) ||
+    /(LUNES|MARTES|MI[ÉE]RCOLES|JUEVES|VIERNES|S[ÁA]BADO|DOMINGO)/.test(up) ||
+    /(TURNO|1ER|2DO|3ER|4TO|PRIMER|SEGUNDO|TERCER|CUARTO|ROTATIVOS?)/.test(up)
+  ) {
+    return "schedule";
+  }
+
   if (
     /(BACHILLERATO|DIPLOMA|GRADO|LICENCI|EXPERIEN|CERTIFIC|CURR[IÍ]CULUM|REQUISIT|ESTUDIOS)/.test(
       up,
@@ -53,11 +64,19 @@ function classifyLegacyPart(p: string): keyof LegacyBuckets | "notes" {
   ) {
     return "requirements";
   }
-  if (/(SALARIO|PAGA|COMPENSACI[ÓO]N|POR HORA|HORA|SEMANALES|PAGO)/.test(up)) {
+
+  if (/(SALARIO|PAGA|COMPENSACI[ÓO]N|POR HORA|SEMANALES|PAGO)/.test(up)) {
     // Si además trae hora, lo dejamos en schedule; sino, compensation
-    if (/\b(AM|PM)\b|\d{1,2}:\d{2}/.test(up)) return "schedule";
+    if (
+      /\b(AM|PM)\b/.test(up) ||
+      /\d{1,2}:\d{2}/.test(up) ||
+      /\d{1,2}\s*(AM|PM)/.test(up)
+    ) {
+      return "schedule";
+    }
     return "compensation";
   }
+
   const token = up.replace(/[^A-ZÑ ]/g, "").trim();
   if (CITIES_PR.has(token)) return "alt_city";
   if (/DISPONIBILIDAD|INMEDIATA/.test(up)) return "availability";
@@ -95,6 +114,141 @@ function toSlug(s: string) {
     .replace(/\p{Diacritic}/gu, "")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
+}
+
+/**
+ * Procesa el nuevo formato CSV con headers específicos:
+ * Orden, Labor Description, Sucursal, Link Typeform, Location, Experience, Education, Description, Numero consecutivo
+ */
+export function mapNewCSVFormatToModernObject(
+  row: Record<string, string>,
+): Record<string, string> {
+  const code = row["Orden"] ?? row["orden"] ?? "";
+  const vacancy = row["Labor Description"] ?? row["labor description"] ?? "";
+  const sucursal = row["Sucursal"] ?? row["sucursal"] ?? "";
+  const linkTypeform = row["Link Typeform"] ?? row["link typeform"] ?? "";
+  const location = row["Location"] ?? row["location"] ?? "";
+  const experience = row["Experience"] ?? row["experience"] ?? "";
+  const education = row["Education"] ?? row["education"] ?? "";
+  const description = row["Description"] ?? row["description"] ?? "";
+
+  // Procesar el campo Description que viene con separadores "]"
+  const descriptionParts = splitLegacyCell(description);
+  const buckets: LegacyBuckets = {
+    alt_city: [],
+    requirements: [],
+    schedule: [],
+    compensation: [],
+    availability: [],
+    notes: [],
+  };
+
+  // Clasificar cada parte del Description usando las palabras clave
+  for (const p of descriptionParts) {
+    const tag = classifyLegacyPart(p);
+    buckets[tag]?.push(p);
+  }
+
+  // Extraer ciudades del campo Location y Description
+  const locationText = `${location} ${descriptionParts.join(" ")}`;
+  const extractedCities = extractCitiesFromText(locationText);
+
+  // Agregar las ciudades encontradas
+  for (const extractedCity of extractedCities) {
+    if (
+      extractedCity !== "No suministrada" &&
+      !buckets.alt_city.includes(extractedCity)
+    ) {
+      buckets.alt_city.push(extractedCity);
+    }
+  }
+
+  // Si no se encontraron ciudades, usar Location o Sucursal
+  if (buckets.alt_city.length === 0) {
+    const cityFromLocation = extractCitiesFromText(location);
+    if (cityFromLocation[0] !== "No suministrada") {
+      buckets.alt_city.push(cityFromLocation[0]);
+    } else {
+      buckets.alt_city.push(CONVERT_CAPITALIZE(sucursal) || "No suministrada");
+    }
+  }
+
+  // Procesar Experience y Education junto con los requirements del Description
+  const allRequirements = [
+    ...buckets.requirements,
+    experience,
+    education,
+  ].filter(Boolean);
+
+  const reqItems = allRequirements
+    .flatMap((r) => r.split(/[,;|]/))
+    .map((s) =>
+      s.replace(/\b(requisitos?|requerimientos?)\b[:\s]*/gi, "").trim(),
+    )
+    .filter(Boolean);
+
+  const academicItems: string[] = [];
+  const licenseItems: string[] = [];
+  const certItems: string[] = [];
+  const expItems: string[] = [];
+
+  for (const item of reqItems) {
+    const up = item.toUpperCase();
+    if (/LICEN[CS]I/i.test(item)) {
+      licenseItems.push(item);
+    } else if (/CERTIFIC/i.test(item)) {
+      certItems.push(item);
+    } else if (/EXPERIEN/i.test(item)) {
+      expItems.push(item);
+    } else if (/BACHILLERATO|DIPLOMA|GRADO|T[ÍI]TULO|ESTUDIOS/i.test(item)) {
+      academicItems.push(item);
+    } else {
+      academicItems.push(item);
+    }
+  }
+
+  const academic = academicItems.join("; ");
+  const license = licenseItems.join("; ");
+  const certs = certItems.join("; ");
+  const exp = expItems.join("; ");
+
+  const compText = buckets.compensation.join("; ");
+  const comp = parseLegacyCompensation(compText);
+  const convertCity = toKebabIfMulti(sucursal, { lowercaseSingle: true });
+
+  const modern: Record<string, string> = {
+    code: String(code || ""),
+    vacancy: CONVERT_CAPITALIZE(vacancy),
+    industry: "",
+    location: buckets.alt_city[0] || "",
+    min_salary: comp.min_salary == null ? "" : String(comp.min_salary),
+    max_salary: comp.max_salary == null ? "" : String(comp.max_salary),
+    hoursJob: buckets.schedule.join("; "),
+    academicRequirements: academic,
+    licenseRequirements: license,
+    certificateRequirements: certs,
+    experienceRequirements: exp,
+    typeOfEmployment: "Full-time",
+    skills: "",
+    benefits: "",
+    regionalOffice: convertCity,
+    linkToApply: linkTypeform || "",
+    description: [
+      buckets.availability.join("; "),
+      buckets.notes.join("; "),
+      compText,
+    ]
+      .filter(Boolean)
+      .join(" | "),
+    owner_email: "",
+    user_id: "",
+    is_deleted: "",
+    slug: toSlug(`${vacancy}-${sucursal}`),
+    payment_frequency: comp.payment_frequency ?? "",
+    created_at: "",
+  };
+
+  return modern;
 }
 
 /**
@@ -239,8 +393,25 @@ export function mapLegacyArrayToModernObject(
 }
 
 /**
+ * Detecta si el CSV tiene el nuevo formato con headers específicos:
+ * Orden, Labor Description, Sucursal, Link Typeform, Location, Experience, Education, Description
+ */
+export function looksLikeNewCSVFormat(fields: string[] = []) {
+  const f = new Set(fields.map((s) => s.trim().toLowerCase()));
+  const newFormatHeaders = [
+    "orden",
+    "labor description",
+    "location",
+    "description",
+  ];
+  // Si tiene al menos 3 de estos headers, es el nuevo formato
+  const matches = newFormatHeaders.filter((h) => f.has(h)).length;
+  return matches >= 3;
+}
+
+/**
  * Heurística: decide si el archivo es del formato NUEVO o LEGACY.
- * - Nuevo: tiene headers “modernos” (ej. 'vacancy', 'industry', etc.)
+ * - Nuevo: tiene headers "modernos" (ej. 'vacancy', 'industry', etc.)
  * - Legacy: no tiene headers o los headers son números/textos "raros" y la 4ta columna es un blob.
  */
 export function looksLikeModernHeaders(fields: string[] = []) {
