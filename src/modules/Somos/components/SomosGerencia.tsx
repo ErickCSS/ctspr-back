@@ -3,11 +3,17 @@ import { WpQuery } from "@/modules/shared/services/wpQuery";
 import { queryEquipoGerencial } from "@/modules/shared/graphql/general.query";
 import { EquiposProps } from "@/modules/shared/types/generalQuery.types";
 import { getTranslations } from "next-intl/server";
+import { getLocale } from "next-intl/server";
 
 export const SomosGerencia = async () => {
   const t = await getTranslations("WeAre");
+  const locale = await getLocale();
+  const isEnglish = locale === "en";
   const equipoAdministrativo: EquiposProps = await WpQuery({
     query: queryEquipoGerencial,
+    variables: {
+      category: isEnglish ? "equipo-gerencial-en" : "equipo-gerencial",
+    },
   });
 
   return (

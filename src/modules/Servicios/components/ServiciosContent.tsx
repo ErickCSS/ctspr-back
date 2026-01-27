@@ -2,10 +2,17 @@ import { WpQuery } from "@/modules/shared/services/wpQuery";
 import { ServiciosProps } from "@/modules/shared/types/generalQuery.types";
 import { queryServiciosContent } from "@/modules/shared/graphql/general.query";
 import { parseContent } from "@/modules/shared/utils/parseContent.utils";
+import { getLocale } from "next-intl/server";
 
 export const ServiciosContent = async () => {
+  const locale = await getLocale();
+  const isEnglish = locale === "en";
   const servicios: ServiciosProps = await WpQuery({
     query: queryServiciosContent,
+    variables: {
+      category: isEnglish ? "servicios-en" : "servicios",
+      in: isEnglish ? "cG9zdDoxMDQ1" : "cG9zdDoxNzI=",
+    },
   });
 
   const content = servicios.posts.nodes[0].content;
