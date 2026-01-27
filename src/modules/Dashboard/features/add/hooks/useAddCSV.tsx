@@ -150,78 +150,83 @@ export const useAddCSV = ({ user }: { user: User }) => {
 
   const onFile = (file: File) => {
     setMessage(null);
-    // Papa.parse<CsvRow>(file, {
-    //   header: true,
-    //   skipEmptyLines: true,
-    //   transformHeader: (h) => h.trim(),
-    //   complete: (result) => {
-    //     const normalized = result.data.map((row) =>
-    //       normalizeRowForDB(row, user),
-    //     );
-    //     setRows(normalized);
-    //   },
-    //   error: (err) => setMessage(err.message),
-    // });
 
-    Papa.parse<Record<string, string>>(file, {
-      header: true,
-      skipEmptyLines: true,
-      encoding: "utf-8",
-      transformHeader: (h) => h.trim(),
-      complete: (result) => {
-        const fields = result.meta?.fields || [];
+    // Leer el archivo manualmente con FileReader
+    // Usar ISO-8859-1 que maneja correctamente los acentos de archivos Excel
+    const reader = new FileReader();
 
-        // 1) Verificar si es el nuevo formato CSV (Orden, Labor Description, etc.)
-        if (looksLikeNewCSVFormat(fields)) {
-          try {
-            const modernRows = result.data.map((row) =>
-              mapNewCSVFormatToModernObject(row),
-            );
-            const normalized = modernRows.map((r) =>
-              normalizeRowForDB(r, user),
-            );
-            setRows(normalized);
-            return;
-          } catch (e: any) {
-            setMessage(e?.message || "Error procesando nuevo formato CSV");
-            return;
-          }
-        }
+    reader.onload = (e) => {
+      const csvText = e.target?.result as string;
+      parseCSV(csvText);
+    };
 
-        // 2) Verificar si es el formato moderno estándar
-        if (looksLikeModernHeaders(fields)) {
-          const normalized = result.data.map((row) =>
-            normalizeRowForDB(row, user),
-          );
-          setRows(normalized);
-          return;
-        }
+    reader.onerror = () => {
+      setMessage("Error al leer el archivo");
+    };
 
-        // 3) Si NO parece ninguno de los anteriores, reprocesamos como LEGACY (sin headers)
-        Papa.parse<string[]>(file, {
-          header: false,
-          encoding: "utf-8",
-          skipEmptyLines: true,
-          complete: (legacy) => {
+    // Leer con ISO-8859-1 (Latin-1) que es compatible con Excel y maneja acentos españoles
+    reader.readAsText(file, "ISO-8859-1");
+
+    function parseCSV(csvText: string) {
+      // Parsear el texto CSV con PapaParse
+      Papa.parse<Record<string, string>>(csvText, {
+        header: true,
+        skipEmptyLines: true,
+        transformHeader: (h) => h.trim(),
+        complete: (result) => {
+          const fields = result.meta?.fields || [];
+
+          // 1) Verificar si es el nuevo formato CSV (Orden, Labor Description, etc.)
+          if (looksLikeNewCSVFormat(fields)) {
             try {
-              // cada row es un array: [code, vacancy, city, blob, row_index]
-              const modernRows = legacy.data.map((arr) =>
-                mapLegacyArrayToModernObject(arr as any),
+              const modernRows = result.data.map((row) =>
+                mapNewCSVFormatToModernObject(row),
               );
-              // ahora pasa por tu normalización habitual (JSONB, defaults, etc.)
               const normalized = modernRows.map((r) =>
                 normalizeRowForDB(r, user),
               );
               setRows(normalized);
+              return;
             } catch (e: any) {
-              setMessage(e?.message || "Error procesando CSV legacy");
+              setMessage(e?.message || "Error procesando nuevo formato CSV");
+              return;
             }
-          },
-          error: (err) => setMessage(err.message),
-        });
-      },
-      error: (err) => setMessage(err.message),
-    });
+          }
+
+          // 2) Verificar si es el formato moderno estándar
+          if (looksLikeModernHeaders(fields)) {
+            const normalized = result.data.map((row) =>
+              normalizeRowForDB(row, user),
+            );
+            setRows(normalized);
+            return;
+          }
+
+          // 3) Si NO parece ninguno de los anteriores, reprocesamos como LEGACY (sin headers)
+          Papa.parse<string[]>(csvText, {
+            header: false,
+            skipEmptyLines: true,
+            complete: (legacy) => {
+              try {
+                // cada row es un array: [code, vacancy, city, blob, row_index]
+                const modernRows = legacy.data.map((arr) =>
+                  mapLegacyArrayToModernObject(arr as any),
+                );
+                // ahora pasa por tu normalización habitual (JSONB, defaults, etc.)
+                const normalized = modernRows.map((r) =>
+                  normalizeRowForDB(r, user),
+                );
+                setRows(normalized);
+              } catch (e: any) {
+                setMessage(e?.message || "Error procesando CSV legacy");
+              }
+            },
+            error: (err: Error) => setMessage(err.message),
+          });
+        },
+        error: (err: Error) => setMessage(err.message),
+      });
+    }
   };
 
   const handleDragOver = (e: React.DragEvent) => {
