@@ -362,8 +362,8 @@ export const queryBlogObjetives = `query BlogObjetives {
   }
 }`;
 
-export const queryEquipoAdministrativo = `query EquipoAdministrativo {
-  posts(where:{categoryName:"equipo-directivo"}, first: 30){
+export const queryEquipoAdministrativo = `query EquipoAdministrativo($category: String!) {
+  posts(where:{categoryName:$category}, first: 30){
     nodes{
       title
       id
