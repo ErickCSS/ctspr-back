@@ -3,11 +3,20 @@ import { querySeguridadSaludOcupacional } from "@/modules/shared/graphql/general
 import { SeguridadSaludOcupacionalProps } from "@/modules/shared/types/generalQuery.types";
 import { parseWithIcons } from "@/modules/shared/utils/ParseWithIcon.utils";
 import Image from "next/image";
+import { getLocale } from "next-intl/server";
 
 export const ServiciosSeguridadSalud = async () => {
+  const locale = await getLocale();
+  const isEnglish = locale === "en";
+
   const seguridadSaludOcupacional: SeguridadSaludOcupacionalProps =
     await WpQuery({
       query: querySeguridadSaludOcupacional,
+      variables: {
+        category: isEnglish
+          ? "seguridad-salud-ocupacional-en"
+          : "seguridad-salud-ocupacional",
+      },
     });
 
   const title = seguridadSaludOcupacional.posts.nodes[0].title;

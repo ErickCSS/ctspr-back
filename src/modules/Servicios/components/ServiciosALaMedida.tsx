@@ -3,10 +3,17 @@ import { WpQuery } from "@modules/shared/services/wpQuery";
 import { queryServiciosMedida } from "@modules/shared/graphql/general.query";
 import { ServiciosListProps } from "@modules/shared/types/generalQuery.types";
 import { parseContent } from "@modules/shared/utils/parseContent.utils";
+import { getLocale } from "next-intl/server";
 
 export const ServiciosALaMedida = async () => {
+  const locale = await getLocale();
+  const isEnglish = locale === "en";
   const serviciosList: ServiciosListProps = await WpQuery({
     query: queryServiciosMedida,
+    variables: {
+      category: isEnglish ? "servicios-en" : "servicios",
+      in: isEnglish ? "cG9zdDoxMDY4" : "cG9zdDoxODY=",
+    },
   });
 
   const servicio = serviciosList.posts.nodes[0];

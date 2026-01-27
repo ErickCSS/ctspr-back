@@ -37,6 +37,9 @@
   "WeAre": {
     "administrative": "Equipo Directivo",
     "gerencial": "Equipo Gerencial"
+  },
+  "FrequentlyAskedQuestions": {
+    "title": "Preguntas Frecuentes para Empresa"
   }
 }
 

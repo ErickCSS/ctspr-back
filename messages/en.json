@@ -38,6 +38,9 @@
     "administrative": "Executive Team",
     "gerencial": "Management Team"
 
+  },
+  "FrequentlyAskedQuestions": {
+    "title": "Frequently Ask Questions for the Company"
   }
 }
 

@@ -166,8 +166,8 @@ export const queryServiciosContent = `query servicios($category: String!, $in: [
   }
 }`;
 
-export const queryPropuestaValorTitle = `query PropuestaValorTitle {
-  posts(where: {categoryName:"Propuesta Valor", in: "cG9zdDoxNjE="}){
+export const queryPropuestaValorTitle = `query PropuestaValorTitle($category: String!, $in: [ID]!) {
+  posts(where: {categoryName:$category, in:$in}){
     nodes{
       title
       id
@@ -176,8 +176,8 @@ export const queryPropuestaValorTitle = `query PropuestaValorTitle {
   }
 }`;
 
-export const queryPropuestaValor = `query PropuestaValor {
-  posts(where: {categoryName:"Propuesta Valor", notIn: "cG9zdDoxNjE="}){
+export const queryPropuestaValor = `query PropuestaValor($category: String!, $notIn: [ID]!) {
+  posts(where: {categoryName:$category, notIn:$notIn}){
     nodes{
       title
       id
@@ -190,23 +190,8 @@ export const queryPropuestaValor = `query PropuestaValor {
   }
 }`;
 
-export const queryServiciosList = `query ServiciosList {
-  posts(where: {categoryName:"Servicios", notIn:["cG9zdDoxOTE=", "cG9zdDoxNzI=", "cG9zdDoxODY="]}){
-    nodes{
-      title
-      id
-			content
-      featuredImage{
-        node {
-          sourceUrl
-        }
-      }
-    }
-  }
-}`;
-
-export const queryServicioSeguridadIntegral = `query ServicioSeguridadIntegral {
-  posts(where: {categoryName:"Servicios", in:["cG9zdDoxOTE="]}){
+export const queryServiciosList = `query ServiciosList($category: String!, $notIn: [ID]!) {
+  posts(where: {categoryName:$category, notIn:$notIn}){
     nodes{
       title
       id
@@ -220,8 +205,8 @@ export const queryServicioSeguridadIntegral = `query ServicioSeguridadIntegral {
   }
 }`;
 
-export const queryServiciosMedida = `query ServiciosMedida {
-  posts(where: {categoryName:"Servicios", in:["cG9zdDoxODY="]}){
+export const queryServicioSeguridadIntegral = `query ServicioSeguridadIntegral($category: String!, $in: [ID]!) {
+  posts(where: {categoryName:$category, in:$in}){
     nodes{
       title
       id
@@ -235,8 +220,23 @@ export const queryServiciosMedida = `query ServiciosMedida {
   }
 }`;
 
-export const queryServiciosCallActions = `query ServiciosCallAction {
-  posts(where: {categoryName:"call-action-servicios"}){
+export const queryServiciosMedida = `query ServiciosMedida($category: String!, $in: [ID]!) {
+  posts(where: {categoryName:$category, in:$in}){
+    nodes{
+      title
+      id
+			content
+      featuredImage{
+        node {
+          sourceUrl
+        }
+      }
+    }
+  }
+}`;
+
+export const queryServiciosCallActions = `query ServiciosCallAction($category: String!) {
+  posts(where: {categoryName:$category}){
     nodes{
       title
       id
@@ -251,8 +251,8 @@ export const queryServiciosCallActions = `query ServiciosCallAction {
   }
 }`;
 
-export const queryRecursosHumanoTitle = `query RecursosHumanosTitle {
-  posts(where: {categoryName:"recursos-humanos", in:"cG9zdDoxOTg="}){
+export const queryRecursosHumanoTitle = `query RecursosHumanosTitle($category: String!, $in: [ID]!) {
+  posts(where: {categoryName:$category, in:$in}){
     nodes{
       title
       id
@@ -261,23 +261,8 @@ export const queryRecursosHumanoTitle = `query RecursosHumanosTitle {
   }
 }`;
 
-export const queryRecursosHumanos = `query RecursosHumanos {
-  posts(where: {categoryName:"recursos-humanos", notIn:"cG9zdDoxOTg="}){
-    nodes{
-      title
-      id
-			content
-      featuredImage{
-        node {
-          sourceUrl
-        }
-      }
-    }
-  }
-}`;
-
-export const queryServiciosPeritajeIndustrias = `query PeritajeIndustrias {
-  posts(where: {categoryName:"peritaje-industrias"}){
+export const queryRecursosHumanos = `query RecursosHumanos($category: String!, $notIn: [ID]!) {
+  posts(where: {categoryName:$category, notIn:$notIn}){
     nodes{
       title
       id
@@ -291,8 +276,23 @@ export const queryServiciosPeritajeIndustrias = `query PeritajeIndustrias {
   }
 }`;
 
-export const querySeguridadSaludOcupacional = `query SeguridadSaludOcupacional {
-  posts(where: {categoryName:"seguridad-salud-ocupacional"}){
+export const queryServiciosPeritajeIndustrias = `query PeritajeIndustrias($category: String!) {
+  posts(where: {categoryName:$category}){
+    nodes{
+      title
+      id
+			content
+      featuredImage{
+        node {
+          sourceUrl
+        }
+      }
+    }
+  }
+}`;
+
+export const querySeguridadSaludOcupacional = `query SeguridadSaludOcupacional($category: String!) {
+  posts(where: {categoryName:$category}){
     nodes{
       title
       id
@@ -395,8 +395,8 @@ export const queryEquipoGerencial = `query EquipoGerencial($category: String!) {
 }
 `;
 
-export const queryPreguntasFrecuentesEmpresas = `query PreguntasFrecuentesEmpresas {
-  posts(where:{categoryName:"preguntas-frecuentes-empresas"}){
+export const queryPreguntasFrecuentesEmpresas = `query PreguntasFrecuentesEmpresas($category: String!) {
+  posts(where:{categoryName:$category}){
     nodes{
       title
       id
