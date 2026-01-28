@@ -10,7 +10,7 @@ import {
 import { Badge } from "@modules/ui/badge";
 import { CONVERT_MONEY } from "@modules/shared/utils/convertMoney";
 import { useAddEmployeeStore } from "@modules/Dashboard/features/add/store/addEmployeeStore";
-import { CONVERT_UPPER } from "@modules/shared/utils";
+import { CONVERT_CAPITALIZE } from "@modules/shared/utils";
 import { formatDistanceToNow } from "date-fns";
 import { es } from "date-fns/locale";
 import { EmployeeType } from "@/modules/shared/types/employee.type";
@@ -68,8 +68,8 @@ export const CardEmployee = ({ employee }: { employee?: EmployeeType }) => {
             <IconBuildingEstate stroke={1.5} size={20} />
             <span className="font-lato">
               Oficina de CTS:{" "}
-              {CONVERT_UPPER(formData.regionalOffice) ||
-                CONVERT_UPPER(
+              {CONVERT_CAPITALIZE(formData.regionalOffice) ||
+                CONVERT_CAPITALIZE(
                   employee?.regionalOffice === "san-german"
                     ? "San Germán"
                     : (employee?.regionalOffice ?? ""),

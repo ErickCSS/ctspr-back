@@ -1,5 +1,5 @@
 import { EmpleosServices } from "@modules/Empleos/services/empleos.services";
-import { CONVERT_UPPER } from "@modules/shared/utils";
+import { CONVERT_CAPITALIZE, CONVERT_UPPER } from "@modules/shared/utils";
 import { CONVERT_MONEY } from "@modules/shared/utils/convertMoney";
 import { MapHeroIcons } from "@modules/Empleos/features/single/libs/MapHeroIcons";
 import {
@@ -69,8 +69,9 @@ const LeftSide = ({ employee }: { employee: EmployeeType }) => {
             <IconBuildingEstate stroke={1.5} size={20} />
             <span>Oficina de CTS:</span>
             <span className="font-lato">
-              {CONVERT_UPPER(employee.regionalOffice.replace("-", " ") ?? "") ||
-                "Oficina Regional"}
+              {CONVERT_CAPITALIZE(
+                employee.regionalOffice.replace("-", " ") ?? "",
+              ) || "Oficina Regional"}
             </span>
           </div>
         </div>

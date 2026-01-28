@@ -46,40 +46,52 @@ function extractCitiesFromText(text: string): string[] {
 function classifyLegacyPart(p: string): keyof LegacyBuckets | "notes" {
   const up = p.toUpperCase();
 
-  // Detectar horarios: AM/PM, horas con/sin dos puntos, días de la semana, turnos
+  // PRIORIDAD 1: Detectar requisitos/experiencia primero (para evitar falsos positivos con "turno")
   if (
-    /\b(AM|PM)\b/.test(up) ||
-    /\d{1,2}:\d{2}/.test(p) ||
-    /\d{1,2}\s*(AM|PM)/.test(up) ||
-    /(LUNES|MARTES|MI[ÉE]RCOLES|JUEVES|VIERNES|S[ÁA]BADO|DOMINGO)/.test(up) ||
-    /(TURNO|1ER|2DO|3ER|4TO|PRIMER|SEGUNDO|TERCER|CUARTO|ROTATIVOS?)/.test(up)
-  ) {
-    return "schedule";
-  }
-
-  if (
-    /(BACHILLERATO|DIPLOMA|GRADO|LICENCI|EXPERIEN|CERTIFIC|CURR[IÍ]CULUM|REQUISIT|ESTUDIOS)/.test(
+    /(BACHILLERATO|DIPLOMA|GRADO|LICENCI|EXPERIEN|CERTIFIC|CURR[IÍ]CULUM|REQUISIT|ESTUDIOS|DOMINIO|CONOCIMIENTO|HABILIDAD|DESTREZA)/.test(
       up,
     )
   ) {
     return "requirements";
   }
 
+  // PRIORIDAD 2: Detectar horarios específicos con indicadores claros
+  // Solo clasificar como schedule si tiene indicadores claros de horario
+  const hasTimeIndicator =
+    /\b(AM|PM)\b/.test(up) ||
+    /\d{1,2}:\d{2}/.test(p) ||
+    /\d{1,2}\s*(AM|PM)/.test(up);
+  const hasDayOfWeek =
+    /(LUNES|MARTES|MI[ÉE]RCOLES|JUEVES|VIERNES|S[ÁA]BADO|DOMINGO)/.test(up);
+  const hasShiftKeyword =
+    /(TURNO|DIURNO|NOCTURNO|ROTATIVO|HORA|HORAS|JORNADA|COMPLETA|PARCIAL|TIEMPO\s+COMPLETO|TIEMPO\s+PARCIAL|PART[\s-]?TIME|FULL[\s-]?TIME)/.test(
+      up,
+    );
+
+  // Solo clasificar como schedule si tiene días de la semana, horas específicas, o palabras clave de turnos
+  if (hasTimeIndicator || hasDayOfWeek || hasShiftKeyword) {
+    return "schedule";
+  }
+
+  // PRIORIDAD 3: Disponibilidad (que puede mencionar turnos pero es diferente a horario)
+  if (/DISPONIBILIDAD|DISPONIBLE|INMEDIATA/.test(up)) {
+    return "availability";
+  }
+
+  // PRIORIDAD 4: Compensación
   if (/(SALARIO|PAGA|COMPENSACI[ÓO]N|POR HORA|SEMANALES|PAGO)/.test(up)) {
-    // Si además trae hora, lo dejamos en schedule; sino, compensation
-    if (
-      /\b(AM|PM)\b/.test(up) ||
-      /\d{1,2}:\d{2}/.test(up) ||
-      /\d{1,2}\s*(AM|PM)/.test(up)
-    ) {
+    // Si además trae hora específica, lo dejamos en schedule
+    if (hasTimeIndicator) {
       return "schedule";
     }
     return "compensation";
   }
 
+  // PRIORIDAD 5: Ciudades
   const token = up.replace(/[^A-ZÑ ]/g, "").trim();
   if (CITIES_PR.has(token)) return "alt_city";
-  if (/DISPONIBILIDAD|INMEDIATA/.test(up)) return "availability";
+
+  // PRIORIDAD 6: Todo lo demás va a notes
   return "notes";
 }
 
@@ -89,6 +101,59 @@ function splitLegacyCell(cell?: string): string[] {
     .split("]")
     .map((s) => s.trim())
     .filter(Boolean);
+}
+
+function extractScheduleInfo(text: string): string {
+  if (!text) return "";
+
+  const up = text.toUpperCase();
+  const schedulePatterns: string[] = [];
+
+  // Extraer días de la semana
+  const daysMatch = text.match(
+    /(lunes|martes|miércoles|miercoles|jueves|viernes|sábado|sabado|domingo)(\s+a\s+(lunes|martes|miércoles|miercoles|jueves|viernes|sábado|sabado|domingo))?/gi,
+  );
+  if (daysMatch) {
+    schedulePatterns.push(...daysMatch);
+  }
+
+  // Extraer horas específicas (8am, 5pm, 8:00am, etc.)
+  const timeMatch = text.match(/\d{1,2}(:\d{2})?\s*(am|pm)/gi);
+  if (timeMatch) {
+    schedulePatterns.push(...timeMatch);
+  }
+
+  // Extraer rangos de horas (8am a 5pm, 8:00 a 17:00, etc.)
+  const timeRangeMatch = text.match(
+    /\d{1,2}(:\d{2})?\s*(am|pm)?\s*a\s*\d{1,2}(:\d{2})?\s*(am|pm)?/gi,
+  );
+  if (timeRangeMatch) {
+    schedulePatterns.push(...timeRangeMatch);
+  }
+
+  // Si encontramos patrones de horario, devolver solo esos
+  if (schedulePatterns.length > 0) {
+    // Eliminar duplicados
+    const unique = [...new Set(schedulePatterns)];
+    return unique.join(", ");
+  }
+
+  // Si no encontramos patrones específicos pero tiene días de semana, horas, o palabras clave de horario
+  const hasDays =
+    /(lunes|martes|miércoles|miercoles|jueves|viernes|sábado|sabado|domingo)/i.test(
+      text,
+    );
+  const hasTime = /\d{1,2}(:\d{2})?\s*(am|pm)|\b(am|pm)\b/i.test(text);
+  const hasScheduleKeywords =
+    /(turno|diurno|nocturno|rotativo|hora|horas|jornada|completa|parcial|tiempo\s+completo|tiempo\s+parcial|part[\s-]?time|full[\s-]?time)/i.test(
+      text,
+    );
+
+  if (hasDays || hasTime || hasScheduleKeywords) {
+    return text;
+  }
+
+  return "";
 }
 
 function parseLegacyCompensation(txt: string) {
@@ -216,6 +281,12 @@ export function mapNewCSVFormatToModernObject(
   const comp = parseLegacyCompensation(compText);
   const convertCity = toKebabIfMulti(sucursal, { lowercaseSingle: true });
 
+  // Filtrar y limpiar la información de horario
+  const scheduleInfo = buckets.schedule
+    .map((s) => extractScheduleInfo(s))
+    .filter(Boolean)
+    .join("; ");
+
   const modern: Record<string, string> = {
     code: String(code || ""),
     vacancy: CONVERT_CAPITALIZE(vacancy),
@@ -223,7 +294,7 @@ export function mapNewCSVFormatToModernObject(
     location: buckets.alt_city[0] || "",
     min_salary: comp.min_salary == null ? "" : String(comp.min_salary),
     max_salary: comp.max_salary == null ? "" : String(comp.max_salary),
-    hoursJob: buckets.schedule.join("; "),
+    hoursJob: scheduleInfo,
     academicRequirements: academic,
     licenseRequirements: license,
     certificateRequirements: certs,
@@ -335,6 +406,12 @@ export function mapLegacyArrayToModernObject(
   const comp = parseLegacyCompensation(compText);
   const convertCity = toKebabIfMulti(city, { lowercaseSingle: true });
 
+  // Filtrar y limpiar la información de horario
+  const scheduleInfoLegacy = buckets.schedule
+    .map((s) => extractScheduleInfo(s))
+    .filter(Boolean)
+    .join("; ");
+
   const FORM_SANTURCE = "https://ctspr.typeform.com/to/ZUNTWj";
   const FORM_LAS_PIEDRAS = "https://ctspr.typeform.com/to/BtYyWuqq";
   const FORM_SAN_GERMAN = "https://ctspr.typeform.com/to/wBjjgLk7";
@@ -363,7 +440,7 @@ export function mapLegacyArrayToModernObject(
     location: buckets.alt_city[0] || "",
     min_salary: comp.min_salary == null ? "" : String(comp.min_salary),
     max_salary: comp.max_salary == null ? "" : String(comp.max_salary),
-    hoursJob: buckets.schedule.join("; "),
+    hoursJob: scheduleInfoLegacy,
     academicRequirements: academic,
     licenseRequirements: license,
     certificateRequirements: certs,

@@ -1,5 +1,5 @@
 import { EmpleosServices } from "@/modules/Empleos/services/empleos.services";
-import { CONVERT_UPPER } from "@/modules/shared/utils";
+import { CONVERT_CAPITALIZE, CONVERT_UPPER } from "@/modules/shared/utils";
 import { EmployeeType } from "@/modules/shared/types/employee.type";
 import {
   IconCalendar,
@@ -61,7 +61,7 @@ const EmployeeOverview = ({ employee }: { employee: EmployeeType }) => {
     // },
     {
       title: "Ubicación del Empleo",
-      description: employee.location,
+      description: CONVERT_CAPITALIZE(employee.location),
       icon: <IconMap stroke={1.2} size={42} className="text-black" />,
     },
     {
@@ -69,14 +69,6 @@ const EmployeeOverview = ({ employee }: { employee: EmployeeType }) => {
       description: employee.hoursJob,
       icon: <IconClock stroke={1.2} size={42} className="text-black" />,
     },
-    {
-      title: "Experiencia",
-      description: employee.experienceRequirements,
-      icon: (
-        <IconChartBarPopular stroke={1.2} size={42} className="text-black" />
-      ),
-    },
-
     // {
     //   title: "Tipo de Contrato",
     //   description: CONVERT_UPPER(employee.typeOfEmployment),
@@ -107,8 +99,7 @@ const EmployeeOverview = ({ employee }: { employee: EmployeeType }) => {
                 {item.title}:
               </span>
               <span className="text-base font-bold text-black">
-                {item.description.charAt(0).toUpperCase() +
-                  item.description.slice(1).toLowerCase()}
+                {item.description}
               </span>
             </div>
           </div>
@@ -122,7 +113,7 @@ const EmployeeOverview = ({ employee }: { employee: EmployeeType }) => {
       <h3 className="font-lato text-2xl font-bold text-black">
         Descripción General
       </h3>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {SHOW_CONTENT({ description })}
       </div>
     </div>
@@ -139,7 +130,17 @@ const EmployeeContent = ({ employee }: { employee: EmployeeType }) => {
       try {
         return JSON.parse(data);
       } catch (error) {
-        console.warn("Failed to parse JSON data:", data, error);
+        // Si falla el JSON parse, intentar convertir texto plano separado por ";"
+        const items = data
+          .split(";")
+          .map((item: string) => item.trim())
+          .filter((item: string) => item.length > 0);
+        if (items.length > 0) {
+          return items.map((item: string, index: number) => ({
+            value: `item-${index}`,
+            label: item,
+          }));
+        }
         return [];
       }
     }
@@ -150,7 +151,11 @@ const EmployeeContent = ({ employee }: { employee: EmployeeType }) => {
   const SHOW_CONTENT = (data: any, title: string) => {
     const dataParsed = parseData(data);
 
-    if (dataParsed[0].label === "No suministrado") {
+    if (
+      !dataParsed ||
+      dataParsed.length === 0 ||
+      dataParsed[0]?.label === "No suministrado"
+    ) {
       return null;
     }
 
@@ -211,6 +216,7 @@ const EmployeeContent = ({ employee }: { employee: EmployeeType }) => {
 
       {SHOW_CONTENT(employee.academicRequirements, "Requisitos Académicos")}
       {SHOW_CONTENT(employee.skills, "Habilidades Requeridas")}
+      {SHOW_CONTENT(employee.experienceRequirements, "Experiencia Requerida")}
       {SHOW_CONTENT(
         employee.certificateRequirements,
         "Certificados Requeridos",
