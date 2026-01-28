@@ -3,11 +3,21 @@ import { WpQuery } from "@/modules/shared/services/wpQuery";
 import { PreguntasFrecuentesProps } from "@/modules/shared/types/generalQuery.types";
 import { queryPreguntasFrecuentesCandidatos } from "@/modules/shared/graphql/general.query";
 import { toReversed } from "@/modules/shared/utils/toReversed";
+import { getTranslations } from "next-intl/server";
+import { getLocale } from "next-intl/server";
 
 export const EmpleoPreguntaFrecuentes = async () => {
+  const t = await getTranslations("FrequentlyAskedQuestions");
+  const locale = await getLocale();
+  const isEnglish = locale === "en";
   const preguntasFrecuentesCandidatos: PreguntasFrecuentesProps = await WpQuery(
     {
       query: queryPreguntasFrecuentesCandidatos,
+      variables: {
+        category: isEnglish
+          ? "preguntas-frecuentes-candidatos-en"
+          : "preguntas-frecuentes-candidatos",
+      },
     },
   );
 
@@ -20,7 +30,7 @@ export const EmpleoPreguntaFrecuentes = async () => {
       <div className="mx-auto w-full lg:max-w-4xl xl:max-w-6xl">
         <div className="flex flex-col gap-y-7">
           <h2 className="text-center text-4xl font-bold text-balance text-black lg:text-5xl">
-            Preguntas Frecuentes para Candidatos
+            {t("titleCandidates")}
           </h2>
           <hr className="border-secondaryColor mx-auto my-3 w-[120px] border-2 outline-none" />
         </div>

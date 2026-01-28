@@ -40,7 +40,27 @@
 
   },
   "FrequentlyAskedQuestions": {
-    "title": "Frequently Ask Questions for the Company"
+    "title": "Frequently Ask Questions for the Company",
+    "titleCandidates": "Frequently Asked Questions for Candidates"
+  },
+  "empleos": {
+    "buttonInformation": "More Information" 
+  },
+  "blog": {
+    "title": "Up to date with CTS"
+  },
+  "ContactUs": {
+    "title": "Contact Us",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "city": "In which town do you live? Or where is your company located?",
+      "message": "Message",
+      "WriteUs": "Write your message",
+      "button": "Send",
+      "enviando": "Sending"
+    }
   }
 }
 

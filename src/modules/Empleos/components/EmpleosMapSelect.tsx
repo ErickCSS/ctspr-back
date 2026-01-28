@@ -12,10 +12,19 @@ import { parseContent } from "@/modules/shared/utils/parseContent.utils";
 import { Button } from "@modules/ui/button";
 import { Link } from "next-view-transitions";
 import Image from "next/image";
+import { getLocale, getTranslations } from "next-intl/server";
 
 export const EmpleosMapSelect = async () => {
+  const locale = await getLocale();
+  const isEnglish = locale === "en";
+  const t = await getTranslations("empleos");
+
   const empleosTitle: EmpleosProps = await WpQuery({
     query: queryEmpleosTitle,
+    variables: {
+      category: isEnglish ? "empleos-en" : "empleos",
+      in: isEnglish ? "cG9zdDoxMTEy" : "cG9zdDoyMTk=",
+    },
   });
 
   const empleos: EmpleosProps = await WpQuery({
@@ -45,11 +54,7 @@ export const EmpleosMapSelect = async () => {
         {/* <div className="mx-auto mt-10 max-w-5xl bg-zinc-100 p-10">
           <div className="grid grid-cols-1 items-center gap-x-10 gap-y-10 lg:grid-cols-2">
             <div className="flex flex-col gap-y-2">
-<<<<<<< HEAD:src/components/Empleos/EmpleosMapSelect.tsx
-              <h3 className="text-center text-3xl font-bold text-pretty md:text-4xl lg:text-left">
-=======
               <h3 className="text-center text-3xl font-bold md:text-4xl lg:text-left">
->>>>>>> fase2-developer:src/modules/Empleos/components/EmpleosMapSelect.tsx
                 {foundEmpleos}
               </h3>
               <div className="text-center text-lg text-balance md:text-xl lg:text-left">
@@ -71,11 +76,7 @@ export const EmpleosMapSelect = async () => {
                   className="bg-secondaryColor h-12 text-lg text-white transition-colors duration-300 hover:bg-pink-700"
                 >
                   <Link
-<<<<<<< HEAD:src/components/Empleos/EmpleosMapSelect.tsx
-                    href={`https://empleos.ctspr.com/jobs/index.php?q=${item === "Salinas" ? "LasPiedras" : item === "San Germán" ? "SanGerman" : item.charAt(0).toUpperCase() + item.slice(1).replace(" ", "")}`}
-=======
                     href={`/empleos?q=${item === "San Germán" ? "San-German" : item.charAt(0).toUpperCase() + item.slice(1).replace(" ", "-")}`}
->>>>>>> fase2-developer:src/modules/Empleos/components/EmpleosMapSelect.tsx
                     target="_blank"
                     rel="noopener noreferrer nofollow"
                   >
@@ -119,7 +120,7 @@ export const EmpleosMapSelect = async () => {
               asChild
               className="bg-secondaryColor min-h-[50px] w-[250px] text-xl text-white transition-colors duration-300 hover:bg-pink-700"
             >
-              <Link href="/contacto">Más Información</Link>
+              <Link href="/contacto">{t("buttonInformation")}</Link>
             </Button>
           </div>
         </div>

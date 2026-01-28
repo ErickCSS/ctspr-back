@@ -6,10 +6,16 @@ import { Button } from "@modules/ui/button";
 import { Link } from "next-view-transitions";
 import { IconCaretRightFilled } from "@tabler/icons-react";
 import { YouTubeEmbed } from "@next/third-parties/google";
+import { getLocale } from "next-intl/server";
 
 export const BlogObjetives = async () => {
+  const locale = await getLocale();
+  const isEnglish = locale === "en";
   const blogObjetives: BlogObjetivesProps = await WpQuery({
     query: queryBlogObjetives,
+    variables: {
+      category: isEnglish ? "blog-page-en" : "blog-page",
+    },
   });
 
   const title = blogObjetives.posts.nodes[0].title;
@@ -44,7 +50,7 @@ export const BlogObjetives = async () => {
               className="bg-secondaryColor h-18 !pr-6 !pl-10 text-xl font-black uppercase transition-colors duration-300 hover:bg-pink-700 lg:text-2xl"
             >
               <Link href="/contacto" className="flex items-center gap-x-5">
-                <span>Contáctanos</span>{" "}
+                <span>{isEnglish ? "Contact us" : "Contáctanos"}</span>{" "}
                 <IconCaretRightFilled size={32} className="size-[32px]" />
               </Link>
             </Button>

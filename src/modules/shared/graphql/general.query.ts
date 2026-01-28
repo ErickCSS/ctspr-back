@@ -306,8 +306,8 @@ export const querySeguridadSaludOcupacional = `query SeguridadSaludOcupacional($
   }
 }`;
 
-export const queryEmpleosTitle = `query EmpleosTitle {
-  posts(where: {categoryName:"empleos", in:"cG9zdDoyMTk="}){
+export const queryEmpleosTitle = `query EmpleosTitle($category: String!, $in: [ID]!) {
+  posts(where: {categoryName:$category, in:$in}){
     nodes{
       title
       id
@@ -326,8 +326,8 @@ export const queryEmpleos = `query Empleos {
   }
 }`;
 
-export const queryEmpleosBeneficios = `query Beneficios {
-  posts(where: {categoryName:"empleos", in:"cG9zdDoyMjU="}){
+export const queryEmpleosBeneficios = `query Beneficios($category: String!, $in: [ID]!) {
+  posts(where: {categoryName:$category, in:$in}){
     nodes{
       title
       id
@@ -341,8 +341,8 @@ export const queryEmpleosBeneficios = `query Beneficios {
   }
 }`;
 
-export const queryBeneficiosUnete = `query BeneficiosUnete {
-  posts(where: {categoryName:"unete"}){
+export const queryBeneficiosUnete = `query BeneficiosUnete($category: String!) {
+  posts(where: {categoryName:$category}){
     nodes{
       title
       id
@@ -352,8 +352,8 @@ export const queryBeneficiosUnete = `query BeneficiosUnete {
   }
 }`;
 
-export const queryBlogObjetives = `query BlogObjetives {
-  posts(where: {categoryName:"blog-page"}){
+export const queryBlogObjetives = `query BlogObjetives($category: String!) {
+  posts(where: {categoryName:$category}){
     nodes{
       title
       id
@@ -405,8 +405,8 @@ export const queryPreguntasFrecuentesEmpresas = `query PreguntasFrecuentesEmpres
   }
 }`;
 
-export const queryPreguntasFrecuentesCandidatos = `query PreguntasFrecuentesCandidatos {
-  posts(where:{categoryName:"preguntas-frecuentes-candidatos"}){
+export const queryPreguntasFrecuentesCandidatos = `query PreguntasFrecuentesCandidatos($category: String!) {
+  posts(where:{categoryName:$category}){
     nodes{
       title
       id
