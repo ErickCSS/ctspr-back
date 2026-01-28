@@ -9,14 +9,25 @@ import {
 } from "@/modules/shared/types/generalQuery.types";
 import { toReversed } from "@/modules/shared/utils/toReversed";
 import Image from "next/image";
+import { getLocale } from "next-intl/server";
 
 export const ServiciosPropuestaValor = async () => {
+  const locale = await getLocale();
+  const isEnglish = locale === "en";
   const propuestaValorTitle: PropuestaValorTitleProps = await WpQuery({
     query: queryPropuestaValorTitle,
+    variables: {
+      category: isEnglish ? "propuesta-valor-en" : "propuesta-valor",
+      in: isEnglish ? "cG9zdDoxMDQ3" : "cG9zdDoxNjE=",
+    },
   });
 
   const propuestaValor: PropuestaValorProps = await WpQuery({
     query: queryPropuestaValor,
+    variables: {
+      category: isEnglish ? "propuesta-valor-en" : "propuesta-valor",
+      notIn: isEnglish ? "cG9zdDoxMDQ3" : "cG9zdDoxNjE=",
+    },
   });
 
   const title = propuestaValorTitle.posts.nodes[0].title;

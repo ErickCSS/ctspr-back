@@ -4,10 +4,19 @@ import { queryServiciosList } from "@/modules/shared/graphql/general.query";
 import { ServiciosListProps } from "@/modules/shared/types/generalQuery.types";
 import { parseContent } from "@/modules/shared/utils/parseContent.utils";
 import { toReversed } from "@/modules/shared/utils/toReversed";
+import { getLocale } from "next-intl/server";
 
 export const ServiciosList = async () => {
+  const locale = await getLocale();
+  const isEnglish = locale === "en";
   const serviciosList: ServiciosListProps = await WpQuery({
     query: queryServiciosList,
+    variables: {
+      category: isEnglish ? "servicios-en" : "servicios",
+      notIn: isEnglish
+        ? ["cG9zdDoxMDQ1", "cG9zdDoxMDY2", "cG9zdDoxMDY4"]
+        : ["cG9zdDoxOTE=", "cG9zdDoxNzI=", "cG9zdDoxODY="],
+    },
   });
 
   const servicios = toReversed(serviciosList.posts.nodes);

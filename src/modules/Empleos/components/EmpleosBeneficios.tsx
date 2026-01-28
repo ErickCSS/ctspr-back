@@ -10,14 +10,26 @@ import {
 import Image from "next/image";
 import { parseWithIcons } from "@/modules/shared/utils/ParseWithIcon.utils";
 import { parseContent } from "@/modules/shared/utils/parseContent.utils";
+import { getLocale } from "next-intl/server";
+import { cn } from "@/modules/shared/lib/utils";
 
 export const EmpleosBeneficios = async () => {
+  const locale = await getLocale();
+  const isEnglish = locale === "en";
+
   const empleosBeneficios: EmpleosBeneficiosProps = await WpQuery({
     query: queryEmpleosBeneficios,
+    variables: {
+      category: isEnglish ? "empleos-en" : "empleos",
+      in: isEnglish ? "cG9zdDoxMTE2" : "cG9zdDoyMjU=",
+    },
   });
 
   const beneficiosUnete: BeneficiosUneteProps = await WpQuery({
     query: queryBeneficiosUnete,
+    variables: {
+      category: isEnglish ? "unete-en" : "unete",
+    },
   });
 
   const title = empleosBeneficios.posts.nodes[0].title;
@@ -41,7 +53,12 @@ export const EmpleosBeneficios = async () => {
               {parseWithIcons(content, "text-secondaryColor size-10")}
             </div>
 
-            <div className="flex flex-col justify-center gap-y-5">
+            <div
+              className={cn(
+                "flex flex-col justify-center gap-y-5",
+                isEnglish ? "mt-7" : "",
+              )}
+            >
               <h3 className="text-center text-5xl font-black text-black lg:text-7xl">
                 {titleUnete}
               </h3>

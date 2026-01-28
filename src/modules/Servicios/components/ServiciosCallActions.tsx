@@ -5,10 +5,18 @@ import {
   parseContent,
   parsePhoneNumbers,
 } from "@/modules/shared/utils/parseContent.utils";
+import { getLocale } from "next-intl/server";
 
 export const ServiciosCallActions = async () => {
+  const locale = await getLocale();
+  const isEnglish = locale === "en";
   const serviciosCallActions: ServiciosCallActionsProps = await WpQuery({
     query: queryServiciosCallActions,
+    variables: {
+      category: isEnglish
+        ? "call-action-servicios-en"
+        : "call-action-servicios",
+    },
   });
 
   const background =

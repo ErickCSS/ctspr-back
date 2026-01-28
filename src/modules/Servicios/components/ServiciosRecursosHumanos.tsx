@@ -10,14 +10,26 @@ import {
 import { parseContent } from "@/modules/shared/utils/parseContent.utils";
 import Image from "next/image";
 import { toReversed } from "@/modules/shared/utils/toReversed";
+import { getLocale } from "next-intl/server";
 
 export const ServiciosRecursosHumanos = async () => {
+  const locale = await getLocale();
+  const isEnglish = locale === "en";
+
   const recursosHumanosTitle: RecursosHumanosTitleProps = await WpQuery({
     query: queryRecursosHumanoTitle,
+    variables: {
+      category: isEnglish ? "recursos-humanos-en" : "recursos-humanos",
+      in: isEnglish ? "cG9zdDoxMDc4" : "cG9zdDoxOTg=",
+    },
   });
 
   const recursosHumanos: RecursosHumanosProps = await WpQuery({
     query: queryRecursosHumanos,
+    variables: {
+      category: isEnglish ? "recursos-humanos-en" : "recursos-humanos",
+      notIn: isEnglish ? "cG9zdDoxMDc4" : "cG9zdDoxOTg=",
+    },
   });
 
   const recursosHumanosReverse = toReversed(recursosHumanos.posts.nodes);

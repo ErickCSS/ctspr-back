@@ -3,10 +3,18 @@ import { queryServicioSeguridadIntegral } from "@/modules/shared/graphql/general
 import { ServiciosListProps } from "@/modules/shared/types/generalQuery.types";
 import { parseContent } from "@/modules/shared/utils/parseContent.utils";
 import Image from "next/image";
+import { getLocale } from "next-intl/server";
 
 export const ServiciosMiddle = async () => {
+  const locale = await getLocale();
+  const isEnglish = locale === "en";
+
   const servicios: ServiciosListProps = await WpQuery({
     query: queryServicioSeguridadIntegral,
+    variables: {
+      category: isEnglish ? "servicios-en" : "servicios",
+      in: isEnglish ? "cG9zdDoxMDY2" : "cG9zdDoxOTE=",
+    },
   });
 
   const title = servicios.posts.nodes[0].title;

@@ -2,11 +2,18 @@ import { WpQuery } from "@/modules/shared/services/wpQuery";
 import { queryServiciosPeritajeIndustrias } from "@/modules/shared/graphql/general.query";
 import { ServiciosPeritajeIndustriasProps } from "@/modules/shared/types/generalQuery.types";
 import { parseWithIcons } from "@/modules/shared/utils/ParseWithIcon.utils";
+import { getLocale } from "next-intl/server";
 
 export const ServiciosPeritajeIndustrias = async () => {
+  const locale = await getLocale();
+  const isEnglish = locale === "en";
+
   const serviciosPeritajeIndustrias: ServiciosPeritajeIndustriasProps =
     await WpQuery({
       query: queryServiciosPeritajeIndustrias,
+      variables: {
+        category: isEnglish ? "peritaje-industrias-en" : "peritaje-industrias",
+      },
     });
 
   const title = serviciosPeritajeIndustrias.posts.nodes[0].title;

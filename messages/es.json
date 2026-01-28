@@ -37,6 +37,29 @@
   "WeAre": {
     "administrative": "Equipo Directivo",
     "gerencial": "Equipo Gerencial"
+  },
+  "FrequentlyAskedQuestions": {
+    "title": "Preguntas Frecuentes para Empresa",
+    "titleCandidates": "Preguntas Frecuentes para Candidatos"
+  },
+  "empleos": {
+    "buttonInformation": "Más Información" 
+  },
+  "blog": {
+    "title": "Al día con CTS"
+  },
+  "ContactUs": {
+    "title": "Contáctanos",
+    "form": {
+      "name": "Nombre",
+      "email": "Email",
+      "phone": "Teléfono",
+      "city": "En qué pueblo resides? ¿O dónde está ubicada tu empresa?",
+      "message": "Mensaje",
+      "WriteUs": "Escribe tu mensaje",
+      "button": "Enviar",
+      "enviando": "Enviando"
+    }
   }
 }
 
