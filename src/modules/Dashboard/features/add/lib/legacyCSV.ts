@@ -305,6 +305,8 @@ export function mapNewCSVFormatToModernObject(
     regionalOffice: convertCity,
     linkToApply: linkTypeform || "",
     description: [
+      scheduleInfo, // Incluir horarios en description
+      license, // Incluir licencias en description
       buckets.availability.join("; "),
       buckets.notes.join("; "),
       compText,
@@ -451,6 +453,8 @@ export function mapLegacyArrayToModernObject(
     regionalOffice: convertCity, // si aparece una ciudad alterna
     linkToApply: SelectForm(),
     description: [
+      scheduleInfoLegacy, // Incluir horarios en description
+      license, // Incluir licencias en description
       buckets.availability.join("; "),
       buckets.notes.join("; "),
       compText,

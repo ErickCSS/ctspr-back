@@ -45,8 +45,10 @@ export const CardEmployee = ({ employee }: { employee?: EmployeeType }) => {
     >
       <CardHeader>
         <div className="flex items-center justify-between">
-          <h4 className="font-lato text-xl font-bold">
-            {formData.vacancy || employee?.vacancy || "Titulo de la Vacante"}
+          <h4 className="font-lato text-base font-bold">
+            {formData.vacancy.toUpperCase() ||
+              employee?.vacancy.toUpperCase() ||
+              "Titulo de la Vacante"}
           </h4>
           <div className="font-lato text-sm font-bold text-zinc-500">
             #{formData.code || employee?.code || "000000"}
@@ -57,7 +59,13 @@ export const CardEmployee = ({ employee }: { employee?: EmployeeType }) => {
             <IconMapPin stroke={1.5} size={20} />
             <span>Ubicación del Empleo:</span>
             <span className="font-lato">
-              {formData.location || employee?.location || "Ciudad, Pais"}
+              {formData.location ||
+                CONVERT_CAPITALIZE(
+                  employee?.location === "San German"
+                    ? "San Germán"
+                    : (employee?.location ?? ""),
+                ) ||
+                "Ciudad, Pais"}
             </span>
           </div>
           {/* <div className="flex items-center gap-x-1 text-sm text-zinc-500">

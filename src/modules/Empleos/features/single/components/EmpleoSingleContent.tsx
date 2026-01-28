@@ -64,11 +64,11 @@ const EmployeeOverview = ({ employee }: { employee: EmployeeType }) => {
       description: CONVERT_CAPITALIZE(employee.location),
       icon: <IconMap stroke={1.2} size={42} className="text-black" />,
     },
-    {
-      title: "Horario",
-      description: employee.hoursJob,
-      icon: <IconClock stroke={1.2} size={42} className="text-black" />,
-    },
+    // {
+    //   title: "Horario",
+    //   description: employee.hoursJob,
+    //   icon: <IconClock stroke={1.2} size={42} className="text-black" />,
+    // },
     // {
     //   title: "Tipo de Contrato",
     //   description: CONVERT_UPPER(employee.typeOfEmployment),
@@ -221,7 +221,7 @@ const EmployeeContent = ({ employee }: { employee: EmployeeType }) => {
         employee.certificateRequirements,
         "Certificados Requeridos",
       )}
-      {SHOW_CONTENT(employee.licenseRequirements, "Licencias Requeridas")}
+      {/* {SHOW_CONTENT(employee.licenseRequirements, "Licencias Requeridas")} */}
       {SHOW_CONTENT(employee.benefits, "Compensaciones y Beneficios")}
 
       {IS_SHOW_BUTTON({ linkToApply: employee.linkToApply })}

@@ -70,7 +70,11 @@ const LeftSide = ({ employee }: { employee: EmployeeType }) => {
             <span>Oficina de CTS:</span>
             <span className="font-lato">
               {CONVERT_CAPITALIZE(
-                employee.regionalOffice.replace("-", " ") ?? "",
+                (employee.regionalOffice.replace("-", " ") === "san german"
+                  ? "San Germán"
+                  : "") ||
+                  employee.regionalOffice.replace("-", " ") ||
+                  "",
               ) || "Oficina Regional"}
             </span>
           </div>
