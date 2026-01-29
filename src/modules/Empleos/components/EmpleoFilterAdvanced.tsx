@@ -18,6 +18,7 @@ import {
   SELECT_EMPLOYMENT,
 } from "@modules/shared/lib/SelectInifo";
 import { useFilterEmpleo } from "@modules/Empleos/hooks/useFilterEmpleo";
+import { getCityLabel } from "@/modules/shared/utils";
 
 export const EmpleoFilterAdvanced = () => {
   const {
@@ -88,7 +89,7 @@ export const EmpleoFilterAdvanced = () => {
                                         {item.vacancy}
                                       </span>
                                       <span className="text-xs text-zinc-500">
-                                        ({item.location})
+                                        ({getCityLabel(item.location)})
                                       </span>
                                     </div>
                                     <span className="text-xs text-zinc-500">

@@ -16,6 +16,7 @@ import {
 } from "@modules/shared/lib/SelectInifo";
 import { Button } from "@/modules/ui/button";
 import { Link } from "next-view-transitions";
+import { getCityLabel } from "@/modules/shared/utils";
 
 export const EmpleoFilterHero = () => {
   const {
@@ -78,7 +79,7 @@ export const EmpleoFilterHero = () => {
                                       {item.vacancy}
                                     </span>
                                     <span className="text-xs text-zinc-500">
-                                      ({item.location})
+                                      ({getCityLabel(item.location)})
                                     </span>
                                   </div>
                                   <span className="text-xs text-zinc-500">
