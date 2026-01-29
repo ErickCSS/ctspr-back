@@ -7,12 +7,12 @@ import {
   IconClock,
   IconChartBarPopular,
   IconContract,
-  IconArrowNarrowLeft,
 } from "@tabler/icons-react";
 import { formatDate } from "date-fns";
 import { es } from "date-fns/locale";
 import { Button } from "@modules/ui/button";
 import { Link } from "next-view-transitions";
+import { BackButton } from "./BackButton";
 
 export const EmpleoSingleContent = async ({ slug }: { slug: string }) => {
   const employee = await EmpleosServices.getEmployeeBySlug(slug);
@@ -24,20 +24,7 @@ export const EmpleoSingleContent = async ({ slug }: { slug: string }) => {
   return (
     <section className="bg-white px-4 py-20">
       <div className="mx-auto w-full max-w-4xl space-y-14">
-        <Button
-          size="lg"
-          className="bg-primaryColor hover:bg-secondaryColor font-lato max-w-sm cursor-pointer text-base font-bold text-white transition-colors duration-300"
-          asChild
-        >
-          <Link
-            href="/empleos"
-            target="_self"
-            className="flex items-center gap-2"
-          >
-            <IconArrowNarrowLeft stroke={1.2} size={40} />
-            <span>Volver al Listado</span>
-          </Link>
-        </Button>
+        <BackButton />
         <EmployeeOverview employee={employee} />
         <EmployeeContent employee={employee} />
       </div>
@@ -193,9 +180,12 @@ const EmployeeContent = ({ employee }: { employee: EmployeeType }) => {
     );
   };
 
-  // Metodo para detectar ";" y hacer un salto de linea con bullets
+  // Metodo para detectar saltos de línea y hacer bullets
   const LIST_DESCRIPTION = (description: string) => {
-    const list = description.split(";");
+    const list = description
+      .split("\n")
+      .map((item) => item.trim())
+      .filter((item) => item.length > 0);
     return (
       <ul className="list-disc space-y-3 pl-6">
         {list.map((item, index) => (

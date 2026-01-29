@@ -103,6 +103,16 @@ function splitLegacyCell(cell?: string): string[] {
     .filter(Boolean);
 }
 
+function formatDescriptionWithLineBreaks(text?: string): string {
+  if (!text) return "";
+  // Reemplazar ] con saltos de línea y también limpiar espacios
+  return text
+    .split("]")
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .join("\n");
+}
+
 function extractScheduleInfo(text: string): string {
   if (!text) return "";
 
@@ -190,7 +200,7 @@ export function mapNewCSVFormatToModernObject(
 ): Record<string, string> {
   const code = row["Orden"] ?? row["orden"] ?? "";
   const vacancy = row["Labor Description"] ?? row["labor description"] ?? "";
-  const sucursal = row["Sucursal"] ?? row["sucursal"] ?? "";
+  const sucursal = row["Sucursal"] ?? row["sucursal"] ?? row["Surcursal"] ?? "";
   const linkTypeform = row["Link Typeform"] ?? row["link typeform"] ?? "";
   const location = row["Location"] ?? row["location"] ?? "";
   const experience = row["Experience"] ?? row["experience"] ?? "";
@@ -287,6 +297,9 @@ export function mapNewCSVFormatToModernObject(
     .filter(Boolean)
     .join("; ");
 
+  // Formatear el contenido original del Description con saltos de línea
+  const formattedDescription = formatDescriptionWithLineBreaks(description);
+
   const modern: Record<string, string> = {
     code: String(code || ""),
     vacancy: CONVERT_CAPITALIZE(vacancy),
@@ -304,15 +317,7 @@ export function mapNewCSVFormatToModernObject(
     benefits: "",
     regionalOffice: convertCity,
     linkToApply: linkTypeform || "",
-    description: [
-      scheduleInfo, // Incluir horarios en description
-      license, // Incluir licencias en description
-      buckets.availability.join("; "),
-      buckets.notes.join("; "),
-      compText,
-    ]
-      .filter(Boolean)
-      .join(" | "),
+    description: formattedDescription,
     owner_email: "",
     user_id: "",
     is_deleted: "",
@@ -414,6 +419,9 @@ export function mapLegacyArrayToModernObject(
     .filter(Boolean)
     .join("; ");
 
+  // Formatear el contenido original del blob con saltos de línea
+  const formattedDescriptionLegacy = formatDescriptionWithLineBreaks(blob);
+
   const FORM_SANTURCE = "https://ctspr.typeform.com/to/ZUNTWj";
   const FORM_LAS_PIEDRAS = "https://ctspr.typeform.com/to/BtYyWuqq";
   const FORM_SAN_GERMAN = "https://ctspr.typeform.com/to/wBjjgLk7";
@@ -452,15 +460,7 @@ export function mapLegacyArrayToModernObject(
     benefits: "", // opcional
     regionalOffice: convertCity, // si aparece una ciudad alterna
     linkToApply: SelectForm(),
-    description: [
-      scheduleInfoLegacy, // Incluir horarios en description
-      license, // Incluir licencias en description
-      buckets.availability.join("; "),
-      buckets.notes.join("; "),
-      compText,
-    ]
-      .filter(Boolean)
-      .join(" | "),
+    description: formattedDescriptionLegacy,
     owner_email: "",
     user_id: "",
     is_deleted: "",
