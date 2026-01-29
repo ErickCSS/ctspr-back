@@ -18,12 +18,23 @@ function extractCitiesFromText(text: string): string[] {
   if (!text) return ["No suministrada"];
 
   const foundCities: string[] = [];
-  const normalizedText = text.toUpperCase();
+  // Normalizar el texto: convertir a mayúsculas y remover acentos/tildes
+  const normalizedText = text
+    .toUpperCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
 
   // Buscar cada ciudad de la lista en el texto
   for (const location of SELECT_LOCATION) {
-    const cityValue = location.value.toUpperCase();
-    const cityLabel = location.label.toUpperCase();
+    // Normalizar value y label: convertir a mayúsculas y remover acentos/tildes
+    const cityValue = location.value
+      .toUpperCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+    const cityLabel = location.label
+      .toUpperCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
 
     // Buscar por value y label, considerando palabras completas
     const valueRegex = new RegExp(
@@ -224,36 +235,36 @@ export function mapNewCSVFormatToModernObject(
     buckets[tag]?.push(p);
   }
 
-  // Extraer ciudades del campo Location y Description
-  const locationText = `${location} ${descriptionParts.join(" ")}`;
-  const extractedCities = extractCitiesFromText(locationText);
-
-  // Agregar las ciudades encontradas
-  for (const extractedCity of extractedCities) {
-    if (
-      extractedCity !== "No suministrada" &&
-      !buckets.alt_city.includes(extractedCity)
-    ) {
-      buckets.alt_city.push(extractedCity);
-    }
+  // PRIORIDAD 1: Intentar extraer ciudad del campo Location primero
+  const cityFromLocation = extractCitiesFromText(location);
+  if (cityFromLocation[0] !== "No suministrada") {
+    buckets.alt_city.push(cityFromLocation[0]);
   }
 
-  // Si no se encontraron ciudades, usar Location o Sucursal
+  // PRIORIDAD 2: Si no se encontró ciudad en Location, buscar en Description
   if (buckets.alt_city.length === 0) {
-    const cityFromLocation = extractCitiesFromText(location);
-    if (cityFromLocation[0] !== "No suministrada") {
-      buckets.alt_city.push(cityFromLocation[0]);
-    } else {
-      buckets.alt_city.push(CONVERT_CAPITALIZE(sucursal) || "No suministrada");
+    const descriptionText = descriptionParts.join(" ");
+    const citiesFromDescription = extractCitiesFromText(descriptionText);
+    for (const extractedCity of citiesFromDescription) {
+      if (
+        extractedCity !== "No suministrada" &&
+        !buckets.alt_city.includes(extractedCity)
+      ) {
+        buckets.alt_city.push(extractedCity);
+      }
     }
   }
 
-  // Procesar Experience y Education junto con los requirements del Description
-  const allRequirements = [
-    ...buckets.requirements,
-    experience,
-    education,
-  ].filter(Boolean);
+  // PRIORIDAD 3: Si aún no hay ciudad, usar Sucursal como fallback
+  if (buckets.alt_city.length === 0) {
+    buckets.alt_city.push(CONVERT_CAPITALIZE(sucursal) || "No suministrada");
+  }
+
+  // Procesar Experience directamente (sin mezclarlo con otros campos)
+  const experienceValue = experience ? experience.trim() : "";
+
+  // Procesar Education y requirements del Description (sin Experience)
+  const allRequirements = [...buckets.requirements, education].filter(Boolean);
 
   const reqItems = allRequirements
     .flatMap((r) => r.split(/[,;|]/))
@@ -265,7 +276,6 @@ export function mapNewCSVFormatToModernObject(
   const academicItems: string[] = [];
   const licenseItems: string[] = [];
   const certItems: string[] = [];
-  const expItems: string[] = [];
 
   for (const item of reqItems) {
     const up = item.toUpperCase();
@@ -273,8 +283,6 @@ export function mapNewCSVFormatToModernObject(
       licenseItems.push(item);
     } else if (/CERTIFIC/i.test(item)) {
       certItems.push(item);
-    } else if (/EXPERIEN/i.test(item)) {
-      expItems.push(item);
     } else if (/BACHILLERATO|DIPLOMA|GRADO|T[ÍI]TULO|ESTUDIOS/i.test(item)) {
       academicItems.push(item);
     } else {
@@ -285,7 +293,6 @@ export function mapNewCSVFormatToModernObject(
   const academic = academicItems.join("; ");
   const license = licenseItems.join("; ");
   const certs = certItems.join("; ");
-  const exp = expItems.join("; ");
 
   const compText = buckets.compensation.join("; ");
   const comp = parseLegacyCompensation(compText);
@@ -311,7 +318,7 @@ export function mapNewCSVFormatToModernObject(
     academicRequirements: academic,
     licenseRequirements: license,
     certificateRequirements: certs,
-    experienceRequirements: exp,
+    experienceRequirements: experienceValue,
     typeOfEmployment: "Full-time",
     skills: "",
     benefits: "",
@@ -356,21 +363,27 @@ export function mapLegacyArrayToModernObject(
     buckets[tag]?.push(p);
   }
 
-  // Extraer ciudades adicionales de la descripción completa
-  const descriptionText = parts.join(" ");
-  const extractedCities = extractCitiesFromText(descriptionText);
+  // PRIORIDAD 1: Intentar extraer ciudad del parámetro city primero
+  const cityFromParam = extractCitiesFromText(city);
+  if (cityFromParam[0] !== "No suministrada") {
+    buckets.alt_city.push(cityFromParam[0]);
+  }
 
-  // Agregar las ciudades encontradas al bucket alt_city si no están ya
-  for (const extractedCity of extractedCities) {
-    if (
-      extractedCity !== "No suministrada" &&
-      !buckets.alt_city.includes(extractedCity)
-    ) {
-      buckets.alt_city.push(extractedCity);
+  // PRIORIDAD 2: Si no se encontró ciudad en el parámetro, buscar en Description
+  if (buckets.alt_city.length === 0) {
+    const descriptionText = parts.join(" ");
+    const citiesFromDescription = extractCitiesFromText(descriptionText);
+    for (const extractedCity of citiesFromDescription) {
+      if (
+        extractedCity !== "No suministrada" &&
+        !buckets.alt_city.includes(extractedCity)
+      ) {
+        buckets.alt_city.push(extractedCity);
+      }
     }
   }
 
-  // Si no se encontraron ciudades en el texto y alt_city está vacío, usar "No suministrada"
+  // PRIORIDAD 3: Si aún no hay ciudad, usar el parámetro city capitalizado como fallback
   if (buckets.alt_city.length === 0) {
     buckets.alt_city.push(CONVERT_CAPITALIZE(city) || "No suministrada");
   }

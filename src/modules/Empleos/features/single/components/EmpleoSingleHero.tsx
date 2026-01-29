@@ -1,5 +1,9 @@
 import { EmpleosServices } from "@modules/Empleos/services/empleos.services";
-import { CONVERT_CAPITALIZE, CONVERT_UPPER } from "@modules/shared/utils";
+import {
+  CONVERT_CAPITALIZE,
+  CONVERT_UPPER,
+  getCityLabel,
+} from "@modules/shared/utils";
 import { CONVERT_MONEY } from "@modules/shared/utils/convertMoney";
 import { MapHeroIcons } from "@modules/Empleos/features/single/libs/MapHeroIcons";
 import {
@@ -58,7 +62,7 @@ const LeftSide = ({ employee }: { employee: EmployeeType }) => {
             <IconMapPin stroke={1.5} size={20} />
             <span>Ubicación del Empleo:</span>
             <span className="font-lato">
-              {employee.location || "Ciudad, Pais"}
+              {getCityLabel(employee.location) || "Ciudad, Pais"}
             </span>
           </div>
           {/* <div className="flex items-center gap-x-2 text-base text-zinc-600">

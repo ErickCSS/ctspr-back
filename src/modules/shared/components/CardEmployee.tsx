@@ -10,7 +10,7 @@ import {
 import { Badge } from "@modules/ui/badge";
 import { CONVERT_MONEY } from "@modules/shared/utils/convertMoney";
 import { useAddEmployeeStore } from "@modules/Dashboard/features/add/store/addEmployeeStore";
-import { CONVERT_CAPITALIZE } from "@modules/shared/utils";
+import { CONVERT_CAPITALIZE, getCityLabel } from "@modules/shared/utils";
 import { formatDistanceToNow } from "date-fns";
 import { es } from "date-fns/locale";
 import { EmployeeType } from "@/modules/shared/types/employee.type";
@@ -60,11 +60,7 @@ export const CardEmployee = ({ employee }: { employee?: EmployeeType }) => {
             <span>Ubicación del Empleo:</span>
             <span className="font-lato">
               {formData.location ||
-                CONVERT_CAPITALIZE(
-                  employee?.location === "San German"
-                    ? "San Germán"
-                    : (employee?.location ?? ""),
-                ) ||
+                getCityLabel(employee?.location ?? "") ||
                 "Ciudad, Pais"}
             </span>
           </div>
