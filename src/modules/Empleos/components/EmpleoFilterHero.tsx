@@ -24,7 +24,6 @@ export const EmpleoFilterHero = () => {
     handleRegionalOfficeChange,
     handleLocationChange,
     loading,
-    setLocalFilters,
     formProps,
     inputProps,
     autocompleteState,
@@ -94,7 +93,7 @@ export const EmpleoFilterHero = () => {
         <div className="h-[28px] !w-[1px] bg-zinc-300" />
         <div className="flex w-1/3 items-center gap-1">
           <Select
-            value={localFilters.regionalOffice}
+            value={localFilters.regionalOffice || "all"}
             onValueChange={handleRegionalOfficeChange}
           >
             <SelectTrigger className="min-h-12 w-full border-none bg-white text-base shadow-none">
@@ -122,7 +121,7 @@ export const EmpleoFilterHero = () => {
         <div className="h-[28px] !w-[1px] bg-zinc-300" />
         <div className="flex w-1/3 items-center gap-1">
           <Select
-            value={localFilters.industry}
+            value={localFilters.location || "all"}
             onValueChange={handleLocationChange}
           >
             <SelectTrigger className="min-h-12 w-full border-none bg-white text-base shadow-none">

@@ -37,12 +37,6 @@ export const ListPagination = ({
     return isDetailPage ? page : pagination?.current_page || page;
   }, [pageFromUrl, isDetailPage, pagination?.current_page, page]);
 
-  useEffect(() => {
-    if (currentPage !== page) {
-      setPage(currentPage);
-    }
-  }, [currentPage, page, setPage]);
-
   const handlePageChange = (pageNumber: number) => {
     setPage(pageNumber);
     if (!isDetailPage) {

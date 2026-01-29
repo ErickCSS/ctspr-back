@@ -35,11 +35,12 @@ interface EmployeeFiltersState {
   setError: (error: string | null) => void;
   setEmployees: (employees: EmployeeType[] | null) => void;
   setActiveFilters: (filters: FilterParams) => void;
-  applyFilters: (filters: FilterParams) => Promise<void>;
+  applyFilters: (filters: FilterParams, page?: number) => Promise<void>;
   clearFilters: () => Promise<void>;
   updateFilter: (key: keyof FilterParams, value: any) => Promise<void>;
   removeFilter: (key: keyof FilterParams) => Promise<void>;
   setPage: (page: number) => Promise<void>;
+  setPageOnly: (page: number) => void;
 }
 
 export const useEmployeeFiltersStore = create<EmployeeFiltersState>(
@@ -62,19 +63,23 @@ export const useEmployeeFiltersStore = create<EmployeeFiltersState>(
     setError: (error) => set({ error }),
     setEmployees: (employees) => set({ employees }),
     setActiveFilters: (activeFilters) => set({ activeFilters }),
+    setPageOnly: (page) => set({ page }),
     setPage: async (page) => {
       set({ page });
       const { activeFilters, applyFilters } = get();
       await applyFilters(activeFilters);
     },
-    applyFilters: async (filters) => {
+    applyFilters: async (filters, page) => {
+      if (page !== undefined) {
+        set({ page });
+      }
       set({ loading: true, error: null });
 
       try {
         const filteredEmployees =
           await EmpleosServices.getEmployeesWithFiltersPagination({
             ...filters,
-            page: get().page,
+            page: page !== undefined ? page : get().page,
           });
         set({
           employees: filteredEmployees.data,
@@ -95,11 +100,17 @@ export const useEmployeeFiltersStore = create<EmployeeFiltersState>(
 
     updateFilter: async (key, value) => {
       const { activeFilters, applyFilters } = get();
-      // Normalizar el valor si es regionalOffice (remover acentos + espacios a guiones)
-      const normalizedValue =
-        key === "regionalOffice" && typeof value === "string"
-          ? normalizeString(value)
-          : value;
+      // Normalizar valores para filtros que usan eq (exact match)
+      let normalizedValue = value;
+      if (typeof value === "string") {
+        if (
+          key === "regionalOffice" ||
+          key === "industry" ||
+          key === "typeOfEmployment"
+        ) {
+          normalizedValue = normalizeString(value);
+        }
+      }
       const newFilters = { ...activeFilters, [key]: normalizedValue };
       await applyFilters(newFilters);
     },

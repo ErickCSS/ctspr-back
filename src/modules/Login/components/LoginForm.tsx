@@ -29,7 +29,6 @@ export const LoginForm = () => {
     formData.append("password", data.password);
 
     const result = await login(formData);
-    console.log(result);
     if (result.success === false) {
       toast.error(result.message);
       loginForm.reset();

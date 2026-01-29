@@ -5,13 +5,11 @@ import { EmpleoDrawerDialog } from "./EmpleoDrawerDialog";
 import { CardEmployee } from "@modules/shared/components/CardEmployee";
 import { useEmployeeFiltersStore } from "@modules/Empleos/store/EmployeeFilterStore";
 
-import { useInitStore } from "@modules/Empleos/hooks/useInitStore";
 import { CardEmployeeSkeleton } from "@modules/shared/skeletons/CardEmployeeSkeleton";
 import Pagination from "@modules/shared/components/pagination/Pagination";
 import { Search } from "lucide-react";
 
 export const EmpleosList = () => {
-  useInitStore();
   const { employees, loading, pagination, page, setPage } =
     useEmployeeFiltersStore();
 

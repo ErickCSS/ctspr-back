@@ -2,7 +2,7 @@
 
 import { useEmployeeFiltersStore } from "@modules/Empleos/store/EmployeeFilterStore";
 import { EmpleosServices } from "@modules/Empleos/services/empleos.services";
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { useDialogStore } from "@modules/Empleos/store/DialogStore";
 import { useSearchParams, useRouter } from "next/navigation";
 import {
@@ -13,7 +13,7 @@ import {
 import { EmployeeType } from "@/modules/shared/types/employee.type";
 
 export const useFilterEmpleo = () => {
-  const { activeFilters, applyFilters, clearFilters, loading } =
+  const { activeFilters, applyFilters, clearFilters, loading, setPage } =
     useEmployeeFiltersStore();
   const { open, setOpen } = useDialogStore();
   const searchParams = useSearchParams();
@@ -22,7 +22,7 @@ export const useFilterEmpleo = () => {
   const isUserAction = useRef(false);
 
   const [filterOptions, setFilterOptions] = useState<any>({});
-  const [localFilters, setLocalFilters] = useState(activeFilters);
+  const [localFilters, setLocalFilters] = useState<any>({});
   const [autocompleteState, setAutocompleteState] = useState<
     AutocompleteState<EmployeeType>
   >({
@@ -87,28 +87,66 @@ export const useFilterEmpleo = () => {
   }, []);
 
   useEffect(() => {
-    setLocalFilters(activeFilters);
-  }, [activeFilters]);
-
-  useEffect(() => {
     if (isUserAction.current) {
       isUserAction.current = false;
       return;
     }
 
-    const search = searchParams.get("q");
-    if (search) {
-      const formattedSearch = search.toLowerCase();
-      const newFilters = { regionalOffice: formattedSearch };
-      setLocalFilters(newFilters);
-      applyFilters(newFilters);
+    const newFilters: any = {};
+
+    const regionalOffice = searchParams.get("q");
+    if (regionalOffice) {
+      newFilters.regionalOffice = regionalOffice.toLowerCase();
     }
+
+    const location = searchParams.get("l");
+    if (location) {
+      newFilters.location = location;
+    }
+
+    const industry = searchParams.get("i");
+    if (industry) {
+      newFilters.industry = industry.toLowerCase();
+    }
+
+    const typeOfEmployment = searchParams.get("t");
+    if (typeOfEmployment) {
+      newFilters.typeOfEmployment = typeOfEmployment.toLowerCase();
+    }
+
+    const pageParam = searchParams.get("page");
+    const pageNumber = pageParam ? parseInt(pageParam) : 1;
+
+    setLocalFilters(newFilters);
+    applyFilters(newFilters, pageNumber);
   }, [searchParams, applyFilters]);
 
   const handleApplyFilters = () => {
     isUserAction.current = true;
     applyFilters(localFilters);
-    params.set("q", localFilters.regionalOffice || "all");
+    if (localFilters.regionalOffice === undefined) {
+      params.delete("q");
+    } else {
+      params.set("q", localFilters.regionalOffice!);
+    }
+    if (localFilters.location === undefined) {
+      params.delete("l");
+    } else {
+      params.set("l", localFilters.location!);
+    }
+    if (localFilters.industry === undefined) {
+      params.delete("i");
+    } else {
+      params.set("i", localFilters.industry!);
+    }
+    if (localFilters.typeOfEmployment === undefined) {
+      params.delete("t");
+    } else {
+      params.set("t", localFilters.typeOfEmployment!);
+    }
+
+    params.set("page", "1");
+
     router.push(`?${params.toString()}`, { scroll: false });
     setOpen(false);
   };
