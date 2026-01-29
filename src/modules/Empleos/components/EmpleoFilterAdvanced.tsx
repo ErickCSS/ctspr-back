@@ -31,6 +31,11 @@ export const EmpleoFilterAdvanced = () => {
     handleRegionalOfficeChange,
     loading,
     setLocalFilters,
+    formProps,
+    inputProps,
+    autocompleteState,
+    panelRef,
+    autocomplete,
   } = useFilterEmpleo();
 
   return (
@@ -39,14 +44,69 @@ export const EmpleoFilterAdvanced = () => {
         {/* Búsqueda */}
         <div className="space-y-3">
           <label className="text-sm font-medium text-gray-700">Búsqueda</label>
-          <Input
-            placeholder="Buscar en vacantes..."
-            className="min-h-12 bg-white text-sm shadow-none focus-visible:ring-0 focus-visible:outline-none"
-            value={localFilters.search || ""}
-            onChange={(e) =>
-              setLocalFilters({ ...localFilters, search: e.target.value })
-            }
-          />
+          <div className="relative">
+            <form
+              onSubmit={
+                formProps.onSubmit as unknown as React.FormEventHandler<HTMLFormElement>
+              }
+              onReset={
+                formProps.onReset as unknown as React.FormEventHandler<HTMLFormElement>
+              }
+              role={formProps.role}
+              noValidate={formProps.noValidate}
+              action={formProps.action}
+              className="w-full"
+            >
+              <Input
+                placeholder="Buscar en vacantes..."
+                className="min-h-12 bg-white text-sm shadow-none focus-visible:ring-0 focus-visible:outline-none"
+                {...(inputProps as unknown as React.InputHTMLAttributes<HTMLInputElement>)}
+              />
+
+              {autocompleteState.isOpen && (
+                <div
+                  className="absolute top-14 z-50 w-full rounded-lg border border-gray-200 bg-white shadow-lg"
+                  ref={panelRef}
+                  {...(autocomplete.getPanelProps() as unknown as React.HTMLAttributes<HTMLDivElement>)}
+                >
+                  {autocompleteState.collections.map((collection, index) => {
+                    const { items } = collection;
+
+                    return (
+                      <div key={`section-${index}`}>
+                        {items.length > 0 && (
+                          <ul {...autocomplete.getListProps()}>
+                            {items.map((item, index) => (
+                              <li key={index}>
+                                <Button asChild variant="ghost">
+                                  <a
+                                    href={`/empleos/${item.slug}`}
+                                    className="w-full !justify-between gap-3 text-left"
+                                  >
+                                    <div className="flex items-center gap-2">
+                                      <span className="text-xs font-semibold uppercase">
+                                        {item.vacancy}
+                                      </span>
+                                      <span className="text-xs text-zinc-500">
+                                        ({item.location})
+                                      </span>
+                                    </div>
+                                    <span className="text-xs text-zinc-500">
+                                      #{item.code}
+                                    </span>
+                                  </a>
+                                </Button>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </form>
+          </div>
         </div>
 
         {/* Industria */}
@@ -85,7 +145,7 @@ export const EmpleoFilterAdvanced = () => {
               Ubicación
             </label>
             <Select
-              value={localFilters.location}
+              value={localFilters.location || "all"}
               onValueChange={handleLocationChange}
             >
               <SelectTrigger className="min-h-12 w-full bg-white text-sm shadow-none">
@@ -143,7 +203,7 @@ export const EmpleoFilterAdvanced = () => {
               Sucursal
             </label>
             <Select
-              value={localFilters.regionalOffice}
+              value={localFilters.regionalOffice || "all"}
               onValueChange={handleRegionalOfficeChange}
             >
               <SelectTrigger className="min-h-12 w-full bg-white text-sm shadow-none">

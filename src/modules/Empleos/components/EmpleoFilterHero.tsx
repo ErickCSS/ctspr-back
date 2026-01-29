@@ -55,7 +55,7 @@ export const EmpleoFilterHero = () => {
 
             {autocompleteState.isOpen && (
               <div
-                className="absolute top-16 w-[350px] rounded-lg bg-white shadow-md"
+                className="absolute top-16 w-[450px] rounded-lg bg-white shadow-md"
                 ref={panelRef}
                 {...(autocomplete.getPanelProps() as unknown as React.HTMLAttributes<HTMLDivElement>)}
               >
@@ -73,7 +73,14 @@ export const EmpleoFilterHero = () => {
                                   href={`/empleos/${item.slug}`}
                                   className="w-full !justify-between gap-3 text-left"
                                 >
-                                  <span>{item.vacancy}</span>
+                                  <div className="flex items-center gap-2">
+                                    <span className="text-sm font-semibold uppercase">
+                                      {item.vacancy}
+                                    </span>
+                                    <span className="text-xs text-zinc-500">
+                                      ({item.location})
+                                    </span>
+                                  </div>
                                   <span className="text-xs text-zinc-500">
                                     #{item.code}
                                   </span>
