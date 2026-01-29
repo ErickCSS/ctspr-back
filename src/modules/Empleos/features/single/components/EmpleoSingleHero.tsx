@@ -46,8 +46,8 @@ const LeftSide = ({ employee }: { employee: EmployeeType }) => {
       </div>
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-2">
-          <h4 className="font-lato text-3xl font-bold">
-            {employee.vacancy || "Titulo de la Vacante"}
+          <h4 className="font-lato text-2xl font-bold">
+            {employee.vacancy.toUpperCase() || "Titulo de la Vacante"}
           </h4>
           <div className="font-lato text-sm font-bold text-zinc-500">
             #{employee.code || "000000"}
