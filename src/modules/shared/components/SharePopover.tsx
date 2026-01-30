@@ -6,6 +6,7 @@ import { IconLink, IconShare2 } from "@tabler/icons-react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
 import { toast } from "react-hot-toast";
+import { useTranslations } from "next-intl";
 
 export const SharePopover = ({
   textSocial,
@@ -22,6 +23,7 @@ export const SharePopover = ({
   const url = `https://ctspr-back.vercel.app${pathname}`;
   const encodedText = encodeURIComponent(textSocial || "");
   const encodedUrl = encodeURIComponent(url);
+  const t = useTranslations("sharePopover");
 
   const shareLinks = {
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
@@ -151,7 +153,7 @@ export const SharePopover = ({
             className="flex w-full cursor-pointer items-center gap-2 rounded-md border border-zinc-100 p-2 text-left hover:bg-zinc-100"
             onClick={handleCopy}
           >
-            <IconLink size={18} /> Copiar enlace
+            <IconLink size={18} /> {t("copy")}
           </button>
         </motion.div>
       )}
@@ -166,7 +168,7 @@ export const SharePopover = ({
         className="flex w-fit cursor-pointer items-center gap-x-2 rounded-lg border border-zinc-300 bg-white px-3 py-2 transition-colors duration-500 ease-in-out hover:bg-zinc-200"
       >
         <IconShare2 className="size-5" />
-        <span>Compartir Post</span>
+        <span>{t("title")}</span>
       </button>
       {typeof window !== "undefined" &&
         ReactDOM.createPortal(popover, document.body)}

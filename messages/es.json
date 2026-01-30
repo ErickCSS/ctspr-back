@@ -78,6 +78,10 @@
       "button": "Enviar",
       "enviando": "Enviando"
     }
+  },
+  "sharePopover": {
+    "title": "Compartir Post",
+    "copy": "Copiar enlace"
   }
 }
 
