@@ -9,14 +9,18 @@ export const Hero = async ({ title }: { title: string }) => {
   const locale = await getLocale();
   const isEnglish = locale === "en";
 
+  console.log(title);
+
   const hero: HeroProps = await WpQuery({
-    query: queryHero(title),
+    query: queryHero,
     variables: {
       category: isEnglish ? `hero-en` : `hero`,
+      title,
     },
   });
 
   const heroImage = hero.posts.nodes[0]?.featuredImage.node.sourceUrl;
+  console.log(heroImage);
   const isContact = title === "Contáctenos" || title === "Contact Us";
   const isEmpleos = title === "Empleo";
   const isListEmpleos =

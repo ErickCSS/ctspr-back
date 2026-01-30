@@ -68,9 +68,8 @@ export const queryWhyChooseUs = `query WhyChooseUs($category: String!) {
   }
 }`;
 
-export const queryHero = (title: string) => {
-  return `query Hero($category: String!) {
-  posts(where: {categoryName:$category, title:"${title}"}) {
+export const queryHero = `query Hero($category: String!, $title: String!) {
+  posts(where: {categoryName:$category, title:$title}) {
     nodes {
       id
       title
@@ -82,7 +81,6 @@ export const queryHero = (title: string) => {
     }
   }
 }`;
-};
 
 export const queryAfiliados = `query Afiliados($category: String!, $notIn: [ID]!) {
   posts(where: {categoryName:$category, notIn:$notIn}){

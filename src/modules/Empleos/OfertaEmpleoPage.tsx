@@ -12,7 +12,7 @@ export const OfertaEmpleoPage = async () => {
 
   return (
     <>
-      <Hero title={isEnglish ? "Job Offers" : "Oferta de Empleo"} />
+      <Hero title={isEnglish ? "Job Offers" : "Ofertas de Empleo"} />
       <EmpleosMapSelect />
       <EmpleosBeneficios />
       <Testimonials />
