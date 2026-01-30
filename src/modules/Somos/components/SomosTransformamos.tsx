@@ -16,6 +16,10 @@ export const SomosTransformamos = async () => {
     },
   });
 
+  const video = isEnglish
+    ? "/videos/CTS-video-slogan-en-ingles.mp4"
+    : "/videos/text-animado-cts.mp4";
+
   const title = somosTransformamos.posts.nodes[0].title;
   const content = somosTransformamos.posts.nodes[0].content;
   const featuredImage =
@@ -57,7 +61,7 @@ export const SomosTransformamos = async () => {
           x5-video-player-fullscreen="false"
           x5-video-player-type="h5"
         >
-          <source src="/videos/text-animado-cts.mp4" type="video/mp4" />
+          <source src={video} type="video/mp4" />
         </video>
       </div>
     </section>

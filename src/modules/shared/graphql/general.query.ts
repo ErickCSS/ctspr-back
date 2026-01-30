@@ -21,8 +21,8 @@ export const queryAbout = `query About($category: String!) {
   }
 }`;
 
-export const querySucursales = `query sucursales {
-  posts(where: {categoryName:"sucursales"}){
+export const querySucursales = `query sucursales($category: String!) {
+  posts(where: {categoryName:$category}){
     nodes{
       id
       title

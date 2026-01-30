@@ -17,9 +17,12 @@ import {
   querySucursales,
 } from "@/modules/shared/graphql/general.query";
 import { IconBrandFacebookFilled } from "@tabler/icons-react";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 
 export const Footer = async () => {
+  const locale = await getLocale();
+  const isEnglish = locale === "en";
+
   const logo: MediaProps = await WpQuery({
     query: queryMedia({ title: "logo-ctspr-whitecolor" }),
   });
@@ -33,6 +36,9 @@ export const Footer = async () => {
 
   const sucursales: SucursalesProps = await WpQuery({
     query: querySucursales,
+    variables: {
+      category: isEnglish ? "sucursales-en" : "sucursales",
+    },
   });
 
   const t = await getTranslations("footer");
@@ -73,7 +79,7 @@ export const Footer = async () => {
                 <h5 className="text-secondaryColor mb-1 text-xl font-bold">
                   {sucursal.title}
                 </h5>
-                <div className="text-white">
+                <div className="text-balance text-white">
                   {parseContent(sucursal.excerpt)}
                 </div>
                 <div className="mt-1 flex flex-col">

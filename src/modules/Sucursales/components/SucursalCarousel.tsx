@@ -18,6 +18,8 @@ import Link from "next/link";
 import { IconBrandFacebookFilled } from "@tabler/icons-react";
 import { toReversed } from "@/modules/shared/utils/toReversed";
 import { useTranslations } from "next-intl";
+import { cn } from "@/modules/shared/lib/utils";
+import { useLocale } from "next-intl";
 
 export const SucursalCarousel = ({
   sucursales,
@@ -25,6 +27,8 @@ export const SucursalCarousel = ({
   sucursales: SucursalesProps;
 }) => {
   const t = useTranslations("sucursales");
+  const locale = useLocale();
+  const isEnglish = locale === "en";
   const sucursalesReverse = toReversed(sucursales.posts.nodes);
 
   return (
@@ -61,7 +65,12 @@ export const SucursalCarousel = ({
                 <h3 className="text-secondaryColor text-3xl font-bold">
                   {sucursal.title}
                 </h3>
-                <div className="mt-1 text-lg text-black">
+                <div
+                  className={cn(
+                    "mt-1 text-lg text-balance text-black",
+                    isEnglish ? "w-2xs" : "",
+                  )}
+                >
                   {parseContent(sucursal.excerpt)}
                 </div>
                 <div className="mt-1 flex flex-col gap-y-1">

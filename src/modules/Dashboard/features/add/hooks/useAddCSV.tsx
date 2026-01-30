@@ -76,10 +76,15 @@ export const useAddCSV = ({ user }: { user: User }) => {
       // no era JSON, seguimos
     }
 
-    const parts = input
-      .split(/[,;|]/)
-      .map((s) => cleanRequirementWords(s.trim()))
-      .filter(Boolean);
+    // Si el texto contiene ], dividir solo por ese separador
+    // Si no, mantener el texto completo (para evitar dividir por comas en requisitos académicos)
+    const parts = input.includes("]")
+      ? input
+          .split("]")
+          .map((s) => cleanRequirementWords(s.trim()))
+          .filter(Boolean)
+      : [cleanRequirementWords(input.trim())].filter(Boolean);
+
     if (parts.length === 0) return [REQUIRED_DEFAULT];
     return parts.map((s) => ({ label: s, value: s }));
   }

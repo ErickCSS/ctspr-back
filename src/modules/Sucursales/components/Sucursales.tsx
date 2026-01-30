@@ -2,13 +2,19 @@ import { SucursalCarousel } from "./SucursalCarousel";
 import { WpQuery } from "@/modules/shared/services/wpQuery";
 import { SucursalesProps } from "@/modules/shared/types/generalQuery.types";
 import { querySucursales } from "@/modules/shared/graphql/general.query";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 
 export const Sucursales = async () => {
+  const locale = await getLocale();
+  const isEnglish = locale === "en";
+  const t = await getTranslations("sucursales");
+
   const sucursales: SucursalesProps = await WpQuery({
     query: querySucursales,
+    variables: {
+      category: isEnglish ? "sucursales-en" : "sucursales",
+    },
   });
-  const t = await getTranslations("sucursales");
 
   return (
     <section className="bg-[#ebebeb] px-4 py-20">
