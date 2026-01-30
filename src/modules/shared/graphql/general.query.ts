@@ -314,8 +314,8 @@ export const queryEmpleosTitle = `query EmpleosTitle($category: String!, $in: [I
   }
 }`;
 
-export const queryEmpleos = `query Empleos {
-  posts(where: {categoryName:"empleos", in:"cG9zdDoyMjI="}){
+export const queryEmpleos = `query Empleos($category: String!, $in: [ID]!) {
+  posts(where: {categoryName:$category, in:$in}){
     nodes{
       title
       id

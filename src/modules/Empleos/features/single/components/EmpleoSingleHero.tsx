@@ -18,9 +18,11 @@ import { Button } from "@modules/ui/button";
 import { Link } from "next-view-transitions";
 import { EmployeeType } from "@/modules/shared/types/employee.type";
 import { SELECT_INDUSTRIES } from "@modules/shared/lib/SelectInifo";
+import { getTranslations } from "next-intl/server";
 
 export const EmpleoSingleHero = async ({ slug }: { slug: string }) => {
   const employee = await EmpleosServices.getEmployeeBySlug(slug);
+
   if (!employee) {
     return null;
   }
@@ -37,7 +39,9 @@ export const EmpleoSingleHero = async ({ slug }: { slug: string }) => {
   );
 };
 
-const LeftSide = ({ employee }: { employee: EmployeeType }) => {
+const LeftSide = async ({ employee }: { employee: EmployeeType }) => {
+  const t = await getTranslations("singleEmployee");
+
   const formattedDate = formatDistanceToNow(employee.created_at, {
     addSuffix: true,
     locale: es,
@@ -60,7 +64,7 @@ const LeftSide = ({ employee }: { employee: EmployeeType }) => {
         <div className="flex flex-wrap items-center gap-3">
           <div className="flex items-center gap-x-2 text-base text-zinc-600">
             <IconMapPin stroke={1.5} size={20} />
-            <span>Ubicación del Empleo:</span>
+            <span>{t("location")}:</span>
             <span className="font-lato">
               {getCityLabel(employee.location) || "Ciudad, Pais"}
             </span>
@@ -71,7 +75,7 @@ const LeftSide = ({ employee }: { employee: EmployeeType }) => {
           </div> */}
           <div className="flex items-center gap-x-2 text-base text-zinc-600">
             <IconBuildingEstate stroke={1.5} size={20} />
-            <span>Oficina de CTS:</span>
+            <span>{t("office")}:</span>
             <span className="font-lato">
               {CONVERT_CAPITALIZE(
                 (employee.regionalOffice.replace("-", " ") === "san german"
@@ -98,7 +102,9 @@ const LeftSide = ({ employee }: { employee: EmployeeType }) => {
   );
 };
 
-const RightSide = ({ employee }: { employee: EmployeeType }) => {
+const RightSide = async ({ employee }: { employee: EmployeeType }) => {
+  const t = await getTranslations("singleEmployee");
+
   const IS_SHOW_BUTTON = ({ linkToApply }: { linkToApply: string }) => {
     if (!linkToApply) {
       return null;
@@ -112,7 +118,7 @@ const RightSide = ({ employee }: { employee: EmployeeType }) => {
           asChild
         >
           <Link href={`${linkToApply}`} target="_blank">
-            Solicitar Ahora
+            {t("buttonApply")}
           </Link>
         </Button>
       </div>

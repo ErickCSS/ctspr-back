@@ -21,8 +21,10 @@ import {
   SELECT_INDUSTRIES,
 } from "@modules/shared/lib/SelectInifo";
 import { useMediaQuery } from "@modules/shared/hooks/useMediaQuery.hooks";
+import { useTranslations } from "next-intl";
 
 export const CardEmployee = ({ employee }: { employee?: EmployeeType }) => {
+  const t = useTranslations("empleos");
   const { formData } = useAddEmployeeStore();
   const pathname = usePathname();
   const isDashboard = pathname.includes("dashboard");
@@ -57,7 +59,7 @@ export const CardEmployee = ({ employee }: { employee?: EmployeeType }) => {
         <div className="flex flex-col justify-center gap-x-2 gap-y-2">
           <div className="flex items-center gap-x-1 text-sm text-zinc-500">
             <IconMapPin stroke={1.5} size={20} />
-            <span>Ubicación del Empleo:</span>
+            <span>{t("location")}</span>
             <span className="font-lato">
               {formData.location ||
                 getCityLabel(employee?.location ?? "") ||
@@ -71,7 +73,7 @@ export const CardEmployee = ({ employee }: { employee?: EmployeeType }) => {
           <div className="flex items-center gap-x-1 text-sm text-zinc-500">
             <IconBuildingEstate stroke={1.5} size={20} />
             <span className="font-lato">
-              Oficina de CTS:{" "}
+              {t("office")}:{" "}
               {CONVERT_CAPITALIZE(formData.regionalOffice) ||
                 CONVERT_CAPITALIZE(
                   employee?.regionalOffice === "san-german"
@@ -95,7 +97,7 @@ export const CardEmployee = ({ employee }: { employee?: EmployeeType }) => {
         >
           <div className="flex items-center gap-2">
             <Badge className="bg-secondaryColor text-sm text-white">
-              Ver Detalle del Empleo
+              {t("cardSeeEmployee")}
             </Badge>
             {/* <Badge className="bg-primaryColor text-sm text-white">
               {CONVERT_UPPER(formData.typeOfEmployment) ||

@@ -3,9 +3,11 @@
 import { useRouter } from "next/navigation";
 import { Button } from "@modules/ui/button";
 import { IconArrowNarrowLeft } from "@tabler/icons-react";
+import { useTranslations } from "next-intl";
 
 export const BackButton = () => {
   const router = useRouter();
+  const t = useTranslations("singleEmployee");
 
   return (
     <Button
@@ -14,7 +16,7 @@ export const BackButton = () => {
       onClick={() => router.back()}
     >
       <IconArrowNarrowLeft stroke={1.2} size={40} />
-      <span>Volver al Listado</span>
+      <span>{t("goBack")}</span>
     </Button>
   );
 };

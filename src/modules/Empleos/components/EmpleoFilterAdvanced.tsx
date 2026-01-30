@@ -19,8 +19,10 @@ import {
 } from "@modules/shared/lib/SelectInifo";
 import { useFilterEmpleo } from "@modules/Empleos/hooks/useFilterEmpleo";
 import { getCityLabel } from "@/modules/shared/utils";
+import { useTranslations } from "next-intl";
 
 export const EmpleoFilterAdvanced = () => {
+  const t = useTranslations("filterJobs");
   const {
     filterOptions,
     localFilters,
@@ -59,7 +61,7 @@ export const EmpleoFilterAdvanced = () => {
               className="w-full"
             >
               <Input
-                placeholder="Buscar en vacantes..."
+                placeholder={t("searchInputPlaceholder")}
                 className="min-h-12 bg-white text-sm shadow-none focus-visible:ring-0 focus-visible:outline-none"
                 {...(inputProps as unknown as React.InputHTMLAttributes<HTMLInputElement>)}
               />

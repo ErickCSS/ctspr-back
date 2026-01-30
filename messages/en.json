@@ -44,10 +44,28 @@
     "titleCandidates": "Frequently Asked Questions for Candidates"
   },
   "empleos": {
-    "buttonInformation": "More Information" 
+    "buttonInformation": "More Information",
+    "buttonJob": "See more jobs",
+    "cardSeeEmployee": "See Detail of the Job",
+    "location": "Location of the Job",
+    "office": "CTS Office"
+  },
+  "filterJobs": {
+    "allOffices": "All Offices",
+    "allLocations": "All Locations",
+    "buttonSearch": "Search",
+    "buttonSearching": "Searching",
+    "searchInputPlaceholder": "Search for a job"
+  },
+  "singleEmployee": {
+    "buttonApply": "Apply Now",
+    "location": "Location of the Job",
+    "office": "CTS Office",
+    "goBack": "Go Back to Jobs"
   },
   "blog": {
-    "title": "Up to date with CTS"
+    "title": "Up to date with CTS",
+    "buttonReadMore": "Read more"
   },
   "ContactUs": {
     "title": "Contact Us",

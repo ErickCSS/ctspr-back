@@ -11,8 +11,10 @@ import {
   AutocompleteState,
 } from "@algolia/autocomplete-core";
 import { EmployeeType } from "@/modules/shared/types/employee.type";
+import { useTranslations } from "next-intl";
 
 export const useFilterEmpleo = () => {
+  const t = useTranslations("filterJobs");
   const { activeFilters, applyFilters, clearFilters, loading, setPage } =
     useEmployeeFiltersStore();
   const { open, setOpen } = useDialogStore();
@@ -38,7 +40,7 @@ export const useFilterEmpleo = () => {
   const autocomplete = useMemo(
     () =>
       createAutocomplete<EmployeeType>({
-        placeholder: "Buscar en vacantes...",
+        placeholder: t("searchInputPlaceholder"),
         onStateChange: ({ state }) => {
           setAutocompleteState(state);
         },

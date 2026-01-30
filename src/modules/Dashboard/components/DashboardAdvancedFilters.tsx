@@ -21,12 +21,14 @@ import {
   SELECT_INDUSTRIES,
   SELECT_LOCATION,
 } from "@/modules/shared/lib/SelectInifo";
+import { useTranslations } from "next-intl";
 
 export const DashboardAdvancedFilters = () => {
   const { activeFilters, applyFilters, clearFilters } =
     useDashboardEmployeeFiltersStore();
   const [filterOptions, setFilterOptions] = useState<any>({});
   const [localFilters, setLocalFilters] = useState(activeFilters);
+  const t = useTranslations("filterJobs");
 
   useEffect(() => {
     const loadFilterOptions = async () => {
@@ -87,10 +89,10 @@ export const DashboardAdvancedFilters = () => {
     <>
       {/* Búsqueda */}
       <SidebarGroup>
-        <SidebarGroupLabel className="text-sm">Búsqueda</SidebarGroupLabel>
+        <SidebarGroupLabel className="text-sm">{t("search")}</SidebarGroupLabel>
         <SidebarGroupContent>
           <Input
-            placeholder="Buscar en vacantes..."
+            placeholder={t("searchPlaceholder")}
             className="bg-white !text-xs shadow-none"
             value={localFilters.search || ""}
             onChange={(e) =>

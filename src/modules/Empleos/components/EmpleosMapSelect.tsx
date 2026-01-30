@@ -29,6 +29,10 @@ export const EmpleosMapSelect = async () => {
 
   const empleos: EmpleosProps = await WpQuery({
     query: queryEmpleos,
+    variables: {
+      category: isEnglish ? "empleos-en" : "empleos",
+      in: isEnglish ? "cG9zdDoxMTE0" : "cG9zdDoyMjI=",
+    },
   });
 
   const mapa: MediaProps = await WpQuery({
@@ -93,7 +97,7 @@ export const EmpleosMapSelect = async () => {
                   target="_self"
                   rel="noopener noreferrer nofollow"
                 >
-                  Ver todos los empleos
+                  {t("buttonJob")}
                 </Link>
               </Button>
             </div>

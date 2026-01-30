@@ -230,9 +230,17 @@ export function mapNewCSVFormatToModernObject(
   };
 
   // Clasificar cada parte del Description usando las palabras clave
+  // Guardamos las partes que NO son requirements para usarlas en la descripción final
+  const nonRequirementParts: string[] = [];
   for (const p of descriptionParts) {
     const tag = classifyLegacyPart(p);
     buckets[tag]?.push(p);
+
+    // Solo incluir en la descripción final las partes que NO son requirements
+    // (requirements ya se manejan por separado en Education)
+    if (tag !== "requirements") {
+      nonRequirementParts.push(p);
+    }
   }
 
   // PRIORIDAD 1: Intentar extraer ciudad del campo Location primero
@@ -304,8 +312,9 @@ export function mapNewCSVFormatToModernObject(
     .filter(Boolean)
     .join("; ");
 
-  // Formatear el contenido original del Description con saltos de línea
-  const formattedDescription = formatDescriptionWithLineBreaks(description);
+  // Formatear el contenido del Description con saltos de línea
+  // IMPORTANTE: Solo incluir partes que NO son requirements (para evitar duplicación con Education)
+  const formattedDescription = nonRequirementParts.filter(Boolean).join("\n");
 
   const modern: Record<string, string> = {
     code: String(code || ""),

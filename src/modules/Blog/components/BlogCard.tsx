@@ -14,9 +14,11 @@ import { useTransitionRouter } from "next-view-transitions";
 import { Post } from "@/modules/shared/types/blog.types";
 import { format, parseISO } from "date-fns";
 import { parseContent } from "@/modules/shared/utils/parseContent.utils";
+import { useTranslations } from "next-intl";
 
 export const BlogCard = ({ post }: { post: Post }) => {
   const router = useTransitionRouter();
+  const t = useTranslations("blog");
   const { dateGmt, featuredImage, slug, title, excerpt } = post.node;
 
   if (!dateGmt || !featuredImage || !slug || !title || !excerpt) {
@@ -59,7 +61,7 @@ export const BlogCard = ({ post }: { post: Post }) => {
           className="bg-secondaryColor hover:bg-primaryColor cursor-pointer text-white transition-colors duration-300"
           onClick={() => router.push(`/blog/${slug}`)}
         >
-          Leer más
+          {t("buttonReadMore")}
         </Button>
       </CardFooter>
     </Card>

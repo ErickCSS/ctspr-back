@@ -1,5 +1,9 @@
 import { EmpleosServices } from "@/modules/Empleos/services/empleos.services";
-import { CONVERT_CAPITALIZE, CONVERT_UPPER } from "@/modules/shared/utils";
+import {
+  CONVERT_CAPITALIZE,
+  CONVERT_UPPER,
+  getCityLabel,
+} from "@/modules/shared/utils";
 import { EmployeeType } from "@/modules/shared/types/employee.type";
 import {
   IconCalendar,
@@ -13,6 +17,7 @@ import { es } from "date-fns/locale";
 import { Button } from "@modules/ui/button";
 import { Link } from "next-view-transitions";
 import { BackButton } from "./BackButton";
+import { getTranslations } from "next-intl/server";
 
 export const EmpleoSingleContent = async ({ slug }: { slug: string }) => {
   const employee = await EmpleosServices.getEmployeeBySlug(slug);
@@ -32,7 +37,7 @@ export const EmpleoSingleContent = async ({ slug }: { slug: string }) => {
   );
 };
 
-const EmployeeOverview = ({ employee }: { employee: EmployeeType }) => {
+const EmployeeOverview = async ({ employee }: { employee: EmployeeType }) => {
   type DescriptionType = {
     title: string;
     description: string;
@@ -48,7 +53,7 @@ const EmployeeOverview = ({ employee }: { employee: EmployeeType }) => {
     // },
     {
       title: "Ubicación del Empleo",
-      description: CONVERT_CAPITALIZE(employee.location),
+      description: getCityLabel(employee.location),
       icon: <IconMap stroke={1.2} size={42} className="text-black" />,
     },
     // {
@@ -107,7 +112,9 @@ const EmployeeOverview = ({ employee }: { employee: EmployeeType }) => {
   );
 };
 
-const EmployeeContent = ({ employee }: { employee: EmployeeType }) => {
+const EmployeeContent = async ({ employee }: { employee: EmployeeType }) => {
+  const t = await getTranslations("singleEmployee");
+
   const parseData = (data: any) => {
     if (typeof data === "object" && data !== null) {
       return data;
@@ -173,7 +180,7 @@ const EmployeeContent = ({ employee }: { employee: EmployeeType }) => {
           asChild
         >
           <Link href={`${linkToApply}`} target="_blank">
-            Solicitar Ahora
+            {t("buttonApply")}
           </Link>
         </Button>
       </div>

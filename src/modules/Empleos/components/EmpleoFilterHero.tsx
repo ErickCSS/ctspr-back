@@ -17,8 +17,10 @@ import {
 import { Button } from "@/modules/ui/button";
 import { Link } from "next-view-transitions";
 import { getCityLabel } from "@/modules/shared/utils";
+import { useTranslations } from "next-intl";
 
 export const EmpleoFilterHero = () => {
+  const t = useTranslations("filterJobs");
   const {
     localFilters,
     handleApplyFilters,
@@ -112,7 +114,7 @@ export const EmpleoFilterHero = () => {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all" className="text-sm">
-                Todas las oficinas
+                {t("allOffices")}
               </SelectItem>
               {SELECT_REGIONAL_OFFICE.map((location, index) => (
                 <SelectItem
@@ -140,7 +142,7 @@ export const EmpleoFilterHero = () => {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value={"all"} className="text-sm">
-                Todas las ubicaciones
+                {t("allLocations")}
               </SelectItem>
               {SELECT_LOCATION.map((location) => (
                 <SelectItem
@@ -162,10 +164,11 @@ export const EmpleoFilterHero = () => {
         >
           {loading ? (
             <div className="flex items-center gap-2">
-              <IconLoader2 className="mr-2 h-4 w-4 animate-spin" /> Buscando
+              <IconLoader2 className="mr-2 h-4 w-4 animate-spin" />{" "}
+              {t("buttonSearching")}
             </div>
           ) : (
-            "Buscar"
+            t("buttonSearch")
           )}
         </Button>
       </div>
