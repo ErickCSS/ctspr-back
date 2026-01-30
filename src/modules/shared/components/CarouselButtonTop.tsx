@@ -20,10 +20,11 @@ export const CarouselButtonTop = ({
   carousels: CarouselProps[];
 }) => {
   const pathname = usePathname();
-  const isHome = pathname === "/";
+  const isHome = pathname === "/" || pathname === "/es" || pathname === "/en";
   const showFirstSix = carousels.slice(0, 6);
   const showLastSix = carousels.slice(-6);
   const SHOW_SLIDES = isHome ? showFirstSix : showLastSix;
+
   const [autoplay, setAutoplay] = useState(true);
   const swiperRef = useRef<SwiperType | null>(null);
 

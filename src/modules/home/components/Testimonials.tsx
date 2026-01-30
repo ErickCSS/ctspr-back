@@ -4,11 +4,17 @@ import { TestimoniosProps } from "@/modules/shared/types/generalQuery.types";
 import { CarouselButtonTop } from "@/modules/shared/components/CarouselButtonTop";
 import { toReversed } from "@/modules/shared/utils/toReversed";
 import { getTranslations } from "next-intl/server";
+import { getLocale } from "next-intl/server";
 
 export const Testimonials = async () => {
+  const locale = await getLocale();
+  const isEnglish = locale === "en";
   const t = await getTranslations("testimonials");
   const testimonios: TestimoniosProps = await WpQuery({
     query: queryTestimonios,
+    variables: {
+      category: isEnglish ? "testimonios-en" : "testimonios",
+    },
   });
 
   const testimoniosReverse = toReversed(testimonios.posts.nodes);

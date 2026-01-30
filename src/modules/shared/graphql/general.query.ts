@@ -37,8 +37,8 @@ export const querySucursales = `query sucursales($category: String!) {
   }
 }`;
 
-export const queryTestimonios = `query testimonios {
-  posts(where: {categoryName:"Testimonios"}, first: 50){
+export const queryTestimonios = `query testimonios($category: String!) {
+  posts(where: {categoryName:$category}, first: 50){
     nodes{
       id
       title
