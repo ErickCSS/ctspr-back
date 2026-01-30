@@ -218,7 +218,9 @@ export function mapNewCSVFormatToModernObject(
   const education = row["Education"] ?? row["education"] ?? "";
   const description = row["Description"] ?? row["description"] ?? "";
 
-  // Procesar el campo Description que viene con separadores "]"
+  // Para el nuevo formato CSV, NO clasificamos el Description
+  // Education va directo a requisitos académicos
+  // Description va directo a la descripción sin extraer nada
   const descriptionParts = splitLegacyCell(description);
   const buckets: LegacyBuckets = {
     alt_city: [],
@@ -228,20 +230,6 @@ export function mapNewCSVFormatToModernObject(
     availability: [],
     notes: [],
   };
-
-  // Clasificar cada parte del Description usando las palabras clave
-  // Guardamos las partes que NO son requirements para usarlas en la descripción final
-  const nonRequirementParts: string[] = [];
-  for (const p of descriptionParts) {
-    const tag = classifyLegacyPart(p);
-    buckets[tag]?.push(p);
-
-    // Solo incluir en la descripción final las partes que NO son requirements
-    // (requirements ya se manejan por separado en Education)
-    if (tag !== "requirements") {
-      nonRequirementParts.push(p);
-    }
-  }
 
   // PRIORIDAD 1: Intentar extraer ciudad del campo Location primero
   const cityFromLocation = extractCitiesFromText(location);
@@ -271,58 +259,28 @@ export function mapNewCSVFormatToModernObject(
   // Procesar Experience directamente (sin mezclarlo con otros campos)
   const experienceValue = experience ? experience.trim() : "";
 
-  // Procesar Education y requirements del Description (sin Experience)
-  const allRequirements = [...buckets.requirements, education].filter(Boolean);
+  // Education va directo a academicRequirements TAL CUAL del CSV
+  const academic = education ? education.trim() : "";
 
-  const reqItems = allRequirements
-    .flatMap((r) => r.split(/[,;|]/))
-    .map((s) =>
-      s.replace(/\b(requisitos?|requerimientos?)\b[:\s]*/gi, "").trim(),
-    )
-    .filter(Boolean);
+  // No extraemos licencias ni certificados del Education en el nuevo formato
+  const license = "";
+  const certs = "";
 
-  const academicItems: string[] = [];
-  const licenseItems: string[] = [];
-  const certItems: string[] = [];
-
-  for (const item of reqItems) {
-    const up = item.toUpperCase();
-    if (/LICEN[CS]I/i.test(item)) {
-      licenseItems.push(item);
-    } else if (/CERTIFIC/i.test(item)) {
-      certItems.push(item);
-    } else if (/BACHILLERATO|DIPLOMA|GRADO|T[ÍI]TULO|ESTUDIOS/i.test(item)) {
-      academicItems.push(item);
-    } else {
-      academicItems.push(item);
-    }
-  }
-
-  const academic = academicItems.join("; ");
-  const license = licenseItems.join("; ");
-  const certs = certItems.join("; ");
-
-  const compText = buckets.compensation.join("; ");
-  const comp = parseLegacyCompensation(compText);
   const convertCity = toKebabIfMulti(sucursal, { lowercaseSingle: true });
 
-  // Filtrar y limpiar la información de horario
-  const scheduleInfo = buckets.schedule
-    .map((s) => extractScheduleInfo(s))
-    .filter(Boolean)
-    .join("; ");
+  // No extraemos información de horario ni compensación del Description en el nuevo formato
+  const scheduleInfo = "";
 
-  // Formatear el contenido del Description con saltos de línea
-  // IMPORTANTE: Solo incluir partes que NO son requirements (para evitar duplicación con Education)
-  const formattedDescription = nonRequirementParts.filter(Boolean).join("\n");
+  // Description va TAL CUAL del CSV con saltos de línea
+  const formattedDescription = formatDescriptionWithLineBreaks(description);
 
   const modern: Record<string, string> = {
     code: String(code || ""),
     vacancy: CONVERT_CAPITALIZE(vacancy),
     industry: "",
     location: buckets.alt_city[0] || "",
-    min_salary: comp.min_salary == null ? "" : String(comp.min_salary),
-    max_salary: comp.max_salary == null ? "" : String(comp.max_salary),
+    min_salary: "",
+    max_salary: "",
     hoursJob: scheduleInfo,
     academicRequirements: academic,
     licenseRequirements: license,
@@ -338,7 +296,7 @@ export function mapNewCSVFormatToModernObject(
     user_id: "",
     is_deleted: "",
     slug: toSlug(`${vacancy}-${sucursal}`),
-    payment_frequency: comp.payment_frequency ?? "",
+    payment_frequency: "",
     created_at: "",
   };
 
