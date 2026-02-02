@@ -84,6 +84,9 @@
   "sharePopover": {
     "title": "Share Post",
     "copy": "Copy link"
+  },
+  "knowOurTeam": {
+    "title": "Know part of our team"
   }
 }
 
