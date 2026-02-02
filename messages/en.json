@@ -55,7 +55,8 @@
     "allLocations": "All Locations",
     "buttonSearch": "Search",
     "buttonSearching": "Searching",
-    "searchInputPlaceholder": "Search for a job"
+    "searchInputPlaceholder": "Search for a job",
+    "searchVacant": "Search in vacancies"
   },
   "singleEmployee": {
     "buttonApply": "Apply Now",

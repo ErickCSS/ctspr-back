@@ -295,7 +295,7 @@ export function mapNewCSVFormatToModernObject(
     owner_email: "",
     user_id: "",
     is_deleted: "",
-    slug: toSlug(`${vacancy}-${sucursal}`),
+    slug: "",
     payment_frequency: "",
     created_at: "",
   };

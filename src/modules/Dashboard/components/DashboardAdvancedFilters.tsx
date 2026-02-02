@@ -89,10 +89,12 @@ export const DashboardAdvancedFilters = () => {
     <>
       {/* Búsqueda */}
       <SidebarGroup>
-        <SidebarGroupLabel className="text-sm">{t("search")}</SidebarGroupLabel>
+        <SidebarGroupLabel className="text-sm">
+          {t("searchVacant")}
+        </SidebarGroupLabel>
         <SidebarGroupContent>
           <Input
-            placeholder={t("searchPlaceholder")}
+            placeholder={t("searchInputPlaceholder")}
             className="bg-white !text-xs shadow-none"
             value={localFilters.search || ""}
             onChange={(e) =>

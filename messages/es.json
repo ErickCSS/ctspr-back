@@ -54,7 +54,8 @@
     "allLocations": "Todas las ubicaciones",
     "buttonSearch": "Buscar",
     "buttonSearching": "Buscando",
-    "searchInputPlaceholder": "Buscar en vacantes..."
+    "searchInputPlaceholder": "Buscar en vacantes...",
+    "searchVacant": "Buscar en vacantes"
   },
   "blog": {
     "title": "Al día con CTS",
