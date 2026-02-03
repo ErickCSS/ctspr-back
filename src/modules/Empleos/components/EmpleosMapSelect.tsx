@@ -55,7 +55,7 @@ export const EmpleosMapSelect = async () => {
           <hr className="border-secondaryColor my-3 w-[120px] border-2 outline-none" />
         </div>
 
-        <div className="mx-auto mt-10 max-w-5xl bg-zinc-100 p-10">
+        {/* <div className="mx-auto mt-10 max-w-5xl bg-zinc-100 p-10">
           <div className="grid grid-cols-1 items-center gap-x-10 gap-y-10 lg:grid-cols-2">
             <div className="flex flex-col gap-y-2">
               <h3 className="text-center text-3xl font-bold md:text-4xl lg:text-left">
@@ -102,7 +102,7 @@ export const EmpleosMapSelect = async () => {
               </Button>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="mt-10">
           <Image

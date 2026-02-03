@@ -49,6 +49,15 @@ export const useAddCSV = ({ user }: { user: User }) => {
     return Math.random().toString(36).substring(2, 8);
   }
 
+  function sanitizeSlug(text: string): string {
+    return text
+      .toLowerCase()
+      .replace(/\s+/g, "-")
+      .replace(/[^\w\-]/g, "")
+      .replace(/\-+/g, "-")
+      .replace(/^\-+|\-+$/g, "");
+  }
+
   function cleanRequirementWords(text: string): string {
     return text.replace(/\b(requisitos?|requerimientos?)\b[:\s]*/gi, "").trim();
   }
@@ -140,7 +149,8 @@ export const useAddCSV = ({ user }: { user: User }) => {
     r.linkToApply ??= "https://empleos.ejemplo.com";
     r.description ??= "";
     r.user_id = user.id;
-    r.slug = `${(r.vacancy || "empleo").toLowerCase().replace(/\s+/g, "-")}-${r.code}-${generateShortId()}`;
+    const baseSlug = `${r.vacancy || "empleo"}-${r.code}-${generateShortId()}`;
+    r.slug = sanitizeSlug(baseSlug);
     r.created_at = new Date().toISOString();
     r.is_deleted = "FALSE";
     if (r.deleted_at === "") delete r.deleted_at;
