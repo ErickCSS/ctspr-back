@@ -158,7 +158,7 @@
 .TestimonialCarousel {
   .swiper-button-prev,
   .swiper-button-next {
-    @apply top-10 text-lg font-black text-zinc-500;
+    @apply top-10 text-lg font-black text-zinc-800;
     &::after {
       @apply text-3xl;
     }

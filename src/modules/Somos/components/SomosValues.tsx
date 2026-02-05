@@ -56,9 +56,9 @@ export const SomosValues = async () => {
                 key={value.id}
                 className="flex w-[250px] flex-col items-center gap-y-5"
               >
-                <h4 className="text-center text-2xl font-bold text-balance text-black">
+                <h3 className="text-center text-2xl font-bold text-balance text-black">
                   {value.title}
-                </h4>
+                </h3>
                 <Image
                   src={value.featuredImage?.node.sourceUrl}
                   alt={value.title}

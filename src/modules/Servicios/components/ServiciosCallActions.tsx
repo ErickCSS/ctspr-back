@@ -31,9 +31,9 @@ export const ServiciosCallActions = async () => {
       style={{ backgroundImage: `url(${background})` }}
     >
       <div className="mx-auto max-w-7xl bg-white/80 p-10 lg:p-14">
-        <h4 className="text-center text-2xl font-black text-balance text-black lg:text-4xl">
+        <h2 className="text-center text-2xl font-black text-balance text-black lg:text-4xl">
           {title}
-        </h4>
+        </h2>
         <div className="mt-5 flex flex-col items-center justify-center gap-5 lg:flex-row">
           <div className="text-center text-3xl font-normal text-black lg:text-left">
             {parseContent(excerpt)}

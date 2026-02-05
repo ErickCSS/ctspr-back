@@ -80,7 +80,7 @@ export const SucursalCarousel = ({
                 </div>
 
                 <Link
-                  className="mt-3 flex w-fit items-center gap-x-2 bg-[#1877F2] p-2"
+                  className="mt-3 flex w-fit items-center gap-x-2 bg-[#166ddf] p-2"
                   href={
                     sucursal.title === "Salinas"
                       ? `https://www.facebook.com/ctssucursallaspiedras`
@@ -99,7 +99,9 @@ export const SucursalCarousel = ({
                       stroke={1.5}
                     />
                   </div>
-                  <span className="text-white">{t("FollowUs")}</span>
+                  <span className="font-semibold text-white">
+                    {t("FollowUs")}
+                  </span>
                 </Link>
               </div>
             </article>

@@ -56,9 +56,9 @@ export const ServiciosPropuestaValor = async () => {
                 quality={50}
                 className="h-auto w-42"
               />
-              <h5 className="max-w-[500px] text-center text-xl font-normal text-balance text-black md:text-2xl">
+              <h3 className="max-w-[500px] text-center text-xl font-normal text-balance text-black md:text-2xl">
                 {value.title}
-              </h5>
+              </h3>
             </article>
           ))}
         </div>

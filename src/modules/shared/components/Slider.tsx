@@ -81,6 +81,7 @@ export const SliderHero = ({ sliders }: { sliders: SliderProps[] }) => {
 
                 <button
                   onClick={() => setMuted(!muted)}
+                  aria-label={t("sound")}
                   className="cursor-pointer rounded-full bg-white p-2 shadow-md transition-opacity duration-300 group-hover:opacity-100 md:opacity-50 md:hover:opacity-100"
                 >
                   {muted ? (

@@ -58,6 +58,7 @@ export const Header = () => {
             <Button
               onClick={() => setOpen(!open)}
               name="menu"
+              aria-label="Menu Button"
               className="bg-primaryColor size-[42px] text-white lg:hidden"
             >
               <IconMenu2 className="size-[24px]" />
@@ -75,6 +76,7 @@ export const Header = () => {
                 variant="outline"
                 size="icon"
                 name="close"
+                aria-label="Close Button"
                 className="absolute top-4 right-4 lg:hidden"
               >
                 <IconX />
@@ -100,6 +102,7 @@ export const Header = () => {
                         : "",
                     )}
                     onClick={() => setOpen(false)}
+                    aria-label={t(item.name)}
                   >
                     {t(item.name)}
                   </Link>

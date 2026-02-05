@@ -64,11 +64,11 @@ export const WhyChooseUsCarousel = ({
                 {choose.content && parseContent(choose.content)}
               </div>
 
-              <h4
+              <h2
                 className={`text-center text-white ${choose.title.includes("HISTORIAS DE ÉXITO") ? "text-base font-normal" : "text-3xl font-bold lg:text-2xl xl:text-3xl"}`}
               >
                 {choose.title}
-              </h4>
+              </h2>
             </div>
           </div>
         </SwiperSlide>

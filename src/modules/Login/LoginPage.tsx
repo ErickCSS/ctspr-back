@@ -29,9 +29,9 @@ export const LoginPage = async () => {
               <h2 className="font-lato text-3xl font-black capitalize">
                 Welcome Back!
               </h2>
-              <h4 className="font-lato text-base font-normal text-balance text-zinc-500">
+              <h3 className="font-lato text-base font-normal text-balance text-zinc-500">
                 Enter your credentials to access your account
-              </h4>
+              </h3>
             </div>
           </CardHeader>
           <CardContent className="flex items-center gap-x-5">

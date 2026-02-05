@@ -136,7 +136,7 @@ export function TruncatedHtml({
             setExpanded(true);
             onClickMore?.();
           }}
-          className="text-secondaryColor mt-2 cursor-pointer hover:underline"
+          className="mt-2 cursor-pointer font-semibold text-blue-700 hover:underline"
         >
           {moreLabel}
         </button>
@@ -146,7 +146,7 @@ export function TruncatedHtml({
             setExpanded(false);
             onClickLess?.();
           }}
-          className="text-secondaryColor mt-2 cursor-pointer hover:underline"
+          className="mt-2 cursor-pointer font-semibold text-blue-700 hover:underline"
         >
           {lessLabel}
         </button>

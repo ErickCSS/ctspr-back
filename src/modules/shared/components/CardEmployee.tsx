@@ -47,11 +47,11 @@ export const CardEmployee = ({ employee }: { employee?: EmployeeType }) => {
     >
       <CardHeader>
         <div className="flex items-center justify-between">
-          <h4 className="font-lato text-base font-bold">
+          <h2 className="font-lato text-base font-bold">
             {formData.vacancy.toUpperCase() ||
               employee?.vacancy.toUpperCase() ||
               "Titulo de la Vacante"}
-          </h4>
+          </h2>
           <div className="font-lato text-sm font-bold text-zinc-500">
             #{formData.code || employee?.code || "000000"}
           </div>

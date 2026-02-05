@@ -46,9 +46,9 @@ export const CarouselVertical = ({
 
             <div className="mx-auto mt-2 flex w-full max-w-full flex-col px-4">
               <div className="flex flex-col items-center">
-                <h4 className="text-secondaryColor text-center text-3xl font-black">
+                <h2 className="text-secondaryColor text-center text-3xl font-black">
                   {carousel.title}
-                </h4>
+                </h2>
                 <div className="text-center text-base font-bold text-balance text-black">
                   {parseContent(carousel.excerpt)}
                 </div>

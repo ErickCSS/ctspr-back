@@ -66,14 +66,14 @@ export const CarouselButtonTop = ({
             />
 
             <div className="flex flex-col space-y-2">
-              <h4 className="mb-2 flex flex-col items-center gap-x-3 text-3xl font-bold lg:flex-row lg:items-end">
+              <h2 className="mb-2 flex flex-col items-center gap-x-3 text-3xl font-bold lg:flex-row lg:items-end">
                 {carousel.title}{" "}
                 <span className="text-lg">
                   {carousel.excerpt.includes("BACARDÍ")
                     ? parseContent(carousel.excerpt)
                     : ""}
                 </span>
-              </h4>
+              </h2>
               <div className="text-base [&>h6]:mb-4 [&>h6]:font-bold [&>h6]:text-zinc-500">
                 <TruncatedHtml
                   html={carousel.content}

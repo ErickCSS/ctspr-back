@@ -51,9 +51,9 @@ export const ServiciosRecursosHumanos = async () => {
             {title}
           </h2>
           <hr className="border-secondaryColor mx-auto my-3 w-[120px] border-2 outline-none" />
-          <h5 className="mt-10 text-center text-xl text-balance">
+          <h3 className="mt-10 text-center text-xl text-balance">
             {parseContent(content)}
-          </h5>
+          </h3>
         </div>
 
         <div className="mx-auto mt-20 max-w-6xl">

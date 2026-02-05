@@ -23,7 +23,7 @@ export const SomosCard = ({
       />
       <div className="to-primaryColor/90 via-primaryColor/10 absolute inset-0 bg-gradient-to-b from-transparent"></div>
       <div className="absolute bottom-4 left-4 text-white">
-        <h4 className="text-2xl font-black">{name}</h4>
+        <h2 className="text-2xl font-black">{name}</h2>
         <div className="text-sm text-balance uppercase">
           {position && parseContent(position)}
         </div>

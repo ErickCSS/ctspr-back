@@ -76,9 +76,9 @@ export const Footer = async () => {
           <div className="mt-5 grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] space-y-5">
             {sucursales.posts.nodes.reverse().map((sucursal) => (
               <article key={sucursal.id}>
-                <h5 className="text-secondaryColor mb-1 text-xl font-bold">
+                <h2 className="text-secondaryColor mb-1 text-xl font-bold">
                   {sucursal.title}
-                </h5>
+                </h2>
                 <div className="text-balance text-white">
                   {parseContent(sucursal.excerpt)}
                 </div>
@@ -111,9 +111,9 @@ export const Footer = async () => {
           </div>
 
           <div className="mt-5 flex flex-col gap-y-4">
-            <h5 className="font-lato text-xl font-bold text-white">
+            <h2 className="font-lato text-xl font-bold text-white">
               {t("documents")}
-            </h5>
+            </h2>
 
             <div className="flex flex-wrap items-center gap-5">
               <Link

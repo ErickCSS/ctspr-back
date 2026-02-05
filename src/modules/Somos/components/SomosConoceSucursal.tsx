@@ -21,7 +21,7 @@ export const SomosConoceSucursal = async () => {
 
   return (
     <div className="border border-zinc-500 p-10">
-      <h4 className="mb-3 text-center text-3xl font-bold">{t("title")}</h4>
+      <h2 className="mb-3 text-center text-3xl font-bold">{t("title")}</h2>
 
       <CarouselVertical carousels={conoceSucursalReverse} />
     </div>

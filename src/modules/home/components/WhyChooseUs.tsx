@@ -57,11 +57,11 @@ export const WhyChooseUs = async () => {
                     <CounterAnimation value={formattedValue} />
                   </div>
 
-                  <h4
+                  <h2
                     className={`text-center text-3xl font-bold text-white lg:text-2xl xl:text-3xl`}
                   >
                     {choose.title}
-                  </h4>
+                  </h2>
                 </div>
               </div>
             </div>

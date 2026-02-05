@@ -10,7 +10,7 @@ export default function PublicLayout({
   return (
     <>
       <Header />
-      {children}
+      <main>{children}</main>
       <Footer />
       <PopUp />
     </>

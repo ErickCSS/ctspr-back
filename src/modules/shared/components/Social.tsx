@@ -53,6 +53,7 @@ export const Social = ({ className }: { className?: string }) => {
             variant="ghost"
             size="icon"
             asChild
+            aria-label={social.social}
             className={`text-primaryColor ${className} rounded-full bg-white shadow-none`}
           >
             <Link
