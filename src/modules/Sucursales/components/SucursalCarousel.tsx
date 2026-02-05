@@ -59,7 +59,10 @@ export const SucursalCarousel = ({
                 alt={sucursal.title}
                 width={500}
                 height={500}
+                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
                 className={`h-[250px] w-full object-cover ${sucursal.title === "Salinas" ? "object-left" : "object-center"}`}
+                loading="lazy"
+                quality={75}
               />
               <div className="mt-5">
                 <h3 className="text-secondaryColor text-3xl font-bold">

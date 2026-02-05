@@ -11,10 +11,13 @@ export const CallActions = async () => {
       <div className="container mx-auto">
         <div className="flex flex-col items-center justify-center gap-x-20 gap-y-10 lg:flex-row">
           <Button
-            className="bg-primaryColor hover:bg-secondaryColor min-h-[60px] !px-8 text-2xl transition-colors duration-300 lg:!px-14 lg:!py-10 lg:text-4xl"
+            className="bg-primaryColor hover:bg-secondaryColor min-h-[60px] !px-8 text-lg transition-colors duration-300 md:text-2xl lg:!px-14 lg:!py-10 lg:text-4xl"
             asChild
           >
-            <Link href="/ofertas-empleo" className="flex items-center gap-x-10">
+            <Link
+              href="/ofertas-empleo"
+              className="flex items-center gap-x-5 md:gap-x-10"
+            >
               <span className="font-bold">{t("jobOffers")} </span>{" "}
               <IconCaretRightFilled
                 size={32}
@@ -24,10 +27,13 @@ export const CallActions = async () => {
           </Button>
 
           <Button
-            className="bg-primaryColor hover:bg-secondaryColor min-h-[60px] !px-8 text-2xl transition-colors duration-300 lg:!px-14 lg:!py-10 lg:text-4xl"
+            className="bg-primaryColor hover:bg-secondaryColor min-h-[60px] !px-8 text-lg transition-colors duration-300 md:text-2xl lg:!px-14 lg:!py-10 lg:text-4xl"
             asChild
           >
-            <Link href="/servicios" className="flex items-center gap-x-10">
+            <Link
+              href="/servicios"
+              className="flex items-center gap-x-5 md:gap-x-10"
+            >
               <span className="font-bold">{t("services")} </span>{" "}
               <IconCaretRightFilled
                 size={32}

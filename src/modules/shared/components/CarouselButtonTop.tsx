@@ -59,6 +59,7 @@ export const CarouselButtonTop = ({
               alt={carousel.title}
               width={200}
               height={200}
+              sizes="(max-width: 768px) 150px, 200px"
               loading="lazy"
               decoding="async"
               quality={60}

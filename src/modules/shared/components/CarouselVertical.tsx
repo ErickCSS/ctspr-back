@@ -38,6 +38,7 @@ export const CarouselVertical = ({
               alt={carousel.title}
               width={200}
               height={200}
+              sizes="(max-width: 768px) 120px, 180px"
               loading="lazy"
               decoding="async"
               quality={60}

@@ -51,8 +51,9 @@ export const Footer = async () => {
             <Image
               src={logo.mediaItems.nodes[0].link}
               alt="logo"
-              width={250}
-              height={250}
+              width={450}
+              height={450}
+              sizes="(max-width: 1024px) 280px, 450px"
               className="h-auto w-[280px] lg:w-[450px]"
               loading="lazy"
               decoding="async"
@@ -151,6 +152,7 @@ export const Footer = async () => {
                 alt="superpages"
                 width={200}
                 height={200}
+                sizes="190px"
                 className="h-auto w-[190px]"
                 loading="lazy"
                 decoding="async"
@@ -166,6 +168,7 @@ export const Footer = async () => {
                 alt="axesa"
                 width={100}
                 height={100}
+                sizes="120px"
                 className="h-auto w-[120px]"
                 loading="lazy"
                 decoding="async"

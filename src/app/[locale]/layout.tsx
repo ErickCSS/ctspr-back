@@ -16,6 +16,7 @@ const lato = Lato({
   variable: "--font-lato",
   subsets: ["latin"],
   weight: ["100", "300", "400", "700", "900"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -66,6 +67,27 @@ export default async function RootLayout(
           <Script
             src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
             strategy="beforeInteractive"
+          />
+          <link
+            rel="preload"
+            as="video"
+            type="video/mp4"
+            href="/videos/video-cts.mp4"
+            fetchPriority="high"
+          />
+          <link
+            rel="preload"
+            as="video"
+            type="video/webm"
+            href="/videos/video-cts.webm"
+            fetchPriority="high"
+          />
+          <link
+            rel="preload"
+            as="video"
+            type="video/webm"
+            href="/videos/cts-video-slider.webm"
+            fetchPriority="high"
           />
         </head>
 

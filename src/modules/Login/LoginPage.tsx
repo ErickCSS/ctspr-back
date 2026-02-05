@@ -20,6 +20,7 @@ export const LoginPage = async () => {
               alt="logo"
               width={200}
               height={200}
+              sizes="200px"
               className="mx-auto h-auto w-[200px]"
               loading="lazy"
               decoding="async"

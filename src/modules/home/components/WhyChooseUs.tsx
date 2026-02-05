@@ -46,6 +46,7 @@ export const WhyChooseUs = async () => {
                   alt={choose.title}
                   width={100}
                   height={100}
+                  sizes="(max-width: 768px) 104px, 128px"
                   className="h-auto w-26 md:w-32"
                   loading="lazy"
                   decoding="async"
@@ -58,7 +59,7 @@ export const WhyChooseUs = async () => {
                   </div>
 
                   <h2
-                    className={`text-center text-3xl font-bold text-white lg:text-2xl xl:text-3xl`}
+                    className={`text-center text-xl font-bold text-white lg:text-2xl xl:text-3xl`}
                   >
                     {choose.title}
                   </h2>

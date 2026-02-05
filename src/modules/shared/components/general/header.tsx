@@ -50,7 +50,9 @@ export const Header = () => {
               alt="logo"
               width={330}
               height={330}
+              sizes="(max-width: 1280px) 250px, 330px"
               className="h-auto w-[250px] xl:w-[330px]"
+              priority
             />
           </Link>
 
