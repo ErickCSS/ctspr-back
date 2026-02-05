@@ -6,17 +6,27 @@ import { useContact } from "@modules/contact/hooks/useContact";
 import { IconLoader2 } from "@tabler/icons-react";
 import { Label } from "@modules/ui/label";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
+import Script from "next/script";
 
 export const ContactForm = () => {
   const { contactForm, onSubmit, error, isSubmitting } = useContact();
+  const [loadCaptcha, setLoadCaptcha] = useState(false);
   const t = useTranslations("ContactUs.form");
 
   return (
     <Form {...contactForm}>
       <form
         onSubmit={onSubmit}
+        onMouseEnter={() => setLoadCaptcha(true)}
         className="font-sf mx-auto mt-10 space-y-4 lg:w-3xl"
       >
+        {loadCaptcha && (
+          <Script
+            src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
+            strategy="lazyOnload"
+          />
+        )}
         <Label className="text-lg">{t("name")}</Label>
         <RenderFormField
           control={contactForm.control}
