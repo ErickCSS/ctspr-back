@@ -87,19 +87,21 @@ export const useFilterEmpleo = () => {
         setFilterOptions(options);
 
         // Sanitizar las ubicaciones usando SELECT_LOCATION
-        const sanitized = (options.locations || []).map((location: string) => {
-          // Buscar la ubicación en SELECT_LOCATION
-          const foundLocation = SELECT_LOCATION.find(
-            (loc) => loc.value.toLowerCase() === location.toLowerCase(),
-          );
+        const sanitized = (options.locations || [])
+          .map((location: string) => {
+            // Buscar la ubicación en SELECT_LOCATION
+            const foundLocation = SELECT_LOCATION.find(
+              (loc) => loc.value.toLowerCase() === location.toLowerCase(),
+            );
 
-          // Si existe en SELECT_LOCATION, usar su label formateado
-          // Si no, usar el valor tal cual viene de la BD
-          return {
-            value: location,
-            label: foundLocation ? foundLocation.label : location,
-          };
-        });
+            // Si existe en SELECT_LOCATION, usar su label formateado
+            // Si no, usar el valor tal cual viene de la BD
+            return {
+              value: location,
+              label: foundLocation ? foundLocation.label : location,
+            };
+          })
+          .sort((a, b) => a.label.localeCompare(b.label));
 
         setSanitizedLocations(sanitized);
       } catch (error) {
