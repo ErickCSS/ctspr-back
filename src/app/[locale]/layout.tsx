@@ -122,6 +122,7 @@ export default async function RootLayout(
           <link
             rel="preload"
             as="image"
+            type="image/webp"
             href="/images/fallback-video.webp"
             fetchPriority="high"
           />
