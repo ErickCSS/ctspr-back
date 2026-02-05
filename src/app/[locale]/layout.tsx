@@ -96,8 +96,8 @@ export default async function RootLayout(
   return (
     <ViewTransitions>
       <html lang="es">
+        <GoogleTagManager gtmId="GTM-MGMDLRV" />
         <head>
-          <GoogleTagManager gtmId="GTM-MGMDLRV" />
           <link
             rel="preload"
             as="video"

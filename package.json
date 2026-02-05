@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint"
   },
-   "engines": {
+  "engines": {
     "node": ">=20.9.0"
   },
   "dependencies": {
@@ -54,7 +54,9 @@
     "zustand": "5.0.8"
   },
   "devDependencies": {
+    "@builder.io/partytown": "^0.10.3",
     "@eslint/eslintrc": "3",
+    "@qwik.dev/partytown": "^0.11.2",
     "@tailwindcss/postcss": "4",
     "@tailwindcss/typography": "0.5.16",
     "@types/node": "20",
