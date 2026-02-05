@@ -12,6 +12,7 @@ import {
 } from "@algolia/autocomplete-core";
 import { EmployeeType } from "@/modules/shared/types/employee.type";
 import { useTranslations } from "next-intl";
+import { SELECT_LOCATION } from "@modules/shared/lib/SelectInifo";
 
 export const useFilterEmpleo = () => {
   const t = useTranslations("filterJobs");
@@ -24,6 +25,9 @@ export const useFilterEmpleo = () => {
   const isUserAction = useRef(false);
 
   const [filterOptions, setFilterOptions] = useState<any>({});
+  const [sanitizedLocations, setSanitizedLocations] = useState<
+    Array<{ value: string; label: string }>
+  >([]);
   const [localFilters, setLocalFilters] = useState<any>({});
   const [autocompleteState, setAutocompleteState] = useState<
     AutocompleteState<EmployeeType>
@@ -81,6 +85,23 @@ export const useFilterEmpleo = () => {
       try {
         const options = await EmpleosServices.getFilterOptions();
         setFilterOptions(options);
+
+        // Sanitizar las ubicaciones usando SELECT_LOCATION
+        const sanitized = (options.locations || []).map((location: string) => {
+          // Buscar la ubicación en SELECT_LOCATION
+          const foundLocation = SELECT_LOCATION.find(
+            (loc) => loc.value.toLowerCase() === location.toLowerCase(),
+          );
+
+          // Si existe en SELECT_LOCATION, usar su label formateado
+          // Si no, usar el valor tal cual viene de la BD
+          return {
+            value: location,
+            label: foundLocation ? foundLocation.label : location,
+          };
+        });
+
+        setSanitizedLocations(sanitized);
       } catch (error) {
         console.error("Error loading filter options:", error);
       }
@@ -200,6 +221,7 @@ export const useFilterEmpleo = () => {
 
   return {
     filterOptions,
+    sanitizedLocations,
     localFilters,
     handleApplyFilters,
     handleClearFilters,

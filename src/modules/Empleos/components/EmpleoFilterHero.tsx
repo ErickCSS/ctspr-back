@@ -10,10 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@modules/ui/select";
-import {
-  SELECT_REGIONAL_OFFICE,
-  SELECT_LOCATION,
-} from "@modules/shared/lib/SelectInifo";
+import { SELECT_REGIONAL_OFFICE } from "@modules/shared/lib/SelectInifo";
 import { Button } from "@/modules/ui/button";
 import { Link } from "next-view-transitions";
 import { getCityLabel } from "@/modules/shared/utils";
@@ -23,6 +20,7 @@ export const EmpleoFilterHero = () => {
   const t = useTranslations("filterJobs");
   const {
     localFilters,
+    sanitizedLocations,
     handleApplyFilters,
     handleRegionalOfficeChange,
     handleLocationChange,
@@ -144,7 +142,7 @@ export const EmpleoFilterHero = () => {
               <SelectItem value={"all"} className="text-sm">
                 {t("allLocations")}
               </SelectItem>
-              {SELECT_LOCATION.map((location) => (
+              {sanitizedLocations.map((location) => (
                 <SelectItem
                   key={location.value}
                   value={location.value}

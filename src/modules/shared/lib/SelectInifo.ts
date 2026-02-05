@@ -108,6 +108,19 @@ export const SELECT_LOCATION = [
   { value: "Yabucoa", label: "Yabucoa" },
   { value: "Yauco", label: "Yauco" },
   { value: "Santurce", label: "Santurce" },
+  { value: "Amelia", label: "Amelia" },
+  { value: "Amelia Industrial Park", label: "Amelia Industrial Park" },
+  { value: "Aeropuerto LMM", label: "Aeropuerto LMM" },
+  { value: "Area Metro", label: "Área Metro" },
+  { value: "Barrio Palmas", label: "Barrio Palmas" },
+  { value: "Ceramica Industrial Park", label: "Cerámica Industrial Park" },
+  { value: "Cupey", label: "Cupey" },
+  { value: "Hato Rey", label: "Hato Rey" },
+  { value: "Isla Verde", label: "Isla Verde" },
+  { value: "Levittown", label: "Levittown" },
+  { value: "Puerto Nuevo", label: "Puerto Nuevo" },
+  { value: "Rio Piedras", label: "Río Piedras" },
+  { value: "Roosevelt", label: "Roosevelt" },
 ];
 
 export const SELECT_REGIONAL_OFFICE = [
