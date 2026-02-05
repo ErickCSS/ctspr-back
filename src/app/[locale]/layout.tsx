@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL("https://ctspr.com"),
   alternates: {
-    canonical: "/",
+    canonical: "/en",
     languages: {
       es: "/es",
       en: "/en",
