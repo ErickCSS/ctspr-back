@@ -17,59 +17,67 @@ const lato = Lato({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  icons: {
-    icon: "/images/cts-favicon.png",
-  },
-  metadataBase: new URL("https://ctspr.com"),
-  alternates: {
-    canonical: "/en",
-    languages: {
-      es: "/es",
-      en: "/en",
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+
+  return {
+    icons: {
+      icon: "/images/cts-favicon.png",
     },
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+    metadataBase: new URL("https://ctspr.com"),
+    alternates: {
+      canonical: `/${locale}`,
+      languages: {
+        es: "/es",
+        en: "/en",
+      },
+    },
+    robots: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  title: "Caribbean Temporary Services LLC",
-  description:
-    "CTS es una empresa local establecida en 1983 con la misión de proveer amplias oportunidades de empleo en Puerto Rico.",
-  openGraph: {
-    title: "Caribbean Temporary Services LLC",
-    description:
-      "CTS es una empresa local establecida en 1983 con la misión de proveer amplias oportunidades de empleo en Puerto Rico.",
-    type: "website",
-    locale: "es",
-    siteName: "Caribbean Temporary Services LLC",
-    images: [
-      {
-        url: "https://stagingctspr.axesawebhosting9.net/wp-content/uploads/2025/07/cts-brand.webp",
-        width: 1200,
-        height: 630,
-        alt: "Caribbean Temporary Services LLC",
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
       },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
+    },
     title: "Caribbean Temporary Services LLC",
     description:
       "CTS es una empresa local establecida en 1983 con la misión de proveer amplias oportunidades de empleo en Puerto Rico.",
-    images: [
-      "https://stagingctspr.axesawebhosting9.net/wp-content/uploads/2025/07/cts-brand.webp",
-    ],
-    creator: "ctspr",
-  },
-};
+    openGraph: {
+      title: "Caribbean Temporary Services LLC",
+      description:
+        "CTS es una empresa local establecida en 1983 con la misión de proveer amplias oportunidades de empleo en Puerto Rico.",
+      type: "website",
+      locale: locale === "es" ? "es_ES" : "en_US",
+      siteName: "Caribbean Temporary Services LLC",
+      images: [
+        {
+          url: "https://stagingctspr.axesawebhosting9.net/wp-content/uploads/2025/07/cts-brand.webp",
+          width: 1200,
+          height: 630,
+          alt: "Caribbean Temporary Services LLC",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Caribbean Temporary Services LLC",
+      description:
+        "CTS es una empresa local establecida en 1983 con la misión de proveer amplias oportunidades de empleo en Puerto Rico.",
+      images: [
+        "https://stagingctspr.axesawebhosting9.net/wp-content/uploads/2025/07/cts-brand.webp",
+      ],
+      creator: "ctspr",
+    },
+  };
+}
 
 export default async function RootLayout(
   props: Readonly<{
