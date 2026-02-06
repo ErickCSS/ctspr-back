@@ -3,8 +3,8 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Login",
-  description: "Login to your account",
+  title: "Login Employee",
+  description: "Login to your employee account",
   robots: {
     index: false,
     follow: false,
