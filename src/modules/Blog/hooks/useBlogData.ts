@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { WpQuery } from "@modules/shared/services/wpQuery";
 import { queryBlog } from "@modules/shared/graphql/general.query";
 import { BlogProps } from "@modules/shared/types/blog.types";
@@ -10,67 +10,109 @@ interface UseBlogDataReturn {
   blog: BlogProps | null;
   loading: boolean;
   error: string | null;
-  cursors: { [key: number]: string }; // Almacena cursores para cada página
 }
 
 export const useBlogData = (page: number): UseBlogDataReturn => {
   const [blog, setBlog] = useState<BlogProps | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [cursors, setCursors] = useState<{ [key: number]: string }>({});
+  const cursorsRef = useRef<{ [key: number]: string }>({});
   const locale = useLocale();
 
+  const fetchPage = useCallback(
+    async (targetPage: number): Promise<BlogProps> => {
+      const variables: any = {
+        category: `blog-${locale.toLowerCase()}`,
+        first: 6,
+      };
+
+      // Si necesitamos un cursor para la página y no lo tenemos,
+      // debemos buscar secuencialmente desde la última página conocida
+      if (targetPage > 1) {
+        const cursorPage = targetPage - 1;
+        if (!cursorsRef.current[cursorPage]) {
+          // Buscar secuencialmente las páginas que faltan
+          let lastKnownPage = 0;
+          for (let i = cursorPage; i >= 1; i--) {
+            if (cursorsRef.current[i]) {
+              lastKnownPage = i;
+              break;
+            }
+          }
+
+          // Fetch páginas intermedias para obtener cursores
+          for (let i = lastKnownPage + 1; i <= cursorPage; i++) {
+            const intermediateVars: any = {
+              category: `blog-${locale.toLowerCase()}`,
+              first: 6,
+            };
+            if (i > 1 && cursorsRef.current[i - 1]) {
+              intermediateVars.after = cursorsRef.current[i - 1];
+            }
+            const intermediateData: BlogProps = await WpQuery({
+              query: queryBlog,
+              variables: intermediateVars,
+            });
+            if (intermediateData.posts.pageInfo.endCursor) {
+              cursorsRef.current[i] = intermediateData.posts.pageInfo.endCursor;
+            }
+          }
+        }
+
+        // Ahora debemos tener el cursor
+        const after = cursorsRef.current[cursorPage];
+        if (after) {
+          variables.after = after;
+        }
+      }
+
+      const data: BlogProps = await WpQuery({
+        query: queryBlog,
+        variables,
+      });
+
+      // Guardar el cursor de la página actual para navegación futura
+      if (data.posts.pageInfo.endCursor) {
+        cursorsRef.current[targetPage] = data.posts.pageInfo.endCursor;
+      }
+
+      return data;
+    },
+    [locale],
+  );
+
   useEffect(() => {
+    let cancelled = false;
+
     const fetchBlogData = async () => {
       try {
         setLoading(true);
         setError(null);
 
-        // Determinar el cursor para la página actual
-        const after = page > 1 ? cursors[page - 1] : undefined;
+        const data = await fetchPage(page);
 
-        // Construir variables requeridas por el query
-        const variables: any = {
-          category: `blog-${locale.toLowerCase()}`,
-          first: 6,
-        };
-
-        // Solo agregar 'after' si existe y no es undefined
-        if (after) {
-          variables.after = after;
-        }
-
-        const data: BlogProps = await WpQuery({
-          query: queryBlog,
-          variables,
-        });
-
-        setBlog(data);
-
-        // Guardar el cursor de la página actual para navegación futura
-        if (data.posts.pageInfo.endCursor) {
-          setCursors((prev) => {
-            // Solo actualizar si el cursor cambió
-            if (prev[page] !== data.posts.pageInfo.endCursor) {
-              return {
-                ...prev,
-                [page]: data.posts.pageInfo.endCursor,
-              };
-            }
-            return prev;
-          });
+        if (!cancelled) {
+          setBlog(data);
         }
       } catch (err) {
-        setError(
-          err instanceof Error ? err.message : "Error loading blog data",
-        );
+        if (!cancelled) {
+          setError(
+            err instanceof Error ? err.message : "Error loading blog data",
+          );
+        }
       } finally {
-        setLoading(false);
+        if (!cancelled) {
+          setLoading(false);
+        }
       }
     };
 
     fetchBlogData();
-  }, [page, cursors]);
 
-  return { blog, loading, error, cursors };
+    return () => {
+      cancelled = true;
+    };
+  }, [page, fetchPage]);
+
+  return { blog, loading, error };
 };

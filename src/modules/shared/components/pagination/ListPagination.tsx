@@ -3,7 +3,6 @@
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import { useTransitionRouter } from "next-view-transitions";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect, useMemo } from "react";
 
 import { Pagination } from "@modules/shared/types/pagination.type";
 
@@ -23,27 +22,13 @@ export const ListPagination = ({
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const isDetailPage = useMemo(
-    () => /^\/blog\/[^\/]+$/.test(pathname),
-    [pathname],
-  );
-  const pageFromUrl = useMemo(
-    () => (!isDetailPage ? searchParams.get("page") : null),
-    [searchParams, isDetailPage],
-  );
-
-  const currentPage = useMemo(() => {
-    if (pageFromUrl) return parseInt(pageFromUrl);
-    return isDetailPage ? page : pagination?.current_page || page;
-  }, [pageFromUrl, isDetailPage, pagination?.current_page, page]);
+  const currentPage = pagination.current_page;
 
   const handlePageChange = (pageNumber: number) => {
     setPage(pageNumber);
-    if (!isDetailPage) {
-      const newParams = new URLSearchParams(searchParams.toString());
-      newParams.set("page", pageNumber.toString());
-      router.push(`${pathname}?${newParams.toString()}`, { scroll: false });
-    }
+    const newParams = new URLSearchParams(searchParams.toString());
+    newParams.set("page", pageNumber.toString());
+    router.push(`${pathname}?${newParams.toString()}`, { scroll: false });
   };
 
   const getPaginationRange = (

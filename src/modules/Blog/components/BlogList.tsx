@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import Pagination from "@modules/shared/components/pagination/Pagination";
 import { BlogCard } from "./BlogCard";
 import { usePaginationBlog } from "@modules/Blog/store/usePaginationBlog";
@@ -13,14 +15,31 @@ interface BlogListProps {
 
 export const BlogList = ({ totalPages }: BlogListProps) => {
   const { page, setPage } = usePaginationBlog();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const pageFromUrl = searchParams.get("page");
+    if (pageFromUrl) {
+      const parsed = parseInt(pageFromUrl, 10);
+      if (
+        !isNaN(parsed) &&
+        parsed >= 1 &&
+        parsed <= totalPages &&
+        parsed !== page
+      ) {
+        setPage(parsed);
+      }
+    }
+  }, [searchParams, totalPages]);
+
   const { blog, loading, error } = useBlogData(page);
 
   const pagination: PaginationType = {
     records: totalPages * 6,
     items_per_page: 6,
-    previous_page: page - 1,
+    previous_page: page > 1 ? page - 1 : null,
     current_page: page,
-    next_page: page + 1,
+    next_page: page < totalPages ? page + 1 : null,
     total_pages: totalPages,
   };
 
