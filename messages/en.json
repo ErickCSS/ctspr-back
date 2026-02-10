@@ -16,7 +16,7 @@
     "services": "Looking to Hire Qualified Talent?"
   },
   "testimonials": {
-    "title": "Testimonials"
+    "title": "Real Stories. Real Growth."
   },
   "sucursales": {
     "title": "Branches",
@@ -87,6 +87,11 @@
   },
   "knowOurTeam": {
     "title": "Know part of our team"
+  },
+  "PopUp": {
+    "title": "Thank you for visiting us",
+    "subtitle": "At CTS, we connect people in search of employment with companies that wish to strengthen their teams.",
+    "button": "How did you hear about us?"
   }
 }
 

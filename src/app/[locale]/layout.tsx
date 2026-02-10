@@ -95,7 +95,7 @@ export default async function RootLayout(
 
   return (
     <ViewTransitions>
-      <html lang="es">
+      <html lang={locale}>
         <GoogleTagManager gtmId="GTM-MGMDLRV" />
         <head>
           <link

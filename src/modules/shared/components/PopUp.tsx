@@ -6,8 +6,12 @@ import { AnimatePresence, motion } from "motion/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { cn } from "@/modules/shared/lib/utils";
+import { useLocale, useTranslations } from "next-intl";
 
 export const PopUp = () => {
+  const t = useTranslations("PopUp");
+  const locale = useLocale();
+  const isEnglish = locale === "en";
   const [showPopUp, setShowPopUp] = useState(false);
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -39,18 +43,22 @@ export const PopUp = () => {
             <IconX className="h-6 w-6" />
           </Button>
           <motion.div className="w-full space-y-2 rounded-xl bg-white p-6">
-            <h3 className="text-2xl font-bold">Gracias por visitarnos</h3>
-            <p className="text-base">
-              En CTS, conectamos a personas en busca de empleo con empresas que
-              desean fortalecer sus equipos.
-            </p>
+            <h3
+              className={cn(
+                "font-bold",
+                isEnglish ? "text-[22px]" : "text-2xl",
+              )}
+            >
+              {t("title")}
+            </h3>
+            <p className="text-base">{t("subtitle")}</p>
             <Button
               className="min-h-[40px] w-full cursor-pointer"
               onClick={() =>
                 router.push("https://ctspr.typeform.com/to/A5PCXQeP")
               }
             >
-              ¿Cómo te enteraste de nosotros?
+              {t("button")}
             </Button>
           </motion.div>
         </motion.div>

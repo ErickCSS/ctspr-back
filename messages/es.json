@@ -86,6 +86,11 @@
   },
   "knowOurTeam": {
     "title": "Conoce parte de nuestro equipo"
+  },
+  "PopUp": {
+    "title": "Gracias por visitarnos",
+    "subtitle": "En CTS, conectamos a personas en busca de empleo con empresas que desean fortalecer sus equipos.",
+    "button": "¿Cómo te enteraste de nosotros?"
   }
 }
 
