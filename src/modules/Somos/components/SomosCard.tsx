@@ -32,7 +32,6 @@ export const SomosCard = async ({
         <div
           className={cn(
             "text-sm text-balance uppercase",
-            isEnglish ? "flex flex-wrap items-center gap-1" : "",
           )}
         >
           {position && parseContent(position)}
