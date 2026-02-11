@@ -34,10 +34,9 @@
     "title": "Join CTS!",
     "subtitle": "Take the next step in your career with confidence. Call us or apply online today!"
   },
-  "WeAre":  {
+  "WeAre": {
     "administrative": "Executive Team",
     "gerencial": "Management Team"
-
   },
   "FrequentlyAskedQuestions": {
     "title": "Frequently Ask Questions for the Company",
@@ -89,9 +88,8 @@
     "title": "Know part of our team"
   },
   "PopUp": {
-    "title": "Thank you for visiting us",
-    "subtitle": "At CTS, we connect people in search of employment with companies that wish to strengthen their teams.",
+    "title": "Thank you for your interest",
+    "subtitle": "At CTS, we connect talent with organizations seeking to build strong and reliable teams.How did you learn about us?",
     "button": "How did you hear about us?"
   }
 }
-
