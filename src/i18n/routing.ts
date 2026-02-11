@@ -6,4 +6,8 @@ export const routing = defineRouting({
 
   // Used when no locale matches
   defaultLocale: "es",
+
+  // Disable accept-language header detection so the site
+  // always defaults to Spanish unless the user explicitly switches
+  localeDetection: false,
 });
