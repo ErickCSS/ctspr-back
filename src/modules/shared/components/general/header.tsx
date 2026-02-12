@@ -17,6 +17,7 @@ export const Header = () => {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const isActive = (path: string) => pathname === path;
+  const locale = useLocale();
 
   // Translation
   const t = useTranslations("nav");
@@ -28,7 +29,7 @@ export const Header = () => {
           asChild
           className="hover:bg-secondaryColor rounded-3xl bg-white px-10 text-black transition-colors duration-300 hover:text-white"
         >
-          <Link href="/login-employee">Login</Link>
+          <Link href={`/${locale}/login-employee`}>Login</Link>
         </Button>
         <div className="flex items-center gap-x-8">
           <Social className="size-8" />
@@ -96,7 +97,7 @@ export const Header = () => {
                 {NAV_CONFIG.map((item) => (
                   <Link
                     key={item.name}
-                    href={item.href}
+                    href={`/${locale}${item.href}`}
                     className={cn(
                       "text-2xl text-black lg:text-lg",
                       isActive(item.href)

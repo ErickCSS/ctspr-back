@@ -80,7 +80,7 @@ export const EmpleosMapSelect = async () => {
                   className="bg-secondaryColor h-12 text-lg text-white transition-colors duration-300 hover:bg-pink-700"
                 >
                   <Link
-                    href={`/empleos?q=${item === "San Germán" ? "San-German" : item.charAt(0).toUpperCase() + item.slice(1).replace(" ", "-")}`}
+                    href={`/${locale}/empleos?q=${item === "San Germán" ? "San-German" : item.charAt(0).toUpperCase() + item.slice(1).replace(" ", "-")}`}
                     target="_blank"
                     rel="noopener noreferrer nofollow"
                   >
@@ -93,7 +93,7 @@ export const EmpleosMapSelect = async () => {
                 className="bg-secondaryColor h-12 text-lg text-white transition-colors duration-300 hover:bg-pink-700"
               >
                 <Link
-                  href="/empleos"
+                  href={`/${locale}/empleos`}
                   target="_self"
                   rel="noopener noreferrer nofollow"
                 >
@@ -124,7 +124,7 @@ export const EmpleosMapSelect = async () => {
               asChild
               className="bg-secondaryColor min-h-[50px] w-[250px] text-xl text-white transition-colors duration-300 hover:bg-pink-700"
             >
-              <Link href="/contacto">{t("buttonInformation")}</Link>
+              <Link href={`/${locale}/contacto`}>{t("buttonInformation")}</Link>
             </Button>
           </div>
         </div>

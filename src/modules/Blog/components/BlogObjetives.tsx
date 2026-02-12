@@ -49,7 +49,10 @@ export const BlogObjetives = async () => {
               asChild
               className="bg-secondaryColor h-18 !pr-6 !pl-10 text-xl font-black uppercase transition-colors duration-300 hover:bg-pink-700 lg:text-2xl"
             >
-              <Link href="/contacto" className="flex items-center gap-x-5">
+              <Link
+                href={`/${locale}/contacto`}
+                className="flex items-center gap-x-5"
+              >
                 <span>{isEnglish ? "Contact us" : "Contáctanos"}</span>{" "}
                 <IconCaretRightFilled size={32} className="size-[32px]" />
               </Link>

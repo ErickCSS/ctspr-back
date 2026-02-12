@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { cn } from "@/modules/shared/lib/utils";
 import { useLocale, useTranslations } from "next-intl";
+import { Link } from "next-view-transitions";
 
 export const PopUp = () => {
   const t = useTranslations("PopUp");
@@ -52,13 +53,14 @@ export const PopUp = () => {
               {t("title")}
             </h3>
             <p className="text-base">{t("subtitle")}</p>
-            <Button
-              className="min-h-[40px] w-full cursor-pointer"
-              onClick={() =>
-                router.push("https://ctspr.typeform.com/to/A5PCXQeP")
-              }
-            >
-              {t("button")}
+            <Button className="min-h-[40px] w-full cursor-pointer">
+              <Link
+                href="https://ctspr.typeform.com/to/A5PCXQeP"
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+              >
+                {t("button")}
+              </Link>
             </Button>
           </motion.div>
         </motion.div>

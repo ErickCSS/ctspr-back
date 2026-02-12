@@ -15,10 +15,12 @@ import { Post } from "@/modules/shared/types/blog.types";
 import { format, parseISO } from "date-fns";
 import { parseContent } from "@/modules/shared/utils/parseContent.utils";
 import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 
 export const BlogCard = ({ post }: { post: Post }) => {
   const router = useTransitionRouter();
   const t = useTranslations("blog");
+  const locale = useLocale();
   const { dateGmt, featuredImage, slug, title, excerpt } = post.node;
 
   if (!dateGmt || !featuredImage || !slug || !title || !excerpt) {
@@ -59,7 +61,7 @@ export const BlogCard = ({ post }: { post: Post }) => {
         <div className="text-primaryColor">{date}</div>
         <Button
           className="bg-secondaryColor hover:bg-primaryColor cursor-pointer text-white transition-colors duration-300"
-          onClick={() => router.push(`/blog/${slug}`)}
+          onClick={() => router.push(`/${locale}/blog/${slug}`)}
         >
           {t("buttonReadMore")}
         </Button>

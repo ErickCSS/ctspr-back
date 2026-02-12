@@ -8,10 +8,12 @@ import { useEmployeeFiltersStore } from "@modules/Empleos/store/EmployeeFilterSt
 import { CardEmployeeSkeleton } from "@modules/shared/skeletons/CardEmployeeSkeleton";
 import Pagination from "@modules/shared/components/pagination/Pagination";
 import { Search } from "lucide-react";
+import { useLocale } from "next-intl";
 
 export const EmpleosList = () => {
   const { employees, loading, pagination, page, setPage } =
     useEmployeeFiltersStore();
+  const locale = useLocale();
 
   if (loading || !employees) {
     return (
@@ -68,7 +70,10 @@ export const EmpleosList = () => {
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {employees?.map((employee) => (
-            <Link key={employee.id} href={`/empleos/${employee.slug}`}>
+            <Link
+              key={employee.id}
+              href={`/${locale}/empleos/${employee.slug}`}
+            >
               <CardEmployee employee={employee} />
             </Link>
           ))}

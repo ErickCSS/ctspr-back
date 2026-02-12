@@ -2,9 +2,11 @@ import { Button } from "@modules/ui/button";
 import { IconCaretRightFilled } from "@tabler/icons-react";
 import { Link } from "next-view-transitions";
 import { getTranslations } from "next-intl/server";
+import { getLocale } from "next-intl/server";
 
 export const CallActions = async () => {
   const t = await getTranslations("callActions");
+  const locale = await getLocale();
 
   return (
     <section className="bg-zinc-100 px-4 py-20">
@@ -15,7 +17,7 @@ export const CallActions = async () => {
             asChild
           >
             <Link
-              href="/ofertas-empleo"
+              href={`/${locale}/ofertas-empleo`}
               className="flex items-center gap-x-5 md:gap-x-10"
             >
               <span className="font-bold">{t("jobOffers")} </span>{" "}
@@ -31,7 +33,7 @@ export const CallActions = async () => {
             asChild
           >
             <Link
-              href="/servicios"
+              href={`/${locale}/servicios`}
               className="flex items-center gap-x-5 md:gap-x-10"
             >
               <span className="font-bold">{t("services")} </span>{" "}
