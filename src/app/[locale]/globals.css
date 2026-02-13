@@ -223,6 +223,11 @@
       word-break: break-all;
     }
   }
+
+  .wp-block-image:not(:where(figure .wp-block-image)) {
+    @apply my-4 h-auto w-[500px];
+  }
+
   .wp-block-post-author {
     @apply mb-8 flex items-center gap-2;
 
@@ -236,8 +241,13 @@
       & .wp-block-post-author__name {
         @apply flex flex-col justify-center gap-1 text-base font-bold;
 
-        &::before {
+        html[lang="es"] &::before {
           content: "Escrito por:";
+          @apply text-sm font-normal;
+        }
+
+        html[lang="en"] &::before {
+          content: "Written by:";
           @apply text-sm font-normal;
         }
       }

@@ -1,5 +1,3 @@
-"use clients";
-
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -12,22 +10,37 @@ import { Navigation, Autoplay } from "swiper/modules";
 import { parseContent } from "@/modules/shared/utils/parseContent.utils";
 import Image from "next/image";
 import { TruncatedHtml } from "@/modules/shared/lib/Truncated";
+import { useState, useEffect, useRef } from "react";
+import type { Swiper as SwiperType } from "swiper";
 
 export const CarouselVertical = ({
   carousels,
 }: {
   carousels: CarouselProps[];
 }) => {
+  const [autoplay, setAutoplay] = useState(true);
+  const swiperRef = useRef<SwiperType | null>(null);
+
+  useEffect(() => {
+    if (swiperRef.current) {
+      swiperRef.current.autoplay.stop();
+      swiperRef.current.autoplay.start();
+    }
+  }, [autoplay]);
+
   return (
     <Swiper
       spaceBetween={0}
       slidesPerView={1}
       navigation={true}
       autoplay={{
-        delay: 5000,
+        delay: autoplay === true ? 10000 : 600000,
         disableOnInteraction: false,
       }}
       modules={[Navigation, Autoplay]}
+      onSwiper={(swiper) => {
+        swiperRef.current = swiper;
+      }}
       className="carousel-vertical rounded-xl bg-white"
     >
       {carousels?.map((carousel, index) => (
@@ -60,6 +73,8 @@ export const CarouselVertical = ({
                   limit={200}
                   moreLabel="Leer más"
                   lessLabel="Leer menos"
+                  onClickMore={() => setAutoplay(false)}
+                  onClickLess={() => setAutoplay(true)}
                 />
               </div>
             </div>
