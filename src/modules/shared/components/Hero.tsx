@@ -9,8 +9,6 @@ export const Hero = async ({ title }: { title: string }) => {
   const locale = await getLocale();
   const isEnglish = locale === "en";
 
-  console.log(title);
-
   const hero: HeroProps = await WpQuery({
     query: queryHero,
     variables: {
@@ -20,7 +18,7 @@ export const Hero = async ({ title }: { title: string }) => {
   });
 
   const heroImage = hero.posts.nodes[0]?.featuredImage.node.sourceUrl;
-  console.log(heroImage);
+
   const isContact = title === "Contáctenos" || title === "Contact Us";
   const isEmpleos = title === "Empleo";
   const isListEmpleos =
@@ -52,7 +50,7 @@ export const Hero = async ({ title }: { title: string }) => {
           <h1 className="text-4xl font-bold text-white lg:text-6xl">
             {hero.posts.nodes[0]?.title}
           </h1>
-          {isListEmpleos && <EmpleoFilterHero />}
+          <EmpleoFilterHero />
         </div>
       </div>
     </section>

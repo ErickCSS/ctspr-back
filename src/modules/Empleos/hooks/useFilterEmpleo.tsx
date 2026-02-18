@@ -172,7 +172,7 @@ export const useFilterEmpleo = () => {
 
     params.set("page", "1");
 
-    router.push(`?${params.toString()}`, { scroll: false });
+    router.push(`empleos?${params.toString()}`, { scroll: false });
     setOpen(false);
   };
 
