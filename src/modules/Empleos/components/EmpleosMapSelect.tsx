@@ -81,7 +81,6 @@ export const EmpleosMapSelect = async () => {
                 >
                   <Link
                     href={`/${locale}/empleos?q=${item === "San Germán" ? "San-German" : item.charAt(0).toUpperCase() + item.slice(1).replace(" ", "-")}`}
-                    target="_blank"
                     rel="noopener noreferrer nofollow"
                   >
                     {item}

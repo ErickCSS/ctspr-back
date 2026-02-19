@@ -12,6 +12,7 @@ import Image from "next/image";
 import { TruncatedHtml } from "@/modules/shared/lib/Truncated";
 import { useState, useEffect, useRef } from "react";
 import type { Swiper as SwiperType } from "swiper";
+import { useTranslations } from "next-intl";
 
 export const CarouselVertical = ({
   carousels,
@@ -20,6 +21,7 @@ export const CarouselVertical = ({
 }) => {
   const [autoplay, setAutoplay] = useState(true);
   const swiperRef = useRef<SwiperType | null>(null);
+  const t = useTranslations("knowOurTeam");
 
   useEffect(() => {
     if (swiperRef.current) {
@@ -71,8 +73,8 @@ export const CarouselVertical = ({
                 <TruncatedHtml
                   html={carousel.content}
                   limit={200}
-                  moreLabel="Leer más"
-                  lessLabel="Leer menos"
+                  moreLabel={t("buttonReadMore")}
+                  lessLabel={t("buttonReadLess")}
                   onClickMore={() => setAutoplay(false)}
                   onClickLess={() => setAutoplay(true)}
                 />

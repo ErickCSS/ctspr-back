@@ -3,7 +3,6 @@
 import { Button } from "@modules/ui/button";
 import { IconX } from "@tabler/icons-react";
 import { AnimatePresence, motion } from "motion/react";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { cn } from "@/modules/shared/lib/utils";
 import { useLocale, useTranslations } from "next-intl";
@@ -20,8 +19,6 @@ export const PopUp = () => {
     }, 15000);
     return () => clearTimeout(timer);
   }, []);
-
-  const router = useRouter();
 
   return (
     <AnimatePresence>

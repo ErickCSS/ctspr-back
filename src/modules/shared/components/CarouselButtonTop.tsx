@@ -13,6 +13,7 @@ import { TruncatedHtml } from "@/modules/shared/lib/Truncated";
 import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
 import type { Swiper as SwiperType } from "swiper";
+import { useTranslations } from "next-intl";
 
 export const CarouselButtonTop = ({
   carousels,
@@ -27,6 +28,7 @@ export const CarouselButtonTop = ({
 
   const [autoplay, setAutoplay] = useState(true);
   const swiperRef = useRef<SwiperType | null>(null);
+  const t = useTranslations("knowOurTeam");
 
   useEffect(() => {
     if (swiperRef.current) {
@@ -79,8 +81,8 @@ export const CarouselButtonTop = ({
                 <TruncatedHtml
                   html={carousel.content}
                   limit={200}
-                  moreLabel="Leer más"
-                  lessLabel="Leer menos"
+                  moreLabel={t("buttonReadMore")}
+                  lessLabel={t("buttonReadLess")}
                   onClickMore={() => setAutoplay(false)}
                   onClickLess={() => setAutoplay(true)}
                 />

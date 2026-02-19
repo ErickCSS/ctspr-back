@@ -59,13 +59,14 @@
   },
   "blog": {
     "title": "Al día con CTS",
-    "buttonReadMore": "Leer más"
+    "buttonReadMore": "Leer más",
+    "buttonReadLess": "Leer menos"
   },
   "singleEmployee": {
     "buttonApply": "Solicitar Ahora",
     "location": "Ubicación del Empleo",
     "office": "Oficina de CTS",
-    "goBack": "Volver al Listado"
+    "goBack": "Volver atrás"
   },
   "ContactUs": {
     "title": "Contáctanos",
@@ -85,12 +86,19 @@
     "copy": "Copiar enlace"
   },
   "knowOurTeam": {
-    "title": "Conoce parte de nuestro equipo"
+    "title": "Conoce parte de nuestro equipo",
+    "buttonReadMore": "Leer más",
+    "buttonReadLess": "Leer menos"
   },
   "PopUp": {
     "title": "Gracias por visitarnos",
     "subtitle": "En CTS, conectamos a personas en busca de empleo con empresas que desean fortalecer sus equipos.",
     "button": "¿Cómo te enteraste de nosotros?"
+  },
+  "loginEmployee": {
+    "title": "Accede aquí con tu usuario y contraseña",
+    "buttonLogin": "Iniciar Sesión",
+    "buttonRequestCredentials": "Oprime aquí para solicitar tus credenciales de acceso"
   }
 }
 

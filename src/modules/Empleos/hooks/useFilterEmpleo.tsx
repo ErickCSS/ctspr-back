@@ -2,7 +2,7 @@
 
 import { useEmployeeFiltersStore } from "@modules/Empleos/store/EmployeeFilterStore";
 import { EmpleosServices } from "@modules/Empleos/services/empleos.services";
-import { useState, useEffect, useRef, useMemo, useCallback } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { useDialogStore } from "@modules/Empleos/store/DialogStore";
 import { useSearchParams, useRouter } from "next/navigation";
 import {
@@ -65,7 +65,7 @@ export const useFilterEmpleo = () => {
           },
         ],
       }),
-    [],
+    [t],
   );
 
   const formRef = useRef(null);
@@ -139,12 +139,8 @@ export const useFilterEmpleo = () => {
       newFilters.typeOfEmployment = typeOfEmployment.toLowerCase();
     }
 
-    const pageParam = searchParams.get("page");
-    const pageNumber = pageParam ? parseInt(pageParam) : 1;
-
     setLocalFilters(newFilters);
-    applyFilters(newFilters, pageNumber);
-  }, [searchParams, applyFilters]);
+  }, [searchParams]);
 
   const handleApplyFilters = () => {
     isUserAction.current = true;

@@ -29,7 +29,7 @@ export const Header = () => {
           asChild
           className="hover:bg-secondaryColor rounded-3xl bg-white px-10 text-black transition-colors duration-300 hover:text-white"
         >
-          <Link href={`/${locale}/login-employee`}>Login</Link>
+          <Link href={`/${locale}/login-employee`}>Log In</Link>
         </Button>
         <div className="flex items-center gap-x-8">
           <Social className="size-8" />

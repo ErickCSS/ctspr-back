@@ -61,11 +61,12 @@
     "buttonApply": "Apply Now",
     "location": "Location of the Job",
     "office": "CTS Office",
-    "goBack": "Go Back to Jobs"
+    "goBack": "Go back"
   },
   "blog": {
     "title": "Up to date with CTS",
-    "buttonReadMore": "Read more"
+    "buttonReadMore": "Read more",
+    "buttonReadLess": "Read less"
   },
   "ContactUs": {
     "title": "Contact Us",
@@ -85,11 +86,18 @@
     "copy": "Copy link"
   },
   "knowOurTeam": {
-    "title": "Know part of our team"
+    "title": "Meet Our Team",
+    "buttonReadMore": "Read more",
+    "buttonReadLess": "Read less"
   },
   "PopUp": {
-    "title": "Thank you for your interest",
-    "subtitle": "At CTS, we connect talent with organizations seeking to build strong and reliable teams.How did you learn about us?",
+    "title": "Thank you for connecting with us!",
+    "subtitle": "At CTS, we connect talent with organizations seeking to build strong and reliable teams.",
     "button": "How did you hear about us?"
+  },
+  "loginEmployee": {
+    "title": "Access here with your username and password.",
+    "buttonLogin": "Log In",
+    "buttonRequestCredentials": "Click here to request your access credentials."
   }
 }

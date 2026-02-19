@@ -14,26 +14,23 @@ import { IconLoader2 } from "@tabler/icons-react";
 import {
   SELECT_REGIONAL_OFFICE,
   SELECT_INDUSTRIES,
-  SELECT_LOCATION,
   SELECT_EMPLOYMENT,
 } from "@modules/shared/lib/SelectInifo";
 import { useFilterEmpleo } from "@modules/Empleos/hooks/useFilterEmpleo";
 import { getCityLabel } from "@/modules/shared/utils";
 import { useTranslations } from "next-intl";
+import { Link } from "next-view-transitions";
 
 export const EmpleoFilterAdvanced = () => {
   const t = useTranslations("filterJobs");
   const {
-    filterOptions,
     localFilters,
+    sanitizedLocations,
     handleApplyFilters,
     handleClearFilters,
-    handleIndustryChange,
     handleLocationChange,
-    handleEmploymentTypeChange,
     handleRegionalOfficeChange,
     loading,
-    setLocalFilters,
     formProps,
     inputProps,
     autocompleteState,
@@ -82,7 +79,7 @@ export const EmpleoFilterAdvanced = () => {
                             {items.map((item, index) => (
                               <li key={index}>
                                 <Button asChild variant="ghost">
-                                  <a
+                                  <Link
                                     href={`/empleos/${item.slug}`}
                                     className="w-full !justify-between gap-3 text-left"
                                   >
@@ -97,7 +94,7 @@ export const EmpleoFilterAdvanced = () => {
                                     <span className="text-xs text-zinc-500">
                                       #{item.code}
                                     </span>
-                                  </a>
+                                  </Link>
                                 </Button>
                               </li>
                             ))}
@@ -156,9 +153,9 @@ export const EmpleoFilterAdvanced = () => {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all" className="text-sm">
-                  Todas las ubicaciones
+                  {t("allLocations")}
                 </SelectItem>
-                {SELECT_LOCATION?.map((location) => (
+                {sanitizedLocations.map((location) => (
                   <SelectItem
                     key={location.value}
                     value={location.value}
@@ -214,11 +211,11 @@ export const EmpleoFilterAdvanced = () => {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all" className="text-sm">
-                  Todas las Sucursales
+                  {t("allOffices")}
                 </SelectItem>
-                {SELECT_REGIONAL_OFFICE?.map((office) => (
+                {SELECT_REGIONAL_OFFICE.map((office, index) => (
                   <SelectItem
-                    key={office.value}
+                    key={index}
                     value={office.value}
                     className="text-sm"
                   >
@@ -282,11 +279,11 @@ export const EmpleoFilterAdvanced = () => {
         >
           {loading ? (
             <div className="flex items-center gap-2">
-              <IconLoader2 className="mr-2 h-4 w-4 animate-spin" /> Aplicando
-              filtros
+              <IconLoader2 className="mr-2 h-4 w-4 animate-spin" />{" "}
+              {t("buttonSearching")}
             </div>
           ) : (
-            "Aplicar Filtros"
+            t("buttonSearch")
           )}
         </Button>
       </div>

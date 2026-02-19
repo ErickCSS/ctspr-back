@@ -1,6 +1,7 @@
 import { Button } from "@modules/ui/button";
 import Link from "next/link";
 import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
 export const metadata: Metadata = {
   title: "Login Employee",
@@ -11,13 +12,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function LoginEmployee() {
+export default async function LoginEmployee() {
+  const t = await getTranslations("loginEmployee");
+
   return (
     <section className="bg-white px-4 py-20">
       <div className="container mx-auto">
-        <h1 className="text-center text-4xl font-bold">
-          Accede aquí con tu usuario y contraseña
-        </h1>
+        <h1 className="text-center text-4xl font-bold">{t("title")}</h1>
         <div className="mt-16 flex flex-col items-center gap-4">
           <Button
             asChild
@@ -29,7 +30,7 @@ export default function LoginEmployee() {
               target="_blank"
               rel="noopener noreferrer nofollow"
             >
-              Iniciar Sesión
+              {t("buttonLogin")}
             </Link>
           </Button>
 
@@ -43,7 +44,7 @@ export default function LoginEmployee() {
               target="_blank"
               rel="noopener noreferrer nofollow"
             >
-              Oprime aquí para solicitar tus credenciales de acceso
+              {t("buttonRequestCredentials")}
             </Link>
           </Button>
         </div>
