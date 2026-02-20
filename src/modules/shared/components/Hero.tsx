@@ -20,7 +20,7 @@ export const Hero = async ({ title }: { title: string }) => {
   const heroImage = hero.posts.nodes[0]?.featuredImage.node.sourceUrl;
 
   const isContact = title === "Contáctenos" || title === "Contact Us";
-  const isEmpleos = title === "Empleo" || title === "Job Offers";
+  const isEmpleos = title === "Ofertas de Empleo" || title === "Job Offers";
   const isListEmpleos =
     title === "Listado de Empleos" || title === "Job Listing";
   const isAbout = title === "Quiénes Somos" || title === "About Us";
