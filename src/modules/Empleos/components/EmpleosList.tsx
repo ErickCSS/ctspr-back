@@ -14,42 +14,57 @@ import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 
 export const EmpleosList = () => {
-  const { employees, loading, pagination, page, setPage, applyFilters } =
-    useEmployeeFiltersStore();
+  const {
+    employees,
+    loading,
+    pagination,
+    page,
+    setPage,
+    applyFilters,
+    activeFilters,
+  } = useEmployeeFiltersStore();
   const locale = useLocale();
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    // Solo cargar datos iniciales si employees es null (primera carga)
-    if (employees === null && !loading) {
-      const newFilters: any = {};
+    if (loading) return;
 
-      const regionalOffice = searchParams.get("q");
-      if (regionalOffice) {
-        newFilters.regionalOffice = regionalOffice.toLowerCase();
-      }
+    const newFilters: any = {};
 
-      const location = searchParams.get("l");
-      if (location) {
-        newFilters.location = location;
-      }
+    const regionalOffice = searchParams.get("q");
+    if (regionalOffice) {
+      newFilters.regionalOffice = regionalOffice.toLowerCase();
+    }
 
-      const industry = searchParams.get("i");
-      if (industry) {
-        newFilters.industry = industry.toLowerCase();
-      }
+    const location = searchParams.get("l");
+    if (location) {
+      newFilters.location = location;
+    }
 
-      const typeOfEmployment = searchParams.get("t");
-      if (typeOfEmployment) {
-        newFilters.typeOfEmployment = typeOfEmployment.toLowerCase();
-      }
+    const industry = searchParams.get("i");
+    if (industry) {
+      newFilters.industry = industry.toLowerCase();
+    }
 
-      const pageParam = searchParams.get("page");
-      const pageNumber = pageParam ? parseInt(pageParam) : 1;
+    const typeOfEmployment = searchParams.get("t");
+    if (typeOfEmployment) {
+      newFilters.typeOfEmployment = typeOfEmployment.toLowerCase();
+    }
 
+    const pageParam = searchParams.get("page");
+    const pageNumber = pageParam ? parseInt(pageParam) : 1;
+
+    const filtersChanged =
+      newFilters.regionalOffice !== activeFilters.regionalOffice ||
+      newFilters.location !== activeFilters.location ||
+      newFilters.industry !== activeFilters.industry ||
+      newFilters.typeOfEmployment !== activeFilters.typeOfEmployment ||
+      employees === null;
+
+    if (filtersChanged) {
       applyFilters(newFilters, pageNumber);
     }
-  }, [employees, loading, searchParams, applyFilters]);
+  }, [searchParams]);
 
   if (loading || !employees) {
     return (
