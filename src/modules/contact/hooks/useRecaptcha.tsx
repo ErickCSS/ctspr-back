@@ -59,22 +59,30 @@ export function useRecaptcha(): UseRecaptcha {
     };
   }, []);
 
-  const execute = useCallback(
-    async (action: string) => {
-      const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  const execute = useCallback(async (action: string): Promise<string> => {
+    const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
-      if (!ready || !window.grecaptcha) {
-        throw new Error("reCAPTCHA aún no está listo");
-      }
+    if (!siteKey) {
+      throw new Error("NEXT_PUBLIC_RECAPTCHA_SITE_KEY no está configurado");
+    }
 
-      if (!siteKey) {
-        throw new Error("NEXT_PUBLIC_RECAPTCHA_SITE_KEY no está configurado");
-      }
+    if (!window.grecaptcha) {
+      throw new Error("reCAPTCHA no está disponible");
+    }
 
-      return await window.grecaptcha.execute(siteKey, { action });
-    },
-    [ready],
-  );
+    return new Promise((resolve, reject) => {
+      window.grecaptcha.ready(() => {
+        window.grecaptcha
+          .execute(siteKey, { action })
+          .then((token: string) => {
+            resolve(token);
+          })
+          .catch((error: Error) => {
+            reject(error);
+          });
+      });
+    });
+  }, []);
 
   return { ready, execute };
 }
