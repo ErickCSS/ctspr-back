@@ -6,8 +6,6 @@ import { useContact } from "@modules/contact/hooks/useContact";
 import { IconLoader2 } from "@tabler/icons-react";
 import { Label } from "@modules/ui/label";
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
-import Script from "next/script";
 
 export const ContactForm = () => {
   const { contactForm, onSubmit, error, isSubmitting } = useContact();
@@ -83,9 +81,6 @@ export const ContactForm = () => {
           </button>
         </form>
       </Form>
-      <Script
-        src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
-      />
     </>
   );
 };

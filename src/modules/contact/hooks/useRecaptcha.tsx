@@ -6,34 +6,72 @@ type UseRecaptcha = {
   execute: (action: string) => Promise<string>;
 };
 
+declare global {
+  interface Window {
+    grecaptcha: any;
+    onRecaptchaLoad?: () => void;
+  }
+}
+
 /**
  * Hook para cargar y ejecutar reCAPTCHA v3.
  */
 export function useRecaptcha(): UseRecaptcha {
   const [ready, setReady] = useState(false);
 
-  // 1️⃣ Insertamos el <script> solo una vez
   useEffect(() => {
-    const onLoad = () => setReady(true);
-    if (window.grecaptcha) {
-      // ya estaba cargado
-      setReady(true);
-    } else {
-      // esperamos el evento que dispara Next.js Script
-      window.___grecaptcha_onload = onLoad;
+    const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+
+    if (!siteKey) {
+      console.error("NEXT_PUBLIC_RECAPTCHA_SITE_KEY no está configurado");
+      return;
     }
+
+    if (window.grecaptcha?.ready) {
+      window.grecaptcha.ready(() => {
+        setReady(true);
+      });
+      return;
+    }
+
+    const scriptId = "recaptcha-script";
+    if (document.getElementById(scriptId)) {
+      return;
+    }
+
+    window.onRecaptchaLoad = () => {
+      if (window.grecaptcha?.ready) {
+        window.grecaptcha.ready(() => {
+          setReady(true);
+        });
+      }
+    };
+
+    const script = document.createElement("script");
+    script.id = scriptId;
+    script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}&onload=onRecaptchaLoad`;
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+
     return () => {
-      delete window.___grecaptcha_onload;
+      delete window.onRecaptchaLoad;
     };
   }, []);
 
   const execute = useCallback(
     async (action: string) => {
-      if (!ready) throw new Error("reCAPTCHA aún no está listo");
-      return await window.grecaptcha.execute(
-        process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!,
-        { action },
-      );
+      const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+
+      if (!ready || !window.grecaptcha) {
+        throw new Error("reCAPTCHA aún no está listo");
+      }
+
+      if (!siteKey) {
+        throw new Error("NEXT_PUBLIC_RECAPTCHA_SITE_KEY no está configurado");
+      }
+
+      return await window.grecaptcha.execute(siteKey, { action });
     },
     [ready],
   );
