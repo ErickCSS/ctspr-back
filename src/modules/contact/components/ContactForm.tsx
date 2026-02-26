@@ -11,85 +11,81 @@ import Script from "next/script";
 
 export const ContactForm = () => {
   const { contactForm, onSubmit, error, isSubmitting } = useContact();
-  const [loadCaptcha, setLoadCaptcha] = useState(false);
+
   const t = useTranslations("ContactUs.form");
 
-  useEffect(() => {
-    setLoadCaptcha(true);
-  }, []);
-
   return (
-    <Form {...contactForm}>
-      <form
-        onSubmit={onSubmit}
-        className="font-sf mx-auto mt-10 space-y-4 lg:w-3xl"
-      >
-        {loadCaptcha && (
-          <Script
-            src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
-          />
-        )}
-        <Label className="text-lg">{t("name")}</Label>
-        <RenderFormField
-          control={contactForm.control}
-          name="name"
-          type="text"
-          placeholder="John Doe"
-          errors={contactForm.formState.errors}
-        />
-
-        <Label className="text-lg">{t("email")}</Label>
-        <RenderFormField
-          control={contactForm.control}
-          name="email"
-          type="email"
-          placeholder="john.doe@example.com"
-          errors={contactForm.formState.errors}
-        />
-
-        <Label className="text-lg">{t("phone")}</Label>
-        <RenderFormField
-          control={contactForm.control}
-          name="phone"
-          type="phone"
-          placeholder="123-456-7890"
-          errors={contactForm.formState.errors}
-        />
-
-        <Label className="text-lg">{t("city")}</Label>
-        <RenderFormField
-          control={contactForm.control}
-          name="city"
-          type="text"
-          placeholder="San Juan"
-          errors={contactForm.formState.errors}
-        />
-
-        <Label className="text-lg">{t("message")}</Label>
-        <RenderFormField
-          control={contactForm.control}
-          name="message"
-          renderTextarea
-          placeholder={t("WriteUs")}
-          errors={contactForm.formState.errors}
-        />
-
-        {error && <p className="text-red-500">{error}</p>}
-
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="bg-secondaryColor disabled:bg-secondaryColor/80 flex h-12 w-45 cursor-pointer items-center justify-center text-lg font-bold text-white uppercase"
+    <>
+      <Form {...contactForm}>
+        <form
+          onSubmit={onSubmit}
+          className="font-sf mx-auto mt-10 space-y-4 lg:w-3xl"
         >
-          {isSubmitting ? (
-            <span className="flex items-center gap-2">
-              <IconLoader2 className="animate-spin" /> {t("enviando")}
-            </span>
-          ) : (
-            t("button")
-          )}
-        </button>
-      </form>
-    </Form>
+          <Label className="text-lg">{t("name")}</Label>
+          <RenderFormField
+            control={contactForm.control}
+            name="name"
+            type="text"
+            placeholder="John Doe"
+            errors={contactForm.formState.errors}
+          />
+
+          <Label className="text-lg">{t("email")}</Label>
+          <RenderFormField
+            control={contactForm.control}
+            name="email"
+            type="email"
+            placeholder="john.doe@example.com"
+            errors={contactForm.formState.errors}
+          />
+
+          <Label className="text-lg">{t("phone")}</Label>
+          <RenderFormField
+            control={contactForm.control}
+            name="phone"
+            type="phone"
+            placeholder="123-456-7890"
+            errors={contactForm.formState.errors}
+          />
+
+          <Label className="text-lg">{t("city")}</Label>
+          <RenderFormField
+            control={contactForm.control}
+            name="city"
+            type="text"
+            placeholder="San Juan"
+            errors={contactForm.formState.errors}
+          />
+
+          <Label className="text-lg">{t("message")}</Label>
+          <RenderFormField
+            control={contactForm.control}
+            name="message"
+            renderTextarea
+            placeholder={t("WriteUs")}
+            errors={contactForm.formState.errors}
+          />
+
+          {error && <p className="text-red-500">{error}</p>}
+
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="bg-secondaryColor disabled:bg-secondaryColor/80 flex h-12 w-45 cursor-pointer items-center justify-center text-lg font-bold text-white uppercase"
+          >
+            {isSubmitting ? (
+              <span className="flex items-center gap-2">
+                <IconLoader2 className="animate-spin" /> {t("enviando")}
+              </span>
+            ) : (
+              t("button")
+            )}
+          </button>
+        </form>
+      </Form>
+      <Script
+        src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
+      />
+    </>
   );
 };
