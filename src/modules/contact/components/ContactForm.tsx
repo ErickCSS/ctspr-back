@@ -27,7 +27,6 @@ export const ContactForm = () => {
         {loadCaptcha && (
           <Script
             src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
-            strategy="lazyOnload"
           />
         )}
         <Label className="text-lg">{t("name")}</Label>
