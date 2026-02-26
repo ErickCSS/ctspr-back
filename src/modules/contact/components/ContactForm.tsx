@@ -6,7 +6,7 @@ import { useContact } from "@modules/contact/hooks/useContact";
 import { IconLoader2 } from "@tabler/icons-react";
 import { Label } from "@modules/ui/label";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Script from "next/script";
 
 export const ContactForm = () => {
@@ -14,11 +14,14 @@ export const ContactForm = () => {
   const [loadCaptcha, setLoadCaptcha] = useState(false);
   const t = useTranslations("ContactUs.form");
 
+  useEffect(() => {
+    setLoadCaptcha(true);
+  }, []);
+
   return (
     <Form {...contactForm}>
       <form
         onSubmit={onSubmit}
-        onMouseEnter={() => setLoadCaptcha(true)}
         className="font-sf mx-auto mt-10 space-y-4 lg:w-3xl"
       >
         {loadCaptcha && (
