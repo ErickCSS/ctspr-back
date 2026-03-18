@@ -91,7 +91,7 @@ export async function generateMetadata({
     },
     openGraph: {
       title: postData.title,
-      description: postData.excerpt?.substring(0, 160) || "",
+      description: postData.excerpt.slice(3, 160) || "",
       images: postData.featuredImage?.node?.sourceUrl
         ? [postData.featuredImage.node.sourceUrl]
         : undefined,
@@ -99,7 +99,7 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       title: postData.title,
-      description: postData.excerpt?.substring(0, 160) || "",
+      description: postData.excerpt.slice(3, 160) || "",
       images: postData.featuredImage?.node?.sourceUrl
         ? [postData.featuredImage.node.sourceUrl]
         : undefined,
