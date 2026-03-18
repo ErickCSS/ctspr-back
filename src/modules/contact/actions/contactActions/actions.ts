@@ -11,10 +11,34 @@ export const sendEmail = async ({
   email: ContactSchemaType;
   recaptchaToken: string;
 }) => {
-  const secret = process.env.RECAPTCHA_SECRET_KEY!;
+  const secret = process.env.RECAPTCHA_SECRET_KEY;
+
+  if (!secret) {
+    console.error("RECAPTCHA_SECRET_KEY no está definida");
+    return {
+      success: false,
+      error: "Configuración de reCAPTCHA no disponible",
+    };
+  }
+
   const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${recaptchaToken}`;
 
-  const recaptchaRes = await fetch(verifyUrl, { method: "POST" });
+  let recaptchaRes;
+  try {
+    recaptchaRes = await fetch(verifyUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    });
+  } catch (fetchError) {
+    console.error("Error al conectar con reCAPTCHA:", fetchError);
+    return {
+      success: false,
+      error: "Error de conexión con el servicio de verificación",
+    };
+  }
+
   const recaptchaJson = await recaptchaRes.json();
 
   if (
@@ -28,13 +52,25 @@ export const sendEmail = async ({
     };
   }
 
+  if (
+    !process.env.SMTP_HOST ||
+    !process.env.SMTP_USER ||
+    !process.env.SMTP_PASS
+  ) {
+    console.error("Variables de entorno SMTP no configuradas");
+    return {
+      success: false,
+      error: "Configuración de correo no disponible",
+    };
+  }
+
   const transporter = Nodemailer.createTransport({
-    host: process.env.SMTP_HOST!,
+    host: process.env.SMTP_HOST,
     port: 587,
     secure: false,
     auth: {
-      user: process.env.SMTP_USER!,
-      pass: process.env.SMTP_PASS!,
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
     },
   });
 
@@ -131,10 +167,13 @@ export const sendEmail = async ({
       error: "",
     };
   } catch (error) {
-    console.log(error as string);
+    console.error("Error al enviar email:", error);
     return {
       success: false,
-      error: error as string,
+      error:
+        error instanceof Error
+          ? error.message
+          : "Error desconocido al enviar el mensaje",
     };
   }
 };
