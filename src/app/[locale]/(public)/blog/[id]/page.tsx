@@ -96,6 +96,15 @@ export async function generateMetadata({
         ? [postData.featuredImage.node.sourceUrl]
         : undefined,
     },
+    twitter: {
+      card: "summary_large_image",
+      title: postData.title,
+      description: postData.excerpt?.substring(0, 160) || "",
+      images: postData.featuredImage?.node?.sourceUrl
+        ? [postData.featuredImage.node.sourceUrl]
+        : undefined,
+      creator: "ctspr",
+    },
   };
 }
 
