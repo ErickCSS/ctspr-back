@@ -7,14 +7,19 @@ import {
   getSlugVariations,
 } from "@/modules/shared/utils/parseContent.utils";
 import { SharePopover } from "@/modules/shared/components/SharePopover";
+import { Metadata } from "next";
+import { getLocale } from "next-intl/server";
 
-export default async function BlogPost({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const id = (await params).id;
-
+async function getPostData(id: string): Promise<{
+  title: string;
+  content: string;
+  featuredImage: {
+    node: {
+      sourceUrl: string;
+    };
+  } | null;
+  excerpt: string;
+} | null> {
   // Normalize the slug to handle emoji encoding issues
   const normalizedSlug = normalizeSlug(id);
 
@@ -51,12 +56,64 @@ export default async function BlogPost({
   }
 
   if (!post) {
+    return null;
+  }
+
+  const { title, content, featuredImage, excerpt } = post.node;
+
+  return { title, content, featuredImage, excerpt };
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const locale = await getLocale();
+  const id = (await params).id;
+  const postData = await getPostData(id);
+
+  if (!postData) {
+    return {
+      title: "Post no encontrado - CTS PR",
+    };
+  }
+
+  return {
+    metadataBase: new URL("https://ctspr.com"),
+    title: `${postData.title} - CTS PR`,
+    alternates: {
+      canonical: `/${locale}/blog/${id}`,
+      languages: {
+        en: `/en/blog/${id}`,
+        es: `/es/blog/${id}`,
+      },
+    },
+    openGraph: {
+      title: postData.title,
+      description: postData.excerpt?.substring(0, 160) || "",
+      images: postData.featuredImage?.node?.sourceUrl
+        ? [postData.featuredImage.node.sourceUrl]
+        : undefined,
+    },
+  };
+}
+
+export default async function BlogPost({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const id = (await params).id;
+  const postData = await getPostData(id);
+
+  if (!postData) {
     return (
       <div className="container mx-auto px-4 py-20">Post no encontrado</div>
     );
   }
 
-  const { title, content, featuredImage } = post.node;
+  const { title, content, featuredImage } = postData;
 
   return (
     <>
