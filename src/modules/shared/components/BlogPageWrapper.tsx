@@ -4,8 +4,6 @@ import { ReactNode } from "react";
 import { TranslationProvider } from "@/modules/shared/contexts/TranslationContext";
 import { PostTranslation } from "@/modules/shared/types/blog.types";
 import { Header } from "@modules/shared/components/general/header";
-import { Footer } from "@modules/shared/components/general/Footer";
-import { PopUp } from "@modules/shared/components/PopUp";
 
 export function BlogPageWrapper({
   children,
