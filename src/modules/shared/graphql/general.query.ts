@@ -474,10 +474,23 @@ export const queryBlogBySlug = `query BlogBySlug($slug: String!) {
         dateGmt
         excerpt
         content
+        uri
         featuredImage {
           node {
             sourceUrl
           }
+        }
+        language{
+          code
+        }
+        translations {
+          id
+          databaseId
+      slug
+      uri
+      language {
+        code
+      }
         }
       }
     }

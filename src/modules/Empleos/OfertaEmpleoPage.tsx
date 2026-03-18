@@ -5,6 +5,7 @@ import { EmpleosBeneficios } from "@modules/Empleos/components/EmpleosBeneficios
 import { EmpleoPreguntaFrecuentes } from "@modules/Empleos/components/EmpleoPreguntaFrecuentes";
 import { Testimonials } from "@modules/home/components/Testimonials";
 import { getLocale } from "next-intl/server";
+import { Header } from "@modules/shared/components/general/header";
 
 export const OfertaEmpleoPage = async () => {
   const locale = await getLocale();
@@ -12,11 +13,14 @@ export const OfertaEmpleoPage = async () => {
 
   return (
     <>
-      <Hero title={isEnglish ? "Job Offers" : "Ofertas de Empleo"} />
-      <EmpleosMapSelect />
-      <EmpleosBeneficios />
-      <Testimonials />
-      <EmpleoPreguntaFrecuentes />
+      <Header />
+      <main>
+        <Hero title={isEnglish ? "Job Offers" : "Ofertas de Empleo"} />
+        <EmpleosMapSelect />
+        <EmpleosBeneficios />
+        <Testimonials />
+        <EmpleoPreguntaFrecuentes />
+      </main>
     </>
   );
 };

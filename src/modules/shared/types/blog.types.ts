@@ -19,10 +19,24 @@ export interface Post {
     excerpt: string;
     dateGmt: string;
     slug: string;
+    uri: string;
+    language: {
+      code: string;
+    };
     featuredImage: {
       node: {
         sourceUrl: string;
       };
     };
+    translations?: PostTranslation[];
   };
 }
+
+export type PostTranslation = {
+  databaseId: number;
+  slug: string;
+  uri: string;
+  language: {
+    code: string;
+  };
+};

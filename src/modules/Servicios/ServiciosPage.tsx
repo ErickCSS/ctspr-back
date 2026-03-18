@@ -11,6 +11,7 @@ import { ServiciosPeritajeIndustrias } from "@modules/Servicios/components/Servi
 import { ServiciosSeguridadSalud } from "@modules/Servicios/components/ServiciosSeguridadSalud";
 import { ServiciosPreguntasFrecuentes } from "@modules/Servicios/components/ServiciosPreguntasFrecuentes";
 import { getLocale } from "next-intl/server";
+import { Header } from "@modules/shared/components/general/header";
 
 export const ServiciosPage = async () => {
   const locale = await getLocale();
@@ -18,18 +19,21 @@ export const ServiciosPage = async () => {
 
   return (
     <>
-      <Hero title={isEnglish ? "Services" : "Servicios"} />
-      <ServiciosContent />
-      <ServiciosPropuestaValor />
-      <ServiciosList />
-      <ServiciosMiddle />
-      <ServiciosALaMedida />
-      <ServiciosCallActions />
-      <ServiciosRecursosHumanos />
-      <ServiciosPeritajeIndustrias />
-      <ServiciosSeguridadSalud />
-      <ServiciosPreguntasFrecuentes />
-      <SomosAfiliaciones background="bg-white" />
+      <Header />
+      <main>
+        <Hero title={isEnglish ? "Services" : "Servicios"} />
+        <ServiciosContent />
+        <ServiciosPropuestaValor />
+        <ServiciosList />
+        <ServiciosMiddle />
+        <ServiciosALaMedida />
+        <ServiciosCallActions />
+        <ServiciosRecursosHumanos />
+        <ServiciosPeritajeIndustrias />
+        <ServiciosSeguridadSalud />
+        <ServiciosPreguntasFrecuentes />
+        <SomosAfiliaciones background="bg-white" />
+      </main>
     </>
   );
 };

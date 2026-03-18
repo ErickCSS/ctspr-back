@@ -20,7 +20,7 @@ export const SharePopover = ({
   const triggerRef = useRef<HTMLButtonElement>(null);
   const windowIsDiff = typeof window !== "undefined";
   const pathname = windowIsDiff ? window.location.pathname : "";
-  const url = `https://ctspr-back.vercel.app${pathname}`;
+  const url = `https://ctspr.com${pathname}`;
   const encodedText = encodeURIComponent(textSocial || "");
   const encodedUrl = encodeURIComponent(url);
   const t = useTranslations("sharePopover");

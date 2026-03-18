@@ -9,6 +9,8 @@ import {
 import { SharePopover } from "@/modules/shared/components/SharePopover";
 import { Metadata } from "next";
 import { getLocale } from "next-intl/server";
+import { PostTranslation } from "@/modules/shared/types/blog.types";
+import { BlogPageWrapper } from "@/modules/shared/components/BlogPageWrapper";
 
 async function getPostData(id: string): Promise<{
   title: string;
@@ -19,6 +21,12 @@ async function getPostData(id: string): Promise<{
     };
   } | null;
   excerpt: string;
+  slug: string;
+  uri: string;
+  language: {
+    code: string;
+  };
+  translations?: PostTranslation[];
 } | null> {
   // Normalize the slug to handle emoji encoding issues
   const normalizedSlug = normalizeSlug(id);
@@ -59,9 +67,27 @@ async function getPostData(id: string): Promise<{
     return null;
   }
 
-  const { title, content, featuredImage, excerpt } = post.node;
+  const {
+    title,
+    content,
+    featuredImage,
+    excerpt,
+    slug,
+    uri,
+    language,
+    translations,
+  } = post.node;
 
-  return { title, content, featuredImage, excerpt };
+  return {
+    title,
+    content,
+    featuredImage,
+    excerpt,
+    slug,
+    uri,
+    language,
+    translations,
+  };
 }
 
 export async function generateMetadata({
@@ -79,14 +105,28 @@ export async function generateMetadata({
     };
   }
 
+  const enTranslation =
+    postData.language.code.toLowerCase() === "en"
+      ? postData
+      : postData.translations?.find(
+          (translation) => translation.language.code.toLowerCase() === "en",
+        );
+
+  const esTranslation =
+    postData.language.code.toLowerCase() === "es"
+      ? postData
+      : postData.translations?.find(
+          (translation) => translation.language.code.toLowerCase() === "es",
+        );
+
   return {
     metadataBase: new URL("https://ctspr.com"),
     title: `${postData.title} - CTS PR`,
     alternates: {
       canonical: `/${locale}/blog/${id}`,
       languages: {
-        en: `/en/blog/${id}`,
-        es: `/es/blog/${id}`,
+        en: enTranslation ? `/en/blog/${enTranslation.slug}` : `/en/blog/${id}`,
+        es: esTranslation ? `/es/blog/${esTranslation.slug}` : `/es/blog/${id}`,
       },
     },
     openGraph: {
@@ -111,9 +151,9 @@ export async function generateMetadata({
 export default async function BlogPost({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string; locale: string }>;
 }) {
-  const id = (await params).id;
+  const { id, locale } = await params;
   const postData = await getPostData(id);
 
   if (!postData) {
@@ -122,10 +162,15 @@ export default async function BlogPost({
     );
   }
 
-  const { title, content, featuredImage } = postData;
+  const { title, content, featuredImage, translations, slug, language } =
+    postData;
 
   return (
-    <>
+    <BlogPageWrapper
+      translations={translations}
+      currentSlug={slug}
+      currentLanguage={language.code}
+    >
       <section
         style={{
           backgroundImage: `url("${featuredImage?.node?.sourceUrl || "https://stagingctspr.axesawebhosting9.net/wp-content/uploads/2025/07/img-transformacion.webp"}")`,
@@ -152,6 +197,6 @@ export default async function BlogPost({
           </div>
         </div>
       </section>
-    </>
+    </BlogPageWrapper>
   );
 }
